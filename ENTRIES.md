@@ -18,6 +18,16 @@ Solution imports, comparison configuration and source metadata.
 | [P09](Phase1/P09/Challenge.lean) | Ordinary resolution and observation wrappers | 8 | [Metadata](entries/P09/formalization.yaml) |
 | [P10](Phase1/P10/Challenge.lean) | Resource-respecting encoded simulation and reduction composition | 6 | [Metadata](entries/P10/formalization.yaml) |
 
+## Submission selection
+
+The Comparator and metadata paths must both match the selected entry. In the
+submission form, expand **File layout** and explicitly enter the metadata path
+from the table. Leave **Project directory** blank. With a blank metadata field,
+Palomar uses the root `formalization.yaml`, which describes P01 even when another
+Comparator is selected. For P02 the pair is `entries/P02/comparator.json` and
+`entries/P02/formalization.yaml`. Check that the displayed project title is
+"Guarded detection and constrained eligible-set extensions" before submitting.
+
 The detector and enumeration results use the literal, charged native execution
 model and supplied decoder evidence. The machine bridge supplies conventional
 encoded executions under its stated constructor and resource premises; those
@@ -34,6 +44,7 @@ K01 encoded-language membership and the remaining whole-paper tranche are
 outside these selections. The six manuscript statements added after the
 accepted formalization snapshot are also outside the selected theorem map.
 
-The primary physical entry is described in [the project README](README.md).
+The project overview and the P01/P02 selections are described in
+[the project README](README.md).
 [Source provenance](SOURCE_PROVENANCE.md) records the manuscript identity,
 authorship, AI assistance and per-file extraction identities.
