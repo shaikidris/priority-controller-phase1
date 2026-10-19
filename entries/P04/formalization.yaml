@@ -12,8 +12,8 @@ classification:
   arxiv:
   - cs.DM
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -23,8 +23,11 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; 5.6, 6.7. The informal manuscript supplies the model and proof arguments
-    according to the recorded source-development account.
+  note: Version 1.0; Theorem 5.6 (formula forests) and the score-domination component
+    of Corollary 6.7 (maximum weight for formula forests). The literal native
+    execution and numerical resource bounds refine the manuscript algorithm. The
+    selected weighted statement establishes a conditional upper bound, not attainment
+    or full maximum-weight optimality.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -71,7 +74,7 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: '5.6'
+  - source: Theorem 5.6 (native forest execution refinement)
     lean: Controller.Cost.ForestOriginalSemantics.original_physical_execution
     module: Controller.Cost.ForestOriginalSemantics
     status: proved
@@ -80,7 +83,7 @@ alignment:
       realization on acceptance. The statement separately bounds native ticks/live words,
       weighted traversal operations, store trace and combined code/storage. Weights are nonnegative
       in the displayed ordered additive group; arithmetic bit cost is separate.
-  - source: '6.7'
+  - source: Corollary 6.7 (conditional score upper-bound component)
     lean: Controller.Optimization.Weights.forest_maximum_weight
     module: Controller.Optimization.Weights
     status: proved

@@ -13,8 +13,8 @@ classification:
   arxiv:
   - cs.DM
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -24,8 +24,11 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; A.1, A.2, A.3, A.4, Section 8 (typed pipeline). The informal manuscript
-    supplies the model and proof arguments according to the recorded source-development account.
+  note: Version 1.0; Theorems A.1 and A.2 (observation projection and optional
+    activities), Corollary A.3 (selected observations), Lemma A.4 (producer recovery),
+    and Section 8 (certificates). The typed payload and pipeline statements refine the
+    interface account; they do not formalize a raw-file parser, unrestricted CNF
+    recognition or every construction-time clause of Appendix A.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -73,7 +76,7 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: A.1
+  - source: Theorem A.1 (conditional observation projection)
     lean: Controller.Native.ObservationProjection.observation_projection_of_unit_conflict
     module: Controller.Native.ObservationProjection
     status: proved
@@ -81,7 +84,7 @@ alignment:
       guards, unit-derived inactive conflict and uniform constant-extension-or-impossible-orientation
       premises. These remain hypotheses; the conclusion is the existential auxiliary projection
       at every defining signal assignment.
-  - source: A.2
+  - source: Theorem A.2 (projection component)
     lean: Controller.Native.ObservationProjection.optional_declared_cnf_projection
     module: Controller.Native.ObservationProjection
     status: proved
@@ -89,14 +92,14 @@ alignment:
       type, existential assignments to the declared auxiliaries exist exactly when a requirement-tree
       leaf pair is discrepant. This theorem proves projection, not the linear-time auxiliary
       construction clause of A.2.
-  - source: A.3
+  - source: Corollary A.3 (including the formal empty-selection case)
     lean: Controller.Native.ObservationProjection.selected_declared_cnf_projection
     module: Controller.Native.ObservationProjection
     status: proved
     note: For a selected list contained in the optional wrapper leaves, the declared selected
       formula projects exactly to a discrepancy on that list. The formal statement also handles
       an empty selected list via its unsatisfiable selected formula.
-  - source: A.4
+  - source: Lemma A.4 (intended-producer recovery)
     lean: Controller.Recognition.IntendedDAG.recovery_exact
     module: Controller.Recognition.ProducerCompletion
     status: proved

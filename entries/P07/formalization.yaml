@@ -12,8 +12,8 @@ classification:
   arxiv:
   - cs.CC
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -23,8 +23,12 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; 7.2, 7.3, 7.4, 7.5 (proper-basis component). The informal manuscript
-    supplies the model and proof arguments according to the recorded source-development account.
+  note: Version 1.0; Lemma 7.2 (bounded positive support), Lemma 7.3 (guarded
+    expansion), Theorem 7.4 (bounded live conjunction), and the proper-basis
+    algorithmic component of Theorem 7.5. The native programs and numerical bounds are
+    mechanized refinements. The general XP and healthy-one bounds are the weaker
+    displayed formal bounds, not the sharper manuscript expressions; full-basis
+    hardness is outside this selection.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -72,38 +76,38 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: '7.2'
+  - source: Lemma 7.2 (bounded support)
     lean: Controller.Decoder.DAG.exists_small_true_support
     module: Controller.Extensions.Support
     status: proved
     note: If a root is true on K and liveAndCount is at most k, a nonempty subset of K of
       size at most k+1 still makes it true. Sharing is counted by distinct live-AND nodes.
-  - source: '7.2'
+  - source: Lemma 7.2 (bounded support)
     lean: Controller.Decoder.DAG.exists_small_target_support
     module: Controller.Extensions.Support
     status: proved
     note: If K contains the target, a true subset containing it has size at most k+2 and is
       admissible for every bus count. This is the forced-target support component of 7.2.
-  - source: '7.3'
+  - source: Lemma 7.3 (guarded expansion)
     lean: Controller.Decoder.DAG.expansion_identity
     module: Controller.Extensions.Expansion
     status: proved
     note: On a child-closed node set, truth at any included node is equivalent to truth under
       every consistent selector expansion. A single selector choice is shared across all occurrences
       of a live-AND node.
-  - source: '7.3'
+  - source: Lemma 7.3 (guarded expansion)
     lean: Controller.Decoder.DAG.global_selector_count
     module: Controller.Extensions.Expansion
     status: proved
     note: The number of global selectors is exactly 2^liveAndCount. This is an exact finite
       counting statement.
-  - source: '7.3'
+  - source: Lemma 7.3 (guarded expansion)
     lean: Controller.Decoder.DAG.cone_expansion_identity
     module: Controller.Extensions.Expansion
     status: proved
     note: The cone-restricted expansion identity holds at every root and assignment, with
       one consistent selector on its cone.
-  - source: '7.4'
+  - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.execution
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
@@ -111,34 +115,34 @@ alignment:
       halts with the exact displayed detection answer, native timeBound, working/code bounds
       and a checked native model plus eligible witness on acceptance. The native execution
       model and representation are explicit.
-  - source: '7.4'
+  - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.emitted_witness
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
     note: Under raw layout and drive one, any decoded output accepted by the native model
       checker yields an admissible eligible set changing an observed root. This is checker-to-physical-witness
       soundness; actual accepting execution is supplied separately.
-  - source: '7.4'
+  - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.xp_time
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
     note: The displayed native timeBound is at most 15000*((k+2)*(G+1)^(k+1)+(G+1)*2^k)*(G+1)+100*N.
       This establishes an XP upper bound with the formal size measures; it is not the exact
       sharper binomial expression stated in the manuscript.
-  - source: '7.4'
+  - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.one_and_time
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
     note: For k=1, the native timeBound is at most 360000*(n^2+q)*G+100*N. Combined with the
       execution premise liveAndCount<=1, this gives the selected one-live-AND runtime bound.
-  - source: '7.4'
+  - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.healthy_one_time
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
     note: When every supplied root is healthy one, native timeBound is at most 15000*(2^k+1)*(G+1)^2+100*N.
       This gives an FPT bound in k for that case; the selected inequality does not assert
       the sharper q*2^k*G expression.
-  - source: 7.5 (proper-basis component)
+  - source: Theorem 7.5 (proper-basis algorithmic component)
     lean: Controller.Extensions.ProperBasisComplete.execution
     module: Controller.Extensions.ProperBasisComplete
     status: proved

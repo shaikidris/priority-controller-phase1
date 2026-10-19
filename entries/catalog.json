@@ -39,7 +39,7 @@
     ]
   },
   "P04": {
-    "purpose": "Formula-forest execution and maximum weight",
+    "purpose": "Formula-forest execution and weighted candidate bounds",
     "comparator_config_path": "entries/P04/comparator.json",
     "formalization_metadata_path": "entries/P04/formalization.yaml",
     "theorem_names": [

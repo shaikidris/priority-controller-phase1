@@ -13,8 +13,8 @@ classification:
   arxiv:
   - cs.CC
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -24,9 +24,11 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; 6.1, 6.10, 6.11 (structural component), 6.12, 6.2, 6.3. The informal
-    manuscript supplies the model and proof arguments according to the recorded source-development
-    account.
+  note: Version 1.0; Example 6.1 (cycle decoder), Proposition 6.2 (critical sets),
+    Corollary 6.3 (adaptive queries), Proposition 6.10 (treewidth), the structural
+    component of Proposition 6.11 (linear width obstruction), and Proposition 6.12
+    (syntactic backdoors). Native recovery executions and their exact resource counts
+    are mechanized refinements; expansion and degree assumptions remain supplied.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -74,89 +76,89 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: '6.1'
+  - source: Example 6.1 (cycle decoder; native execution refinement where stated)
     lean: Controller.Cost.CriticalSets.cycle_complete
     module: Controller.Cost.CriticalSets
     status: proved
     note: The actual costed cycle-decoder recovery run returns all channels, halts with a
       detecting physical descriptor, and includes source validation, array/program formation
       and explicit linear tick/storage bounds under the matching representation premises.
-  - source: '6.1'
+  - source: Example 6.1 (cycle decoder; native execution refinement where stated)
     lean: Controller.Cost.CriticalSets.cycle_unique
     module: Controller.Cost.CriticalSets
     status: proved
     note: Any admissible set whose canonical realization detects the cycle decoder is the
       full channel universe. This is the uniqueness component of Example 6.1.
-  - source: '6.2'
+  - source: Proposition 6.2 (critical sets; native recovery refinement where stated)
     lean: Controller.Boundaries.physical_test_list_lower_bound
     module: Controller.Boundaries.CriticalSets
     status: proved
     note: Any fixed physical test list that detects every critical observation has at least
       as many entries as critical eligible sets. It is a syntax-independent universal-test-list
       lower bound, not a sequential-time lower bound for a decoder-reading algorithm.
-  - source: '6.2'
+  - source: Proposition 6.2 (critical sets; native recovery refinement where stated)
     lean: Controller.Boundaries.criticalSets_card_one
     module: Controller.Boundaries.CriticalSets
     status: proved
     note: For one bus, the critical-set family has exactly 2^(n-1)-1 members, with the target
       an inhabited channel.
-  - source: '6.2'
+  - source: Proposition 6.2 (critical sets; native recovery refinement where stated)
     lean: Controller.Boundaries.criticalSets_card_many
     module: Controller.Boundaries.CriticalSets
     status: proved
     note: For at least two buses, the critical-set family has exactly 2^n-2 members.
-  - source: '6.2'
+  - source: Proposition 6.2 (critical sets; native recovery refinement where stated)
     lean: Controller.Cost.CriticalSets.critical_complete
     module: Controller.Cost.CriticalSets
     status: proved
     note: For every supplied critical set, the actual matched forest recovery program returns
       that set and a detecting physical descriptor with the validation, formation and linear
       native resource bounds in RecoveryRun.
-  - source: '6.3'
+  - source: Corollary 6.3 (adaptive query bound)
     lean: Controller.Boundaries.deterministic_one_bus
     module: Controller.Boundaries.OracleQueries
     status: proved
     note: Every finite adaptive query tree correct on the one-bus critical family and bottom
       oracle has worst-case query budget at least 2^(n-1)-1.
-  - source: '6.3'
+  - source: Corollary 6.3 (adaptive query bound)
     lean: Controller.Boundaries.deterministic_many_buses
     module: Controller.Boundaries.OracleQueries
     status: proved
     note: For at least two buses, every finite adaptive query tree correct on the critical
       family and bottom oracle has budget at least 2^n-2.
-  - source: '6.3'
+  - source: Corollary 6.3 (adaptive query bound)
     lean: Controller.Boundaries.randomized_mixture_lower_bound
     module: Controller.Boundaries.OracleQueries
     status: proved
     note: For a finite nonnegative normalized mixture of query trees, each with budget at
       most r and success at least 2/3 on the bottom and every critical oracle, critical-set
       cardinality is at most 3*r. This is the displayed finite randomized-query model.
-  - source: '6.10'
+  - source: Proposition 6.10 (native treewidth)
     lean: Controller.Graph.NativeWidth.primal_treewidth_lower
     module: Controller.Graph.NativeMinor
     status: proved
     note: Every TreewidthLE witness for the specified native primal graph has width at least
       min(channels,buses). The native layout and graph definition remain explicit.
-  - source: '6.10'
+  - source: Proposition 6.10 (native treewidth)
     lean: Controller.Graph.NativeWidth.incidence_treewidth_lower
     module: Controller.Graph.NativeMinor
     status: proved
     note: Every TreewidthLE witness for the specified native incidence graph has width at
       least min(channels,buses). No bound for all equivalent CNF representations is asserted.
-  - source: '6.12'
+  - source: Proposition 6.12 (syntactic backdoors)
     lean: Controller.Boundaries.Backdoors.native_backdoor_lower_bound
     module: Controller.Boundaries.Backdoors
     status: proved
     note: Every strong or deletion backdoor of the bounded global native formula into the
       displayed Horn, renamable-Horn or two-CNF class has cardinality at least the bus count.
       Base-class membership is syntactic, including formulas with empty clauses.
-  - source: '6.12'
+  - source: Proposition 6.12 (syntactic backdoors)
     lean: Controller.Boundaries.Backdoors.specification_backdoor_lower_bound
     module: Controller.Boundaries.Backdoors
     status: proved
     note: The same bus-count lower bound holds for strong or deletion backdoors of the displayed
       specification formula into the three syntactic base classes.
-  - source: 6.11 (structural component)
+  - source: Proposition 6.11 (conditional structural component)
     lean: Controller.Graph.CoverCircuit.linear_width_obstruction
     module: Controller.Graph.CoverNets
     status: proved

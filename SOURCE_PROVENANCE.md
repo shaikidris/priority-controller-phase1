@@ -42,5 +42,4 @@ direction, including GPT-6 and Claude Opus 5.5. These identities are an inspecte
 provenance account, not a complete usage log. The source manuscript supplied
 the mathematical model and proof arguments according to the research plan.
 The DOI edition appeared after the initial Lean proofs; its publication date
-is not evidence of public precedence over those proofs. No independent human
-review or Palomar registration is asserted by this source account.
+is not evidence of public precedence over those proofs. Independent human review is not asserted by this source account.
