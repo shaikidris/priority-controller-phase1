@@ -32,6 +32,27 @@ class GuardRegression(unittest.TestCase):
     def test_valid_request(self):
         self.assertEqual(guard.validate_inputs(contract, self.inputs()), 'abcdef123456')
 
+    def test_ambiguous_plain_msc_rejected(self):
+        text = 'classification:\n  msc2020: [06E30, 68Q60]\n'
+        self.assertEqual(yaml.safe_load(text)['classification']['msc2020'][0], '06E30')
+        with self.assertRaisesRegex(ValueError, 'Quote MSC2020 code'):
+            guard.validate_metadata_portability(text)
+
+    def test_quoted_msc_accepted(self):
+        for code in ['"06E30"', "'06E30'"]:
+            self.assertEqual(guard.validate_metadata_portability(
+                'classification:\n  msc2020: [' + code + ', 68Q60]\n'), 2)
+
+    def test_empty_msc_accepted(self):
+        self.assertEqual(guard.validate_metadata_portability(
+            'classification:\n  msc2020: []\n'), 0)
+
+    def test_all_entry_metadata_portable(self):
+        catalog = json.loads((SOURCE/'entries/catalog.json').read_text())
+        for entry in catalog.values():
+            guard.validate_metadata_portability(
+                (SOURCE/entry['formalization_metadata_path']).read_text())
+
     def test_bad_request_identifier(self):
         inputs=self.inputs(); inputs['request_id']='phase1-release-too-long'
         with self.assertRaisesRegex(Exception,'twelve'):

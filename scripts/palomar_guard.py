@@ -13,6 +13,8 @@ from pathlib import Path
 import subprocess
 import sys
 
+from palomar_metadata_portability import validate_metadata_portability
+
 
 PIPELINE = "d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44"
 WORKFLOW = ".github/workflows/palomar-rehearsal.yml"
@@ -127,6 +129,7 @@ def main():
                   pipeline_commit=PIPELINE, request_id=args.request_id,
                   mode="full", execution_profile=PROFILE, options=options)
     validate_inputs(contract, inputs)
+    portable_codes = validate_metadata_portability((source / metadata_path).read_text())
     metadata = contract.load_formalization_metadata(source / metadata_path)
     validate_selection(source, metadata, comparator)
     import yaml
@@ -138,6 +141,9 @@ def main():
         "scope": "pinned request/metadata and immutable binding guard; no proof verification",
         "inputs": inputs,
         "entry": args.entry,
+        "metadata_portability": {"ambiguous_plain_msc_scalars": 0,
+                                 "msc_scalars_checked": portable_codes,
+                                 "scope": "Known YAML scalar ambiguity lint; not full browser intake validation"},
         "manifest_guard": manifest,
         "metadata_sha256": hashlib.sha256((source / metadata_path).read_bytes()).hexdigest(),
         "workflow_sha256": hashlib.sha256((source / WORKFLOW).read_bytes()).hexdigest(),
