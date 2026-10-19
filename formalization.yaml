@@ -15,7 +15,7 @@ classification:
   arxiv:
   - cs.DM
   msc2020:
-  - 06E30
+  - '06E30'
   - 68Q60
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority Controllers'
