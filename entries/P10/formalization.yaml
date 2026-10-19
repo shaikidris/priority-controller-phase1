@@ -14,8 +14,8 @@ classification:
   arxiv:
   - cs.CC
   msc2020:
-  - 68Q04
-  - 68Q27
+  - '68Q04'
+  - '68Q27'
 sources:
 - title: K00 encoded-machine simulation and resource-respecting reduction bridge
   authors:

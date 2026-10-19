@@ -66,6 +66,115 @@ source correspondence and qualifications. The proofs live in
 [Controller.Decoder.Extend](Controller/Decoder/Extend.lean) and
 [Controller.Cost.SharedDetectorCold](Controller/Cost/SharedDetectorCold.lean).
 
+## P03: canonical streaming enumeration
+
+[P03](Phase1/P03/Challenge.lean) enumerates the detecting eligible sets of a
+supplied guarded DAG without duplicates and in the stated order, and proves
+that their canonical primary-input realizations detect. Its actual native
+program terminates; the iterator theorem bounds the transition to the next
+emission or exhaustion from its displayed runtime invariant. Immutable code,
+mutable working words, external output and per-result emission costs are
+separate measures. These results refine Corollary 5.5, based on Theorem 5.4.
+The explicit program and numerical constants are implementation refinements;
+the entry does not enumerate all primary assignments or all native-CNF models.
+[Metadata and exact alignment](entries/P03/formalization.yaml).
+
+## P04: formula forests and weighted candidate bounds
+
+[P04](Phase1/P04/Challenge.lean) gives physical detection execution for a
+supplied formula forest with matching rows, heads and roots, under its displayed
+native layout and initial-state assumptions. It bounds ticks, live words and
+other declared operation/storage measures and supplies a detecting realization
+on acceptance, refining Theorem 5.6. Its separate weighted theorem assumes a
+returned traversal candidate and nonnegative weights, and bounds every
+admissible true-set weight by that candidate's score with linear operation
+counts. This is the upper-bound component of Corollary 6.7; it does not establish
+candidate existence, attainment or maximum-weight optimality of the emitted
+physical test. Encoded-weight bit costs are separate.
+[Metadata and exact alignment](entries/P04/formalization.yaml).
+
+## P05: dual-Horn and graph-cover representations
+
+[P05](Phase1/P05/Challenge.lean) represents dual-Horn satisfiability and finite
+graph vertex covers by physical bridge detection. Its theorems prove semantic
+correspondence, counted decoder size, formula-forest structure and eligible-set
+count/realization laws. Source variables, isolated graph vertices and literal
+multiplicities remain declared; graph enumeration and the required edge witness
+are supplied. The source constructions are Propositions 5.2 and 6.4. The count
+concerns eligible sets, and the selection does not assert a complete encoded
+P-completeness or counting-hardness theorem.
+[Entry account](entries/P05/README.md) and
+[metadata](entries/P05/formalization.yaml).
+
+## P06: critical sets, query bounds and structural obstructions
+
+[P06](Phase1/P06/Challenge.lean) formalizes the cycle/critical-set constructions
+of Example 6.1 and Proposition 6.2, universal physical-test-list lower bounds,
+and deterministic and finite randomized query bounds from Corollary 6.3.
+The costed recovery runs refine the constructive arguments with explicit native
+representation and execution premises. The structural theorems cover the
+specified primal/incidence encodings of Proposition 6.10, the conditional
+graph-width component of Proposition 6.11 and the syntactic backdoors of
+Proposition 6.12.
+Expansion and degree bounds are supplied assumptions. The query bounds restrict
+oracle access; they are not sequential-time lower bounds for an algorithm that
+reads decoder syntax. No infinite expander construction or DNNF lower bound is
+selected. [Metadata and exact alignment](entries/P06/formalization.yaml).
+
+## P07: bounded live conjunction and proper bases
+
+[P07](Phase1/P07/Challenge.lean) proves small-support and consistent selector
+expansion laws from Lemmas 7.2 and 7.3, then gives actual native detection and
+checked emitted witnesses for a supplied live-AND bound. Its numerical XP,
+one-live-AND and healthy-one estimates refine Theorem 7.4; the displayed general
+XP and healthy-one inequalities are weaker than the manuscript's sharper
+expressions. The proper-basis program formalizes the algorithmic component of
+Theorem 7.5 under supplied basis and representation evidence. It does not prove
+the full-basis hardness classification or independently supply an encoded
+language's missing construction bridge.
+[Metadata and exact alignment](entries/P07/formalization.yaml).
+
+## P08: observation projection and typed certificates
+
+[P08](Phase1/P08/Challenge.lean) proves conditional observation projection and
+optional/selected-wrapper equivalences from Theorems A.1 and A.2 and Corollary
+A.3, plus intended-producer recovery from Lemma A.4. Its selected-observation
+projection also handles the empty-list case. The Section 8 interface is refined
+by checked structured-family decoding, model lifting, exact SAT behavior after
+acceptance and sound SAT/UNSAT verdicts. Certified-UNSAT completeness assumes a
+supplied certificate accepted by the typed checker. The payload, intended DAG,
+promises and grammar premises remain explicit. This is not a raw DIMACS/JSON
+parser, unrestricted CNF discovery or a proof of every auxiliary construction
+time bound. [Metadata and exact alignment](entries/P08/formalization.yaml).
+
+## P09: checked ordinary resolution
+
+[P09](Phase1/P09/Challenge.lean) gives explicit ordinary-resolution construction
+and checker acceptance for the raw guarded native encoding and supported
+optional/selected observation wrappers. Theorems B.1 and B.2 and Corollary A.3
+supply the source arguments. Completeness is stated under UNSAT and the relevant
+wrapper/selection premises; returned-result checking is separate. The numerical
+bounds count cubic inferences in the displayed size parameters, with a separate
+quartic bound on derived literal occurrences. They do not bound compiler running
+time or claim cubic encoded proof size. No extension-variable rule or arbitrary
+CNF completeness is asserted.
+[Metadata and exact alignment](entries/P09/formalization.yaml).
+
+## P10: encoded simulation and reduction composition
+
+[P10](Phase1/P10/Challenge.lean) selects six principal theorems from the
+39-declaration K00 bridge: decoded image execution, polynomial-time native-to-TM2
+compilation, logarithmic-space composition and allocation erasure, parameterized
+reduction composition, and input-independent finite-TM2 realization. Constructor
+execution and intermediate output size are charged where required; space uses
+the stated finite-control tape model and visited-cell predicate. The custom
+encodings and machine witnesses are stated and proved in this development,
+using standard simulation and composition mechanisms. The controller manuscript
+is background for this entry. Application-specific constructors and resulting
+encoded-language class membership remain separate obligations.
+[Proof mechanisms](entries/P10/README.md) and
+[metadata](entries/P10/formalization.yaml).
+
 ## Selecting an entry
 
 For P02, select `entries/P02/comparator.json` and explicitly set **File layout →

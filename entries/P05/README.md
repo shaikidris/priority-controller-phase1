@@ -22,6 +22,6 @@ lake build Phase1.P05.Challenge Phase1.P05.Solution
 lake comparator --config entries/P05/comparator.json
 ```
 
-The mathematical source is Theorems 5.2 and 6.4 of Idris Ali Shaik,
+The mathematical source is Propositions 5.2 and 6.4 of Idris Ali Shaik,
 *Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in
 Priority Controllers*, [version 1.0](https://zenodo.org/records/23400057).

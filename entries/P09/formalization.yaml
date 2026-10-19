@@ -13,8 +13,8 @@ classification:
   arxiv:
   - cs.CC
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -24,8 +24,11 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; B.1, B.2. The informal manuscript supplies the model and proof arguments
-    according to the recorded source-development account.
+  note: Version 1.0; Theorem B.1 (ordinary native resolution), its separate
+    derived-literal storage discussion, and Theorem B.2 with the selected-observation
+    variant of Corollary A.3. The explicit compiler/checker interfaces and numerical
+    constants refine these proof-construction arguments. Inference count,
+    derived-literal storage and compiler runtime are distinct measures.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -73,35 +76,35 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: B.1
+  - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.native_refutation_encoded_cubic
     module: Controller.Cost.Resolution
     status: proved
     note: Native raw-layout guarded decoder formula; UNSAT implies an accepted ordinary-resolution
       refutation with at most 100000 times nativeEncodedSize cubed inferences. nativeEncodedSize
       counts declared variables plus original literal occurrences, retaining multiplicity.
-  - source: B.1
+  - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.compactNativeCompile_complete
     module: Controller.Cost.Resolution
     status: proved
     note: The parameter-only native compiler returns a checker-accepted trace on every raw-layout
       guarded UNSAT native formula. The explicit bound is 100000 times variableCount cubed;
       it bounds trace steps, not compiler running time.
-  - source: B.1
+  - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.compactNativeCompile_checked
     module: Controller.Cost.Resolution
     status: proved
     note: Every returned native trace is checker-accepted and has at most 100000 times variableCount
       cubed steps. This is a returned-result soundness and size theorem; completeness is a
       separate selected declaration.
-  - source: B.1
+  - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.canonical_derived_literal_storage
     module: Controller.Cost.Resolution
     status: proved
     note: The canonical refutation has at most 200000 times variableCount to the fourth derived
       literal occurrences. This is the separate storage measure discussed after B.1; it is
       not a cubic encoded-proof-size or compiler-time claim.
-  - source: B.2
+  - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runOptional_complete_cubic
     module: Controller.Cost.WrapperResolution
     status: proved
@@ -109,7 +112,7 @@ alignment:
       an accepted trace with at most 1000000 times nativeCoreSize cubed plus 5 times wrapperSize
       steps. nativeCoreSize includes observed pair incidences; wrapperSize counts original
       wrapper rows and literal occurrences.
-  - source: B.2
+  - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runSelected_complete_cubic
     module: Controller.Cost.WrapperResolution
     status: proved
@@ -117,14 +120,14 @@ alignment:
       UNSAT canonical selected input yields an accepted trace. The bound uses distinct selected
       outputs in nativeCoreSize, while selectedWrapperSize retains the added disjunction and
       all selected incidences.
-  - source: B.2
+  - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runOptional_checked
     module: Controller.Cost.WrapperResolution
     status: proved
     note: Any trace returned by runOptional passes the ordinary-resolution checker on the
       canonical optional input. This declaration provides acceptance soundness; it has no
       independent size or completeness conclusion.
-  - source: B.2
+  - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runSelected_checked
     module: Controller.Cost.WrapperResolution
     status: proved

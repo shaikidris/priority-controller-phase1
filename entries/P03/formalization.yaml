@@ -12,8 +12,8 @@ classification:
   arxiv:
   - cs.DM
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -23,8 +23,10 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; 5.5. The informal manuscript supplies the model and proof arguments according
-    to the recorded source-development account.
+  note: Version 1.0; Section 5, Corollary 5.5 (polynomial-delay enumeration), using
+    the eligibility-extension account of Theorem 5.4. The literal native program,
+    iterator invariant, constants and separate code, working-memory and output
+    measures are mechanized refinements of this account.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -71,7 +73,7 @@ review:
 alignment:
   namespace: Controller
   statements:
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.execution
     module: Controller.Cost.Enumeration
     status: proved
@@ -79,21 +81,21 @@ alignment:
       of its complete result stream. The total bound includes up to 2^n prefix candidates
       plus a separate emitBudget per result; working peak is at most 258*(countedSize + 1).
       Immutable program storage and the retained external output stream are separate measures.
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.results_exact
     module: Controller.Cost.Enumeration
     status: proved
     note: The result sequence is duplicate-free and ordered by the explicit Before relation.
       Membership is exactly the Detecting predicate for the supplied guarded DAG, bus count,
       target and drive. Objects enumerated are eligible channel sets.
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.canonical_result_detects
     module: Controller.Cost.Enumeration
     status: proved
     note: Each enumerated eligible set gives a detecting drive-one canonical primary input
       under realizeBridge. This is a witness-correctness theorem and does not count every
       primary assignment or native-CNF model.
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.iterator_delay
     module: Controller.Cost.Enumeration
     status: proved
@@ -101,13 +103,13 @@ alignment:
       or exhaustion endpoint within 100000*n*(n+q)*countedSize ticks and the stated working
       peak. Its external output is unchanged during this iterator transition; emission has
       its own charge.
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.delay_bound
     module: Controller.Cost.Enumeration
     status: proved
     note: The symbolic iterator delay function is bounded by 100000*n*(n+q)*countedSize. This
       arithmetic bound accompanies the separate actual iterator execution theorem.
-  - source: '5.5'
+  - source: Corollary 5.5 (native enumeration refinement)
     lean: Controller.Cost.Enumeration.program_words_bound
     module: Controller.Cost.Enumeration
     status: proved

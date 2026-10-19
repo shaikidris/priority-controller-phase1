@@ -15,7 +15,7 @@ classification:
   - cs.DM
   msc2020:
   - '06E30'
-  - 68Q25
+  - '68Q25'
 sources:
 - title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
     Controllers'
@@ -25,8 +25,10 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Theorems 5.2 and 6.4. The informal reductions supply the source constructions
-    and proof arguments.
+  note: Version 1.0; Proposition 5.2 (dual-Horn transfer) and Proposition 6.4
+    (graph-cover representation). These supply the constructions and semantic
+    correspondence. The formalization retains declared variable and vertex universes,
+    literal multiplicities and explicit counted decoder sizes.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -74,47 +76,47 @@ review:
 alignment:
   namespace: Controller.Reductions
   statements:
-  - source: Theorem 5.2
+  - source: Proposition 5.2
     lean: Controller.Reductions.DualHorn.model_bridge_detectable_iff
     module: Controller.Reductions.DualHornModels
     status: proved
     note: A dual-Horn source formula is satisfiable exactly when its explicit modelBridge/modelObservation
       instance is physically detectable under drive one. This establishes the semantic representation
       reduction, not a complete encoded-language P-completeness theorem.
-  - source: Theorem 5.2
+  - source: Proposition 5.2
     lean: Controller.Reductions.DualHorn.decoder_size_linear
     module: Controller.Reductions.DualHornSize
     status: proved
     note: The constructed dual-Horn decoder has counted size at most 10*(1+n+clauseCount+sourceLiteralIncidences).
       Literal and row multiplicities use the retained ordered source representation.
-  - source: Theorem 5.2
+  - source: Proposition 5.2
     lean: Controller.Reductions.DualHorn.decoder_formulaForest
     module: Controller.Reductions.DualHornForest
     status: proved
     note: The explicitly constructed decoder is a formula forest. This structural statement
       holds for every supplied source formula; its dual-Horn semantic equivalence has a separate
       premise.
-  - source: Theorem 6.4
+  - source: Proposition 6.4
     lean: Controller.Reductions.coverDAG_size_linear
     module: Controller.Reductions.GraphCover
     status: proved
     note: For an enumerated graph with a supplied edge, coverDAG has counted size at most
       14*(vertexCount+edgeCount). The edge witness retains the nonempty-edge condition.
-  - source: Theorem 6.4
+  - source: Proposition 6.4
     lean: Controller.Reductions.cover_detection_count
     module: Controller.Reductions.GraphCover
     status: proved
     note: 'The number of detecting eligible sets in the graph-cover representation equals
       the number of vertex covers. This counts the two displayed finite set types, not all
       primary assignments or native-CNF models and not a standalone #P-hardness proof.'
-  - source: Theorem 6.4
+  - source: Proposition 6.4
     lean: Controller.Reductions.cover_physical_detects_only_covers
     module: Controller.Reductions.GraphCover
     status: proved
     note: Every physical detecting input in the graph-cover instance has faulty eligible set
       equal to the target adjoined to a vertex cover. Arbitrary physical input and wire values
       are covered by the premise.
-  - source: Theorem 6.4
+  - source: Proposition 6.4
     lean: Controller.Reductions.cover_realizer_detects_iff
     module: Controller.Reductions.GraphCover
     status: proved
