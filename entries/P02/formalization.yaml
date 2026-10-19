@@ -1,8 +1,8 @@
 version: v0.4
 project:
   name: Guarded detection and constrained eligible-set extensions
-  description: Correctness and completeness of fault detection and extension over a supplied
-    guarded decoder DAG, together with an executed native cold-detector bound.
+  description: Correctness and completeness of fault detection and extension over a supplied guarded
+    decoder DAG, together with an executed native cold-detector bound.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -12,21 +12,20 @@ classification:
   arxiv:
   - cs.DM
   msc2020:
-  - 68Q25
-  - 68Q60
+  - '68Q25'
+  - '68Q60'
 sources:
-- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
-    Controllers'
+- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority Controllers'
   authors:
   - Idris Ali Shaik
   id: doi:10.5281/zenodo.23400057
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Section 5, Theorem 5.1 for guarded detection and Theorem 5.4
-    for constrained eligibility extension. The cold native program and its exact
-    instruction and live-word bounds are mechanized implementation refinements of
-    that algorithmic account, not separately numbered manuscript statements.
+  note: Version 1.0; Section 5, Theorem 5.1 for guarded detection and Theorem 5.4 for constrained
+    eligibility extension. The cold native program and its exact instruction and live-word bounds
+    are mechanized implementation refinements of that algorithmic account, not separately numbered
+    manuscript statements.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -34,9 +33,13 @@ status:
   scope: Correctness and completeness of fault detection and extension over a supplied guarded
     decoder DAG, together with an executed native cold-detector bound. The decoder is supplied
     as structured finite data. Fixed signs constrain eligibility coordinates. The cold-detector
-    resource theorem uses its displayed native instruction model and encoded input layout;
-    it is not a conventional encoded-language membership theorem and does not discover a guarded
-    presentation of arbitrary CNF.
+    resource theorem uses its displayed native instruction model and encoded input layout; it
+    is not a conventional encoded-language membership theorem and does not discover a guarded
+    presentation of arbitrary CNF. The resource theorem measures execution of a Solution-supplied
+    instance-dependent program. Comparator does not fix the body of this definition hole. A uniform
+    charged constructor for this program family is not selected. The checked emitted model is
+    not linked by this theorem to the fixed eligibility sets T/F, and its live-word bound includes
+    the native-size term on rejection as well as acceptance.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -50,24 +53,23 @@ automation:
     - GPT-6
     - Claude Opus 5.5
     framework: OpenAI Codex and Claude Code
-    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds
-      and axiom audits. Recorded model identities are not a complete historical usage log.
+    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds and
+      axiom audits. Recorded model identities are not a complete historical usage log.
     cost:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Formalize the supplied controller equations and prove the exact image
-      and detection statements without changing their hypotheses.
+    prompting_notes: Prove guarded detection and fixed-eligibility extension correctness, then
+      inspect the execution model and charged resources separately.
   spend_usd: not tracked
-  notes: The author directed the formalization. AI agents assisted with proof construction
-    and packaging.
+  notes: The author directed the formalization. AI agents assisted with proof construction and
+    packaging.
 fidelity:
-  divergences: The exact cold-machine program, constants and checked-model postcondition
-    refine the algorithmic account in Theorems 5.1 and 5.4; the manuscript does not
-    state this instruction-level theorem. The decoder is supplied as structured finite data. Fixed signs constrain eligibility
-    coordinates. The cold-detector resource theorem uses its displayed native instruction
-    model and encoded input layout; it is not a conventional encoded-language membership theorem
-    and does not discover a guarded presentation of arbitrary CNF.
+  divergences: The resource theorem measures execution of a Solution-supplied instance-dependent
+    program. Comparator does not fix the body of this definition hole. A uniform charged constructor
+    for this program family is not selected. The checked emitted model is not linked by this theorem
+    to the fixed eligibility sets T/F, and its live-word bound includes the native-size term on
+    rejection as well as acceptance.
 review:
   status: self-assessed
   reviewers: []
@@ -81,41 +83,41 @@ alignment:
     module: Controller.Public.Detection
     status: proved
     note: For a supplied guarded DAG, detectInput returns none exactly when no physical bridge-interface
-      input and wire value distinguish an observed root. Every returned input satisfies the
-      drive interface with wire true and distinguishes a root. This is the semantic correctness
-      component of 5.1.
+      input and wire value distinguish an observed root. Every returned input satisfies the drive
+      interface with wire true and distinguishes a root. This is the semantic correctness component
+      of 5.1.
   - source: Theorem 5.1 (semantic correctness and completeness)
     lean: Controller.Public.guarded_bridge_detector_complete
     module: Controller.Public.Detection
     status: proved
     note: For a supplied guarded DAG, existence of a returned input is equivalent to physical
-      bridge detectability. The theorem covers the drive parameter explicitly; runtime is
-      established separately.
+      bridge detectability. The theorem covers the drive parameter explicitly; the separate execution
+      theorem has its own layout, program-family and storage premises.
   - source: Theorems 5.1 and 5.4 (mechanized implementation refinement)
     lean: Controller.Cost.SharedDetectorCold.execution
     module: Controller.Cost.SharedDetectorCold
     status: proved
-    note: The program and its exact numerical bounds refine the manuscript algorithms;
-      they are not separately numbered source claims. The charged cold native program requires raw layout, drive one, consistent fixed
-      sets, matching rows/heads/roots and the displayed observation correspondence and initial
-      packet. It halts with the exact constrained detection answer, at most 5100*(n+q+1)*(G+1)
-      ticks plus 55 times the displayed selected native size on acceptance, bounded live words
-      and a checked native model when it accepts. These representation and native instruction
-      premises remain explicit.
+    note: The program and its exact numerical bounds refine the manuscript algorithms; they are
+      not separately numbered source claims. The charged cold native program requires raw layout,
+      drive one, consistent fixed sets, matching rows/heads/roots and the displayed observation
+      correspondence and initial packet. It halts with the exact constrained detection answer,
+      at most 5100*(n+q+1)*(G+1) ticks plus 55 times the displayed selected native size on acceptance,
+      bounded live words and a checked native model when it accepts. These representation and
+      native instruction premises remain explicit.
   - source: Theorem 5.4 (eligibility extension)
     lean: Controller.Decoder.DAG.extendSet_some
     module: Controller.Decoder.Extend
     status: proved
     note: Every returned extension has drive one, is admissible, extends the fixed true/false
-      eligibility sets and changes a supplied root from its target-singleton value. Fixed
-      sets constrain eligibility coordinates.
+      eligibility sets and changes a supplied root from its target-singleton value. Fixed sets
+      constrain eligibility coordinates.
   - source: Theorem 5.4 (eligibility extension)
     lean: Controller.Decoder.DAG.extendSet_none_iff
     module: Controller.Decoder.Extend
     status: proved
-    note: The extension routine returns none exactly when there is no admissible detecting
-      extension satisfying the fixed eligibility sets and drive-one condition. This is an
-      exact semantic failure criterion, including inconsistent constraints.
+    note: The extension routine returns none exactly when there is no admissible detecting extension
+      satisfying the fixed eligibility sets and drive-one condition. This is an exact semantic
+      failure criterion, including inconsistent constraints.
   - source: Theorem 5.4 (eligibility extension)
     lean: Controller.Decoder.DAG.extendSet_exists_iff
     module: Controller.Decoder.Extend

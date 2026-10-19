@@ -68,8 +68,8 @@ noncomputable section
 /-!
 # Guarded decision and constrained extension
 The grammar, state transitions, resource measures and mathematical predicates
-are explicit. Definition holes identify only implementation witnesses; the
-selected universal theorems constrain their executions or returned results.
+are explicit. Definition holes supply instance-dependent implementations. Their bodies
+require source-level review; Comparator matches their types. See SEMANTIC_SCOPE.md.
 The selected statements retain the exact assumptions of the proof library.
 -/
 /- Source-exported auxiliary proofs; addDecl checks every complete proof. -/

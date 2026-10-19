@@ -124,6 +124,27 @@ theorem execution (parameters : Parameters) (graph : DAG parameters.channels) (g
   rw [finish] at runtime
   exact ⟨final, ticks, peak, trace, time, space, runtime.1, by simpa only [results, initial, List.append_nil] using output, trace.to_execution⟩
 
+/- Complete stream time is proportional to the number of outputs, including
+one final exhaustion search and the explicit serialization cost per output. -/
+set_option maxHeartbeats 2000000 in
+theorem execution_output_sensitive (parameters : Parameters) (graph : DAG parameters.channels) (guarded : graph.Guarded)
+    (rows : List ForestIndexedOperands.Row) (roots : List Nat) (matched : ForestIndexedOperands.RowsMatch graph rows)
+    (heads : UniformDAGSource.HeadsMatch graph rows matched) (rootMatches : ForestIndexedOperands.RootsMatch graph roots) :
+    ∃ final ticks peak, WorkingExecution (program parameters graph rows roots) (initial parameters graph rows roots) final ticks peak ∧
+      ticks ≤ ((results parameters graph).length + 1) * EnumerationDriverNext.delay parameters graph +
+        (results parameters graph).length * EnumerationDriverStream.emitBudget parameters ∧
+      peak ≤ 258 * (graph.countedSize + 1) ∧ final.halted = true ∧
+      final.output = (EnumerationDriverStream.words parameters (Width parameters graph) (results parameters graph)).reverse ∧
+      ∃ livePeak, Execution (program parameters graph rows roots) (initial parameters graph rows roots) final ticks livePeak := by
+  have context := EnumerationDriverCapacity.context parameters graph guarded rows roots matched heads rootMatches
+  obtain ⟨final, ticks, peak, trace, time, space, output, runtime⟩ :=
+    EnumerationDriverStream.execution_output_sensitive parameters graph (EnumerationDriverCapacity.retained parameters graph) 0 rows roots
+      (program parameters graph rows roots) context (2 ^ parameters.channels + 1) .initial (initial parameters graph rows roots)
+      ⟨rfl, rfl, rfl, rfl⟩
+  have finish := Decoder.Enumeration.enumeration_terminates graph guarded parameters.buses parameters.bridge.target parameters.drive
+  rw [finish] at runtime
+  exact ⟨final, ticks, peak, trace, by simpa only [results] using time, space, runtime.1, by simpa only [results, initial, List.append_nil] using output, trace.to_execution⟩
+
 set_option maxHeartbeats 2000000 in
 theorem iterator_delay (parameters : Parameters) (graph : DAG parameters.channels) (guarded : graph.Guarded)
     (rows : List ForestIndexedOperands.Row) (roots : List Nat) (matched : ForestIndexedOperands.RowsMatch graph rows)
@@ -141,5 +162,48 @@ theorem iterator_delay (parameters : Parameters) (graph : DAG parameters.channel
     EnumerationDriverNext.execution parameters graph (EnumerationDriverCapacity.retained parameters graph) 0 rows roots
       (program parameters graph rows roots) (EnumerationDriverCapacity.context parameters graph guarded rows roots matched heads rootMatches) logical state runtime
   exact ⟨final, ticks, peak, trace, time.trans (delay_bound parameters graph), space, output, endpoint⟩
+
+
+/- One bounded transition searches, emits the next canonical model if present,
+and restores the iterator invariant for the following call. -/
+set_option maxHeartbeats 2000000 in
+theorem stream_step (parameters : Parameters) (graph : DAG parameters.channels) (guarded : graph.Guarded)
+    (rows : List ForestIndexedOperands.Row) (roots : List Nat) (matched : ForestIndexedOperands.RowsMatch graph rows)
+    (heads : UniformDAGSource.HeadsMatch graph rows matched) (rootMatches : ForestIndexedOperands.RootsMatch graph roots)
+    (logical : Decoder.Enumeration.State parameters.channels) (state : State (Width parameters graph) 8)
+    (runtime : EnumerationDriverNext.Runtime parameters graph (EnumerationPrefixOracle.packet parameters (Width parameters graph) rows roots)
+      0 (EnumerationDriverCode.labels parameters graph (Width parameters graph) 0).seek logical state) :
+    ∃ final ticks peak, WorkingExecution (program parameters graph rows roots) state final ticks peak ∧
+      ticks ≤ 100000 * parameters.channels * (parameters.channels + graph.roots.length) * graph.countedSize +
+        EnumerationDriverStream.emitBudget parameters ∧
+      peak ≤ 258 * (graph.countedSize + 1) ∧
+      match (Decoder.Enumeration.next graph parameters.buses parameters.bridge.target parameters.drive logical).output with
+      | none => final.halted = true ∧ final.output = state.output
+      | some K => final.output = (EnumerationCanonicalEmit.words parameters (Width parameters graph) K).reverse ++ state.output ∧
+          EnumerationDriverNext.Runtime parameters graph (EnumerationPrefixOracle.packet parameters (Width parameters graph) rows roots)
+            0 (EnumerationDriverCode.labels parameters graph (Width parameters graph) 0).seek (.after K) final := by
+  let context := EnumerationDriverCapacity.context parameters graph guarded rows roots matched heads rootMatches
+  obtain ⟨found, searchTicks, searchPeak, searchTrace, searchTime, searchSpace, searchOutput, endpoint⟩ :=
+    EnumerationDriverNext.execution parameters graph (EnumerationDriverCapacity.retained parameters graph) 0 rows roots
+      (program parameters graph rows roots) context logical state runtime
+  have time := searchTime.trans (delay_bound parameters graph)
+  cases returned : (Decoder.Enumeration.next graph parameters.buses parameters.bridge.target parameters.drive logical).output with
+  | none =>
+    refine ⟨found, searchTicks, searchPeak, searchTrace, by omega, searchSpace, ?_⟩
+    exact ⟨by simpa only [returned, EnumerationDriverStart.Endpoint] using endpoint, searchOutput⟩
+  | some K =>
+    have ready := endpoint
+    simp only [returned, EnumerationDriverStart.Endpoint] at ready
+    have detects := EnumerationDriverStream.result_detecting parameters graph guarded logical K returned
+    have drive : parameters.drive = true := detects.1
+    have detectsTrue : Decoder.Enumeration.Detecting graph parameters.buses parameters.bridge.target true K := by
+      simpa only [drive] using detects
+    obtain ⟨final, emitTicks, emitPeak, emitTrace, emitTime, emitSpace, emitReady, emitPC, emitOutput⟩ :=
+      EnumerationDriverWorking.emission parameters graph (EnumerationDriverCapacity.retained parameters graph) 0 rows roots
+        (program parameters graph rows roots) context K found ready.1 detectsTrue ready.2
+    refine ⟨final, searchTicks + emitTicks, max searchPeak emitPeak, searchTrace.append emitTrace,
+      by change emitTicks ≤ EnumerationDriverStream.emitBudget parameters at emitTime; omega,
+      max_le searchSpace (emitSpace.trans (searchTrace.final_le_peak.trans searchSpace)), ?_⟩
+    exact ⟨by rw [emitOutput, searchOutput], ⟨emitReady, emitPC, detects⟩⟩
 
 end Controller.Cost.Enumeration

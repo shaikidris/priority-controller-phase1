@@ -18,8 +18,8 @@ For one guarded output and nonnegative channel weights in an ordered group:
   one-head candidates;
 * a healthy-one output has a maximum-weight detecting set, the greatest
   eligible zero;
-* on a formula forest, the costed indexed traversal selects a maximum-weight
-  true set over all outputs within linear operation counts.
+* on a formula forest, a returned indexed-traversal candidate bounds the
+  weight of every admissible true set, with linear operation counts.
 
 Weights may be zero. Nothing is claimed for negative weights. Arithmetic is
 counted in operations; the bit cost of weights is a separate contract.
@@ -119,7 +119,7 @@ open Controller.Cost Controller.Cost.ForestIndexedOperands in
 /-- Formula forests: the costed indexed traversal's selected score bounds the
 weight of every admissible true set at every output, and the run uses linearly
 many indexed and arithmetic operations. The weight function is the one supplied;
-no representation change occurs between the optimum and the resource bound. -/
+the statement assumes a returned candidate and does not prove score attainment. -/
 theorem forest_maximum_weight (graph : DAG n) (guarded : graph.Guarded)
     (forest : graph.FormulaForest) (rows : List Row) (roots : List Nat)
     (matched : RowsMatch graph rows) (rootsMatch : RootsMatch graph roots)

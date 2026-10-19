@@ -17,6 +17,11 @@ version 1.0, [DOI 10.5281/zenodo.23400057](https://zenodo.org/records/23400057).
 Per-entry metadata distinguishes manuscript statements from implementation
 refinements and other differences in the formalization.
 
+The [algorithm and encoding contracts](SEMANTIC_SCOPE.md) identify the remaining
+uniform code-construction, bounded-encoding width and typed-family acceptance
+bridges. The selected component theorems retain their literal scope; the full
+paper algorithm target remains open at those bridges.
+
 ## P01: exact physical images
 
 [P01](Phase1/P01/Challenge.lean) characterizes the activated drive-one bridge
@@ -53,7 +58,9 @@ program implementation:
   decoder size and `S` the selected native size. The run takes at most
   `5100*(n+q+1)*(G+1)` ticks, plus `55*S` on acceptance. Peak live words are at
   most the initial live words plus `210*(G+1)+3*S`. An accepting run emits output
-  accepted by the specified native model checker. This explicit instruction
+  accepted by the specified native model checker. The model-checking postcondition
+  does not tie that model's eligible set to T/F. The code is supplied by an
+  instance-dependent factory whose construction cost is not selected. This explicit instruction
   model, program, constants and output-checking postcondition refine the
   algorithmic account in Theorems 5.1 and 5.4; the exact machine statement is
   not a separately numbered theorem of the manuscript.
@@ -70,9 +77,11 @@ source correspondence and qualifications. The proofs live in
 
 [P03](Phase1/P03/Challenge.lean) enumerates the detecting eligible sets of a
 supplied guarded DAG without duplicates and in the stated order, and proves
-that their canonical primary-input realizations detect. Its actual native
-program terminates; the iterator theorem bounds the transition to the next
-emission or exhaustion from its displayed runtime invariant. Immutable code,
+that their canonical primary-input realizations detect. The supplied native
+program terminates within `(r+1)*delay+r*emitBudget` ticks for `r` results.
+The stream-step theorem includes search, canonical emission and return to the
+iterator invariant, or exhaustion. One program serves all prefixes of the
+instance; a charged constructor for that instance-dependent code remains separate. Immutable code,
 mutable working words, external output and per-result emission costs are
 separate measures. These results refine Corollary 5.5, based on Theorem 5.4.
 The explicit program and numerical constants are implementation refinements;
@@ -84,8 +93,10 @@ the entry does not enumerate all primary assignments or all native-CNF models.
 [P04](Phase1/P04/Challenge.lean) gives physical detection execution for a
 supplied formula forest with matching rows, heads and roots, under its displayed
 native layout and initial-state assumptions. It bounds ticks, live words and
-other declared operation/storage measures and supplies a detecting realization
-on acceptance, refining Theorem 5.6. Its separate weighted theorem assumes a
+other declared operation/storage measures and emits a detecting eligible-set
+descriptor on acceptance. Its reference code factory precomputes a selected result;
+the fetched tick bound does not charge that computation or establish the full
+uniform algorithm of Theorem 5.6. Its separate weighted theorem assumes a
 returned traversal candidate and nonnegative weights, and bounds every
 admissible true-set weight by that candidate's score with linear operation
 counts. This is the upper-bound component of Corollary 6.7; it does not establish
