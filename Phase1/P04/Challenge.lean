@@ -69,7 +69,7 @@ namespace Controller
 The grammar,state transitions,resource measures and mathematical predicates
 are explicit. Definition holes identify only implementation witnesses;the
 selected universal theorems constrain their executions or returned results.
-The selected statements retain the exact assumptions of the proof library.
+Code-construction cost is separate from fetched execution.
 -/
 section
 abbrev Channel (n:ℕ):=Fin n

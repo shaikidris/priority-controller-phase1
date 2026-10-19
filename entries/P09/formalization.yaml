@@ -1,8 +1,8 @@
 version: v0.4
 project:
   name: Ordinary resolution for native encodings and observation wrappers
-  description: Checked ordinary-resolution construction for the native controller encoding
-    and supported observation wrappers, with cubic inference bounds and the displayed derived-literal
+  description: Checked ordinary-resolution construction for the native controller encoding and
+    supported observation wrappers, with cubic inference bounds and the displayed derived-literal
     storage bound.
   authors:
   - Idris Ali Shaik
@@ -16,19 +16,17 @@ classification:
   - '68Q25'
   - '68Q60'
 sources:
-- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
-    Controllers'
+- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority Controllers'
   authors:
   - Idris Ali Shaik
   id: doi:10.5281/zenodo.23400057
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Theorem B.1 (ordinary native resolution), its separate
-    derived-literal storage discussion, and Theorem B.2 with the selected-observation
-    variant of Corollary A.3. The explicit compiler/checker interfaces and numerical
-    constants refine these proof-construction arguments. Inference count,
-    derived-literal storage and compiler runtime are distinct measures.
+  note: Version 1.0; Theorem B.1 (ordinary native resolution), its separate derived-literal storage
+    discussion, and Theorem B.2 with the selected-observation variant of Corollary A.3. The explicit
+    compiler/checker interfaces and numerical constants refine these proof-construction arguments.
+    Inference count, derived-literal storage and compiler runtime are distinct measures.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
@@ -38,7 +36,10 @@ status:
     bound. The resolution checker and clause semantics are explicit. Bounds count the displayed
     inference or literal-storage measures and use the formal native or wrapper size parameters.
     These are ordinary resolution results, with no extension rule or generic claim for arbitrary
-    CNF.
+    CNF. The selected joint resource theorem bounds inference count and derived-literal storage
+    for the same compactRefute object. Compiler existence and checked-trace results do not assert
+    a polynomial-time executable compiler or charge code generation. Native and wrapper size parameters
+    and their representation premises remain explicit.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -52,22 +53,22 @@ automation:
     - GPT-6
     - Claude Opus 5.5
     framework: OpenAI Codex and Claude Code
-    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds
-      and axiom audits. Recorded model identities are not a complete historical usage log.
+    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds and
+      axiom audits. Recorded model identities are not a complete historical usage log.
     cost:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Formalize the supplied controller equations and prove the exact image
-      and detection statements without changing their hypotheses.
+    prompting_notes: Prove ordinary-resolution checker soundness and explicit refutation resources
+      with a shared witness for joint bounds.
   spend_usd: not tracked
-  notes: The author directed the formalization. AI agents assisted with proof construction
-    and packaging.
+  notes: The author directed the formalization. AI agents assisted with proof construction and
+    packaging.
 fidelity:
-  divergences: The resolution checker and clause semantics are explicit. Bounds count the
-    displayed inference or literal-storage measures and use the formal native or wrapper size
-    parameters. These are ordinary resolution results, with no extension rule or generic claim
-    for arbitrary CNF.
+  divergences: The selected joint resource theorem bounds inference count and derived-literal
+    storage for the same compactRefute object. Compiler existence and checked-trace results do
+    not assert a polynomial-time executable compiler or charge code generation. Native and wrapper
+    size parameters and their representation premises remain explicit.
 review:
   status: self-assessed
   reviewers: []
@@ -88,50 +89,58 @@ alignment:
     module: Controller.Cost.Resolution
     status: proved
     note: The parameter-only native compiler returns a checker-accepted trace on every raw-layout
-      guarded UNSAT native formula. The explicit bound is 100000 times variableCount cubed;
-      it bounds trace steps, not compiler running time.
+      guarded UNSAT native formula. The explicit bound is 100000 times variableCount cubed; it
+      bounds trace steps, not compiler running time.
   - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.compactNativeCompile_checked
     module: Controller.Cost.Resolution
     status: proved
     note: Every returned native trace is checker-accepted and has at most 100000 times variableCount
-      cubed steps. This is a returned-result soundness and size theorem; completeness is a
-      separate selected declaration.
+      cubed steps. This is a returned-result soundness and size theorem; completeness is a separate
+      selected declaration.
   - source: Theorem B.1 (explicit proof construction and storage refinement)
     lean: Controller.Cost.NativeResolution.canonical_derived_literal_storage
     module: Controller.Cost.Resolution
     status: proved
     note: The canonical refutation has at most 200000 times variableCount to the fourth derived
-      literal occurrences. This is the separate storage measure discussed after B.1; it is
-      not a cubic encoded-proof-size or compiler-time claim.
+      literal occurrences. This is the separate storage measure discussed after B.1; it is not
+      a cubic encoded-proof-size or compiler-time claim.
   - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runOptional_complete_cubic
     module: Controller.Cost.WrapperResolution
     status: proved
     note: For a supported optional wrapper whose canonical input is UNSAT, runOptional returns
       an accepted trace with at most 1000000 times nativeCoreSize cubed plus 5 times wrapperSize
-      steps. nativeCoreSize includes observed pair incidences; wrapperSize counts original
-      wrapper rows and literal occurrences.
+      steps. nativeCoreSize includes observed pair incidences; wrapperSize counts original wrapper
+      rows and literal occurrences.
   - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runSelected_complete_cubic
     module: Controller.Cost.WrapperResolution
     status: proved
-    note: For a supported wrapper and a nonempty selected list contained in its leaves, an
-      UNSAT canonical selected input yields an accepted trace. The bound uses distinct selected
-      outputs in nativeCoreSize, while selectedWrapperSize retains the added disjunction and
-      all selected incidences.
+    note: For a supported wrapper and a nonempty selected list contained in its leaves, an UNSAT
+      canonical selected input yields an accepted trace. The bound uses distinct selected outputs
+      in nativeCoreSize, while selectedWrapperSize retains the added disjunction and all selected
+      incidences.
   - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runOptional_checked
     module: Controller.Cost.WrapperResolution
     status: proved
-    note: Any trace returned by runOptional passes the ordinary-resolution checker on the
-      canonical optional input. This declaration provides acceptance soundness; it has no
-      independent size or completeness conclusion.
+    note: Any trace returned by runOptional passes the ordinary-resolution checker on the canonical
+      optional input. This declaration provides acceptance soundness; it has no independent size
+      or completeness conclusion.
   - source: Theorem B.2 and Corollary A.3 (supported observation wrappers)
     lean: Controller.Cost.WrapperResolution.runSelected_checked
     module: Controller.Cost.WrapperResolution
     status: proved
-    note: Any trace returned by runSelected passes the ordinary-resolution checker on the
-      canonical selected input. This declaration provides acceptance soundness; completeness
-      and its nonempty/leaf conditions appear separately.
+    note: Any trace returned by runSelected passes the ordinary-resolution checker on the canonical
+      selected input. This declaration provides acceptance soundness; completeness and its nonempty/leaf
+      conditions appear separately.
+  - source: Theorems B.1 and B.2 (joint canonical resources)
+    lean: Controller.Cost.NativeResolution.canonical_refutation_resources
+    module: Controller.Cost.Resolution
+    status: proved
+    note: The same compactRefute object is accepted by the ordinary-resolution checker, has at
+      most 100000*v^3 inferences, and stores at most 200000*v^4 derived literals, where v is the
+      native variable count. This is a joint certificate-size theorem, without a compiler runtime
+      bound.
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.

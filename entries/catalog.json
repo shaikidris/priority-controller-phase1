@@ -35,7 +35,9 @@
       "Controller.Cost.Enumeration.canonical_result_detects",
       "Controller.Cost.Enumeration.iterator_delay",
       "Controller.Cost.Enumeration.delay_bound",
-      "Controller.Cost.Enumeration.program_words_bound"
+      "Controller.Cost.Enumeration.program_words_bound",
+      "Controller.Cost.Enumeration.execution_output_sensitive",
+      "Controller.Cost.Enumeration.stream_step"
     ]
   },
   "P04": {
@@ -114,7 +116,8 @@
       "Controller.Certificate.Pipeline.runFamily_sat_iff",
       "Controller.Certificate.Pipeline.runFamily_certified_unsat",
       "Controller.Certificate.Pipeline.runFamily_sat_sound",
-      "Controller.Certificate.Pipeline.runFamily_unsat_sound"
+      "Controller.Certificate.Pipeline.runFamily_unsat_sound",
+      "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates"
     ]
   },
   "P09": {
@@ -129,7 +132,8 @@
       "Controller.Cost.WrapperResolution.runOptional_complete_cubic",
       "Controller.Cost.WrapperResolution.runSelected_complete_cubic",
       "Controller.Cost.WrapperResolution.runOptional_checked",
-      "Controller.Cost.WrapperResolution.runSelected_checked"
+      "Controller.Cost.WrapperResolution.runSelected_checked",
+      "Controller.Cost.NativeResolution.canonical_refutation_resources"
     ]
   },
   "P10": {

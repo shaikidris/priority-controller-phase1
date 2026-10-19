@@ -110,7 +110,7 @@ def Discrepant (signals : σ → Bool) (pair : Literal σ × Literal σ) : Prop 
 inductive UnitDerived (formula : Formula α) : Clause α → Prop where
   | source (clause : Clause α) (membership : clause ∈ formula.clauses) : UnitDerived formula clause | reorder {left right : Clause α} (proof : UnitDerived formula left) (permutation : left.Perm right) : UnitDerived formula right | propagate (literal : Literal α) (tail : Clause α) (clause : UnitDerived formula (literal :: tail)) (unit : UnitDerived formula [negate literal]) : UnitDerived formula tail
 def inactiveFormula (pure : Formula α) (activities : ρ → Literal α) (accepted : List ρ) : Formula α := pure ++ ofClauses (accepted.map fun i => [negate (activities i)])
-/-- observation projection of unit conflict: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem observation_projection_of_unit_conflict (definitions : Formula σ) (wrapper : Formula (Sum σ α)) (pure : Formula α) (pairs : ρ → Literal σ × Literal σ) (activities : ρ → Literal α) (accepted : List ρ) (pureCovered : ∀ signals values, Satisfies (joint signals values) wrapper → Satisfies values pure) (guards : ∀ signals values, Satisfies (joint signals values) wrapper → ∀ i, LiteralHolds values (activities i) → Discrepant signals (pairs i)) (conflict : UnitDerived (inactiveFormula pure activities accepted) []) (uniform : ∀ i ∈ accepted, ∀ left right : Bool, left ≠ right → (¬∃ signals, Satisfies signals definitions ∧ literalValue signals (pairs i).1 = left ∧ literalValue signals (pairs i).2 = right) ∨ ∃ values, ∀ signals, Satisfies signals definitions → literalValue signals (pairs i).1 = left → literalValue signals (pairs i).2 = right → Satisfies (joint signals values) wrapper) (signals : σ → Bool) (model : Satisfies signals definitions) : (∃ values, Satisfies (joint signals values) wrapper) ↔ ∃ i ∈ accepted, Discrepant signals (pairs i) := by sorry
 inductive RequirementTree (ρ : Type*) where
   | leaf (observation : ρ) | branch (left right : RequirementTree ρ)
@@ -149,9 +149,9 @@ def OptionalWrapper.DeclaredPrivate [Fintype ι] (wrapper : OptionalWrapper σ �
 noncomputable def extendDeclaredAuxiliaries (support : Finset α) (values : {a // a ∈ support} → Bool) : α → Bool := by
   classical
   exact fun a => if membership : a ∈ support then values ⟨a, membership⟩ else false
-/-- optional declared cnf projection: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem optional_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) wrapper.formula) ↔ ∃ i ∈ wrapper.tree.leaves, Discrepant signals (wrapper.observedPairs i) := by sorry
-/-- selected declared cnf projection: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem selected_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (selected : List ρ) (allLeaves : ∀ i ∈ selected, i ∈ wrapper.tree.leaves) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) (selectedFormula wrapper selected)) ↔ ∃ i ∈ selected, Discrepant signals (wrapper.observedPairs i) := by sorry
 end Controller.Native.ObservationProjection source_context "Controller.Recognition.Producers"
 section
@@ -191,7 +191,7 @@ instance [DecidableEq α] [Fintype α] (roots : Finset α) (rank : α → Nat) (
 attribute [instance 1000] Nat.decLt
 end Controller.Recognition end source_context "Controller.Recognition.ProducerCompletion" namespace Controller.Recognition.IntendedDAG
 variable [DecidableEq α]
-/-- recovery exact: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem recovery_exact (dag : IntendedDAG α) (promise : dag.CandidatePromise) {known trace} (run : dag.Run promise known trace) (saturated : ∀ p ∈ promise.candidates, ¬p.Ready known) : (∀ p ∈ trace, p = dag.producer p.output.1 ∧ p.output.1 ∉ dag.roots) ∧ (∀ v, v ∉ dag.roots → dag.producer v ∈ trace) ∧ (trace.map (fun p => p.output.1)).Nodup := by sorry
 end Controller.Recognition.IntendedDAG source_context "Controller.Recognition.Coverage" namespace Controller.Recognition.Coverage
 open Controller.CNF
@@ -759,10 +759,12 @@ end CompletePayload end PrivateFamily end Controller.Recognition source_context 
 open Controller.Decoder Controller.CNF
 def guardedCheck (graph : DAG n) : Bool := (List.finRange graph.nodeCount).all fun i => !(graph.node i).isLiveAnd
 def decodeChecked (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) : Option (PrivateFamily.Record source recovered parameters boundary auxCount) := if guardedCheck parameters.decoder then payload.decodeChecked else none
-/-- decodeChecked sound: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem decodeChecked_sound (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (accepted : decodeChecked payload = some record) : parameters.decoder.Guarded ∧ record.check = true ∧ (Satisfiable source ↔ Physical.BridgeDetectable (b := parameters.buses) parameters.bridge parameters.drive parameters.observations) := by sorry
-/-- decodeChecked lifting: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem decodeChecked_lifting (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (accepted : decodeChecked payload = some record) (assignment : Native.Variable parameters → Bool) (model : Satisfies assignment parameters.specificationFormula) : Satisfies (record.liftNative assignment) source := by sorry
+/-- An accepted positive-output wrapper needs more source coordinates than native variables. -/
+theorem decodeChecked_requires_extra_coordinates {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {parameters : Native.Parameters} (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (positive : 0 < parameters.decoder.roots.length) (accepted : decodeChecked payload = some record) : Fintype.card (Native.Variable parameters) < original := by sorry
 end Controller.Recognition.GuardedFamily source_context "Controller.Certificate.InputBinding" namespace Controller.Certificate
 open Controller.CNF
 structure InputPacket where
@@ -983,13 +985,13 @@ def checkModelInput (source : FiniteFormula varCount) (input : SubmittedInput) (
 def validate (source : FiniteFormula varCount) (input : SubmittedInput) : Candidate varCount → Verdict | .sat assignment => if checkModelInput source input assignment then .sat else .invalid | .unsat certificate => if checkSubmitted source input certificate then .unsat else .invalid | .outside => .outside | .invalid => .invalid | .timeout => .timeout
 def familyCandidate {source : FiniteFormula varCount} (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) : Candidate varCount := match Recognition.GuardedFamily.decodeChecked payload with | none => .outside | some record => match Native.Lift.detectNamed parameters with | some assignment => .sat (record.liftNative assignment) | none => match refutation with | some certificate => .unsat certificate | none => .timeout
 def runFamily (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) : Verdict := validate source input (familyCandidate payload refutation)
-/-- runFamily sat sound: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem runFamily_sat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .sat) : Satisfiable source := by sorry
-/-- runFamily unsat sound: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem runFamily_unsat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .unsat) : Unsatisfiable source := by sorry
-/-- runFamily sat iff: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem runFamily_sat_iff (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered parameters boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (refutation : Option (Certificate varCount)) : runFamily source (.structured (InputPacket.serialize source)) payload refutation = .sat ↔ Satisfiable source := by sorry
-/-- runFamily certified unsat: Observation projection, producer recovery and typed certificates. -/
+/-- Typed projection and certificate law. -/
 theorem runFamily_certified_unsat (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered parameters boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (certificate : Certificate varCount) (checked : checkTyped source certificate = true) : runFamily source (.structured (InputPacket.serialize source)) payload (some certificate) = .unsat := by sorry
 end Controller.Certificate.Pipeline
 

@@ -1,8 +1,8 @@
 version: v0.4
 project:
   name: Formula-forest execution and weighted candidate bounds
-  description: Physical detection execution for supplied formula forests and bounds of admissible
-    true-set weights by a returned candidate score, with linear operation counts.
+  description: Formula-forest physical-detection correctness, fetched execution bounds after instance-dependent
+    code construction, and conditional weighted candidate score bounds.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -15,28 +15,31 @@ classification:
   - '68Q25'
   - '68Q60'
 sources:
-- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
-    Controllers'
+- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority Controllers'
   authors:
   - Idris Ali Shaik
   id: doi:10.5281/zenodo.23400057
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Theorem 5.6 (formula forests) and the score-domination component
-    of Corollary 6.7 (maximum weight for formula forests). The literal native
-    execution and numerical resource bounds refine the manuscript algorithm. The
-    selected weighted statement establishes a conditional upper bound, not attainment
-    or full maximum-weight optimality.
+  note: Version 1.0; Theorem 5.6 (formula forests) and the score-domination component of Corollary
+    6.7 (maximum weight for formula forests). The literal native execution and numerical resource
+    bounds refine the manuscript algorithm. The selected weighted statement establishes a conditional
+    upper bound, not attainment or full maximum-weight optimality.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
 status:
-  scope: Physical detection execution for supplied formula forests and bounds of admissible
-    true-set weights by a returned candidate score, with linear operation counts. The selected
-    score theorem is an upper-bound component of Corollary 6.7; attainment, candidate existence
-    and maximum-weight optimality of the emitted physical test are not conclusions of the
-    selected surface.
+  scope: Physical detection execution for supplied formula forests and bounds of admissible true-set
+    weights by a returned candidate score, with linear operation counts. The selected score theorem
+    is an upper-bound component of Corollary 6.7; attainment, candidate existence and maximum-weight
+    optimality of the emitted physical test are not conclusions of the selected surface. The fetched-execution
+    bound starts after instance-dependent code construction. The reference factory evaluates runAll
+    and embeds the selected result while constructing the code; that computation is not charged
+    by the fetched tick bound. This does not establish the paper's uniform linear-time algorithm.
+    Acceptance emits an eligible-set indicator defining a canonical physical input, rather than
+    all primary-input coordinates. The weighted result is a conditional score upper bound, without
+    candidate existence or attainment.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -50,22 +53,24 @@ automation:
     - GPT-6
     - Claude Opus 5.5
     framework: OpenAI Codex and Claude Code
-    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds
-      and axiom audits. Recorded model identities are not a complete historical usage log.
+    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds and
+      axiom audits. Recorded model identities are not a complete historical usage log.
     cost:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Formalize the supplied controller equations and prove the exact image
-      and detection statements without changing their hypotheses.
+    prompting_notes: Prove formula-forest detection and weighted candidate bounds while separating
+      code construction from fetched execution.
   spend_usd: not tracked
-  notes: The author directed the formalization. AI agents assisted with proof construction
-    and packaging.
+  notes: The author directed the formalization. AI agents assisted with proof construction and
+    packaging.
 fidelity:
-  divergences: The supplied forest, matching representation, nonnegative weights and native
-    execution model are explicit. The selected weighted theorem assumes a returned candidate
-    and proves score domination plus operation bounds. It does not by itself give a maximum-weight
-    detecting witness or encoded-weight bit complexity.
+  divergences: The fetched-execution bound starts after instance-dependent code construction.
+    The reference factory evaluates runAll and embeds the selected result while constructing the
+    code; that computation is not charged by the fetched tick bound. This does not establish the
+    paper's uniform linear-time algorithm. Acceptance emits an eligible-set indicator defining
+    a canonical physical input, rather than all primary-input coordinates. The weighted result
+    is a conditional score upper bound, without candidate existence or attainment.
 review:
   status: self-assessed
   reviewers: []
@@ -78,18 +83,18 @@ alignment:
     lean: Controller.Cost.ForestOriginalSemantics.original_physical_execution
     module: Controller.Cost.ForestOriginalSemantics
     status: proved
-    note: For a supplied formula forest with matching rows, heads and roots, the actual drive-one
-      native program halts, decides physical detectability and emits an admissible detecting
-      realization on acceptance. The statement separately bounds native ticks/live words,
-      weighted traversal operations, store trace and combined code/storage. Weights are nonnegative
-      in the displayed ordered additive group; arithmetic bit cost is separate.
+    note: For matching forest representations, the selected instance-dependent program halts with
+      the exact physical-detection answer. Acceptance supplies an admissible detecting K and emits
+      its indicator as a descriptor of the canonical physical input. Fetched ticks and storage
+      are bounded after code construction. The reference constructor precomputes the selection;
+      the tick bound does not include that computation.
   - source: Corollary 6.7 (conditional score upper-bound component)
     lean: Controller.Optimization.Weights.forest_maximum_weight
     module: Controller.Optimization.Weights
     status: proved
     note: Conditional on the indexed weighted traversal returning a candidate, its score bounds
       the weight of every admissible set making any supplied root true. The theorem also proves
-      linear indexed and arithmetic operation bounds. It supplies the upper-bound component
-      of 6.7; it does not assert that the candidate score is attained, that a candidate exists
-      whenever detection is possible, or that the physical output test has maximum weight.
+      linear indexed and arithmetic operation bounds. It supplies the upper-bound component of
+      6.7; it does not assert that the candidate score is attained, that a candidate exists whenever
+      detection is possible, or that the physical output test has maximum weight.
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.

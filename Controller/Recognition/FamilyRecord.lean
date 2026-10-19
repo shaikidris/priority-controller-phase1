@@ -47,6 +47,35 @@ theorem decodeChecked_lifting
     Satisfies (record.liftNative assignment) source :=
   record.checked_lift_native (decodeChecked_sound payload record accepted).2.1 assignment model
 
+/-- Successful recognition with an observed root requires source coordinates
+beyond the native-variable boundary for the private activity wrapper. -/
+theorem decodeChecked_requires_extra_coordinates
+    {original recovered boundary auxCount : Nat} {source : Formula (Fin original)}
+    {parameters : Native.Parameters}
+    (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount)
+    (record : PrivateFamily.Record source recovered parameters boundary auxCount)
+    (positive : 0 < parameters.decoder.roots.length)
+    (accepted : decodeChecked payload = some record) :
+    Fintype.card (Native.Variable parameters) < original := by
+  have checked := (GuardedFamily.decodeChecked_sound payload record accepted).2.1
+  have checks := (PrivateFamily.Record.check_iff record).mp checked
+  have roleCard : Fintype.card (Native.Variable parameters) = boundary := by
+    simpa using Fintype.card_congr (record.roles.equivalence checks.2.1)
+  have partitionCard : boundary + auxCount = recovered := by
+    simpa using Fintype.card_congr (record.partition.equivalence checks.2.2.1)
+  have aliases : ((record.aliases.EdgeChecks ∧ record.aliases.base.RowChecks) ∧
+      record.aliases.AnchorChecks) ∧ (∀ i, record.aliases.pathCheck i = true) := by
+    simpa [AliasTrace.Record.check] using checks.1
+  have injective : Function.Injective record.aliases.base.anchor := by
+    intro x y same
+    have image := congrArg record.aliases.base.coordinate same
+    simpa only [(aliases.1.2 x).1, (aliases.1.2 y).1] using image
+  have recoveredLe : recovered ≤ original := by
+    simpa using Fintype.card_le_of_injective record.aliases.base.anchor injective
+  have activity := (record.wrapper.activities ⟨0, positive⟩).isLt
+  omega
+
+
 theorem rejects_liveAnd (graph : DAG n) (index : Fin graph.nodeCount)
     (live : (graph.node index).isLiveAnd = true) : guardedCheck graph = false := by
   apply Bool.eq_false_iff.mpr

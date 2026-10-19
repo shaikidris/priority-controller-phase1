@@ -7,7 +7,9 @@
     "Controller.Cost.Enumeration.canonical_result_detects",
     "Controller.Cost.Enumeration.iterator_delay",
     "Controller.Cost.Enumeration.delay_bound",
-    "Controller.Cost.Enumeration.program_words_bound"
+    "Controller.Cost.Enumeration.program_words_bound",
+    "Controller.Cost.Enumeration.execution_output_sensitive",
+    "Controller.Cost.Enumeration.stream_step"
   ],
   "permitted_axioms": [
     "propext",

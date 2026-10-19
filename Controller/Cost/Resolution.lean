@@ -987,6 +987,19 @@ theorem canonical_derived_literal_storage (parameters : Parameters) (raw : param
     (NativeProof.Compiler.variableCount parameters) 100000 (Nat.le_refl _)
   exact (compactRefuteSize _ raw guarded unsat).trans (canonical_fullPrefixBudget_cubic parameters)
 
+/-- The same canonical checked refutation has both the cubic inference bound
+and the quartic derived-literal storage bound. -/
+theorem canonical_refutation_resources (parameters : Parameters) (raw : parameters.layout = .raw)
+    (guarded : parameters.decoder.Guarded) (unsat : Unsatisfiable (formula parameters)) :
+    let result := compactRefute (NativeProof.Compiler.canonicalRename parameters) raw guarded unsat
+    check (NativeProof.Compiler.nativeFormula parameters) result.trace = true ∧
+      result.proofPrefix.steps.length ≤ 100000 * (NativeProof.Compiler.variableCount parameters) ^ 3 ∧
+      (result.proofPrefix.steps.map fun step => step.clause.length).sum ≤
+        200000 * (NativeProof.Compiler.variableCount parameters) ^ 4 := by
+  exact ⟨(compactRefute _ raw guarded unsat).checked,
+    (compactRefuteSize _ raw guarded unsat).trans (canonical_fullPrefixBudget_cubic parameters),
+    canonical_derived_literal_storage parameters raw guarded unsat⟩
+
 /-- Parameter-only frontend for the resource-bounded native construction. -/
 def compactNativeCompile (parameters : Parameters) : Option (Trace (NativeProof.Compiler.variableCount parameters)) :=
   if accepted : NativeProof.Compiler.supported parameters = true then

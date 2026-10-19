@@ -11,7 +11,8 @@
     "Controller.Certificate.Pipeline.runFamily_sat_iff",
     "Controller.Certificate.Pipeline.runFamily_certified_unsat",
     "Controller.Certificate.Pipeline.runFamily_sat_sound",
-    "Controller.Certificate.Pipeline.runFamily_unsat_sound"
+    "Controller.Certificate.Pipeline.runFamily_unsat_sound",
+    "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates"
   ],
   "permitted_axioms": [
     "propext",

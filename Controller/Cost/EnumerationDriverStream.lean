@@ -94,5 +94,57 @@ theorem execution (fuel : Nat) : ∀ (logical : Enumeration.State parameters.cha
         simp only [trace, returned, continuation, words, List.flatMap_cons, List.reverse_append, List.append_assoc]
       · simpa only [finish, returned, continuation] using finalRuntime
 
+/- Each produced result incurs one search and one emission; the final failed
+search is charged once, independently of the ghost fuel used for termination. -/
+set_option maxHeartbeats 2000000 in
+theorem execution_output_sensitive (fuel : Nat) : ∀ (logical : Enumeration.State parameters.channels) (state : State w 8),
+    Runtime parameters graph packet entry (l).seek logical state →
+    ∃ final ticks peak, WorkingExecution program state final ticks peak ∧
+      ticks ≤ ((trace graph parameters.buses parameters.bridge.target parameters.drive fuel logical).length + 1) * delay parameters graph +
+        (trace graph parameters.buses parameters.bridge.target parameters.drive fuel logical).length * emitBudget parameters ∧ peak ≤ space graph ∧
+      final.output = (words parameters w (trace graph parameters.buses parameters.bridge.target parameters.drive fuel logical)).reverse ++ state.output ∧
+      Runtime parameters graph packet entry (l).seek (finish graph parameters.buses parameters.bridge.target parameters.drive fuel logical) final := by
+  induction fuel with
+  | zero =>
+    intro logical state runtime
+    exact ⟨state, 0, workingWords state, WorkingExecution.refl state, by simp,
+      runtime_words parameters graph retained entry rows roots program context logical state runtime, by simp [words, trace], runtime⟩
+  | succ fuel ih =>
+    intro logical state runtime
+    obtain ⟨found, searchTicks, searchPeak, searchTrace, searchTime, searchSpace, searchOutput, endpoint⟩ :=
+      EnumerationDriverNext.execution parameters graph retained entry rows roots program context logical state runtime
+    cases returned : (next graph parameters.buses parameters.bridge.target parameters.drive logical).output with
+    | none =>
+      have halted : found.halted = true := by simpa only [returned, EnumerationDriverStart.Endpoint] using endpoint
+      have foundSpace : workingWords found ≤ space graph := searchTrace.final_le_peak.trans searchSpace
+      refine ⟨found, searchTicks, searchPeak, searchTrace, ?_, searchSpace, ?_, ?_⟩
+      · simpa only [trace, returned, List.length_nil, Nat.zero_mul, Nat.add_zero,
+          Nat.zero_add, Nat.one_mul] using searchTime
+      · simpa only [trace, returned, words, List.flatMap_nil, List.reverse_nil, List.nil_append] using searchOutput
+      · simpa only [finish, returned, Runtime] using And.intro halted foundSpace
+    | some K =>
+      have foundReady : Ready parameters packet parameters.channels parameters.channels K found ∧ found.pc = word w (l).emit := by
+        simpa only [returned, EnumerationDriverStart.Endpoint] using endpoint
+      have detects := result_detecting parameters graph context.guarded logical K returned
+      have drive : parameters.drive = true := detects.1
+      have detectsTrue : Detecting graph parameters.buses parameters.bridge.target true K := by
+        simpa only [drive] using detects
+      obtain ⟨emitted, emitTicks, emitPeak, emitTrace, emitTime, emitSpace, emitReady, emitPC, emitOutput⟩ :=
+        EnumerationDriverWorking.emission parameters graph retained entry rows roots program context K found foundReady.1 detectsTrue foundReady.2
+      have emittedRuntime : Runtime parameters graph packet entry (l).seek (.after K) emitted := ⟨emitReady, emitPC, detects⟩
+      obtain ⟨final, restTicks, restPeak, restTrace, restTime, restSpace, restOutput, finalRuntime⟩ := ih (.after K) emitted emittedRuntime
+      have continuation := next_continuation_some graph parameters.buses parameters.bridge.target parameters.drive logical K returned
+      refine ⟨final, searchTicks + (emitTicks + restTicks), _, searchTrace.append (emitTrace.append restTrace), ?_, ?_, ?_, ?_⟩
+      · simp only [trace, returned, continuation, List.length_cons, Nat.add_mul, Nat.one_mul]
+        change emitTicks ≤ emitBudget parameters at emitTime
+        clear * - searchTime emitTime restTime
+        simp only [Nat.add_mul, Nat.one_mul] at restTime
+        omega
+      · have emissionBound := emitSpace.trans (searchTrace.final_le_peak.trans searchSpace)
+        exact max_le searchSpace (max_le emissionBound restSpace)
+      · rw [restOutput, emitOutput, searchOutput]
+        simp only [trace, returned, continuation, words, List.flatMap_cons, List.reverse_append, List.append_assoc]
+      · simpa only [finish, returned, continuation] using finalRuntime
+
 end
 end Controller.Cost.EnumerationDriverStream

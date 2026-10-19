@@ -518,6 +518,8 @@ theorem compactNativeCompile_checked (parameters : Parameters) (trace : Trace (N
 def nativeEncodedSize (parameters : Parameters) : Nat := NativeProof.Compiler.variableCount parameters + ((NativeProof.Compiler.nativeFormula parameters).clauses.toList.map List.length).sum
 /-- native refutation encoded cubic: Ordinary resolution and observation wrappers. -/
 theorem native_refutation_encoded_cubic (parameters : Parameters) (raw : parameters.layout = .raw) (guarded : parameters.decoder.Guarded) (unsat : Unsatisfiable (formula parameters)) : ∃ result : NativeProof.Compiler.Refutation (parameters := parameters) (NativeProof.Compiler.canonicalRename parameters), check (NativeProof.Compiler.nativeFormula parameters) result.trace = true ∧ result.proofPrefix.steps.length ≤ 100000 * nativeEncodedSize parameters ^ 3 := by sorry
+/-- One canonical checked refutation satisfies both inference and derived-literal bounds. -/
+theorem canonical_refutation_resources (parameters : Parameters) (raw : parameters.layout = .raw) (guarded : parameters.decoder.Guarded) (unsat : Unsatisfiable (formula parameters)) : let result := compactRefute (NativeProof.Compiler.canonicalRename parameters) raw guarded unsat; check (NativeProof.Compiler.nativeFormula parameters) result.trace = true ∧ result.proofPrefix.steps.length ≤ 100000 * (NativeProof.Compiler.variableCount parameters) ^ 3 ∧ (result.proofPrefix.steps.map fun step => step.clause.length).sum ≤ 200000 * (NativeProof.Compiler.variableCount parameters) ^ 4 := by sorry
 end Controller.Cost.NativeResolution
 source_context "Controller.Native.ObservationProjection"
 namespace Controller.Native.ObservationProjection

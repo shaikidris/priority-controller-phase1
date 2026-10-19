@@ -1,10 +1,10 @@
 version: v0.4
 project:
   name: Dual-Horn models and vertex covers in priority controllers
-  description: Dual-Horn satisfiability and finite graph vertex covers are represented by
-    physical bridge detection in finite priority controllers. The constructions preserve the
-    declared variable or vertex universe, have linear counted decoder size, and count eligible
-    detecting qualifier sets rather than primary-input assignments.
+  description: Dual-Horn satisfiability and finite graph vertex covers are represented by physical
+    bridge detection in finite priority controllers. The constructions preserve the declared variable
+    or vertex universe, have linear counted decoder size, and count eligible detecting qualifier
+    sets rather than primary-input assignments.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -17,27 +17,25 @@ classification:
   - '06E30'
   - '68Q25'
 sources:
-- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority
-    Controllers'
+- title: 'Polynomial Fault Detection Without Bounded Width: Exact Reachable Sets in Priority Controllers'
   authors:
   - Idris Ali Shaik
   id: doi:10.5281/zenodo.23400057
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Proposition 5.2 (dual-Horn transfer) and Proposition 6.4
-    (graph-cover representation). These supply the constructions and semantic
-    correspondence. The formalization retains declared variable and vertex universes,
-    literal multiplicities and explicit counted decoder sizes.
+  note: Version 1.0; Proposition 5.2 (dual-Horn transfer) and Proposition 6.4 (graph-cover representation).
+    These supply the constructions and semantic correspondence. The formalization retains declared
+    variable and vertex universes, literal multiplicities and explicit counted decoder sizes.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
 status:
-  scope: Seven selected declarations prove the dual-Horn model/detection equivalence, linear
-    decoder size and formula-forest structure, and the vertex-cover decoder size, eligible-set
-    count and physical realization correspondence. Isolated vertices and unused source variables
-    remain declared. No polynomial algorithm for unrestricted SAT, count of all primary-input
-    tests, or whole-paper completion is asserted.
+  scope: Seven selected declarations prove the dual-Horn model/detection equivalence, linear decoder
+    size and formula-forest structure, and the vertex-cover decoder size, eligible-set count and
+    physical realization correspondence. Isolated vertices and unused source variables remain
+    declared. No polynomial algorithm for unrestricted SAT, count of all primary-input tests,
+    or whole-paper completion is asserted.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -51,23 +49,23 @@ automation:
     - GPT-6
     - Claude Opus 5.5
     framework: OpenAI Codex and Claude Code
-    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds
-      and axiom audits. Recorded model identities are not a complete historical usage log.
+    tool_setup: AI-assisted Lean proof development, source inspection, command-line builds and
+      axiom audits. Recorded model identities are not a complete historical usage log.
     cost:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Formalize the supplied controller equations and prove the exact image
-      and detection statements without changing their hypotheses.
+    prompting_notes: Prove the dual-Horn and vertex-cover correspondences, declared sizes and
+      eligible-set counting laws.
   spend_usd: not tracked
-  notes: The author directed the formalization. AI agents assisted with proof construction
-    and packaging.
+  notes: The author directed the formalization. AI agents assisted with proof construction and
+    packaging.
 fidelity:
-  divergences: The dual-Horn source clauses are explicit ordered literal lists, and source
-    variables use Fin n. The graph is supplied by an injective ordered enumeration of edges
-    on Fin n, including isolated vertices. Formula size counts literal occurrences and stored
-    rows. Linear size is stated for the counted decoder representation. The physical realization
-    theorem chooses a driver endpoint of a supplied graph edge.
+  divergences: The dual-Horn source clauses are explicit ordered literal lists, and source variables
+    use Fin n. The graph is supplied by an injective ordered enumeration of edges on Fin n, including
+    isolated vertices. Formula size counts literal occurrences and stored rows. Linear size is
+    stated for the counted decoder representation. The physical realization theorem chooses a
+    driver endpoint of a supplied graph edge.
 review:
   status: self-assessed
   reviewers: []
@@ -93,34 +91,33 @@ alignment:
     lean: Controller.Reductions.DualHorn.decoder_formulaForest
     module: Controller.Reductions.DualHornForest
     status: proved
-    note: The explicitly constructed decoder is a formula forest. This structural statement
-      holds for every supplied source formula; its dual-Horn semantic equivalence has a separate
-      premise.
+    note: The explicitly constructed decoder is a formula forest. This structural statement holds
+      for every supplied source formula; its dual-Horn semantic equivalence has a separate premise.
   - source: Proposition 6.4
     lean: Controller.Reductions.coverDAG_size_linear
     module: Controller.Reductions.GraphCover
     status: proved
-    note: For an enumerated graph with a supplied edge, coverDAG has counted size at most
-      14*(vertexCount+edgeCount). The edge witness retains the nonempty-edge condition.
+    note: For an enumerated graph with a supplied edge, coverDAG has counted size at most 14*(vertexCount+edgeCount).
+      The edge witness retains the nonempty-edge condition.
   - source: Proposition 6.4
     lean: Controller.Reductions.cover_detection_count
     module: Controller.Reductions.GraphCover
     status: proved
-    note: 'The number of detecting eligible sets in the graph-cover representation equals
-      the number of vertex covers. This counts the two displayed finite set types, not all
-      primary assignments or native-CNF models and not a standalone #P-hardness proof.'
+    note: 'The number of detecting eligible sets in the graph-cover representation equals the
+      number of vertex covers. This counts the two displayed finite set types, not all primary
+      assignments or native-CNF models and not a standalone #P-hardness proof.'
   - source: Proposition 6.4
     lean: Controller.Reductions.cover_physical_detects_only_covers
     module: Controller.Reductions.GraphCover
     status: proved
-    note: Every physical detecting input in the graph-cover instance has faulty eligible set
-      equal to the target adjoined to a vertex cover. Arbitrary physical input and wire values
-      are covered by the premise.
+    note: Every physical detecting input in the graph-cover instance has faulty eligible set equal
+      to the target adjoined to a vertex cover. Arbitrary physical input and wire values are covered
+      by the premise.
   - source: Proposition 6.4
     lean: Controller.Reductions.cover_realizer_detects_iff
     module: Controller.Reductions.GraphCover
     status: proved
     note: For any admissible one-bus set K, its canonical primary realization detects exactly
-      when K is the target adjoined to a vertex cover. The enumerated graph, edge and driver
-      are supplied.
+      when K is the target adjoined to a vertex cover. The enumerated graph, edge and driver are
+      supplied.
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.
