@@ -1,0 +1,59 @@
+{
+  "schema_version": 1,
+  "metadata_path": "formalization.yaml",
+  "comparator_path": "entries/P01/comparator.json",
+  "input_sha256": {
+    "metadata": "de7e033c2aab9437f9533e1ec65da9b4b61d2f7daf84a22e9b7cc9b1f42d6fc1",
+    "comparator": "9352c9575f32dd7ea9a2784d64cc2043ee636837d969d676488cffd1c2299dbd",
+    "challenge": "67d347e0592af5fe0d12671d76b9b33ee8cdbd09351fa7afdb22f9cf93fc5e6f"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "image",
+      "theorems": [
+        "Controller.Physical.separated_drive_one_set_pair_image_iff"
+      ],
+      "abstract_quotes": [
+        "Exact reachable qualifier-set images"
+      ],
+      "account": "The activated bridge image is exactly the target singleton paired with an admissible faulty set."
+    },
+    {
+      "id": "detection",
+      "theorems": [
+        "Controller.Physical.not_bridgeDetectable_drive_zero",
+        "Controller.Physical.bridge_detectable_iff_exists_output"
+      ],
+      "abstract_quotes": [
+        "characterize detection through arbitrary Boolean qualifier observations"
+      ],
+      "account": "Drive zero is undetectable, and drive-one detection is equivalent to a differing observation on an admissible set."
+    },
+    {
+      "id": "local-relations",
+      "theorems": [
+        "Controller.Physical.proper_projection_full",
+        "Controller.Physical.valid_local_relations_accept_zero"
+      ],
+      "abstract_quotes": [
+        "nonemptiness cannot be expressed by valid proper-coordinate relations"
+      ],
+      "account": "Proper-coordinate projections are full; valid local relations also admit zero."
+    },
+    {
+      "id": "stuck-fault",
+      "theorems": [
+        "Controller.Physical.stuck_detectable_iff"
+      ],
+      "abstract_quotes": [
+        "classify a specified qualifier-only stuck-at fault"
+      ],
+      "account": "The explicit stuck-at model has the selected channel-count and stuck-value criterion."
+    }
+  ]
+}

@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P08/formalization.yaml",
+  "comparator_path": "entries/P08/comparator.json",
+  "input_sha256": {
+    "metadata": "e8bbf2f7d16b9083a91b4704dc7738071688b5cfb0bf7486219e0ae8509ba3bd",
+    "comparator": "af660b2283976b49a76491152848b5d29e4053c6f46cc6c7350732cf893418ed",
+    "challenge": "18733804d68e73393b3709b74743834d75d5727cb0d1bca487d01bf3963285ef"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "projection",
+      "theorems": [
+        "Controller.Native.ObservationProjection.observation_projection_of_unit_conflict",
+        "Controller.Native.ObservationProjection.optional_declared_cnf_projection",
+        "Controller.Native.ObservationProjection.selected_declared_cnf_projection"
+      ],
+      "abstract_quotes": [
+        "Conditional observation-wrapper projection"
+      ],
+      "account": "The selected projection equivalences retain the unit-conflict, declared-private grammar and selection premises."
+    },
+    {
+      "id": "producer-recovery",
+      "theorems": [
+        "Controller.Recognition.IntendedDAG.recovery_exact"
+      ],
+      "abstract_quotes": [
+        "intended-producer recovery"
+      ],
+      "account": "A maximal run under the candidate promise recovers exactly the intended nonroots without duplicate identifiers."
+    },
+    {
+      "id": "typed-decoding",
+      "theorems": [
+        "Controller.Recognition.GuardedFamily.decodeChecked_sound",
+        "Controller.Recognition.GuardedFamily.decodeChecked_lifting"
+      ],
+      "abstract_quotes": [
+        "checked structured-family decoding and model lifting"
+      ],
+      "account": "Successful typed decoding gives a checked guarded record, semantic correspondence and source model lifting."
+    },
+    {
+      "id": "certificate-pipeline",
+      "theorems": [
+        "Controller.Certificate.Pipeline.runFamily_sat_iff",
+        "Controller.Certificate.Pipeline.runFamily_certified_unsat",
+        "Controller.Certificate.Pipeline.runFamily_sat_sound",
+        "Controller.Certificate.Pipeline.runFamily_unsat_sound"
+      ],
+      "abstract_quotes": [
+        "sound SAT/UNSAT verdicts",
+        "Exact SAT and certified-UNSAT completeness claims assume successful family acceptance",
+        "accepted refutation certificate for the latter"
+      ],
+      "account": "Verdict soundness is unconditional on arbitrary SubmittedInput; exact behavior and certificate completeness retain acceptance premises."
+    },
+    {
+      "id": "coordinate-boundary",
+      "theorems": [
+        "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates"
+      ],
+      "abstract_quotes": [
+        "Acceptance with an observed root requires more source coordinates than native variables"
+      ],
+      "account": "Successful positive-output typed acceptance requires strictly more original coordinates than native variables; no accepted witness is constructed."
+    }
+  ]
+}

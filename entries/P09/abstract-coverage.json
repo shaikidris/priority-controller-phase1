@@ -1,0 +1,55 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P09/formalization.yaml",
+  "comparator_path": "entries/P09/comparator.json",
+  "input_sha256": {
+    "metadata": "75fd33db349c814dc3a1ac17b402ef386989b5b94d4cbce94c4089056a49eadf",
+    "comparator": "2ee4561103760da5f5bdbea285dc7d8d0e5a9224e10c37052e3a9a2de9b1133f",
+    "challenge": "9d3f19b8235525fb6b5554ed5945a2b66c359e915b41ace43145901dd8413bb4"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "native-resolution",
+      "theorems": [
+        "Controller.Cost.NativeResolution.native_refutation_encoded_cubic",
+        "Controller.Cost.NativeResolution.compactNativeCompile_complete",
+        "Controller.Cost.NativeResolution.compactNativeCompile_checked"
+      ],
+      "abstract_quotes": [
+        "Checked ordinary-resolution construction for the native controller encoding",
+        "cubic inference bounds"
+      ],
+      "account": "The native compiler/refutation existence, completeness and acceptance results concern ordinary-resolution traces with cubic inference counts."
+    },
+    {
+      "id": "wrapper-resolution",
+      "theorems": [
+        "Controller.Cost.WrapperResolution.runOptional_complete_cubic",
+        "Controller.Cost.WrapperResolution.runSelected_complete_cubic",
+        "Controller.Cost.WrapperResolution.runOptional_checked",
+        "Controller.Cost.WrapperResolution.runSelected_checked"
+      ],
+      "abstract_quotes": [
+        "supported observation wrappers",
+        "cubic inference bounds"
+      ],
+      "account": "Supported optional and selected wrappers have checker-accepted refutations and the displayed cubic-plus-wrapper inference bounds."
+    },
+    {
+      "id": "literal-storage",
+      "theorems": [
+        "Controller.Cost.NativeResolution.canonical_derived_literal_storage",
+        "Controller.Cost.NativeResolution.canonical_refutation_resources"
+      ],
+      "abstract_quotes": [
+        "displayed derived-literal storage bound"
+      ],
+      "account": "The canonical refutation has the displayed quartic derived-literal bound; the joint resource theorem uses the same accepted witness."
+    }
+  ]
+}

@@ -173,13 +173,13 @@ alignment:
       satisfies the stated linear size-versus-treewidth, net-cutwidth and K-input block-width
       inequalities, with C=12000*c*(D+1). Expansion and bounded degree remain premises; no infinite
       expander construction or DNNF/OBDD lower bound is selected.
-  - source: Example 5.2 and critical-family recovery
+  - source: Proposition 6.2 (critical-family source recovery refinement)
     lean: Controller.Cost.CriticalSourceScan.critical_physical_recovery
     module: Controller.Cost.CriticalSourceRecovery
     status: proved
     note: One source-reading program recovers the canonical indicator and a physical detecting
       realization under the critical-family promise, with complete cold-run bounds.
-  - source: Proposition 5.3 (cycle recovery)
+  - source: Example 6.1 (cycle source recovery refinement)
     lean: Controller.Cost.CriticalSourceScan.cycle_physical_recovery
     module: Controller.Cost.CriticalSourceRecovery
     status: proved

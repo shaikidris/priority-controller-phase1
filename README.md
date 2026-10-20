@@ -211,6 +211,22 @@ lake build Phase1.P02.Challenge Phase1.P02.Solution
 lake comparator --config entries/P02/comparator.json
 ```
 
+## Abstract coverage
+
+Each entry's `abstract-coverage.json` maps every selected theorem to a reviewed
+mathematical family and exact wording in its public abstract. The preparation
+guard checks all ten maps and rejects missing families, absent phrases or stale
+metadata, Comparator and Challenge hashes before the full rehearsal. Review the
+semantic changes before updating a map; the checker verifies coverage and
+freshness of that review, rather than automatically certifying its meaning.
+
+```sh
+python3 scripts/check_palomar_abstract_coverage.py --source . \
+  --metadata entries/P06/formalization.yaml \
+  --comparator entries/P06/comparator.json \
+  --coverage entries/P06/abstract-coverage.json
+```
+
 The proofs were developed with AI assistance under the author's direction.
 [Source provenance](SOURCE_PROVENANCE.md) records manuscript and extraction
 identities. Author-owned source is licensed under [Apache-2.0](LICENSE);

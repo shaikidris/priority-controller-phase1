@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P03/formalization.yaml",
+  "comparator_path": "entries/P03/comparator.json",
+  "input_sha256": {
+    "metadata": "b5e43be65d624af77d02ab9b4d7a218ab1e9050d336bd366616bb8b5cc3a8320",
+    "comparator": "a0cb82e2ab6d595d0d8da957cfaaaae6edf88a492c8ae718dbe384eb9ef5ef5a",
+    "challenge": "eb03be581a8ef3e56429f496be0c1956ac4e75e59d2a155f8a268b9c3833d317"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "traversal",
+      "theorems": [
+        "Controller.Cost.Enumeration.execution"
+      ],
+      "abstract_quotes": [
+        "actual prefix traversal"
+      ],
+      "account": "The native prefix driver halts with the declared enumeration output under source-matching promises."
+    },
+    {
+      "id": "canonical-results",
+      "theorems": [
+        "Controller.Cost.Enumeration.results_exact"
+      ],
+      "abstract_quotes": [
+        "Canonical eligible-set enumeration",
+        "exact returned sets"
+      ],
+      "account": "The returned list is duplicate-free, canonically ordered and exactly the detecting eligible sets."
+    },
+    {
+      "id": "physical-witness",
+      "theorems": [
+        "Controller.Cost.Enumeration.canonical_result_detects"
+      ],
+      "abstract_quotes": [
+        "detecting emitted witnesses"
+      ],
+      "account": "Each enumerated set yields the canonical physical detection realization."
+    },
+    {
+      "id": "delay-and-stream",
+      "theorems": [
+        "Controller.Cost.Enumeration.iterator_delay",
+        "Controller.Cost.Enumeration.delay_bound",
+        "Controller.Cost.Enumeration.stream_step"
+      ],
+      "abstract_quotes": [
+        "iterator delay"
+      ],
+      "account": "The next iterator and stream step have the displayed bounded delay and continuation or halt behavior."
+    },
+    {
+      "id": "resources",
+      "theorems": [
+        "Controller.Cost.Enumeration.program_words_bound",
+        "Controller.Cost.Enumeration.execution_output_sensitive"
+      ],
+      "abstract_quotes": [
+        "native program resource bounds"
+      ],
+      "account": "Program word count and whole output-sensitive execution satisfy the stated native bounds."
+    }
+  ]
+}

@@ -107,6 +107,18 @@ class GuardRegression(unittest.TestCase):
             with self.assertRaisesRegex(ValueError,'selections differ'):
                 guard.validate_selection(SOURCE,bad,comparator)
 
+    def test_all_entry_abstracts_have_reviewed_coverage(self):
+        catalog = json.loads((SOURCE/'entries/catalog.json').read_text())
+        for name, entry in catalog.items():
+            with self.subTest(entry=name):
+                metadata_path = entry['formalization_metadata_path']
+                comparator_path = entry['comparator_config_path']
+                metadata = contract.load_formalization_metadata(SOURCE/metadata_path)
+                coverage = str(Path(comparator_path).with_name('abstract-coverage.json'))
+                result = guard.validate_abstract_coverage(
+                    SOURCE, metadata, metadata_path, comparator_path, coverage)
+                self.assertEqual(result['status'], 'pass')
+
     def test_legacy_unselected_owner_rejected(self):
         # A valid selected surface must not hide an incompatible companion.
         with tempfile.TemporaryDirectory(dir=args.scratch_root) as tmp:

@@ -1,0 +1,38 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P04/formalization.yaml",
+  "comparator_path": "entries/P04/comparator.json",
+  "input_sha256": {
+    "metadata": "5dbdb1a317da63fd07fb6d018397b088eb056226f3ae19a7512ec8c86c4e892e",
+    "comparator": "f9b29cc7ff9677b042201cff1f71fd6ac5a590192ad594ebb8091f76dd39ea62",
+    "challenge": "ecc76322f5b42136c3b5e501acfe2fcf3a0348116a20579a2aabdc4d2af67d5d"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "forest-execution",
+      "theorems": [
+        "Controller.Cost.ForestOriginalSemantics.original_physical_execution"
+      ],
+      "abstract_quotes": [
+        "Formula-forest detection execution"
+      ],
+      "account": "Execution on matched formula-forest source rows halts with physical detection semantics and displayed resource bounds."
+    },
+    {
+      "id": "weighted-optimum",
+      "theorems": [
+        "Controller.Optimization.Weights.forest_maximum_weight",
+        "Controller.Optimization.Weights.forest_physical_maximum"
+      ],
+      "abstract_quotes": [
+        "nonnegative-weight optimal detecting sets for healthy-zero observations"
+      ],
+      "account": "The selected score bound and attained physical optimum retain their weight, forest and healthy-zero premises."
+    }
+  ]
+}

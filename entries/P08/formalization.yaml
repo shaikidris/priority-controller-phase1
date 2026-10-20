@@ -1,9 +1,11 @@
 version: v0.4
 project:
   name: Observation projection and typed certificate pipelines
-  description: Observation-wrapper projection, recovery for the intended producer family, checked
-    structured-family decoding, and typed satisfiability or certified-unsatisfiability pipeline
-    laws.
+  description: Conditional observation-wrapper projection, intended-producer recovery, checked
+    structured-family decoding and model lifting, and sound SAT/UNSAT verdicts. Exact SAT and
+    certified-UNSAT completeness claims assume successful family acceptance, with an accepted
+    refutation certificate for the latter. Acceptance with an observed root requires more source
+    coordinates than native variables.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -117,7 +119,7 @@ alignment:
     lean: Controller.Recognition.GuardedFamily.decodeChecked_sound
     module: Controller.Recognition.FamilyRecord
     status: proved
-    note: Given a structured CompletePayload and a returned checked record, the recovered decoder
+    note: Given a structured CompletePayload and a returned checked record, the supplied decoder
       is guarded, the record passes its check, and source satisfiability is equivalent to physical
       bridge detectability. This is the supplied typed-family boundary, not the complete raw-file
       Algorithm 2 recognizer.
