@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNativeLayoutConstruction
-import Controller.Cost.ResolvedFrontConstruction
-import Controller.Cost.QuietQueryConstruction
+public import Controller.Cost.ResolvedNativeLayoutConstruction
+public import Controller.Cost.ResolvedFrontConstruction
+public import Controller.Cost.QuietQueryConstruction
+
+@[expose] public section
+
 
 /-! Returning selector callback construction uses the cached source layout,
 charged operand front, quiet query and stack restoration. -/

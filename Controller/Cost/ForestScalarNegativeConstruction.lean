@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestNegativeConstruction
+public import Controller.Cost.ForestNegativeConstruction
+
+@[expose] public section
+
 
 /-! Negative image formation from scalar metadata. Coordinate arrays and local
 clause labels are absent from this executable interface; they occur only in

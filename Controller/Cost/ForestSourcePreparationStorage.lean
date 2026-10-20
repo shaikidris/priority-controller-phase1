@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceConstruction
-import Controller.Cost.ForestCompilerOffsets
+public import Controller.Cost.ForestSourceConstruction
+public import Controller.Cost.ForestCompilerOffsets
+
+@[expose] public section
+
 
 /-! Source validation and cache construction storage. Checked ID conversion
 retains scalar/list continuations, and the source/cache arrays grow once in

@@ -1,8 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ExtensionConstructionRecipes
-import Controller.Cost.ResidentSolverConstruction
-import Controller.Cost.ForestAdmissibleConstruction
-import Controller.Cost.ForestNegativeRecipes
+public import Controller.Cost.ExtensionConstructionRecipes
+public import Controller.Cost.ResidentSolverConstruction
+public import Controller.Cost.ForestAdmissibleConstruction
+public import Controller.Cost.ForestNegativeRecipes
+
+@[expose] public section
+
 
 /-! Decision-only resident query formation. The clause constructor is shared
 with the forest compiler; a fixed first-order solver suffix is installed at

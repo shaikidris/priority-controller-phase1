@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestScalarNegativeConstruction
-import Controller.Cost.ForestAdmissibleStorage
+public import Controller.Cost.ForestScalarNegativeConstruction
+public import Controller.Cost.ForestAdmissibleStorage
+
+@[expose] public section
+
 
 /-! Complete per-query negative construction storage. Provisional placement,
 relocated variable code and every fixed backend operand are independently

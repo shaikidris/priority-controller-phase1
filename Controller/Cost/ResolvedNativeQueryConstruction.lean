@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNativeLayoutConstruction
-import Controller.Cost.NativeQueryConstruction
+public import Controller.Cost.ResolvedNativeLayoutConstruction
+public import Controller.Cost.NativeQueryConstruction
+
+@[expose] public section
+
 
 /-! Complete native query image construction from the original typed source.
 The source normalization profile is cached once. Native emission reuses the

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisProbeConstruction
+public import Controller.Cost.BasisProbeConstruction
+
+@[expose] public section
+
 
 /-! Singleton column schedules form and relocate one fixed source interpreter
 per channel. Column values are produced only by fetched execution. -/

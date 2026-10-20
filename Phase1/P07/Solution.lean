@@ -1,5 +1,10 @@
-import Controller.Extensions.BoundedNativeComplete
-import Controller.Extensions.Expansion
-import Controller.Extensions.ProperBasisComplete
-import Controller.Extensions.Support
-import Controller.Cost.ExtensionAlgorithmsComplete
+module
+
+public import Controller.Extensions.BoundedNativeComplete
+public import Controller.Extensions.Expansion
+public import Controller.Extensions.ProperBasisComplete
+public import Controller.Extensions.Support
+public import Controller.Cost.ExtensionAlgorithmsComplete
+
+@[expose] public section
+

@@ -1,8 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceConstruction
-import Controller.Cost.ForestCompilerOffsets
-import Controller.Cost.ForestConstructionRecipes
-import Controller.Cost.UniformDAGResources
+public import Controller.Cost.ForestSourceConstruction
+public import Controller.Cost.ForestCompilerOffsets
+public import Controller.Cost.ForestConstructionRecipes
+public import Controller.Cost.UniformDAGResources
+
+@[expose] public section
+
 
 /-! Interpreter image construction from scalar source counts. The constructor
 never materializes a hypothetical source or evaluation heap to read its size.

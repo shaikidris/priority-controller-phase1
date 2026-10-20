@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedCallbackConstruction
+public import Controller.Cost.ResolvedCallbackConstruction
+
+@[expose] public section
+
 
 /-! The selector and root traversal image has one returning callback. Source
 layout and live-AND counts determine every block placement. -/

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestDirectoryConstruction
+public import Controller.Cost.ForestDirectoryConstruction
+
+@[expose] public section
+
 
 /-! Complete variable constructor image for one source-addressed query. The
 profile, directory and literal streams are computed from the supplied rows.

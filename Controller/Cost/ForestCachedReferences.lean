@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerOffsets
-import Controller.Cost.ForestWeightedIndexed
-import Controller.Cost.ForestZeroReferenceCone
+public import Controller.Cost.ForestCompilerOffsets
+public import Controller.Cost.ForestWeightedIndexed
+public import Controller.Cost.ForestZeroReferenceCone
+
+@[expose] public section
+
 
 /-! Source-addressed clauses formed from indexed rows and cached stream
 positions. Child and guard lists are traversed with advancing indices; the

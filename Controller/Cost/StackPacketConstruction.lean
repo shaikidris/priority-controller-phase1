@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ExtensionNativeRecipes
-import Controller.Cost.TemplateStreamConstruction
-import Controller.Cost.SupportTraversalConstruction
+public import Controller.Cost.ExtensionNativeRecipes
+public import Controller.Cost.TemplateStreamConstruction
+public import Controller.Cost.SupportTraversalConstruction
+
+@[expose] public section
+
 
 /-! First-order source-packet transfer and restoration. Runtime words are moved
 by the emitted instructions; construction sees only addresses and lengths. -/

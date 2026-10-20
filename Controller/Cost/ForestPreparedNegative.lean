@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestStreamingConstruction
-import Controller.Cost.ForestQueryPackets
-import Controller.Cost.ForestSourceConstruction
+public import Controller.Cost.ForestStreamingConstruction
+public import Controller.Cost.ForestQueryPackets
+public import Controller.Cost.ForestSourceConstruction
+
+@[expose] public section
+
 
 /-! Negative image assembly from checked source roots and the shared source
 cache. Both the root conversion and clause generation are executed; semantic

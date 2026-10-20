@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProperBasisConstructionRecipes
-import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.ProperBasisConstructionRecipes
+public import Controller.Cost.ForestClauseProgramConstruction
+
+@[expose] public section
+
 
 /-! Witness emission instructions are formed from explicit scalar operands;
 the candidate values are read and emitted by the resulting program. -/

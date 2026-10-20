@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestQueryConstruction
+public import Controller.Cost.ForestQueryConstruction
+
+@[expose] public section
+
 
 /-! Variable row-directory formation. Row lengths are obtained by a charged
 source traversal and embedded using a fixed checked instruction recipe. -/

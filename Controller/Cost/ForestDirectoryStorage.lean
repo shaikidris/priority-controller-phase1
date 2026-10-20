@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestDirectoryConstruction
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ForestDirectoryConstruction
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Temporary construction storage for source-row directories. Row-length
 scans retain source-list tails; generated code and scalar continuation records

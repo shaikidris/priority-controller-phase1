@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SupportCandidateConstruction
+public import Controller.Cost.SupportCandidateConstruction
+
+@[expose] public section
+
 
 /-! The complete bounded-support controller is constructed from scalar source
 counts. A zero-filled header supplies layout only; no healthy evaluation or

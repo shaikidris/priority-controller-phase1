@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResidentSolverStorage
-import Controller.Cost.ForestAdmissibleStorage
-import Controller.Cost.NativeQueryConstruction
+public import Controller.Cost.ResidentSolverStorage
+public import Controller.Cost.ForestAdmissibleStorage
+public import Controller.Cost.NativeQueryConstruction
+
+@[expose] public section
+
 
 /-! Storage for both provisional and relocated quiet query construction,
 including its fixed resident solver and source-prefix materialization. -/

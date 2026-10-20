@@ -1,6 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSelectionMachine
-import Controller.Cost.ForestRootProjection
+public import Controller.Cost.ForestSelectionMachine
+public import Controller.Cost.ForestRootProjection
+
+import all Init.Data.List.ToArrayImpl
+
+@[expose] public section
+
 
 /-! A source constructor for the variable descriptor/candidate prefix. The
 machine reverses the retained parent records and emits instructions one at a

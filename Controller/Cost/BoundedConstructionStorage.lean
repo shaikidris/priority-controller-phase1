@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SelectorAssemblyStorage
-import Controller.Cost.SupportCompleteStorage
-import Controller.Cost.BoundedDetectorConstruction
+public import Controller.Cost.SelectorAssemblyStorage
+public import Controller.Cost.SupportCompleteStorage
+public import Controller.Cost.BoundedDetectorConstruction
+
+@[expose] public section
+
 
 /-! Full bounded-live-AND instruction construction, including cold preparation,
 both search phases, provisional images, all relocations and the final image. -/

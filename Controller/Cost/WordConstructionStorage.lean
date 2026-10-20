@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.WordConstructionRecipe
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Construction storage for first-order instruction recipes. Environments and
 recipe syntax are read-only inputs. The measure counts temporary operand/control

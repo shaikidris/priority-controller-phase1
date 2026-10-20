@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Optimization.Weights
+public import Controller.Optimization.Weights
+
+@[expose] public section
+
 
 /-! A deterministic continuation machine for the source-indexed forest
 selector. A transition consumes one source/control occurrence. It never calls

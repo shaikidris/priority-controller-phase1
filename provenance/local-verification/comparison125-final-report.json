@@ -1,4 +1,5 @@
 {
+  "current_repair_receipt": "module-compatibility126.json",
   "entries": [
     {
       "challenge_sha256": "ecc76322f5b42136c3b5e501acfe2fcf3a0348116a20579a2aabdc4d2af67d5d",
@@ -29,5 +30,6 @@
     }
   ],
   "protected_Linux_rehearsal": false,
+  "record_role": "Historical source-bound evidence for public parent ed774233fc9c15d5bac1a87e79ac2826ff75a34c",
   "status": "LOCAL_THREE_AFFECTED_COMPARATORS_AND_KERNELS_PASS"
 }

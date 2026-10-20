@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProperDetectorConstruction
-import Controller.Cost.ClauseProfileStorage
-import Controller.Cost.NativeConstructionStorage
+public import Controller.Cost.ProperDetectorConstruction
+public import Controller.Cost.ClauseProfileStorage
+public import Controller.Cost.NativeConstructionStorage
+
+@[expose] public section
+
 
 /-! Complete source-driven extension algorithms with construction and fetched
 execution charged in the word-operation model. The input retains the raw native

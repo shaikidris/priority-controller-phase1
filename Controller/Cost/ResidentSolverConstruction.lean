@@ -1,8 +1,15 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.DeriveExtensionRecipe
-import Controller.Cost.ForestNegativeRecipes
-import Controller.Cost.EnumerationResident
-import Controller.Cost.ForestClauseProgramConstruction
+public meta import Controller.Cost.DeriveExtensionRecipe
+public import Controller.Cost.ForestNegativeRecipes
+public import Controller.Cost.EnumerationResident
+public import Controller.Cost.ForestClauseProgramConstruction
+
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Fixed resident solvers assembled from small checked templates. The shared
 normalizer and FIFO recipes retain explicit scalar headers and source counts. -/

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SupportControllerConstruction
+public import Controller.Cost.SupportControllerConstruction
+
+@[expose] public section
+
 
 /-! Charged construction of one source-evaluating support callback. The same
 root scan is shared by the subset traversal; construction reads source counts

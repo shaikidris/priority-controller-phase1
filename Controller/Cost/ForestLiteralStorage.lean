@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestQueryConstruction
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ForestQueryConstruction
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Transient construction storage for the source-literal instruction stream.
 Literal formation uses the checked first-order recipes. Continuations retain

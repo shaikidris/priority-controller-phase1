@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProgramRelocationConstruction
+public import Controller.Cost.ProgramRelocationConstruction
+
+@[expose] public section
+
 
 /-! The source operand emitter forms literal, read and selected-read blocks
 from explicit scalar fields. Choice reads are runtime branches, not decisions

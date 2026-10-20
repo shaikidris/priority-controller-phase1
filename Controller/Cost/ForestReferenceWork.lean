@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCachedQueries
-import Controller.Cost.WordConstructionRecipe
+public import Controller.Cost.ForestCachedQueries
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Source-field work for the cached clause producer. The resource measure
 counts the indexed row/tag reads and dispatch, advancing incidence positions,

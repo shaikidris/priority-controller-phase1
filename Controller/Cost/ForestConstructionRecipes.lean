@@ -1,6 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.DeriveWordRecipe
-import Controller.Cost.ForestRootProjection
+public meta import Controller.Cost.DeriveWordRecipe
+public import Controller.Cost.ForestRootProjection
+
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Fixed numeric forest kernels as first-order construction recipes. The
 checked identities bind every operand and branch target to the native kernels. -/

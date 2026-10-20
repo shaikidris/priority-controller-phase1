@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedPlanProducer
-import Controller.Cost.StackPacketConstruction
+public import Controller.Cost.ResolvedPlanProducer
+public import Controller.Cost.StackPacketConstruction
+
+@[expose] public section
+
 
 /-! Source-query preparation constructs its operand plan and emitter, then
 forms the copy and packet handoff at cached positions. Selector bits remain

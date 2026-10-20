@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedPlanConstruction
+public import Controller.Cost.ResolvedPlanConstruction
+
+@[expose] public section
+
 
 /-! Selector-query operands formed directly from typed source fields. Only a
 live AND produces a runtime selected read. Other gates preserve every source

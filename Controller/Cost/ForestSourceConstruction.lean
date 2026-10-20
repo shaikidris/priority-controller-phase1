@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestWeightedIndexed
+public import Controller.Cost.ForestWeightedIndexed
+
+@[expose] public section
+
 
 /-! Charged validation of the original ordered rows. Bounds include checked
 child and channel conversion, advancing row positions and the final array

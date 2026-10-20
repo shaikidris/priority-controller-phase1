@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SupportAssemblyStorage
+public import Controller.Cost.SupportAssemblyStorage
+
+@[expose] public section
+
 
 /-! Complete support-side assembly traces, including source preparation and
 native finishing. Healthy values are runtime data, not constructor inputs. -/

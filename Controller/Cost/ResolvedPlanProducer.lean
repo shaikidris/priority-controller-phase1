@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNodeConstruction
+public import Controller.Cost.ResolvedNodeConstruction
+
+@[expose] public section
+
 
 /-! One source-order pass forms an expansion query. Cached row offsets, dense
 selector ranks and the scalar source end are shared by all node records. The

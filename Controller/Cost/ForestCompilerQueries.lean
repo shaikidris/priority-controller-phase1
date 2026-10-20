@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerDictionary
-import Controller.Cost.ForestZeroNonempty
+public import Controller.Cost.ForestCompilerDictionary
+public import Controller.Cost.ForestZeroNonempty
+
+@[expose] public section
+
 
 /-! Root-local compiler metadata with one shared ambient dictionary. Local
 rows, local counts and channel coverage are computed in occurrence order. A

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SourceOperandConstruction
-import Controller.Cost.TemplateStreamConstruction
+public import Controller.Cost.SourceOperandConstruction
+public import Controller.Cost.TemplateStreamConstruction
+
+@[expose] public section
+
 
 /-! Source-count and occurrence-stream construction for the support controller.
 The interpreter image reads the original encoded graph. Healthy values are not

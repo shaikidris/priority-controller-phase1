@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceDriver
-import Controller.Cost.ForestPreparedPositive
-import Controller.Cost.ForestPreparedNegative
+public import Controller.Cost.ForestSourceDriver
+public import Controller.Cost.ForestPreparedPositive
+public import Controller.Cost.ForestPreparedNegative
+
+@[expose] public section
+
 
 /-! The complete forest instruction image is constructed from original source
 rows, original roots, weights and the physical target. Its data path executes

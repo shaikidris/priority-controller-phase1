@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestQueryPackets
-import Controller.Cost.ForestReferenceStorage
+public import Controller.Cost.ForestQueryPackets
+public import Controller.Cost.ForestReferenceStorage
+
+@[expose] public section
+
 
 /-! Newly formed storage for all source query packets, including cone records,
 root/target units, outer-list copies and recursive packet continuations. -/

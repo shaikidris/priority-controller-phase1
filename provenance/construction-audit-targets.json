@@ -52,8 +52,6 @@
     "Controller.Cost.ForestReferenceWork.roots_bound",
     "Controller.Cost.UniformSourceConstruction.code_image",
     "Controller.Cost.UniformSourceConstruction.work_bound",
-    "Controller.Cost.ForestNegativeResidentConstruction.image",
-    "Controller.Cost.ForestNegativeResidentConstruction.work_bound",
     "Controller.Cost.ForestRootClassification.program_image",
     "Controller.Cost.ForestRootClassification.construction_bound",
     "Controller.Cost.ForestRootClassification.execution",

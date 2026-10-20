@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.CriticalSets
-import Controller.Cost.ForestMarkerMachine
-import Mathlib.Data.Nat.Bitwise
+public import Controller.Cost.CriticalSets
+public import Controller.Cost.ForestMarkerMachine
+public import Mathlib.Data.Nat.Bitwise
+
+@[expose] public section
+
 
 /-! A fixed source-tag scanner for the critical-set and modulo-cycle layouts.
 The program reads the channel count and the original node headers. Neither

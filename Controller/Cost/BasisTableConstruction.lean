@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisConflictConstruction
-import Controller.Cost.StackPacketConstruction
+public import Controller.Cost.BasisConflictConstruction
+public import Controller.Cost.StackPacketConstruction
+
+@[expose] public section
+
 
 /-! Proper-basis table images are constructed from original source counts.
 Matrix allocation uses its arithmetic dimensions; no matrix value is evaluated

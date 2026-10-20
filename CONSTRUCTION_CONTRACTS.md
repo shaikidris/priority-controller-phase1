@@ -4,7 +4,7 @@ The proof library includes complete forest, bounded-live-AND and proper-basis
 constructors alongside the ten registry statement surfaces. The Comparator
 configuration for each entry lists its registry-selected declarations.
 [The companion audit manifest](provenance/construction-audit-targets.json)
-identifies 404 audit targets covering construction, recovery,
+identifies 402 audit targets covering construction, recovery,
 optimality and native width.
 
 Let `n` count channels, `q` observed roots, `G` the counted decoder source size,
@@ -34,9 +34,9 @@ the stated basis or live-conjunction promises. Recovery consumes the supplied
 structured source; it is not a recognizer for arbitrary malformed input.
 
 The proof package uses Lean 4.35.0-rc3 and the exact Mathlib revision in
-[lake-manifest.json](lake-manifest.json). Existing modern modules and the new
-legacy-format proof modules compile at this same pin. The Solution import
-surfaces use the supported legacy format to import both kinds.
+[lake-manifest.json](lake-manifest.json). Every Lean source uses the modern
+module system. Public imports expose the proof interfaces; generated construction
+recipes export their checked definition bodies for downstream reduction.
 
 Build the companion import surface with:
 

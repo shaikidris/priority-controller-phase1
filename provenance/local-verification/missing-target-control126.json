@@ -1,0 +1,5 @@
+{
+  "status": "MISSING_AUDIT_TARGET_REJECTED",
+  "expected_constant": "Controller.Cost.NoSuchAuditTarget",
+  "diagnostic": "/Users/shaik.i/research/p-vs-np/formalization/evidence/phase1-palomar-20261018/claude-review-audit-20261019/module-repair126/RejectMissingTarget.lean:6:0: error(lean.unknownIdentifier): Unknown constant `Controller.Cost.NoSuchAuditTarget`\n"
+}

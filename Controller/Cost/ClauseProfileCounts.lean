@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SharedNormalizationShape
-import Controller.Cost.ResolvedPlanProducer
+public import Controller.Cost.SharedNormalizationShape
+public import Controller.Cost.ResolvedPlanProducer
+
+@[expose] public section
+
 
 /-! Source-field normalization counts. Guard labels are counted by finite
 channel membership; no Boolean assignment is chosen to construct a program. -/

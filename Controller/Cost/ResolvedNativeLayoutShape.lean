@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.FullDictionaryProfile
-import Controller.Cost.ResolvedSourceProfile
+public import Controller.Cost.FullDictionaryProfile
+public import Controller.Cost.ResolvedSourceProfile
+
+@[expose] public section
+
 
 /-! The native continuation address is a scalar function of source row sizes
 and normalization counts. Full coordinate coverage fixes the optional row. -/

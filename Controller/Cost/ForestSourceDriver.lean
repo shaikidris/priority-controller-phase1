@@ -1,8 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestRootClassification
-import Controller.Cost.ForestSourceConstruction
-import Controller.Cost.ForestCompilerOffsets
-import Controller.Cost.ForestSelectionMachine
+public import Controller.Cost.ForestRootClassification
+public import Controller.Cost.ForestSourceConstruction
+public import Controller.Cost.ForestCompilerOffsets
+public import Controller.Cost.ForestSelectionMachine
+
+@[expose] public section
+
 
 /-! Source-only preprocessing for the complete forest constructor. Root
 families are computed by the fetched classifier; the weighted selector is

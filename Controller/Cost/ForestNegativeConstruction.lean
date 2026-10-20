@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestNegativeRecipes
-import Controller.Cost.ForestAdmissibleConstruction
+public import Controller.Cost.ForestNegativeRecipes
+public import Controller.Cost.ForestAdmissibleConstruction
+
+@[expose] public section
+
 
 /-! Complete negative-query instruction formation from cached metadata.
 The provisional constructor is charged before its size is used for relocation.

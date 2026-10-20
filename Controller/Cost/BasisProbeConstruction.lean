@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProperBasisConstructionRecipes
-import Controller.Cost.SourceRepackConstruction
+public import Controller.Cost.ProperBasisConstructionRecipes
+public import Controller.Cost.SourceRepackConstruction
+
+@[expose] public section
+
 
 /-! Fixed source interpreters and copy/reclaim continuations for proper-basis
 table columns. Construction reads source counts and typed channel IDs only. -/

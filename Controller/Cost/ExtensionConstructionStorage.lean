@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProperNativeStorage
-import Controller.Cost.BoundedConstructionStorage
-import Controller.Cost.ConstructedExtensionsComplete
+public import Controller.Cost.ProperNativeStorage
+public import Controller.Cost.BoundedConstructionStorage
+public import Controller.Cost.ConstructedExtensionsComplete
+
+@[expose] public section
+
 
 /-! Storage contracts for complete extension constructors. Assembly traces
 charge the actual instruction images. Source validation/cache buffers and the

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SourceRepackConstruction
+public import Controller.Cost.SourceRepackConstruction
+
+@[expose] public section
+
 
 /-! Cold source preparation constructs its interpreter, reads the healthy
 value table at runtime, and constructs the physical retained-header exchange. -/

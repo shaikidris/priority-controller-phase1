@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeQueryStorage
-import Controller.Cost.StackPacketConstruction
+public import Controller.Cost.NativeQueryStorage
+public import Controller.Cost.StackPacketConstruction
+
+@[expose] public section
+
 
 /-! Packet exchange storage includes the generated move/zero streams and
 fixed copy, reclaim, ABI and return recipes. The original data words are

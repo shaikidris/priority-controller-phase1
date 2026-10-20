@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.QuietQueryStorage
-import Controller.Cost.NativeSuccessStorage
+public import Controller.Cost.QuietQueryStorage
+public import Controller.Cost.NativeSuccessStorage
+
+@[expose] public section
+
 
 /-! Storage for the complete shared native query constructor. Uniform fixed
 recipe traces cover every scalar placement; source and native continuations

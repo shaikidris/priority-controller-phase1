@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestZeroCompile
+public import Controller.Cost.ForestZeroCompile
+
+@[expose] public section
+
 
 /-! An epoch-indexed source compiler dictionary. The two dense arrays are
 initialized once; starting a query increments the epoch and clears only the

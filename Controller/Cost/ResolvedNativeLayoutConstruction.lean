@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNativeLayoutShape
-import Controller.Cost.ResolvedRowsConstruction
-import Controller.Cost.ForestDirectoryConstruction
+public import Controller.Cost.ResolvedNativeLayoutShape
+public import Controller.Cost.ResolvedRowsConstruction
+public import Controller.Cost.ForestDirectoryConstruction
+
+@[expose] public section
+
 
 /-! Native layout metadata is constructed once from source rows and cached
 normalization counts. No healthy values, satisfying assignment or normalized

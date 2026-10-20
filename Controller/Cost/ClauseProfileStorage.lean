@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedSourceProfile
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ResolvedSourceProfile
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Guard membership scans retain source-list tails and one finite-channel
 filter. Their storage follows scan depth and retained output, not scan time. -/

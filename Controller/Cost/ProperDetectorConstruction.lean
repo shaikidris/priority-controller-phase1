@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ProperNativeConstruction
-import Controller.Cost.BoundedDetectorConstruction
-import Controller.Extensions.BoundedNativeComplete
+public import Controller.Cost.ProperNativeConstruction
+public import Controller.Cost.BoundedDetectorConstruction
+public import Controller.Extensions.BoundedNativeComplete
+
+@[expose] public section
+
 
 /-! A constructed implementation of the proper-basis algorithm. The guarded
 case reuses the bounded detector at zero live conjunctions; the other two cases

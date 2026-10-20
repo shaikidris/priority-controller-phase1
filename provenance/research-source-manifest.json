@@ -9237,801 +9237,801 @@
     "modules": {
       "Controller/Cost/AndRankConstruction.lean": {
         "source_sha256": "efbda56eb08b510e77376dfdbf85c3345d7ad29bc9ab98eb6d3f06505611bd28",
-        "ported_sha256": "1a4d5a02e91c4515eeccbcf7eef2cd7b1ffa259dc9fb887b4dcf34b45e6aa1fc",
+        "ported_sha256": "42c1d72acedfa6b2d023ed1aa2d859313cb73837933c3635ed8d0399e1d06376",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/AssemblyStorage.lean": {
         "source_sha256": "5a5948a0d54731968c592685076c7c724df099c5b3f6fd6eee336f8e4dcd044b",
-        "ported_sha256": "c92bb1bba359b4fe11d561e4856c9f7bfde7358bba5de63c567a960b9853f825",
+        "ported_sha256": "486a5a044116196ef6a2db45a2d3efda1530de12c469df9a9198bfb068299fff",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisColumnConstruction.lean": {
         "source_sha256": "afe665e7132d45e79e582bd3fe0385be00920eb52fff1b8fd4db0e4bcbe0d1fa",
-        "ported_sha256": "582726ab81d2346d709a058f891bbcb79bd5650bffe450b4434266d3f695acfe",
+        "ported_sha256": "4494066d43ed4211c7b3b9814642e0459c544803c6c3f72593af5abb2fe0c724",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisConflictConstruction.lean": {
         "source_sha256": "d9a532fcf3dda69dc9ab9a53c90492a659c07b457552ab63c354fcc01cc89a11",
-        "ported_sha256": "4053afeb3b2a2530f9c5279fdd5b605b444b818efd860992ef69ab289bfa552b",
+        "ported_sha256": "5b784e34391bb58f6e5e280c8ba1a334583ae9a85bd05829314c554838a6a947",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisOutputConstruction.lean": {
         "source_sha256": "843af9447aeaed6871654babceaddc2483afb44feb676355497afe4861a8e237",
-        "ported_sha256": "5215385624b939700a33f777a685ee601d188d25e4368f468d6e827b77d2c0ae",
+        "ported_sha256": "be81faf3238606f10b7ef6afb31f9b1210d2ace8ab39098909c395c0cf61758d",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisOutputStorage.lean": {
         "source_sha256": "264b2f7d4be93b36436c9f96449fb4ca192a08de5f70bfb5d54722e0f580a7fb",
-        "ported_sha256": "c945e67d330a4fec774e1f7f6d8f77ce040a07c704baabc93eb42b354be2581e",
+        "ported_sha256": "cfb55e2010e84d1c786531e5589157b8ab9fa1d5ff71d3114a696e58db5449cd",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisProbeConstruction.lean": {
         "source_sha256": "5e4e7f86dff500c253969f3d903be8768e8b31b6dfb3d9ef6597cdf3de194aa8",
-        "ported_sha256": "b335ff57c759470f02887e44ebb9ff350d8b1c5fed047408d263b7b5ee129cec",
+        "ported_sha256": "eb7664f87222bc9fb7440949f3ca463633ec11a1760df4b0949cf10d7cd7be69",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisReturnConstruction.lean": {
         "source_sha256": "1d28a0d4883ceb0e73956665062d037d1680d96cd04295a9ac57acac0df81ce5",
-        "ported_sha256": "1c448334ec70047cbd5b8e3c5451c24c713d09de5cbb6e1c9b6d001017214e67",
+        "ported_sha256": "d626de62e348a0d40cfc5882f5682e7399123a3878a3dc42a99562f0ce056c39",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisRootConstruction.lean": {
         "source_sha256": "e8ab2378a2371db0c4ca6240b22b9934abed7964e1d4be953f05b7b882dfac49",
-        "ported_sha256": "8ca08037964034574741ab422c8ad0482eb5f7d3530c1ea85eb470cbbb000b8a",
+        "ported_sha256": "6433336127be557d851f94d92dd106d7a6151b653ebd1e364d77bb08ba8ed342",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisTableConstruction.lean": {
         "source_sha256": "241dcd0ded9296e835b5837c178dad721205ae448f173de5ce6db9c437a24943",
-        "ported_sha256": "ac6802aa72b0150bce1ab18aceda9dfd04747e5f3f434a1ad7ea7d9a1cb6c4c5",
+        "ported_sha256": "b2ca5b4cb11fcdd9e74823d029e7b686facf4bf7c5e4965221c9ec5ac456c085",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BasisTableStorage.lean": {
         "source_sha256": "443c70dd1bd5b7ff0e4bc1d98f3a887f415a00f0a65daf602780f4c343dbd859",
-        "ported_sha256": "2fc73d7b9e542b923299b8155eda43e0d42e7fc08c304719e8ea117ea353b6c8",
+        "ported_sha256": "4f8687723d3fcf48fad9ef720a3cb2788c578f6a026bce440f32346fbd364931",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BoundedConstructionStorage.lean": {
         "source_sha256": "6915b9e665f50f1aec293216f7b4e4b8b28808fe696690de2723f8384b20d66f",
-        "ported_sha256": "343e75f16e16ebfe11697b825fed7abd20cf3167aa4b6eff626bd96dfb35c2c2",
+        "ported_sha256": "714b5471f16f8989e2de3be57820d19ac4cc035d9cbadfaa9b61cc59a4dda4f8",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BoundedDetectorConstruction.lean": {
         "source_sha256": "73d5cc812fecb3011aa628be42cbc796b5fa6a3cd9464fe338dbc3c6343b4124",
-        "ported_sha256": "b67d005b20833f79283209107c959b49aae570833c3dc3a96370824a09e6cd94",
+        "ported_sha256": "bb2622c10d2b7607f482f74ea20a42fde9322e9c3fd5a45d6d117cfa0624acb6",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/BoundedRun.lean": {
         "source_sha256": "865548700358f4d3fc7ec49b83d40f2087327c6ec0a07a69ec2440d4e5da369b",
-        "ported_sha256": "16b33afb6027fdb8ad92bf040290733e0b14b7a60245f70acc8935011f9c3a74",
+        "ported_sha256": "4f8058fc9b55b271b6e19871b513186564ba298d753c9d9af89e86da99ed9903",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ClauseProfileCounts.lean": {
         "source_sha256": "94624a9bd0c04a238311d68335621665fbf21b05360bda1fcf2a569075ea3aca",
-        "ported_sha256": "7d9814ff721519d57d4c356864716b774f3115f1fde3b3308fa3002fce134d53",
+        "ported_sha256": "0f1a7824069d94781b91f5c9b7b0ec92f8ba10f000c1b0695c482bc9ce991682",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ClauseProfileStorage.lean": {
         "source_sha256": "8bd1b2b94f4ea9bd7a0b2a67a94f229766bda19ed342a0f01f6b946ba40800f7",
-        "ported_sha256": "544bba9da72c1cac5aa61b78f2451f1bd19b557b74fac11e0ed0caed13946952",
+        "ported_sha256": "51d398b33fe47d1da81824d51652a509e6fb80092240e0f92d2dfca8d37c6f05",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ConstructedExtensionsComplete.lean": {
         "source_sha256": "7c568fca83c41f81686197b9896586b616a415f6ca5b4359db1f59f0c6fa27db",
-        "ported_sha256": "505fe772a82e771261d41a25f0dbd091bf826d911e64fbb38b66388584e0abf9",
+        "ported_sha256": "f1bddb4c49e95b0e6f4c89a81c262d32fe0f3766e792ee3c2d9256d0c975e15c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/CriticalSourceBoot.lean": {
         "source_sha256": "d731fc1fbbc2bb84ad2875f5ba9de8dcc2344d9f081cb170e73e24ed1951600e",
-        "ported_sha256": "0930f8d9c4feb2f8dec3dae3e7d676d6455961b8e696fec95f77a0175261176b",
+        "ported_sha256": "b5fd96f7ac7ed7ddf251ac14dc44b745803309ffa6f2d2217799a7b02ee5bb97",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/CriticalSourceRecovery.lean": {
         "source_sha256": "5581af6993df6627f8d91e1bb1c71afd5a65b401dbb1008e6c9628f6837dcdb8",
-        "ported_sha256": "177f35786b9423ba1e01c324ab2135b6d65e2f9c30a98cded6b8c81cfb812665",
+        "ported_sha256": "4b7aab740c8f8500f65a3a5e0ccdd9251e12f670b3917af430168f2a8c35cb53",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/CriticalSourceScan.lean": {
         "source_sha256": "9919fc05d9300493e21ac7109f5473a81f86765cd4793edfe6c61389bf5892a4",
-        "ported_sha256": "2a759d4b25f2072ffcd8f4fe61457b9dfd6548cec60c0102080fb743be70c94b",
+        "ported_sha256": "4bb9e95355e145333880c3e1d985b3fb92c935c4db4a0a8fa895bee0f8c9f2bf",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/DeriveBasisRecipe.lean": {
         "source_sha256": "9ab1a04c0a0fe2bd3c345d4b20710ac2d080095a19e75193c3cd9fe7f8c0dcc6",
-        "ported_sha256": "a8b8444b526d5af1aab5d8b45baf8087a8ecec2d5487aca273a316363f4f79c4",
+        "ported_sha256": "4e26da1880ae1b9cc44bc1268d36f638397f04d0327469d0a36f9a5af9742a98",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/DeriveExtensionRecipe.lean": {
         "source_sha256": "d67844be00085d725d12860a08c19a79ab8f53e5a99f88b3930b74a3b4158493",
-        "ported_sha256": "a5144965bc6b6a494719a64c8bb200f7bf9df0316aa44b71eb8e6d18550a41b8",
+        "ported_sha256": "c19bee34f0ddfc5ee5881a0842fc602a88bc82a5d3a06bd19f62046d8a96af28",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/DeriveWordRecipe.lean": {
         "source_sha256": "335718c63b47ffbd8ed02f3d952f937445034aff98b92974da10fc48c85a6ff5",
-        "ported_sha256": "9c54a4ac1affc081f04b7c1e5726106acb882d98dac40284fabac7431687d878",
+        "ported_sha256": "25ea3b0c72fb1c30089af35e27ee2b4eb76aa2ea829a479d46533258cdcf9437",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ExtensionAlgorithmsComplete.lean": {
         "source_sha256": "5eebc330fc5f86a8a6af430f5d1577d9efee5e23946e43f15f44082d6eca879e",
-        "ported_sha256": "419ed6be78aa857ce29507bb5b4ec3e07dcc01c7f3f4e567d83b9ba9ee2e9072",
+        "ported_sha256": "7666dd15b0a608645bc277df975df733fba7b0b7b5e3e7bfb7640ef935cf9ca2",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ExtensionConstructionRecipes.lean": {
         "source_sha256": "c9a2d357edaf27187e72855eaba35a1344f7bed5f6eb480cc9a4aa39311e56d8",
-        "ported_sha256": "c038f0b9f32cccf31423fcc68a7a33e707f80571b79fd5d5d8a3328ac00ad72c",
+        "ported_sha256": "c63f9290eb80d5c8e3668f9a243824995fb8cf84d8dca47b48fa6e434284ecd6",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ExtensionConstructionStorage.lean": {
         "source_sha256": "9839a06d6e75d60fd907545827f852185907fd140afdf7482a4b311fdd09f498",
-        "ported_sha256": "eba156003e3168f211278f76598119c87773cd4423fb45e1e72cf9bbdd3bbe01",
+        "ported_sha256": "cd53a9737627dca1e129d882839cddcb69290fedbd5d69b8b747359132fe0a1b",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ExtensionNativeRecipes.lean": {
         "source_sha256": "b219abe81aa1c669a39c4e599045c27e3fb2de3d8337af97586d4674344d4b4c",
-        "ported_sha256": "acd72ded2653b5e06618e1fb6afd5bee3c8771b0c91a79918b34dc3190ffbc45",
+        "ported_sha256": "63b94e7328ae4ef44a126395e5126723a8db29949bef2a2bd8643b85165dc6f0",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestAdmissibleConstruction.lean": {
         "source_sha256": "e857f506ed71ba730923e15684e0863da17a90a75271e701f6f4174139990951",
-        "ported_sha256": "84703ed2d62ed7f52b9922094a8a86d6bee6213afe0356dadf927d84d5e24e33",
+        "ported_sha256": "934aeb2f2ccda8fb0253690dd0395583483ae5182213c7f9ede763c137aaebf6",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestAdmissibleStorage.lean": {
         "source_sha256": "0b0946343f712dec81a9fb816568575a8ad412f7cd687248b9214ef5dfaf498e",
-        "ported_sha256": "2cd6a80b2d295af5a294f52a5e5fe421d4e601e474bdfbbeaab79ff4a7944fb0",
+        "ported_sha256": "8a12f575fee159e71d178ff8fd7e38ef0086c984d8a8adc0da0d84b982c894da",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCachedNegativeProgram.lean": {
         "source_sha256": "091f3a96886c218b28fb4a60678a6ed536f5e4f7147cfdfe3be2d7f791770a55",
-        "ported_sha256": "20cb2ed1ae8538a98d24d9b331f0f80495c56b7e9ba881e9b3fe9e07127c9f1a",
+        "ported_sha256": "2ce5d1afefec9b832ff76bc2464a185f436cb3aeee0e53564d9f3d31d40d56e1",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCachedQueries.lean": {
         "source_sha256": "0a550eb31bc61099f4de85c2545e28ce38354790fa781bb2fb7665248c6cab28",
-        "ported_sha256": "7ea8811f163c991879976d5ee537317a9c74f6a2a68118432e4c804b3669874b",
+        "ported_sha256": "24f335c9e79ccdac9d1184f37de8e7ec06593093d72a146ac9ced9efdc3d1b68",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCachedReferences.lean": {
         "source_sha256": "35f47e5a9dbc428ec817f0e09d10ed7b2e76f290fb6107f1b46a9dfcc1be39bb",
-        "ported_sha256": "7b96e1053d702e6e769ba434f2b107e3edeb9abf38aa919082849959c8da01d5",
+        "ported_sha256": "a1e362ff27ecaa7ad873865a6b54bd8c8b9dfe7a448e2e9a57ee0444a51dc8da",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestClauseProgramConstruction.lean": {
         "source_sha256": "d4f64044ecf24ccb80882a331041ad7f8456e1dee5eb8eb52f908a3fc7c19bb7",
-        "ported_sha256": "727c3a14395e9f7144398b1c94dcdd18be21a3eb819c03bc79f48d19f201cecc",
+        "ported_sha256": "d58c587c64d1cd034b2f45af0812b8c8a89bfc8eee3e213f54d25fff5b0c9132",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestClauseStorage.lean": {
         "source_sha256": "3a11dcdd5484aeb703c61c1f69ab3d4aafe5d3d586f57414f83f20e33f2cc6ff",
-        "ported_sha256": "12976fdb7c5a1c800591ea7f9ae5d051986207a573dbe25db32bf50a6e5cc721",
+        "ported_sha256": "786438cca00d449d4099dfbc83839b24badf207d94c0ec5a438cbe8f90e4ad61",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerComplete.lean": {
         "source_sha256": "b95fccbbd38903c59cc6cd649c4435450b635f5ad639494c045b59cc35bf9317",
-        "ported_sha256": "c3e6aeb23828917ed3f3aa87e088042ed7f26fc4ff3775cb36cb160b693444e3",
+        "ported_sha256": "77099bbdd0a1ee9d40798b6479c441f3b5076941463b518bc23fcb66243b48ef",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerDictionary.lean": {
         "source_sha256": "a9c78e28a005a7870691cbe629b4bd92d1fc0d31be134bce88b34bd2d7282bec",
-        "ported_sha256": "a1f6e31b4da45b2efc69df87d40299dcc99581c9ef3d994e4bc7676618f94daf",
+        "ported_sha256": "a0efcafe256ed2186b080bcaf04cf44ecdb66b28d5fc24bb82d80c5729c4f9b8",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerMarks.lean": {
         "source_sha256": "f17f0f3502b2633da25ed561d460e0ffdf2d3da367708b551b55c49a764d75af",
-        "ported_sha256": "64daf91017599f06b6460b3d33ee97144776c2b9f70d42fa66fdecb2a82e2bd7",
+        "ported_sha256": "fbf47fd741cb9907c2f6c7c56c1dea58beabd0568c7e5c533614f6089f15a64d",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerOffsets.lean": {
         "source_sha256": "558d8ef5e77ba8e833a4a588571682baa0c0167b2232814981a7f95e81d4b6a6",
-        "ported_sha256": "577488f7804a908b3dede7693f18e431bebecb135502e33082815518a5304249",
+        "ported_sha256": "9d854ddecf6a7f3b4ec4674d625bd554ce4ed90d665b89819998ffe3d346830a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerQueries.lean": {
         "source_sha256": "1a99369289ad58bdb06394239287ed56cdcf6fcbcadfb76bfeb1313717bf3ba8",
-        "ported_sha256": "50f3d1bb6ed64d84af81f3120ea9b01424e0c0de7d372b1b2f9ba498c443454b",
+        "ported_sha256": "3858387bb6b2752731214e96fe9b5b1d2985a16b96fdd40fd104fe8b0d273b46",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerRanges.lean": {
         "source_sha256": "4477d8546d650345b3ef1b4e2bf889472f8dfa4d222b100d319c60ae67cb6ee4",
-        "ported_sha256": "e50ff732ecb96521aa6fc8bcec977254c21494e91fe8b7928338e65fa6ecb623",
+        "ported_sha256": "c490a05aa7b41dca50b66a6d8ad361becd4a72fb4bc60a3aeabd2f318f2be192",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestCompilerStorage.lean": {
         "source_sha256": "2c3ceaf02af59e43721bad55371b2881f5093a6c83f3c6f9cc14e99b478377d7",
-        "ported_sha256": "b64dff3d2b5c7bf39436c6057498d726823e0eb7975c99679963faffc95646d0",
+        "ported_sha256": "7132f8941ffbed403d9773080c60aa5f56d832f0c09785154c9e3288fa0d3516",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestConstructionRecipes.lean": {
         "source_sha256": "63b1a44a4e71d4a1aed4d0300d21b551ef9e128229d011c7f9cebbc803ab247d",
-        "ported_sha256": "82acc5006840585d0b8fb0341778a19797c204d97abd9d9e81a84706b06446c7",
+        "ported_sha256": "22af0b49f241b5fd8854aa4685ae29b85aecef4e668420bf85139c0cb56158bf",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestDescriptorConstruction.lean": {
         "source_sha256": "ccaf7d73d7efec8cff7abd257e9ac0829a8f963b1c4b55ceec3c631681f669f3",
-        "ported_sha256": "0164d12b89f70f3b953644a2eac847d4b686591fb306506b4bbd9b45166010ec",
+        "ported_sha256": "d9fce76329dccc9a52d5723f8808d50c57990cb266b0f6d1434d0e1b235a0c4f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestDescriptorStorage.lean": {
         "source_sha256": "fcebde6fe86d290cf8d244d30c3b42e464ad693b7e71deac74083ea65dd05f33",
-        "ported_sha256": "7d48978c3e2035ccd73f4fe563a633affa43f27956bc4865839eb2c474ca2488",
+        "ported_sha256": "7194aae7f829dab2c4f6cf9dad969753318effcceeca33f42de3a0f4b05dd056",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestDirectoryConstruction.lean": {
         "source_sha256": "b50864b8d06b8b6f3ea2196ff6b760c3a105b1a75e028b823c6a4a9cde56d959",
-        "ported_sha256": "dca0b85a1959301c4a87361fb9c15f2665498000e91192e91342450a9589e15d",
+        "ported_sha256": "8218a480f2ed5be794963b28188edf82efaaf4221628f8562793dde7908cc642",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestDirectoryStorage.lean": {
         "source_sha256": "44d49a4d9c219ca9ea1c937ebcf88a20112542d516a5dac9ef8b56bcd70177a9",
-        "ported_sha256": "f92912b080ed7ad149a8dd3d3db2406d465e7715285237fe034fa4e4fd5c9a8e",
+        "ported_sha256": "af8ea035b8d43fe8c3639e8b6e694276bfab3edb7abd81519e72501b51128008",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestFixedControlRecipes.lean": {
         "source_sha256": "1f1f83261113c8e4570832521b66d6fc3bcfe072d6c18984ced8eaaf57f8d353",
-        "ported_sha256": "35a0fcfae7cb6d68a4189555507350cb8668676673378495e120c24ccf46bca9",
+        "ported_sha256": "7ae7963a090daaf6c34acb5c20befe82659b95dc98021d9312a7f979ae40b8b3",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestLiteralStorage.lean": {
         "source_sha256": "cb436f7b3ff6c891db4eca0e11d48dd1e513aee8c2e8d91d4d8f9fc07c8c1120",
-        "ported_sha256": "86cb13296fbeaf41c097a671abd3d5799b342eeb65b7897f89dfab211b039039",
+        "ported_sha256": "f9b3897675f630fe0c6b44fcc08ea58a72415aad549d94ed2f854c3b22fcb86c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestMarkStorage.lean": {
         "source_sha256": "5701fa3178b2564c3dee4d065ec2d56fd3cb90a140d83c899df8e813cc8282bd",
-        "ported_sha256": "4abe86278ccd60a36b3f80ccc5e3a24c4b6eab3a6b2bddc208a4867758660d7b",
+        "ported_sha256": "651823ec08c0bf08297b890b28e90715525d8046862efb0921e86f3adcf9ff6a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestNegativeConstruction.lean": {
         "source_sha256": "0189921e922afd5f24f95b4fb6a47b0fed52edf8a9c56256de51a415919fad4b",
-        "ported_sha256": "40172e05a2b0d533d0df89307c62a3ed1799bc6bb20b4d053a03ee02421e76f3",
+        "ported_sha256": "4d32bbcff7825623d4a0e3c3c0879550781d51b8594fb639fb9305c510c4df4a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestNegativeRecipes.lean": {
         "source_sha256": "4454a50d44b3dc4e368f80b6cc96a55b3d3fe36b36205f55ebba9bfdb3162088",
-        "ported_sha256": "2409b25a192a804796bf1c83dc925165c69056ed82421ee6a9d3f123cd4344b3",
+        "ported_sha256": "d6ffe5c998ed09aae510778d43e816b0c49fca8ea09988103358e19a098005b7",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestNegativeStorage.lean": {
         "source_sha256": "985d30c15801216e43ab74145d30ef8eb63a1dfc055bb3261ec47b9d99a0ed99",
-        "ported_sha256": "d26e1e7a0401d059341a654f7b79af756d07ee196ef55329593dfb2c000ddd65",
+        "ported_sha256": "ef29abf41f23245b5e5cdd72b11b1962750a0291955f0b18305974c9e8425bbb",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestPositiveConstruction.lean": {
         "source_sha256": "8e7f8bcac3d35d98e21efdfe3c3268f552c6c645f1fae3d3f5e0919e5b1cdd6e",
-        "ported_sha256": "a43f0ce2892719c364415256805638b5cec75778d05244f32fc8e0c0a28b6e07",
+        "ported_sha256": "51df56579050134728c2630bf747061d56a80b6313b27db1a530567d1d8461b9",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestPositiveStorage.lean": {
         "source_sha256": "f6c29d2be8fbf0219224d05fd5ed29331f881a0f492feba3e8aeb7531087fccc",
-        "ported_sha256": "f6e16b6ec0d24d49b4745a6d9d7ad38cc60527b3e285cac9e857d336129445c3",
+        "ported_sha256": "1ab485c4f828aa14f73c828875dc435ea90f71358150637ba5178782968eb766",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestPreparedNegative.lean": {
         "source_sha256": "df736725339577b3e4fc62b06270387076b0fc7a116e2b8bbcb19da191c2c7c5",
-        "ported_sha256": "cac2438501d3353b207af6ce27a36242beee1b9dba076e50e332c2e7da506947",
+        "ported_sha256": "511021135cc825e6becce175c447f5fa08b60b7912cf7a8e3585c8ebf6b6d0b8",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestPreparedPositive.lean": {
         "source_sha256": "8a121c095d933d48acfb29e33ae1676a8ce1c32a9974f076043a8cf835e44177",
-        "ported_sha256": "726df3ec17988366750bd140741f3287234add3a6318f5b9ce43c0d7928bf384",
+        "ported_sha256": "24b102ca6cf1ac2d2133660c78ec6a2b4ab98795a40d6b117cb6c12bf3cfa2a0",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestPreparedPositiveStorage.lean": {
         "source_sha256": "12106263280995b5b61d31d964811257389db99de36d40eb19869633570dc69f",
-        "ported_sha256": "4d2355b617ef90cc48235e7228f93f5ddf4e9ecb1b623e533be5963df2b8a74f",
+        "ported_sha256": "30c470d69dd3f497161cbe4ac3391412777f1a1ec6c5625e395ced86682c9275",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestQueryConstruction.lean": {
         "source_sha256": "79ae351516b42502a9c7ff377ac56c20af04443b7a87d1710beaafde1ccfa6af",
-        "ported_sha256": "d81a1718c022017e1b86d4c01ca1367d4110de012be39034ca31a6d450c318fb",
+        "ported_sha256": "4303f357133f84fd84553168c65c2d2b411e269681da3623e4a06085a64e8005",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestQueryPacketStorage.lean": {
         "source_sha256": "621f49060e0f44387b63e620ce9a6ead155fcc3a5e7b8bb1782db45b7a6f613e",
-        "ported_sha256": "520f267cf19a8605e2f16a9168ffbe3124f9bc474df23e204c045c31d2b19fe3",
+        "ported_sha256": "d00253e21261aa94f679f21603631d3926be5535961c8d720ab4cb41a6a2aebd",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestQueryPackets.lean": {
         "source_sha256": "96a02089075fd1862ae69c0dd67780ec04d04fe04e9df352474114a709aa532d",
-        "ported_sha256": "b1c054eef2f8902a101ebcfed8bc67272c7b708c30027b6f54cba5b9afe855fd",
+        "ported_sha256": "aa2577ec211b085e670781a94940e20776b7bdc2f80594e9c9091765d8219157",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestReferenceConstruction.lean": {
         "source_sha256": "d31a1307b99de9de4f139a8ee17376c6edcbd38861cc2141fd04d23f2f0d0c77",
-        "ported_sha256": "520ea4768df5857b2d8b79d938ce7ee7d9c7ba768128961babd07c992446fe3a",
+        "ported_sha256": "d14fbd3971f51e2122103b029dffa5d73817f7b7494674ff5b8638ad936971c0",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestReferenceStorage.lean": {
         "source_sha256": "d370bd2ee1899ebfe38898d818fbf47846f300685982d15b3d8a0418a1927183",
-        "ported_sha256": "03185c6eba0dff00f592beb8c025c34473ab153c5e78c3009c0bc9186a87a7cb",
+        "ported_sha256": "382b99b51ea821654d49b30d08b4db456c40c8f0678a625618bc792e48a31b08",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestReferenceWork.lean": {
         "source_sha256": "7aabf09a77e3de57878d555955cbc8e51c36a09d764bf8dbbc0f42a6068440e5",
-        "ported_sha256": "46928fa8c55ed7f4ef984f23e5a01574d7d3f90bc904870b70ad9428847cde29",
+        "ported_sha256": "1f9ff87a87bc843a5a656d91c14eb2fcbeeb1524d0f9326f5cff68f313c035ae",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestRootClassification.lean": {
         "source_sha256": "332cb9886827a1faa3639725fa8b4925621b00ececcdc40ee21e723d4fabead8",
-        "ported_sha256": "009077756bf36f25688d27edb75def6f23e2449ea70befd4cc78590c4ec28b1a",
+        "ported_sha256": "7a5f5994f88f96b1809a32757682307a414355680db15161c8f104a445f3c6b0",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestScalarNegativeConstruction.lean": {
         "source_sha256": "d59a59e2448e2a212c274c0ad60aafbc560c5645e4e7bc7c2e270e9ac4c30915",
-        "ported_sha256": "6a803d5dbc45da8e19ff0e9722450609332fd7448a3777d08dc0a1a03bb89535",
+        "ported_sha256": "4d48a3ad14a11e3ac94a16cbb6384bb5d34182a4d8509791107308a8c9130836",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestScalarStorage.lean": {
         "source_sha256": "ed3b195aeb498e19ae7828a90fb65fea47f3179b797303b32ada0f4a426f8012",
-        "ported_sha256": "45c2904cf11a367187d86e74947ff3b425a44ff83166d7025770d71a0e3f5145",
+        "ported_sha256": "cc4d0fde9042f21a41b18880a0f3ec8fe61323af8786ff25e2a591c0fbdca46c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSelectionMachine.lean": {
         "source_sha256": "4ef84d202ae6c58db64b48180419f58e0a8c71bd008b4b4d0bbab432ef9a648a",
-        "ported_sha256": "4bd7ef881a74d6bef3b86c53701263907218fd06e0b94a6181062ad496b2ae82",
+        "ported_sha256": "814810107e3a46646416db55ed41f291df2149ede051e0256b6ca1a080ce6a28",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceCompiler.lean": {
         "source_sha256": "1bd27b1e8957f37a76c104d439391c377c6e0b692844f447ddeb3a1fbf6c6a33",
-        "ported_sha256": "1b75dd30dbea19037fab7eddd8e7cb46cb82a0c54faa5491bafca90e70521726",
+        "ported_sha256": "022c4f80365452012788b778d5107a2fb5f0c19252b3d7f55ed04122b9f098cd",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceConstruction.lean": {
         "source_sha256": "57a04828885a9df1943cb5ded09d2a8d06297154576f7744ace5b9bc8bdacc8e",
-        "ported_sha256": "346353be4555f8e0f56db2f1c3ccff5758150863278d8b8002d005bf4fbd7c0f",
+        "ported_sha256": "743ff92bf1ed01b6e874d3629bac12e44e66657ddb9ab1155b1f1ace886f4620",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceDriver.lean": {
         "source_sha256": "96f21c8bbb41bc11c9c7f9393c6f8474a56fc76c80661d1270b3f3bec5446073",
-        "ported_sha256": "27b526316d8176e78d34e0162df9ce0d77d58ec11b6948e76940aef9cf9facc6",
+        "ported_sha256": "0123efc2ce776fdff671cc1e0e73360cc85f20765236beb5f6180fa9b26eb961",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceImage.lean": {
         "source_sha256": "8adc8b13057bc1c559a1eef5e3535f7aa35d9256c25faada2f27f14b67075990",
-        "ported_sha256": "c7063f9feb4c14292e9bba7f74239768fa96cc6f21f1a38f7800c14fcbd6e7a1",
+        "ported_sha256": "d78bb7f4a2af8d2ff0530bec875cc4de9c9abaa10a3fe196d177054453df951e",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceOptimal.lean": {
         "source_sha256": "bdee30d6ea652011875cf1d6b42940e7e18fea303c30386d412d4dce19e8a0c0",
-        "ported_sha256": "872a1c1d7de4a9af72e590a47a3e7c6353c7b4f93f1ab173836ce9b3bd2ea231",
+        "ported_sha256": "b8ffa71d5508baf9a802c95057ae74f363858f3817d223c37ec7726fb2a2455a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourcePreparationStorage.lean": {
         "source_sha256": "54ab6b5a61a8a932dd0d30c5b89500c478aaa275b4124e21855a73ebf612bad9",
-        "ported_sha256": "03a79b711bfb3b0a4415bdabb3fef25ee63d6585cad65a09fe81ae7c4e8ba75d",
+        "ported_sha256": "618981a6d53b5a684120ad92645739c9475b6b50ae7b24734b768ea2e8e6ab13",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceResources.lean": {
         "source_sha256": "3a6b7176e57354339fabb69a80c40a302cf3d45bfb1cfaccb670b7b8682ca5ee",
-        "ported_sha256": "38e031fe3940d117f40714ddcb49c07f56dbe365a39552faed0d6250c4f4fb83",
+        "ported_sha256": "68ba4ec6aca5244db882330cb18dc5ebb55dccb0e59b8e9b01b3f35a0ddbac77",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestSourceStorage.lean": {
         "source_sha256": "923bb232a45e3d99cfa8d600bda89ba234de4b663fc58670b151198de9ddf01d",
-        "ported_sha256": "e0afbd304d489665c87aad1596690cc41187e64680084e537cace5243058f0a6",
+        "ported_sha256": "df4b492a856d0731c7bbb26c386ed4b449f147233d5c515c3ec87fb3609b35ec",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestStreamingConstruction.lean": {
         "source_sha256": "d534f61c7d9707b9756bce10ae19768a3b1f153b72a3adcff1d2f5031100fa30",
-        "ported_sha256": "c37893b33a97851d09592db06d054ae0426ceba938cd7e34fd5e23788007b92f",
+        "ported_sha256": "10509f2458dbdcad3e53163402bdd7bd1d44f09dccd2abdbf8da45aefb54bdcc",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestStreamingStorage.lean": {
         "source_sha256": "c082a7077d95cb2cafeb2d881b080854834ee5a5edd848e9f71f0b247e58f20a",
-        "ported_sha256": "d291603580aed4f29719f01b22e5e1480ad2cd093d8b2eb40c3eee1260174156",
+        "ported_sha256": "0ee2e93a8cb3f454bb7a205e53d453900e28c0c265ce8327691918fda6ba0c4c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ForestWeightedCold.lean": {
         "source_sha256": "333dad120aeea7d402de929fc9c83329eef3a89fa94c1ad44a75f85efad05660",
-        "ported_sha256": "bb981c0dac980746c8769f6755c157930167ea43aa079b6f8c1137816db49f17",
+        "ported_sha256": "e4a4a90eb7a56b0f2cdc8cb44ad42a54cfc66e8c6d0cd7b385ede0ff8712bc98",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/FullDictionaryProfile.lean": {
         "source_sha256": "92eb63d13db2f7d865468254fae263a4ae03cfb3806dd862b6b2ecea442de2bf",
-        "ported_sha256": "1f24d7d93aa98bfcc88d7a96d178528401f75395fc5e4b370fce24fdf0b23b06",
+        "ported_sha256": "1c25cb3da559768bc94d6f566367339583b85e6b1eb478562a3ad3dee50de52f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeCircuitConstruction.lean": {
         "source_sha256": "f6d5856dffcb9de26095b7dabc3185f011aa0eafe1cce681939fc3e58246917d",
-        "ported_sha256": "e8b0b17d05ff3cf1142988bdc064a27f0aa28231ae5a8bd3b3b615a10469b195",
+        "ported_sha256": "1d80f84efc36aa889fb14291de453784ed9fe83821921a894e53bf1340e0d545",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeConstructionStorage.lean": {
         "source_sha256": "8554eb23a046fad05ef29998284d746a1e092aac2bef5ca0234de436265185dd",
-        "ported_sha256": "148329423f15df6d67aa37a5761e35bc446f57af4e55c466a1988eabdcb019bc",
+        "ported_sha256": "4fbd5bac4badf026107138a13a9eb65334c5ca3e9b4bc9e12bc49c333973108f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeContinuationConstruction.lean": {
         "source_sha256": "19ff98062983e0539a1cd6e73cce00adac08500915bd2f70f193bbe8ad9375fe",
-        "ported_sha256": "d215ebb804a8b9635d21c00ecc59a33a394b3ec243607cc7f82c8de5144b5ba2",
+        "ported_sha256": "81fdae09c908a2be2b7bdf7578cfa25d7594eefb13672a501148fec10c39ebc7",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeFinishStorage.lean": {
         "source_sha256": "6f58399faa6dfb21501f37c445aeeb8c910a89aaa9db55c5d53d69fe10b29c00",
-        "ported_sha256": "1ace2a34b666383d47ad21f144472e07f07ed8339d3da68b12a358b7417984d3",
+        "ported_sha256": "9d2c43d7562300a86e02589921bb9ab3161e29d16de935e4172d020aa5570c43",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeGateConstruction.lean": {
         "source_sha256": "d7479ea708611b87a3fddd73ee56bbfec66b15da1c8200bdd244f70400b8ab07",
-        "ported_sha256": "724a65fd61810f655395edbfaae7723244c836065ba3202903821da5249ad13d",
+        "ported_sha256": "1213bbe7f7628ecfc4957c1473f470028f805296a7be4dd35705f6a2dae116cf",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeQueryConstruction.lean": {
         "source_sha256": "0d9c1acef600b08eae9ca4dc3ec1c3ebf918a1e7820c547868cfc003d18f691c",
-        "ported_sha256": "d6baeb4b4e9dda32344bbbb1da61e278c118c8e310c091faa6636c5884e5ee4b",
+        "ported_sha256": "30dcb97cfb889e1510863e64ccb33660885a66dbb652bb9863c649c0a5a24298",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeQueryStorage.lean": {
         "source_sha256": "f3799bd67a4733f63aa67ba1f66d71ac9b5dd4565da50007ec7d4a1dd9ebc0bd",
-        "ported_sha256": "5e0b6a92ca50264c658df53c16c035c35da337c8bbab073f0069d7f7258af3da",
+        "ported_sha256": "ef528049290d41dae42356c4600854449e38a922be985ed210fbea2e295397a9",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeRootConstruction.lean": {
         "source_sha256": "adf49eb2a649de4de9b30899127b11111add72d9b3fc0a909f0e918b8daca4e5",
-        "ported_sha256": "ecb337dc15bb6c589e4f11838156c367298471ddc644c44a2595a429612dd386",
+        "ported_sha256": "e8872183e6e6dab740fc6bc69f2457114a5e888f1ddff97118bfeb8e47be9370",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeSuccessConstruction.lean": {
         "source_sha256": "5b64858362c0855745d47005964aa934ec220b16fa3ea668e2677fb469f66171",
-        "ported_sha256": "a31398d289c6b27e9378b9a5626bfcd2e11e46c8c723b411b61c8b50567453be",
+        "ported_sha256": "de5b8829d7731afa9e1a4a707a528464ea78db830795b070d6b02b18f5d927ef",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/NativeSuccessStorage.lean": {
         "source_sha256": "303baf644596499706b0c9688bad9b4ef0a626cd5d7a1eeefbe96cfbb39b56a0",
-        "ported_sha256": "17fe6f5f2b15234abb979e15fec75b875126e2f390b2adbb80d19fd14c166486",
+        "ported_sha256": "33431d522f8a890fa0b30a3e00a70c9e973ea2303d69ff74442a75497ec35e0f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/PacketTransferStorage.lean": {
         "source_sha256": "3e50f0dfdebffa65ab996c27ac9194622cc6b8ac9ff31f72091586431e6bf3fc",
-        "ported_sha256": "3cb31a1388858ff4749a1a57c143f733527936382ce09ed83c8bed5db8ac21f0",
+        "ported_sha256": "a385d6a70244d0ab49b61d8cd8e7a552c6ddcec6747ccaf1cc35730b43c887ce",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/PlanConstructionStorage.lean": {
         "source_sha256": "926d67f2434221ba92be1bec116640b173958756cab8287b0c6417bd3d0eed6f",
-        "ported_sha256": "68fc0465627ba1c92f1695f2f32b568e7c1f2a815c17fc3483a18034d2fd0f1c",
+        "ported_sha256": "225ec14eeab3d8a5a69940d8e40cf8c2bb5e0959f238291141501330f48544f1",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ProgramRelocationConstruction.lean": {
         "source_sha256": "ac2f3e817b1a0318b7c01f940a365704d49e17395e01d2315ab7db1690287710",
-        "ported_sha256": "7927b398c424b8b6533f98044c26d7fd864e94960d5148ec2339e661fff92a41",
+        "ported_sha256": "47a13d71782b41de88a75dc77a934b011bc8b97df855642823050773aeb148ea",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ProperBasisConstructionRecipes.lean": {
         "source_sha256": "0618e48d87001fe2f7807f403cdacba22a82c3112ac8930bc169c70f611ac799",
-        "ported_sha256": "c099b18cface392963aca46f1d562a119ade89d6e9a1d8f2fa27cb1b14e780b8",
+        "ported_sha256": "352fe633440c536e738c13b934ab7a1658a27662e15e0072e4efd34d237497ee",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ProperDetectorConstruction.lean": {
         "source_sha256": "237ea6c382a519ee2af2577e5082935b777940bca5ee3a37fb5d732082a58dcc",
-        "ported_sha256": "864ccc35903bab5bda4669ccc0106f634099c11603cc1eb8536d5af847e26779",
+        "ported_sha256": "24ff3559f8e67bc3527a2661b3bf70fc738326fd458275986d0f40c583606a54",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ProperNativeConstruction.lean": {
         "source_sha256": "a2a8531cac0f27da582ec2d572c762a899244d2a6e2bf37d78ef093ca7388079",
-        "ported_sha256": "79a570461a156576ee857abfa209ae755a04ceb48b8435688d134dd6d8c5d283",
+        "ported_sha256": "918452cd619c79ae57b80f6b37307be34a6eba92cdcfd26e8cead52f4d72f93f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ProperNativeStorage.lean": {
         "source_sha256": "12ed798acd92008d828476fd0ad093e04a9cc1a92d1f4eb3883bed7fbb1da1a9",
-        "ported_sha256": "08b8f26a687877adeb82d11ed3422ff690f2a386f80dd762be8400927be73d63",
+        "ported_sha256": "5f361c8cfe71929bec3bb38523124066b131bd9a663f8cdba4d6a45606fb8f8e",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/QuietQueryConstruction.lean": {
         "source_sha256": "f7d1c6a275487a530e5bd3871808852ee154b707349779f804aa930af56d4131",
-        "ported_sha256": "5308b3bd2a48fbbc6c92a8c365fa5592cdd27ec3d10de83d471f6d70c7891e15",
+        "ported_sha256": "e96bcaa9de1a209b5487be67907e45623b6ec313125eefc48562265d1417d95c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/QuietQueryStorage.lean": {
         "source_sha256": "db5a3407ca55bfc60d13fa3db2e22aa859fbc5fab6a0f48d18f55a41fe86ff73",
-        "ported_sha256": "ec06918361b211a5f0cfa0239f2fee537fc3ecf473cd5d7755eda3be57c967e3",
+        "ported_sha256": "4e803430d95316c258a925b45176081882bb5f3abb623c777e1d6602d38f5b0f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResidentSolverConstruction.lean": {
         "source_sha256": "bb152fb9941ea4189ef605776703f04f411f480113501a1bb9f51f8a1e8ae61d",
-        "ported_sha256": "99fdac6bce5016168c146458d7dd6a5cf4a3ef7b286a3989d7887fd475ff8e11",
+        "ported_sha256": "b8647ed80e934af704bb077c834cba665e715dafa641764a96f7249a74e3aa85",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResidentSolverStorage.lean": {
         "source_sha256": "44b484bcfd3587a3092c7e5763a29c5ef333585acff595858ed63b638fd1c72f",
-        "ported_sha256": "21559260ad88117ea0f5bb728fcf0962c34b97d0a0099b54d1b88a096bd95cca",
+        "ported_sha256": "4e9bae053eeacf159b9bd04e18291944a00878065b5219a5e88e7373c2afc81a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedBodyConstruction.lean": {
         "source_sha256": "27bd007aa994345a5e1615de1fd2713b6600dd15db8bf89aeb1e4d6c9072140f",
-        "ported_sha256": "66d3b6d0f2e11e86038200401d519a64c7bf273a2d26e1350f7f7a2c8f3bfd5b",
+        "ported_sha256": "27e52482588d30e2882992d83cc79232a66beac91dfa81986b6c6437853c2599",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedCallbackConstruction.lean": {
         "source_sha256": "22f148cfebb428a150b3e200e79af14b1b4a8ac6544b83aeefde348e21900598",
-        "ported_sha256": "5950616daf830a3206d713489a0ef5ffb2f5a1846c1f8c3a38a47057a0568d8e",
+        "ported_sha256": "85ad9895a40b32060f31763f6bfba65d2aa1f65b1571f7fa5e5c9a6766c61fd7",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedFrontConstruction.lean": {
         "source_sha256": "f71e3f7868bdb5901a2832e9be4b216668924042a45239c4aa8a008a83a5088b",
-        "ported_sha256": "caa538d95198b80a5899fcdacb1121ade1bd486204919a3697e8615db1fbc13a",
+        "ported_sha256": "be8a804353cc4f2ff0e20b121f3df29a77752be7557411681d6d203de671889a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedFrontStorage.lean": {
         "source_sha256": "e75d21d84a36cc96a6e5ccf0ea124e2f1ca2a4f84e634fd32f0bb851bc348400",
-        "ported_sha256": "7a3cf2ea3a30c64fdd81d83268150881a9e97309b6f80bdccb0f5351dd28759b",
+        "ported_sha256": "c605d3f1bb4d0d1a4719088fb5dcb2d51de925aa2552ff301bcda78bf5e7cadf",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedMetadataStorage.lean": {
         "source_sha256": "fc24d04b44d374887ef394453dcbc1a8e3e6686106d1f769718c6e96718c5ac2",
-        "ported_sha256": "48b3347989f07e9225340d4642eea2061032396b4016254298ae044abfff0670",
+        "ported_sha256": "8ebd2e4fc2bc5a631751ec90305c44fd4b292aa004e1fc33b327a42913823f0f",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedNativeLayoutConstruction.lean": {
         "source_sha256": "36db1d510fa3074bbc6fed35d14beb81431ed52bc0017477e222f6cf004ee194",
-        "ported_sha256": "9a8e88d2c8c75295fe0b554323f766b6a6e0ae35ddfa73a44bbb2b60a383e217",
+        "ported_sha256": "bc287007c3c2dcb9c26c36108d0608cce59760afd7691721c9c65212de7b6869",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedNativeLayoutShape.lean": {
         "source_sha256": "ee4ab54e1ec590e44410ebacbb84948d73527201026bb2e99c126707fffa884b",
-        "ported_sha256": "bbcc0b18d72809b632f62a5283d50c3ba0dd2c81dedd666d42a8fabf6efd2f08",
+        "ported_sha256": "75775f358e1a307abad26a3ac781cc49e9e282a48be475d6d792c12a2bf8c30e",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedNativeQueryConstruction.lean": {
         "source_sha256": "150f0a39911c3231b859e3e808e771da12ad7752650ed825c0df5ba0ec27fa3c",
-        "ported_sha256": "7150e5eb1fb8e871a589abd54eb973a8cd39c0c927712c076d4bab1a29ba8747",
+        "ported_sha256": "deb617a7c19c09b2a34f280f9313e1b7f8659fad5c1a64d1ae082bc7097faccc",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedNativeSourceConstruction.lean": {
         "source_sha256": "c49cba632b019981810159f9fb4576e49466f4f642a3ef8f778711be97f82a11",
-        "ported_sha256": "ff7484fb021c88dcea627f437cb3ae089927a05c4a54e6bdd15cc3fd467b88e8",
+        "ported_sha256": "4eec8bcd8e04c4f44ab052a4c3793700c90713f8810bc55e12816116564a4574",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedNodeConstruction.lean": {
         "source_sha256": "a4ea53a020c4fae4a1011b81f77500f944a76263369244a7341e67c81d7de4ff",
-        "ported_sha256": "7bf9defec168ebd9f1ac99b578404b49f6e1e778201e72aca69ea4112cffabae",
+        "ported_sha256": "b830659ed7755e74c4fa82511acd04f23df8286c41a798111a0585e638b8d599",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedPlanConstruction.lean": {
         "source_sha256": "588c37ace3931ab0ce507df268d8526eedfa6a7d81f92a8e44a8cca4241a4a94",
-        "ported_sha256": "3d08d2b54ff61ac69f1730c4da583ea74c8071284766087a86784cbe96c5adf5",
+        "ported_sha256": "16d6a8421d57facb30e6bae06705e7c9b1a6bad2e85cb1b3f864d51043ede644",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedPlanProducer.lean": {
         "source_sha256": "b2f1183b83ae722a5fa3784e53b6d74937d78efa887dddd9b70194b0deda7aec",
-        "ported_sha256": "7692f4c72e20f0223cc29915da5e43228d41c11d5876d0bd173f71472eb0696e",
+        "ported_sha256": "f93190ffaface5be8013d3532775e4e057e967b2c8836047026c4595fd51cc7d",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedQueryStorage.lean": {
         "source_sha256": "59e634682df756759c23a4cbd45b18d62d7a06cfcf65c7fffc4c5102bc25f3b8",
-        "ported_sha256": "81137c0822c6ce39cfe9ce8f6fcae8ffbac2273950d24d82309b2e593453706d",
+        "ported_sha256": "ae9dcff962761c58bde73c74ec590a45745603dd8046a0507a8539fd32c9627d",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedRowsConstruction.lean": {
         "source_sha256": "7e1a465b848fbad862f8b69c34e1debc1c027a04f1be865792208375d764b2fb",
-        "ported_sha256": "4e98e01563e6fbdaa0e7d6c5d2be465e25240adf476fafe766be57c78f588960",
+        "ported_sha256": "4719e4b14f2cd8d5fd3b8b8718dbbe644405f93e59a1cd2bfd85c15d817bab1a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedSearchConstruction.lean": {
         "source_sha256": "385f25b10fe678f8190a50291afaf85a77ee2658e7c1026bccfbe012e3c99525",
-        "ported_sha256": "bf83e5c629594eb0b8160bd0d29294276e1e1255d3781599ae9a08d0772b16b3",
+        "ported_sha256": "4ed26ea79ea7fe06b4b2320728649c833830976175986bde11b0600b771d48db",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/ResolvedSourceProfile.lean": {
         "source_sha256": "cbb57ceae3b0d0c282493b00dabe10e368bd985f40485b9f011b8896677dbb10",
-        "ported_sha256": "36f2f3c581fd441dd889247e654758970c8d712aae7b8e2b60a0e344cf6e1e9b",
+        "ported_sha256": "99bed51ed1472c8beaea180ece68237841b25d25116f164d249ef9775589d80a",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SelectorAssemblyStorage.lean": {
         "source_sha256": "509659e200539a9867e3a80f87bb1bad421813d38e883396ac3126e103cfac9a",
-        "ported_sha256": "671d3af8d827ce431fe343c32ed7d354b066f1e44044fc1efcdecd61cb047ff4",
+        "ported_sha256": "dc63a1c24ee8a860615d3d8f1ddccbfbe22df407e5fa6c2abb699ea39d90cc39",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SourceOperandConstruction.lean": {
         "source_sha256": "81de6171ef7f0e8bba61d0db540b344b9aefefc430a6087ed2c5a3e45d3b604b",
-        "ported_sha256": "de1d739db8fbb9fd91124322cf94db656867a8b4d7377342f877ce148fa319c8",
+        "ported_sha256": "4f8a4a208d1d0554be9b906440b41445e59e4ca76c0197f0b52e9d70a8854d8c",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SourceRepackConstruction.lean": {
         "source_sha256": "02ba8ebcfe425dc4220240033d7549b0efd7a45684b9536a6ca8cb6000426bfd",
-        "ported_sha256": "01f6e6250d51f6620335dc29aa11a2ca983ddf264cbf9974405764d2b07be94d",
+        "ported_sha256": "15121e0b86aa06028a5f619190ea7e8ace23f000a74203a159cd23d18db9b92e",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/StackPacketConstruction.lean": {
         "source_sha256": "05f897d3598960a806f68b65f2be6260c60fd5f95721a512816d23b4c5ac764b",
-        "ported_sha256": "84c41c932c7ecd9fdfde337ca15304b31ef73f4b4d6aa3580558ae916c935d50",
+        "ported_sha256": "1855432d6c701a301f5a75979a3741ec6a7e4a2b1f6ef7fcbf87975732a385c9",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportAssemblyStorage.lean": {
         "source_sha256": "71869ca550aacd8bb353bc862c6a5807f858f3af37308a3447631f599eecf624",
-        "ported_sha256": "1dbf3f3c8207851aeedb9bd2b0adb3d92f15ded42bb934771aa6ed116f45f64a",
+        "ported_sha256": "14889c9524076c91b63856571f87cd372b3c8891de26ad75f5f12f681ffe65ad",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportCandidateConstruction.lean": {
         "source_sha256": "d15b617423fe9c6e774449dae28c949553d69892c4c91343ded3ede5f0f42401",
-        "ported_sha256": "6e5f1e93ebe400a280d4cf4b6c18d4ecba07bddc862eb7eb3c6f6306e9059e4f",
+        "ported_sha256": "829aeb0063c1e1231c06db358582c1e049b4f21100cab7dd2a918f32f4d004c4",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportColdConstruction.lean": {
         "source_sha256": "4dea75e3c5a467bfb83c5b5ab0e5c22fba3d1076d65b2b7097e4ae36125d2485",
-        "ported_sha256": "ae48f9028b27d5eccb158cae6b7ba4c7a5ef72d1598d9bd47d12127c6712111d",
+        "ported_sha256": "ef211ef2b1ebafce448bbcdbe7e5f07edcf6a5eb841b4c92f6213a3d6653fbcb",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportCompleteStorage.lean": {
         "source_sha256": "d9348b1611174f5578f7655b4b83fb8a52cf6d3e31d777a1ad3800387484d3b3",
-        "ported_sha256": "86ba893f7598db9fefc2061b4f917e1f493e9c707c18b1f978903c44cdaeb13b",
+        "ported_sha256": "d46de28f32fb5443cc11a35627bbff7640082c0b1b127d4be7e4f9c526628317",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportControllerConstruction.lean": {
         "source_sha256": "b71544465a60f9264371bef26357c7b905e79defa53b231fa195fac1840f8e24",
-        "ported_sha256": "b1538729444e00ccf96afb1be3fb479fb880c9d476e3ed0e38a9537b84b42fb6",
+        "ported_sha256": "051be7a3000777a2eb7eec0fa7c8b73bb82799c559a924f513785e7d7c0d7b05",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportNativeConstruction.lean": {
         "source_sha256": "db3ac741ba6ca0fa10551371f1213f628bdb697dcdbca1ab7e59f02d1869ef59",
-        "ported_sha256": "b41c79db953363e667e4239105601b8114a018deab944d2cbd5228c6f517a5d5",
+        "ported_sha256": "e0f8129776f48b7b8851ba2db9273d04ecf79fcf803b3f64098721e21f90149e",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/SupportTraversalConstruction.lean": {
         "source_sha256": "8a990d5b89c08f9954402b6c56e1a72a6828e2b17027b3d5abebc15fb22f2ef5",
-        "ported_sha256": "6b82719326b130948898205d7557a55f62ba1a540add098eac991af2a2c7df52",
+        "ported_sha256": "2545d8c4f10b46ca2961e3f7fbff4f6169b92358ba45045ab7f16666310658cb",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/TemplateStreamConstruction.lean": {
         "source_sha256": "df0bccb2cfede3ac59f76464ca1a1966aa8f05970aa96d72c5230dc7f3f510e6",
-        "ported_sha256": "631694fd80d519828c5cf4ec8018db087adf95d1002b6cb64ffc8ad8037f16df",
+        "ported_sha256": "bc93ef81569a962f1e61cae9d764cc1465df2174e02bc5d2127a6918bd3333a8",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/UniformSourceConstruction.lean": {
         "source_sha256": "e0fd4095e5fccb9333740c0b3c2d7d2a8ef4696d1b8917c783a0090197383a7e",
-        "ported_sha256": "30ef6636b4a671956e52609af7daf4bc5edb5a9bb7d315a52da22e2737a865f5",
+        "ported_sha256": "db9f5e98dcb1949dd6009cffdbcb53f788f35c5d14546f5d4a0e34d33d198083",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/UniformSourceStorage.lean": {
         "source_sha256": "d03a4d2e0ee9d75e3eefe19df8ab4b23311bd34a47e56f07ce418d567bdbb95a",
-        "ported_sha256": "4d96e747a284c1dc7285ea795e8abe4dde32cafa97e5b111f1763d90af0f4d65",
+        "ported_sha256": "0b131d1b60791175da1991c33b5b0dfdc13dd3231ebc8b7c3a919fd6f8700ec5",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/WitnessEmissionConstruction.lean": {
         "source_sha256": "7695148610458280e4b5c698827c2d870263d97dc84a3b5f2c88614619c6e013",
-        "ported_sha256": "cf8e1b23ee16a5b71e17c3c8fb316f71f13b5cd6e061666353928f32704135a4",
+        "ported_sha256": "4ff7f354417e4a8ce7cabc374d777ca36ef8fe032c0a34a38a1e96aa4e1a701d",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/WordConstructionRecipe.lean": {
         "source_sha256": "10b32605d620adca187fbb8859b995ea8e8b15f9bc157d4f217b06d22e657075",
-        "ported_sha256": "4da8cfd68e3d9a1dc7569edb4c8f67ff0370ff82f14c26c90555152f2530a8bb",
+        "ported_sha256": "07a7324d45ac7ee1a664d781cc7d8b0a75118aa104ef3598c29523abb34e38f5",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Cost/WordConstructionStorage.lean": {
         "source_sha256": "d7de9f91ddc16e355137266ab219a0eda90f36531e17a32af6cd3205109ada62",
-        "ported_sha256": "11ab9a29ea8141d7ba2b56ced2ffbee5c118d5de4e7a272df976b331b8bfe4e6",
+        "ported_sha256": "36309ea77a753cc0d668dd9e730293e5a77ca98f7e82e964db419959917e53d9",
         "role": "new checked construction/recovery source",
-        "port_note": "Use the supported legacy source format at the retained Lean 4.35.0-rc3 pin, matching the checked cross-pin prototypes; ordered-CNF namespace substitution only."
+        "port_note": "Modern Lean module headers, explicit public/runtime/meta imports and exposed mathematical definitions at the retained pin; ordered-CNF adapter preserved. Module-specific proof elaboration repairs are recorded in the compatibility overlay."
       },
       "Controller/Graph/NativeMinor.lean": {
         "source_sha256": "ecf96c6fc9b00a79aa47868a4bff1d50015177362ed253c20e7db47b4c169388",
@@ -10051,6 +10051,163 @@
         "role": "append attained maximum physical execution proof",
         "port_note": "Append only the final weighted-execution namespace, preserving existing declarations."
       }
+    }
+  },
+  "module_compatibility": {
+    "base_commit": "ed774233fc9c15d5bac1a87e79ac2826ff75a34c",
+    "migrated_legacy_files": 140,
+    "scope": "Module system, import/declaration visibility and proof elaboration. No selected theorem, definition hole, permitted axiom or toolchain changes.",
+    "source_requirement_checker": "PalomarSubmission d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44 scripts/source_requirements.py",
+    "generated_definitions": "Lean.withExporting around ordinary checked Lean.addAndCompile; no skipped kernel checking.",
+    "array_proof_import": "import all Init.Data.List.ToArrayImpl in ForestDescriptorConstruction",
+    "audit_roots": {
+      "verified": 402,
+      "obsolete_nonexistent_aliases_removed": [
+        "Controller.Cost.ForestNegativeResidentConstruction.image",
+        "Controller.Cost.ForestNegativeResidentConstruction.work_bound"
+      ],
+      "actual_corresponding_results_already_listed": [
+        "Controller.Cost.ForestNegativeConstruction.form_image",
+        "Controller.Cost.ForestNegativeConstruction.form_work"
+      ]
+    },
+    "before_construction_owner_sha256": {
+      "Controller/Cost/AndRankConstruction.lean": "1a4d5a02e91c4515eeccbcf7eef2cd7b1ffa259dc9fb887b4dcf34b45e6aa1fc",
+      "Controller/Cost/AssemblyStorage.lean": "c92bb1bba359b4fe11d561e4856c9f7bfde7358bba5de63c567a960b9853f825",
+      "Controller/Cost/BasisColumnConstruction.lean": "582726ab81d2346d709a058f891bbcb79bd5650bffe450b4434266d3f695acfe",
+      "Controller/Cost/BasisConflictConstruction.lean": "4053afeb3b2a2530f9c5279fdd5b605b444b818efd860992ef69ab289bfa552b",
+      "Controller/Cost/BasisOutputConstruction.lean": "5215385624b939700a33f777a685ee601d188d25e4368f468d6e827b77d2c0ae",
+      "Controller/Cost/BasisOutputStorage.lean": "c945e67d330a4fec774e1f7f6d8f77ce040a07c704baabc93eb42b354be2581e",
+      "Controller/Cost/BasisProbeConstruction.lean": "b335ff57c759470f02887e44ebb9ff350d8b1c5fed047408d263b7b5ee129cec",
+      "Controller/Cost/BasisReturnConstruction.lean": "1c448334ec70047cbd5b8e3c5451c24c713d09de5cbb6e1c9b6d001017214e67",
+      "Controller/Cost/BasisRootConstruction.lean": "8ca08037964034574741ab422c8ad0482eb5f7d3530c1ea85eb470cbbb000b8a",
+      "Controller/Cost/BasisTableConstruction.lean": "ac6802aa72b0150bce1ab18aceda9dfd04747e5f3f434a1ad7ea7d9a1cb6c4c5",
+      "Controller/Cost/BasisTableStorage.lean": "2fc73d7b9e542b923299b8155eda43e0d42e7fc08c304719e8ea117ea353b6c8",
+      "Controller/Cost/BoundedConstructionStorage.lean": "343e75f16e16ebfe11697b825fed7abd20cf3167aa4b6eff626bd96dfb35c2c2",
+      "Controller/Cost/BoundedDetectorConstruction.lean": "b67d005b20833f79283209107c959b49aae570833c3dc3a96370824a09e6cd94",
+      "Controller/Cost/BoundedRun.lean": "16b33afb6027fdb8ad92bf040290733e0b14b7a60245f70acc8935011f9c3a74",
+      "Controller/Cost/ClauseProfileCounts.lean": "7d9814ff721519d57d4c356864716b774f3115f1fde3b3308fa3002fce134d53",
+      "Controller/Cost/ClauseProfileStorage.lean": "544bba9da72c1cac5aa61b78f2451f1bd19b557b74fac11e0ed0caed13946952",
+      "Controller/Cost/ConstructedExtensionsComplete.lean": "505fe772a82e771261d41a25f0dbd091bf826d911e64fbb38b66388584e0abf9",
+      "Controller/Cost/CriticalSourceBoot.lean": "0930f8d9c4feb2f8dec3dae3e7d676d6455961b8e696fec95f77a0175261176b",
+      "Controller/Cost/CriticalSourceRecovery.lean": "177f35786b9423ba1e01c324ab2135b6d65e2f9c30a98cded6b8c81cfb812665",
+      "Controller/Cost/CriticalSourceScan.lean": "2a759d4b25f2072ffcd8f4fe61457b9dfd6548cec60c0102080fb743be70c94b",
+      "Controller/Cost/DeriveBasisRecipe.lean": "a8b8444b526d5af1aab5d8b45baf8087a8ecec2d5487aca273a316363f4f79c4",
+      "Controller/Cost/DeriveExtensionRecipe.lean": "a5144965bc6b6a494719a64c8bb200f7bf9df0316aa44b71eb8e6d18550a41b8",
+      "Controller/Cost/DeriveWordRecipe.lean": "9c54a4ac1affc081f04b7c1e5726106acb882d98dac40284fabac7431687d878",
+      "Controller/Cost/ExtensionAlgorithmsComplete.lean": "419ed6be78aa857ce29507bb5b4ec3e07dcc01c7f3f4e567d83b9ba9ee2e9072",
+      "Controller/Cost/ExtensionConstructionRecipes.lean": "c038f0b9f32cccf31423fcc68a7a33e707f80571b79fd5d5d8a3328ac00ad72c",
+      "Controller/Cost/ExtensionConstructionStorage.lean": "eba156003e3168f211278f76598119c87773cd4423fb45e1e72cf9bbdd3bbe01",
+      "Controller/Cost/ExtensionNativeRecipes.lean": "acd72ded2653b5e06618e1fb6afd5bee3c8771b0c91a79918b34dc3190ffbc45",
+      "Controller/Cost/ForestAdmissibleConstruction.lean": "84703ed2d62ed7f52b9922094a8a86d6bee6213afe0356dadf927d84d5e24e33",
+      "Controller/Cost/ForestAdmissibleStorage.lean": "2cd6a80b2d295af5a294f52a5e5fe421d4e601e474bdfbbeaab79ff4a7944fb0",
+      "Controller/Cost/ForestCachedNegativeProgram.lean": "20cb2ed1ae8538a98d24d9b331f0f80495c56b7e9ba881e9b3fe9e07127c9f1a",
+      "Controller/Cost/ForestCachedQueries.lean": "7ea8811f163c991879976d5ee537317a9c74f6a2a68118432e4c804b3669874b",
+      "Controller/Cost/ForestCachedReferences.lean": "7b96e1053d702e6e769ba434f2b107e3edeb9abf38aa919082849959c8da01d5",
+      "Controller/Cost/ForestClauseProgramConstruction.lean": "727c3a14395e9f7144398b1c94dcdd18be21a3eb819c03bc79f48d19f201cecc",
+      "Controller/Cost/ForestClauseStorage.lean": "12976fdb7c5a1c800591ea7f9ae5d051986207a573dbe25db32bf50a6e5cc721",
+      "Controller/Cost/ForestCompilerComplete.lean": "c3e6aeb23828917ed3f3aa87e088042ed7f26fc4ff3775cb36cb160b693444e3",
+      "Controller/Cost/ForestCompilerDictionary.lean": "a1f6e31b4da45b2efc69df87d40299dcc99581c9ef3d994e4bc7676618f94daf",
+      "Controller/Cost/ForestCompilerMarks.lean": "64daf91017599f06b6460b3d33ee97144776c2b9f70d42fa66fdecb2a82e2bd7",
+      "Controller/Cost/ForestCompilerOffsets.lean": "577488f7804a908b3dede7693f18e431bebecb135502e33082815518a5304249",
+      "Controller/Cost/ForestCompilerQueries.lean": "50f3d1bb6ed64d84af81f3120ea9b01424e0c0de7d372b1b2f9ba498c443454b",
+      "Controller/Cost/ForestCompilerRanges.lean": "e50ff732ecb96521aa6fc8bcec977254c21494e91fe8b7928338e65fa6ecb623",
+      "Controller/Cost/ForestCompilerStorage.lean": "b64dff3d2b5c7bf39436c6057498d726823e0eb7975c99679963faffc95646d0",
+      "Controller/Cost/ForestConstructionRecipes.lean": "82acc5006840585d0b8fb0341778a19797c204d97abd9d9e81a84706b06446c7",
+      "Controller/Cost/ForestDescriptorConstruction.lean": "0164d12b89f70f3b953644a2eac847d4b686591fb306506b4bbd9b45166010ec",
+      "Controller/Cost/ForestDescriptorStorage.lean": "7d48978c3e2035ccd73f4fe563a633affa43f27956bc4865839eb2c474ca2488",
+      "Controller/Cost/ForestDirectoryConstruction.lean": "dca0b85a1959301c4a87361fb9c15f2665498000e91192e91342450a9589e15d",
+      "Controller/Cost/ForestDirectoryStorage.lean": "f92912b080ed7ad149a8dd3d3db2406d465e7715285237fe034fa4e4fd5c9a8e",
+      "Controller/Cost/ForestFixedControlRecipes.lean": "35a0fcfae7cb6d68a4189555507350cb8668676673378495e120c24ccf46bca9",
+      "Controller/Cost/ForestLiteralStorage.lean": "86cb13296fbeaf41c097a671abd3d5799b342eeb65b7897f89dfab211b039039",
+      "Controller/Cost/ForestMarkStorage.lean": "4abe86278ccd60a36b3f80ccc5e3a24c4b6eab3a6b2bddc208a4867758660d7b",
+      "Controller/Cost/ForestNegativeConstruction.lean": "40172e05a2b0d533d0df89307c62a3ed1799bc6bb20b4d053a03ee02421e76f3",
+      "Controller/Cost/ForestNegativeRecipes.lean": "2409b25a192a804796bf1c83dc925165c69056ed82421ee6a9d3f123cd4344b3",
+      "Controller/Cost/ForestNegativeStorage.lean": "d26e1e7a0401d059341a654f7b79af756d07ee196ef55329593dfb2c000ddd65",
+      "Controller/Cost/ForestPositiveConstruction.lean": "a43f0ce2892719c364415256805638b5cec75778d05244f32fc8e0c0a28b6e07",
+      "Controller/Cost/ForestPositiveStorage.lean": "f6e16b6ec0d24d49b4745a6d9d7ad38cc60527b3e285cac9e857d336129445c3",
+      "Controller/Cost/ForestPreparedNegative.lean": "cac2438501d3353b207af6ce27a36242beee1b9dba076e50e332c2e7da506947",
+      "Controller/Cost/ForestPreparedPositive.lean": "726df3ec17988366750bd140741f3287234add3a6318f5b9ce43c0d7928bf384",
+      "Controller/Cost/ForestPreparedPositiveStorage.lean": "4d2355b617ef90cc48235e7228f93f5ddf4e9ecb1b623e533be5963df2b8a74f",
+      "Controller/Cost/ForestQueryConstruction.lean": "d81a1718c022017e1b86d4c01ca1367d4110de012be39034ca31a6d450c318fb",
+      "Controller/Cost/ForestQueryPacketStorage.lean": "520f267cf19a8605e2f16a9168ffbe3124f9bc474df23e204c045c31d2b19fe3",
+      "Controller/Cost/ForestQueryPackets.lean": "b1c054eef2f8902a101ebcfed8bc67272c7b708c30027b6f54cba5b9afe855fd",
+      "Controller/Cost/ForestReferenceConstruction.lean": "520ea4768df5857b2d8b79d938ce7ee7d9c7ba768128961babd07c992446fe3a",
+      "Controller/Cost/ForestReferenceStorage.lean": "03185c6eba0dff00f592beb8c025c34473ab153c5e78c3009c0bc9186a87a7cb",
+      "Controller/Cost/ForestReferenceWork.lean": "46928fa8c55ed7f4ef984f23e5a01574d7d3f90bc904870b70ad9428847cde29",
+      "Controller/Cost/ForestRootClassification.lean": "009077756bf36f25688d27edb75def6f23e2449ea70befd4cc78590c4ec28b1a",
+      "Controller/Cost/ForestScalarNegativeConstruction.lean": "6a803d5dbc45da8e19ff0e9722450609332fd7448a3777d08dc0a1a03bb89535",
+      "Controller/Cost/ForestScalarStorage.lean": "45c2904cf11a367187d86e74947ff3b425a44ff83166d7025770d71a0e3f5145",
+      "Controller/Cost/ForestSelectionMachine.lean": "4bd7ef881a74d6bef3b86c53701263907218fd06e0b94a6181062ad496b2ae82",
+      "Controller/Cost/ForestSourceCompiler.lean": "1b75dd30dbea19037fab7eddd8e7cb46cb82a0c54faa5491bafca90e70521726",
+      "Controller/Cost/ForestSourceConstruction.lean": "346353be4555f8e0f56db2f1c3ccff5758150863278d8b8002d005bf4fbd7c0f",
+      "Controller/Cost/ForestSourceDriver.lean": "27b526316d8176e78d34e0162df9ce0d77d58ec11b6948e76940aef9cf9facc6",
+      "Controller/Cost/ForestSourceImage.lean": "c7063f9feb4c14292e9bba7f74239768fa96cc6f21f1a38f7800c14fcbd6e7a1",
+      "Controller/Cost/ForestSourceOptimal.lean": "872a1c1d7de4a9af72e590a47a3e7c6353c7b4f93f1ab173836ce9b3bd2ea231",
+      "Controller/Cost/ForestSourcePreparationStorage.lean": "03a79b711bfb3b0a4415bdabb3fef25ee63d6585cad65a09fe81ae7c4e8ba75d",
+      "Controller/Cost/ForestSourceResources.lean": "38e031fe3940d117f40714ddcb49c07f56dbe365a39552faed0d6250c4f4fb83",
+      "Controller/Cost/ForestSourceStorage.lean": "e0afbd304d489665c87aad1596690cc41187e64680084e537cace5243058f0a6",
+      "Controller/Cost/ForestStreamingConstruction.lean": "c37893b33a97851d09592db06d054ae0426ceba938cd7e34fd5e23788007b92f",
+      "Controller/Cost/ForestStreamingStorage.lean": "d291603580aed4f29719f01b22e5e1480ad2cd093d8b2eb40c3eee1260174156",
+      "Controller/Cost/ForestWeightedCold.lean": "bb981c0dac980746c8769f6755c157930167ea43aa079b6f8c1137816db49f17",
+      "Controller/Cost/FullDictionaryProfile.lean": "1f24d7d93aa98bfcc88d7a96d178528401f75395fc5e4b370fce24fdf0b23b06",
+      "Controller/Cost/NativeCircuitConstruction.lean": "e8b0b17d05ff3cf1142988bdc064a27f0aa28231ae5a8bd3b3b615a10469b195",
+      "Controller/Cost/NativeConstructionStorage.lean": "148329423f15df6d67aa37a5761e35bc446f57af4e55c466a1988eabdcb019bc",
+      "Controller/Cost/NativeContinuationConstruction.lean": "d215ebb804a8b9635d21c00ecc59a33a394b3ec243607cc7f82c8de5144b5ba2",
+      "Controller/Cost/NativeFinishStorage.lean": "1ace2a34b666383d47ad21f144472e07f07ed8339d3da68b12a358b7417984d3",
+      "Controller/Cost/NativeGateConstruction.lean": "724a65fd61810f655395edbfaae7723244c836065ba3202903821da5249ad13d",
+      "Controller/Cost/NativeQueryConstruction.lean": "d6baeb4b4e9dda32344bbbb1da61e278c118c8e310c091faa6636c5884e5ee4b",
+      "Controller/Cost/NativeQueryStorage.lean": "5e0b6a92ca50264c658df53c16c035c35da337c8bbab073f0069d7f7258af3da",
+      "Controller/Cost/NativeRootConstruction.lean": "ecb337dc15bb6c589e4f11838156c367298471ddc644c44a2595a429612dd386",
+      "Controller/Cost/NativeSuccessConstruction.lean": "a31398d289c6b27e9378b9a5626bfcd2e11e46c8c723b411b61c8b50567453be",
+      "Controller/Cost/NativeSuccessStorage.lean": "17fe6f5f2b15234abb979e15fec75b875126e2f390b2adbb80d19fd14c166486",
+      "Controller/Cost/PacketTransferStorage.lean": "3cb31a1388858ff4749a1a57c143f733527936382ce09ed83c8bed5db8ac21f0",
+      "Controller/Cost/PlanConstructionStorage.lean": "68fc0465627ba1c92f1695f2f32b568e7c1f2a815c17fc3483a18034d2fd0f1c",
+      "Controller/Cost/ProgramRelocationConstruction.lean": "7927b398c424b8b6533f98044c26d7fd864e94960d5148ec2339e661fff92a41",
+      "Controller/Cost/ProperBasisConstructionRecipes.lean": "c099b18cface392963aca46f1d562a119ade89d6e9a1d8f2fa27cb1b14e780b8",
+      "Controller/Cost/ProperDetectorConstruction.lean": "864ccc35903bab5bda4669ccc0106f634099c11603cc1eb8536d5af847e26779",
+      "Controller/Cost/ProperNativeConstruction.lean": "79a570461a156576ee857abfa209ae755a04ceb48b8435688d134dd6d8c5d283",
+      "Controller/Cost/ProperNativeStorage.lean": "08b8f26a687877adeb82d11ed3422ff690f2a386f80dd762be8400927be73d63",
+      "Controller/Cost/QuietQueryConstruction.lean": "5308b3bd2a48fbbc6c92a8c365fa5592cdd27ec3d10de83d471f6d70c7891e15",
+      "Controller/Cost/QuietQueryStorage.lean": "ec06918361b211a5f0cfa0239f2fee537fc3ecf473cd5d7755eda3be57c967e3",
+      "Controller/Cost/ResidentSolverConstruction.lean": "99fdac6bce5016168c146458d7dd6a5cf4a3ef7b286a3989d7887fd475ff8e11",
+      "Controller/Cost/ResidentSolverStorage.lean": "21559260ad88117ea0f5bb728fcf0962c34b97d0a0099b54d1b88a096bd95cca",
+      "Controller/Cost/ResolvedBodyConstruction.lean": "66d3b6d0f2e11e86038200401d519a64c7bf273a2d26e1350f7f7a2c8f3bfd5b",
+      "Controller/Cost/ResolvedCallbackConstruction.lean": "5950616daf830a3206d713489a0ef5ffb2f5a1846c1f8c3a38a47057a0568d8e",
+      "Controller/Cost/ResolvedFrontConstruction.lean": "caa538d95198b80a5899fcdacb1121ade1bd486204919a3697e8615db1fbc13a",
+      "Controller/Cost/ResolvedFrontStorage.lean": "7a3cf2ea3a30c64fdd81d83268150881a9e97309b6f80bdccb0f5351dd28759b",
+      "Controller/Cost/ResolvedMetadataStorage.lean": "48b3347989f07e9225340d4642eea2061032396b4016254298ae044abfff0670",
+      "Controller/Cost/ResolvedNativeLayoutConstruction.lean": "9a8e88d2c8c75295fe0b554323f766b6a6e0ae35ddfa73a44bbb2b60a383e217",
+      "Controller/Cost/ResolvedNativeLayoutShape.lean": "bbcc0b18d72809b632f62a5283d50c3ba0dd2c81dedd666d42a8fabf6efd2f08",
+      "Controller/Cost/ResolvedNativeQueryConstruction.lean": "7150e5eb1fb8e871a589abd54eb973a8cd39c0c927712c076d4bab1a29ba8747",
+      "Controller/Cost/ResolvedNativeSourceConstruction.lean": "ff7484fb021c88dcea627f437cb3ae089927a05c4a54e6bdd15cc3fd467b88e8",
+      "Controller/Cost/ResolvedNodeConstruction.lean": "7bf9defec168ebd9f1ac99b578404b49f6e1e778201e72aca69ea4112cffabae",
+      "Controller/Cost/ResolvedPlanConstruction.lean": "3d08d2b54ff61ac69f1730c4da583ea74c8071284766087a86784cbe96c5adf5",
+      "Controller/Cost/ResolvedPlanProducer.lean": "7692f4c72e20f0223cc29915da5e43228d41c11d5876d0bd173f71472eb0696e",
+      "Controller/Cost/ResolvedQueryStorage.lean": "81137c0822c6ce39cfe9ce8f6fcae8ffbac2273950d24d82309b2e593453706d",
+      "Controller/Cost/ResolvedRowsConstruction.lean": "4e98e01563e6fbdaa0e7d6c5d2be465e25240adf476fafe766be57c78f588960",
+      "Controller/Cost/ResolvedSearchConstruction.lean": "bf83e5c629594eb0b8160bd0d29294276e1e1255d3781599ae9a08d0772b16b3",
+      "Controller/Cost/ResolvedSourceProfile.lean": "36f2f3c581fd441dd889247e654758970c8d712aae7b8e2b60a0e344cf6e1e9b",
+      "Controller/Cost/SelectorAssemblyStorage.lean": "671d3af8d827ce431fe343c32ed7d354b066f1e44044fc1efcdecd61cb047ff4",
+      "Controller/Cost/SourceOperandConstruction.lean": "de1d739db8fbb9fd91124322cf94db656867a8b4d7377342f877ce148fa319c8",
+      "Controller/Cost/SourceRepackConstruction.lean": "01f6e6250d51f6620335dc29aa11a2ca983ddf264cbf9974405764d2b07be94d",
+      "Controller/Cost/StackPacketConstruction.lean": "84c41c932c7ecd9fdfde337ca15304b31ef73f4b4d6aa3580558ae916c935d50",
+      "Controller/Cost/SupportAssemblyStorage.lean": "1dbf3f3c8207851aeedb9bd2b0adb3d92f15ded42bb934771aa6ed116f45f64a",
+      "Controller/Cost/SupportCandidateConstruction.lean": "6e5f1e93ebe400a280d4cf4b6c18d4ecba07bddc862eb7eb3c6f6306e9059e4f",
+      "Controller/Cost/SupportColdConstruction.lean": "ae48f9028b27d5eccb158cae6b7ba4c7a5ef72d1598d9bd47d12127c6712111d",
+      "Controller/Cost/SupportCompleteStorage.lean": "86ba893f7598db9fefc2061b4f917e1f493e9c707c18b1f978903c44cdaeb13b",
+      "Controller/Cost/SupportControllerConstruction.lean": "b1538729444e00ccf96afb1be3fb479fb880c9d476e3ed0e38a9537b84b42fb6",
+      "Controller/Cost/SupportNativeConstruction.lean": "b41c79db953363e667e4239105601b8114a018deab944d2cbd5228c6f517a5d5",
+      "Controller/Cost/SupportTraversalConstruction.lean": "6b82719326b130948898205d7557a55f62ba1a540add098eac991af2a2c7df52",
+      "Controller/Cost/TemplateStreamConstruction.lean": "631694fd80d519828c5cf4ec8018db087adf95d1002b6cb64ffc8ad8037f16df",
+      "Controller/Cost/UniformSourceConstruction.lean": "30ef6636b4a671956e52609af7daf4bc5edb5a9bb7d315a52da22e2737a865f5",
+      "Controller/Cost/UniformSourceStorage.lean": "4d96e747a284c1dc7285ea795e8abe4dde32cafa97e5b111f1763d90af0f4d65",
+      "Controller/Cost/WitnessEmissionConstruction.lean": "cf8e1b23ee16a5b71e17c3c8fb316f71f13b5cd6e061666353928f32704135a4",
+      "Controller/Cost/WordConstructionRecipe.lean": "4da8cfd68e3d9a1dc7569edb4c8f67ff0370ff82f14c26c90555152f2530a8bb",
+      "Controller/Cost/WordConstructionStorage.lean": "11ab9a29ea8141d7ba2b56ced2ffbee5c118d5de4e7a272df976b331b8bfe4e6",
+      "Controller/Graph/NativeMinor.lean": "1b32d07aa6174435903f45369d592cf69111e06f9a86114c3cc13d04a4802761",
+      "Controller/Optimization/Weights.lean": "8d408750cfa7c2edd936c93edaa81f43f157bc05cdcec0a1b1153ce7a49454d9",
+      "Controller/Cost/ForestOriginalSemantics.lean": "5974259e38687fc276082dd2266d241eaaff653f9e5605f3578633f3005c22d8"
     }
   }
 }

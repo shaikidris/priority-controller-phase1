@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SupportAssemblyStorage
-import Controller.Cost.ResolvedSearchConstruction
+public import Controller.Cost.SupportAssemblyStorage
+public import Controller.Cost.ResolvedSearchConstruction
+
+@[expose] public section
+
 
 /-! Source-driven selector assembly retains both layout materializations and
 its shared returning/native callbacks. Word-list formation traces include every

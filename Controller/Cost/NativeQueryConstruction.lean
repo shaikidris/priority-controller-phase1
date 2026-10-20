@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeSuccessConstruction
-import Controller.Cost.QuietQueryConstruction
+public import Controller.Cost.NativeSuccessConstruction
+public import Controller.Cost.QuietQueryConstruction
+
+@[expose] public section
+
 
 /-! Native-emitting resident query construction shares the charged clause
 prefix and fixed normalizer/FIFO stream with the quiet query. The successful

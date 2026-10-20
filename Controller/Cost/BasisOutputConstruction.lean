@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisReturnConstruction
+public import Controller.Cost.BasisReturnConstruction
+
+@[expose] public section
+
 
 /-! Root occurrences share a proper-basis table. The schedule depends on the
 root count and source directory cursor, with one explicit witness emitter. -/

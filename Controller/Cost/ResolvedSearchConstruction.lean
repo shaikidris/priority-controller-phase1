@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedBodyConstruction
-import Controller.Cost.ResolvedNativeSourceConstruction
+public import Controller.Cost.ResolvedBodyConstruction
+public import Controller.Cost.ResolvedNativeSourceConstruction
+
+@[expose] public section
+
 
 /-! One source-driven healthy-one image shares the selector body and the
 native emission continuation. Provisional layout, relocation and concatenation

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.AssemblyStorage
-import Controller.Cost.BasisOutputConstruction
+public import Controller.Cost.AssemblyStorage
+public import Controller.Cost.BasisOutputConstruction
+
+@[expose] public section
+
 
 /-! Source-indexed proper-basis witness and root schedules. Values are emitted
 by fetched loads; instruction construction uses only offsets and channel IDs. -/

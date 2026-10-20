@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestDescriptorConstruction
+public import Controller.Cost.ForestDescriptorConstruction
+
+@[expose] public section
+
 
 /-! Retained construction storage of the executed descriptor writer. The
 measure charges descriptor-list records and generated instruction backing at

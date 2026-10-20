@@ -1,8 +1,15 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.DeriveExtensionRecipe
-import Controller.Cost.NativeContinuationConstruction
-import Controller.Cost.SharedQueryDispatch
-import Controller.Cost.ResidentSolverConstruction
+public meta import Controller.Cost.DeriveExtensionRecipe
+public import Controller.Cost.NativeContinuationConstruction
+public import Controller.Cost.SharedQueryDispatch
+public import Controller.Cost.ResidentSolverConstruction
+
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Fixed first-order blocks around the shared native model continuation. -/
 set_option maxHeartbeats 2000000

@@ -1,6 +1,4 @@
 {
-  "status": "UNCHANGED_COMPANION_IMPORT_CONE_THREE_KERNEL_PASS_INHERITED",
-  "original_report_sha256": "24f28bf201811be5715f2296295c90ae996d896f15ecb7f55cc6899f03c97c58",
   "checked_input_sources": {
     "Controller/Basic/Admissible.lean": "12a47f957ffb9857ea6ffe51b47f1f757e0970ab40e161cb2db1c51b1c979d47",
     "Controller/Basic/Assignments.lean": "a3989253f4732b1d6c21253018b705bebf144a369c238aead44e89887790eaa6",
@@ -1059,11 +1057,15 @@
     "Controller/Resolution/Soundness.lean": "c389a20e47d03d3351d7db5752fa40907d601788a1b4e19dc43f1aad0861753d",
     "Controller/Resolution/Trace.lean": "599e2bbeea551572aff1f0f5229ba18c989307440814d4966bbb3db5e2488ba1",
     "Phase1/Audit/Construction.lean": "18c455a883bb360b56f8a432f485c8369075a4c4c7d71864e851ca42b7fd3738",
-    "lean-toolchain": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47",
-    "lakefile.toml": "d9bc74645946342e8fb61aaacbec74544f084dd6c8db8f256f6aa9021604d4da",
     "lake-manifest.json": "d75105ad02aee3355357e8fb32011b273450141ae3f0cd7dce3d750a3be266b0",
+    "lakefile.toml": "d9bc74645946342e8fb61aaacbec74544f084dd6c8db8f256f6aa9021604d4da",
+    "lean-toolchain": "bc84812c94489d1e3e191baa1dc10d5eb684382d7fe9d2a5ab085e72c1c67e47",
     "provenance/construction-audit-targets.json": "698e22b212cbabf63ff2417b29092875a416e14e695578165af3dc4e6d8d22d9"
   },
+  "current_repair_receipt": "module-compatibility126.json",
   "excluded_unimported_surfaces": "The Phase1 registry wrappers, Audit.Signatures and umbrella modules are outside Phase1.Audit.Construction imports. Affected entry comparisons and the final default build have separate receipts.",
-  "protected_Linux_rehearsal": false
+  "original_report_sha256": "24f28bf201811be5715f2296295c90ae996d896f15ecb7f55cc6899f03c97c58",
+  "protected_Linux_rehearsal": false,
+  "record_role": "Historical source-bound evidence for public parent ed774233fc9c15d5bac1a87e79ac2826ff75a34c",
+  "status": "UNCHANGED_COMPANION_IMPORT_CONE_THREE_KERNEL_PASS_INHERITED"
 }

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisColumnConstruction
+public import Controller.Cost.BasisColumnConstruction
+
+@[expose] public section
+
 
 /-! Contradiction-table instructions are constructed from source sign-cell
 addresses. Their flags are computed by fetched reads, comparisons and stores. -/

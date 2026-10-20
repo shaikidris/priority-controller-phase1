@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedSourceProfile
+public import Controller.Cost.ResolvedSourceProfile
+
+@[expose] public section
+
 
 /-! Source-order literal rows for the fixed placement template. All fields are
 original node IDs, guard labels or polarities. Runtime selector choices and

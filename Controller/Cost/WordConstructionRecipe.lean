@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestZeroResident
+public import Controller.Cost.ForestZeroResident
+
+@[expose] public section
+
 
 /-! First-order word-construction recipes. Instance-dependent operands are
 read from an explicit finite environment and formed using the displayed

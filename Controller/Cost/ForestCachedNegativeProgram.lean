@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerQueries
-import Controller.Cost.ForestZeroSourcePlan
+public import Controller.Cost.ForestCompilerQueries
+public import Controller.Cost.ForestZeroSourcePlan
+
+@[expose] public section
+
 
 /-! Native negative-query code generated from cached source metadata. The
 constructor uses local counts and coverage from the epoch dictionary. It does
@@ -81,7 +86,6 @@ theorem chunks_eq (heap : Array (Word width)) (layout : Layout ambient heap.size
   unfold chunks ForestZeroResident.chunks
   dsimp only [referenceSummary, heapEnd, constructorDictionary, constructorFormulaBackend, backendLayout]
   rw [base]
-  rfl
 
 /-- One query uses the shared arrays and the resulting cached counts directly.
 The dense projection used by the proof does not occur in this definition. -/

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerStorage
-import Controller.Cost.ForestCompilerRanges
+public import Controller.Cost.ForestCompilerStorage
+public import Controller.Cost.ForestCompilerRanges
+
+@[expose] public section
+
 
 /-! Complete original-source forest construction contract. The source/list
 construction clock, retained construction words and fetched execution use

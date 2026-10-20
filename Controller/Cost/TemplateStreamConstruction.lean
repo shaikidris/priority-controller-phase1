@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.WordConstructionStorage
-import Controller.Cost.CompilerAppendTrace
-import Mathlib.Tactic.Linarith
+public import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.CompilerAppendTrace
+public import Mathlib.Tactic.Linarith
+
+@[expose] public section
+
 
 /-! Construction of a stream of fixed templates over supplied scalar records.
 Record production is charged by the caller. Every record is read through its

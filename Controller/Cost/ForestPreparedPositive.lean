@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestPositiveConstruction
-import Controller.Cost.ForestFixedControlRecipes
+public import Controller.Cost.ForestPositiveConstruction
+public import Controller.Cost.ForestFixedControlRecipes
+
+@[expose] public section
+
 
 /-! Positive image assembly from the executed selector state and scalar source
 counts. Graphs and the recursive selector occur only in refinement theorems. -/

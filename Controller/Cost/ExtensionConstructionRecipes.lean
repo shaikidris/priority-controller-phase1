@@ -1,7 +1,14 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.DeriveExtensionRecipe
-import Controller.Extensions.BoundedNativeDetector
-import Controller.Extensions.ProperBasisComplete
+public meta import Controller.Cost.DeriveExtensionRecipe
+public import Controller.Extensions.BoundedNativeDetector
+public import Controller.Extensions.ProperBasisComplete
+
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! First-order construction recipes for the fixed extension-controller blocks.
 All varying addresses and counts are explicit numeric input slots. -/

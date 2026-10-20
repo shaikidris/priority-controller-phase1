@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceResources
+public import Controller.Cost.ForestSourceResources
+
+@[expose] public section
+
 
 /-! Retained program storage for the actual source-only forest constructor.
 Program words count the generated instruction backing, separately from fetched

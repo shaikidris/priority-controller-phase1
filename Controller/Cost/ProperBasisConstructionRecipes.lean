@@ -1,7 +1,14 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.DeriveBasisRecipe
-import Controller.Cost.UniformSourceConstruction
-import Controller.Extensions.ProperBasisComplete
+public meta import Controller.Cost.DeriveBasisRecipe
+public import Controller.Cost.UniformSourceConstruction
+public import Controller.Extensions.ProperBasisComplete
+
+public import Controller.Cost.WordConstructionRecipe
+
+@[expose] public section
+
 
 /-! Fixed proper-basis kernels use explicit scalar fields, including the value
 of a typed source index. Recipe identity keeps the original finite-index types. -/
