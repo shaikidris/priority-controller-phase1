@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P06/formalization.yaml",
+  "comparator_path": "entries/P06/comparator.json",
+  "input_sha256": {
+    "metadata": "91253f30b966068145f9ba37da4e3a22d4367b52ef51450612a2b8d579568b3d",
+    "comparator": "5386d27d98384ea65b065bddad77069a335eef7d1d866e33c1a7299c83f94b50",
+    "challenge": "c004aca2f294292355ff5300260c04dfebe73dd0f0aa494c07fdd63b09fb816a"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "counts",
+      "theorems": [
+        "Controller.Boundaries.criticalSets_card_one",
+        "Controller.Boundaries.criticalSets_card_many"
+      ],
+      "abstract_quotes": [
+        "Critical detecting-set counts"
+      ],
+      "account": "One-bus and many-bus critical-family cardinalities have the displayed exact exponential values."
+    },
+    {
+      "id": "physical-tests",
+      "theorems": [
+        "Controller.Boundaries.physical_test_list_lower_bound"
+      ],
+      "abstract_quotes": [
+        "physical test-list",
+        "lower bounds"
+      ],
+      "account": "Every universal physical test list has at least the critical-family cardinality."
+    },
+    {
+      "id": "queries",
+      "theorems": [
+        "Controller.Boundaries.deterministic_one_bus",
+        "Controller.Boundaries.deterministic_many_buses",
+        "Controller.Boundaries.randomized_mixture_lower_bound"
+      ],
+      "abstract_quotes": [
+        "black-box query lower bounds"
+      ],
+      "account": "Deterministic and finite randomized adaptive query models obey the displayed critical-family bounds."
+    },
+    {
+      "id": "recovery",
+      "theorems": [
+        "Controller.Cost.CriticalSets.cycle_complete",
+        "Controller.Cost.CriticalSets.cycle_unique",
+        "Controller.Cost.CriticalSets.critical_complete",
+        "Controller.Cost.CriticalSourceScan.critical_physical_recovery",
+        "Controller.Cost.CriticalSourceScan.cycle_physical_recovery"
+      ],
+      "abstract_quotes": [
+        "critical-set and cycle recovery through a fixed source-reading program"
+      ],
+      "account": "Cycle uniqueness and matched recovery executions are supplemented by fixed source-reading physical critical/cycle recovery."
+    },
+    {
+      "id": "treewidth",
+      "theorems": [
+        "Controller.Graph.NativeWidth.primal_treewidth_lower",
+        "Controller.Graph.NativeWidth.incidence_treewidth_lower",
+        "Controller.Graph.BoundedNativeWidth.primal_treewidth_lower",
+        "Controller.Graph.BoundedNativeWidth.incidence_treewidth_lower"
+      ],
+      "abstract_quotes": [
+        "Primal/incidence treewidth bounds concern specification and complete binary-expanded native CNF graphs"
+      ],
+      "account": "The specification and binary-expanded native primal and incidence graphs each have the stated minor-based lower bound."
+    },
+    {
+      "id": "cover-width",
+      "theorems": [
+        "Controller.Graph.CoverCircuit.linear_width_obstruction"
+      ],
+      "abstract_quotes": [
+        "conditional cover-layout theorem bounds treewidth, net-cutwidth and block width"
+      ],
+      "account": "The cover-layout width inequalities retain expansion and bounded-degree premises."
+    },
+    {
+      "id": "backdoors",
+      "theorems": [
+        "Controller.Boundaries.Backdoors.native_backdoor_lower_bound",
+        "Controller.Boundaries.Backdoors.specification_backdoor_lower_bound"
+      ],
+      "abstract_quotes": [
+        "Strong and deletion backdoors into Horn, renamable-Horn and two-CNF",
+        "cardinality at least the bus count for both native and specification formulas"
+      ],
+      "account": "Each of the two syntactic backdoor theorems supplies the bus-count bound for every displayed base class."
+    }
+  ]
+}

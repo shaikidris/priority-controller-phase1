@@ -1,9 +1,12 @@
 version: v0.4
 project:
   name: Critical recovery, query lower bounds and binary-native width
-  description: Critical-set and cycle recovery through a fixed source-reading program, black-box
-    query obstructions, and primal/incidence width lower bounds for both specification and complete
-    binary-expanded native CNF graphs.
+  description: Critical detecting-set counts, physical test-list and black-box query lower bounds,
+    and critical-set and cycle recovery through a fixed source-reading program. Primal/incidence
+    treewidth bounds concern specification and complete binary-expanded native CNF graphs; a
+    conditional cover-layout theorem bounds treewidth, net-cutwidth and block width. Strong and
+    deletion backdoors into Horn, renamable-Horn and two-CNF have cardinality at least the bus
+    count for both native and specification formulas.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
