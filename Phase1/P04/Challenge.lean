@@ -20,71 +20,70 @@ public import Mathlib.Tactic.FinCases
 public import Mathlib.Tactic.IntervalCases
 public import Std.Sat.CNF
 open Lean in
-meta partial def sourceDependencyOrder (infos : Std.HashMap Name ConstantInfo) (name : Name) : StateM (NameSet × Array Name) Unit := do
-  if (← get).1.contains name then return
-  let some info := infos[name]? | return
-  modify fun (seen, order) => (seen.insert name, order)
-  let used := info.type.foldConsts #[] fun n ns => ns.push n
-  let used := (info.value? (allowOpaque := true)).map (fun value => value.foldConsts used fun n ns => ns.push n) |>.getD used
-  for dependency in used do sourceDependencyOrder infos dependency
-  modify fun (seen, order) => (seen, order.push name)
+meta partial def sord (i:Std.HashMap Name ConstantInfo) (n:Name):StateM (NameSet × Array Name) Unit:=do
+  if (← get).1.contains n then return
+  let some c:=i[n]? | return
+  modify fun (S,o)=> (S.insert n,o)
+  let u:=c.type.foldConsts #[] fun n ns=> ns.push n
+  let u:= (c.value? (allowOpaque:=true)).map (fun v=> v.foldConsts u fun n ns=> ns.push n) |>.getD u
+  for d in u do sord i d
+  modify fun (S,o)=> (S,o.push n)
 open Lean Elab Command in
-elab "ctx " source:str : command => do
-  let root := (← getOptions).get `sourceContextRoot ""
-  if root.isEmpty then
-    let original := (← getEnv).mainModule
-    modifyScope fun scope => { scope with opts := scope.opts.set `sourceContextRoot original.toString }
-  let checked := (← getEnv).toKernelEnv
+elab "ctx " s:str:command=> do
+  let r:= (← getOptions).get `r ""
+  if r.isEmpty then
+    let m:= (← getEnv).mainModule
+    modifyScope fun q=> { q with opts:=q.opts.set `r m.toString}
+  let k:= (← getEnv).toKernelEnv
   let mut env ← getEnv
-  let locals := checked.constants.toList.filter fun (name, _) => env.getModuleIdxFor? name |>.isNone
-  env := { env with base.private.constants := checked.constants, base.public.constants := checked.constants, asyncConstsMap := default, localRealizationCtxMap := {} }
-  env := env.setMainModule ("Controller." ++ source.getString).toName
-  env := Meta.auxLemmasExt.setState env {}
-  env := (private_decl% Lean.Meta.Match.matcherExt).setState env {}
-  env := (private_decl% Lean.Meta.sparseCasesOnCacheExt).setState env {}
-  let infos := locals.foldl (fun table (name, info) => table.insert name info) ({} : Std.HashMap Name ConstantInfo)
-  let (_, (_, order)) := (locals.forM fun (name, _) => sourceDependencyOrder infos name).run ({}, #[])
-  for name in order do env ← env.enableRealizationsForConst (← getOptions) name
+  let l:=k.constants.toList.filter fun (n,_)=> env.getModuleIdxFor? n |>.isNone
+  env:= { env with base.private.constants:=k.constants,base.public.constants:=k.constants,asyncConstsMap:=default,localRealizationCtxMap:= {}}
+  env:=env.setMainModule ("Controller." ++s.getString).toName
+  env:=Meta.auxLemmasExt.setState env {}
+  env:= (private_decl% Lean.Meta.Match.matcherExt).setState env {}
+  env:= (private_decl% Lean.Meta.sparseCasesOnCacheExt).setState env {}
+  let i:=l.foldl (fun t (n,c)=> t.insert n c) ({}:Std.HashMap Name ConstantInfo)
+  let (_, (_,o)):= (l.forM fun (n,_)=> sord i n).run ({}, #[])
+  for n in o do env ← env.enableRealizationsForConst (← getOptions) n
   setEnv env
 open Lean Elab Command in
-elab "end_ctx" : command => do
-  let root := (← getOptions).get `sourceContextRoot ""
-  if root.isEmpty then throwError "missing original Challenge module"
-  modifyEnv (·.setMainModule root.toName)
+elab "end_ctx" :command=> do
+  let r:= (← getOptions).get `r ""
+  if r.isEmpty then throwError "missing root"
+  modifyEnv (·.setMainModule r.toName)
 
 open Lean Elab Tactic in
-elab "source_aux_index " index:num : tactic => do
-  let current ← getDeclNGen
-  unless current.parentIdxs == [1] do throwError "unexpected source auxiliary scope"
-  setDeclNGen { current with idx := index.getNat }
-/- Omit editor states, preserving checked proof terms. -/
+elab "aux " x:num:tactic=> do
+  let a ← getDeclNGen
+  unless a.parentIdxs== [1] do throwError "aux scope"
+  setDeclNGen { a with idx:=x.getNat}
+/- Omit editor states, preserving k proof terms. -/
 open Lean Elab Tactic in
-elab "compact_proof " t:tacticSeq : tactic => withEnableInfoTree false (evalTactic t)
+elab "cp " t:tacticSeq:tactic=> withEnableInfoTree false (evalTactic t)
 @[expose] public section
 noncomputable section
 ctx "Basic.Assignments"
 namespace Controller
 /-!
-# Formula-forest execution and maximum weight
-The grammar,state transitions,resource measures and mathematical predicates
-are explicit. Definition holes identify only implementation witnesses;the
-selected universal theorems constrain their executions or returned results.
-Code-construction cost is separate from fetched execution.
+# Forest detection and optimal weight
+Instruction execution and nonnegative-weight maxima for supplied formula forests.
+Physical attainment assumes healthy-zero outputs. Construction certificates are
+in the proof library.
 -/
 section
 abbrev Channel (n:ℕ):=Fin n
 abbrev Assignment (n:ℕ):=Channel n→ Bool
 def assignmentOfSet {n:ℕ} (K:Finset (Channel n)):Assignment n:=fun i=> decide (i ∈ K)
 end ctx "Cost.Model" namespace Cost
-abbrev Word (width : Nat) := Fin (@HPow.hPow.{0, 0, 0} Nat Nat Nat (@instHPow.{0, 0} Nat Nat (@instPowNat.{0} Nat instNatPowNat)) (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) width)
+abbrev Word (width:Nat):=Fin (@HPow.hPow.{0,0,0} Nat Nat Nat (@instHPow.{0,0} Nat Nat (@instPowNat.{0} Nat instNatPowNat)) (@OfNat.ofNat.{0} Nat (nat_lit 2) (instOfNatNat (nat_lit 2))) width)
 def word (width value:Nat):Word width:= ⟨value % ((@HPow.hPow Nat Nat Nat (@instHPow Nat Nat (@instPowNat Nat instNatPowNat)) 2 width)),Nat.mod_lt _ (Nat.two_pow_pos width)⟩
 structure State (width registers:Nat) where
   (reg:Fin registers→ Word width) (heap:Array (Word width)) (stack:List (Word width)) (output:List (Word width)) (pc:Word width) (halted:Bool)
 def State.liveWords (s:State width registers):Nat:=registers+s.heap.size+s.stack.length+s.output.length+1
 inductive Instruction (width registers:Nat) where
   | constant (dst:Fin registers) (value:Word width) | copy (dst src:Fin registers) | add (dst left right:Fin registers) | xor (dst left right:Fin registers) | load (dst address:Fin registers) | store (address src:Fin registers) | allocate (src:Fin registers) | release | push (src:Fin registers) | pop (dst:Fin registers) | emit (src:Fin registers) | branchZero (src:Fin registers) (target:Word width) | halt
-def Instruction.arithmeticOps : Instruction width registers → Nat
-  | .add .. | .xor .. => 1 | _ => 0
+def Instruction.arithmeticOps:Instruction width registers→ Nat
+  | .add .. | .xor .. => 1 | _=> 0
 def State.put (s:State width registers) (dst:Fin registers) (value:Word width):State width registers:= { s with reg:=fun i=> if i=dst then value else s.reg i}
 def State.advance (s:State width registers):State width registers:= { s with pc:=word width (s.pc.val+1)}
 def step (instruction:Instruction width registers) (s:State width registers):Option (State width registers):=
@@ -143,8 +142,8 @@ variable {n:ℕ}
 def childIndex (g0:DAG n) (parent:Fin g0.nodeCount) (child:Fin parent.val):Fin g0.nodeCount:= ⟨child.val,Nat.lt_trans child.isLt parent.isLt⟩
 theorem childIndex_lt (g0:DAG n) (parent:Fin g0.nodeCount) (child:Fin parent.val): (g0.childIndex parent child).val < parent.val:=child.isLt
 def Guarded (g0:DAG n):Prop:= ∀ index, (g0.node index).IsGuarded
-def childIncidences (g0:DAG n):ℕ := @List.sum Nat instAddNat (@Zero.ofOfNat0 Nat (instOfNatNat (nat_lit 0))) (List.ofFn fun index:Fin g0.nodeCount=> (g0.node index).children.length)
-def guardIncidences (g0:DAG n):ℕ := @List.sum Nat instAddNat (@Zero.ofOfNat0 Nat (instOfNatNat (nat_lit 0))) (List.ofFn fun index:Fin g0.nodeCount=> (g0.node index).guardLabels.length)
+def childIncidences (g0:DAG n):ℕ:= @List.sum Nat instAddNat (@Zero.ofOfNat0 Nat (instOfNatNat (nat_lit 0))) (List.ofFn fun index:Fin g0.nodeCount=> (g0.node index).children.length)
+def guardIncidences (g0:DAG n):ℕ:= @List.sum Nat instAddNat (@Zero.ofOfNat0 Nat (instOfNatNat (nat_lit 0))) (List.ofFn fun index:Fin g0.nodeCount=> (g0.node index).guardLabels.length)
 end DAG end Decoder ctx "Decoder.Eval" namespace Decoder
 namespace DAG
 variable {n:ℕ}
@@ -240,7 +239,7 @@ inductive RootedPath (g0:DAG n):
 namespace RootedPath
 theorem endpoint_mem_cones {g0:DAG n} {node:Fin g0.nodeCount} {route:List g0.StoredOccurrence} (path:RootedPath g0 node route):node ∈ g0.cones g0.roots:=by { induction path with | root position=> { exact g0.root_mem_cones g0.roots _ (List.get_mem _ _)} | child parent position ar0 path ih=> { exact g0.cones_childClosed g0.roots parent ih _ (List.get_mem _ _)}}
 theorem nonempty {g0:DAG n} {node:Fin g0.nodeCount} {route:List g0.StoredOccurrence} (path:RootedPath g0 node route):route ≠ []:=by { cases path <;> simp}
-theorem unique_internal (g0:DAG n) (fr0:g0.FormulaForest): ∀ (node:Fin g0.nodeCount) (f0 s0:List g0.StoredOccurrence), (g0.node node).isInternal=true→ RootedPath g0 node f0→ RootedPath g0 node s0→ f0=s0:=by compact_proof { have claim: ∀ rank:ℕ, ∀ (firstNode secondNode:Fin g0.nodeCount),g0.nodeCount - firstNode.val=rank→ firstNode=secondNode→ ∀ (f0 s0:List g0.StoredOccurrence), (g0.node firstNode).isInternal=true→ RootedPath g0 firstNode f0→ RootedPath g0 secondNode s0→ f0=s0:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro firstNode secondNode rankEquation heq0 f0 s0 internal firstPath secondPath;cases firstPath with | root fp0=> { cases secondPath with | root sp0=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inl fp0) (.inl sp0) trivial trivial rfl heq0.symm;have he0:=Sum.inl.inj positions;cases he0;rfl} | child parent position ar0 path=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inl fp0) (.inr ⟨parent,position⟩) trivial (path.endpoint_mem_cones) rfl heq0.symm;cases positions}} | child pa0 fp0 firstPrefix firstPath=> { cases secondPath with | root sp0=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inr ⟨pa0,fp0⟩) (.inl sp0) firstPath.endpoint_mem_cones trivial rfl heq0.symm;cases positions} | child pb0 sp0 secondPrefix secondPath=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inr ⟨pa0,fp0⟩) (.inr ⟨pb0,sp0⟩) firstPath.endpoint_mem_cones secondPath.endpoint_mem_cones rfl heq0.symm;have parentEqual:pa0=pb0:=congrArg Sigma.fst (Sum.inr.inj positions);subst pb0;have positionEqual:fp0=sp0:=by { exact congrArg (fun pair:g0.ParentOccurrence=> pair.2.val) (Sum.inr.inj positions) |> Fin.ext};subst sp0;have decrease:g0.nodeCount - pa0.val < rank:=by { have earlier:=g0.childIndex_lt pa0 ((g0.node pa0).children.get fp0);omega};have prefixes:=ih _ decrease pa0 pa0 rfl rfl firstPrefix secondPrefix (parent_internal g0 pa0 fp0) firstPath secondPath;exact congrArg (List.cons (.inr ⟨pa0,fp0⟩)) prefixes}}}};intro node f0 s0 internal firstPath secondPath;exact claim _ node node rfl rfl f0 s0 internal firstPath secondPath}
+theorem unique_internal (g0:DAG n) (fr0:g0.FormulaForest): ∀ (node:Fin g0.nodeCount) (f0 s0:List g0.StoredOccurrence), (g0.node node).isInternal=true→ RootedPath g0 node f0→ RootedPath g0 node s0→ f0=s0:=by cp { have claim: ∀ rank:ℕ, ∀ (firstNode secondNode:Fin g0.nodeCount),g0.nodeCount - firstNode.val=rank→ firstNode=secondNode→ ∀ (f0 s0:List g0.StoredOccurrence), (g0.node firstNode).isInternal=true→ RootedPath g0 firstNode f0→ RootedPath g0 secondNode s0→ f0=s0:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro firstNode secondNode rankEquation heq0 f0 s0 internal firstPath secondPath;cases firstPath with | root fp0=> { cases secondPath with | root sp0=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inl fp0) (.inl sp0) trivial trivial rfl heq0.symm;have he0:=Sum.inl.inj positions;cases he0;rfl} | child parent position ar0 path=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inl fp0) (.inr ⟨parent,position⟩) trivial (path.endpoint_mem_cones) rfl heq0.symm;cases positions}} | child pa0 fp0 firstPrefix firstPath=> { cases secondPath with | root sp0=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inr ⟨pa0,fp0⟩) (.inl sp0) firstPath.endpoint_mem_cones trivial rfl heq0.symm;cases positions} | child pb0 sp0 secondPrefix secondPath=> { have positions:=active_occurrence_unique g0 fr0 _ internal (.inr ⟨pa0,fp0⟩) (.inr ⟨pb0,sp0⟩) firstPath.endpoint_mem_cones secondPath.endpoint_mem_cones rfl heq0.symm;have parentEqual:pa0=pb0:=congrArg Sigma.fst (Sum.inr.inj positions);subst pb0;have positionEqual:fp0=sp0:=by { exact congrArg (fun pair:g0.ParentOccurrence=> pair.2.val) (Sum.inr.inj positions) |> Fin.ext};subst sp0;have decrease:g0.nodeCount - pa0.val < rank:=by { have earlier:=g0.childIndex_lt pa0 ((g0.node pa0).children.get fp0);omega};have prefixes:=ih _ decrease pa0 pa0 rfl rfl firstPrefix secondPrefix (parent_internal g0 pa0 fp0) firstPath secondPath;exact congrArg (List.cons (.inr ⟨pa0,fp0⟩)) prefixes}}}};intro node f0 s0 internal firstPath secondPath;exact claim _ node node rfl rfl f0 s0 internal firstPath secondPath}
 end RootedPath
 end Cost.ForestOccurrences ctx "Cost.ForestGuardCharging" namespace Cost.ForestGuardCharging
 open Decoder Cost.ForestOccurrences
@@ -252,7 +251,7 @@ structure GuardVisit (g0:DAG n) where
   (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (position:Fin (g0.node node).guardLabels.length) (phase:Bool)
 theorem guard_internal (g0:DAG n) (node:Fin g0.nodeCount) (position:Fin (g0.node node).guardLabels.length): (g0.node node).isInternal=true:=by { have valid:=position.isLt;cases equation:g0.node node <;> simp_all [Gate.guardLabels,Gate.isInternal]}
 def GuardVisit.key {g0:DAG n} (visit:GuardVisit g0):GuardKey g0:= (⟨visit.node,visit.position⟩,visit.phase)
-theorem key_injective (g0:DAG n) (fr0:g0.FormulaForest):Function.Injective (GuardVisit.key (g0:=g0)):=by compact_proof { intro f0 s0 he0;cases f0 with | mk firstNode firstRoute firstPath fp0 firstPhase=> { cases s0 with | mk secondNode secondRoute secondPath sp0 secondPhase=> { have nodes:firstNode=secondNode:=congrArg (fun key:GuardKey g0=> key.1.1) he0;subst secondNode;have positions:fp0=sp0:=Fin.ext (congrArg (fun key:GuardKey g0=> key.1.2.val) he0);subst sp0;have phases:firstPhase=secondPhase:=congrArg (fun key:GuardKey g0=> key.2) he0;subst secondPhase;have routes:=RootedPath.unique_internal g0 fr0 firstNode firstRoute secondRoute (guard_internal g0 firstNode fp0) firstPath secondPath;subst secondRoute;rfl}}}
+theorem key_injective (g0:DAG n) (fr0:g0.FormulaForest):Function.Injective (GuardVisit.key (g0:=g0)):=by cp { intro f0 s0 he0;cases f0 with | mk firstNode firstRoute firstPath fp0 firstPhase=> { cases s0 with | mk secondNode secondRoute secondPath sp0 secondPhase=> { have nodes:firstNode=secondNode:=congrArg (fun key:GuardKey g0=> key.1.1) he0;subst secondNode;have positions:fp0=sp0:=Fin.ext (congrArg (fun key:GuardKey g0=> key.1.2.val) he0);subst sp0;have phases:firstPhase=secondPhase:=congrArg (fun key:GuardKey g0=> key.2) he0;subst secondPhase;have routes:=RootedPath.unique_internal g0 fr0 firstNode firstRoute secondRoute (guard_internal g0 firstNode fp0) firstPath secondPath;subst secondRoute;rfl}}}
 theorem key_card (g0:DAG n):Nat.card (GuardKey g0)=2*g0.guardIncidences:=by { simp only [GuardKey,GuardPosition,Nat.card_prod,Nat.card_sigma,Nat.card_fin,Nat.card_eq_fintype_card,Fintype.card_bool];simp [DAG.guardIncidences,List.sum_ofFn,Nat.mul_comm]}
 theorem visit_card_le (g0:DAG n) (fr0:g0.FormulaForest):Nat.card (GuardVisit g0)≤ 2*g0.guardIncidences:=by { have bounded:=Nat.card_le_card_of_injective (GuardVisit.key (g0:=g0)) (key_injective g0 fr0);exact bounded.trans_eq (key_card g0)}
 end Cost.ForestGuardCharging ctx "Cost.ForestGuardVisits" namespace Cost.ForestGuardVisits
@@ -271,10 +270,10 @@ def walkGhost (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence
     (ownVisits g0 node route rooted true).reverse
 termination_by node.val
 decreasing_by all_goals exact g0.childIndex_lt _ _
-theorem route_suffix (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:GuardVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by compact_proof { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:GuardVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted visit hp0;rw [walkGhost.eq_def] at hp0;rcases List.mem_append.mp hp0 with before | after; · { rcases List.mem_append.mp before with own | ds0; · { rw [own_route g0 node route rooted false visit own]}; · { obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp ds0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _ visit hv0;exact (List.suffix_cons _ route).trans suffix}}; · { have own:=List.mem_reverse.mp after;rw [own_route g0 node route rooted true visit own]}}};intro node route rooted visit hp0;exact claim node.val node rfl route rooted visit hp0}
+theorem route_suffix (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:GuardVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by cp { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:GuardVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted visit hp0;rw [walkGhost.eq_def] at hp0;rcases List.mem_append.mp hp0 with before | after; · { rcases List.mem_append.mp before with own | ds0; · { rw [own_route g0 node route rooted false visit own]}; · { obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp ds0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _ visit hv0;exact (List.suffix_cons _ route).trans suffix}}; · { have own:=List.mem_reverse.mp after;rw [own_route g0 node route rooted true visit own]}}};intro node route rooted visit hp0;exact claim node.val node rfl route rooted visit hp0}
 theorem equal_length_suffix {f0 s0 whole:List α} (sa0:f0 <:+whole) (sb0:s0 <:+whole) (lengths:f0.length=s0.length):f0=s0:=by { exact (List.suffix_of_suffix_length_le sa0 sb0 lengths.le).eq_of_length lengths}
 def childrenGhost (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route):List (GuardVisit g0):= (List.ofFn fun position:Fin (g0.node node).children.length=> walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).flatten
-theorem own_children_disjoint (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (phase:Bool):List.Disjoint (ownVisits g0 node route rooted phase) (childrenGhost g0 node route rooted):=by compact_proof { apply List.disjoint_left.mpr;intro visit ownPresent ds0;have ownRoute:=own_route g0 node route rooted phase visit ownPresent;obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp ds0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=route_suffix g0 _ _ _ visit hv0;have lengths:=suffix.length_le;rw [ownRoute] at lengths;simp only [List.length_cons] at lengths;omega}
+theorem own_children_disjoint (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (phase:Bool):List.Disjoint (ownVisits g0 node route rooted phase) (childrenGhost g0 node route rooted):=by cp { apply List.disjoint_left.mpr;intro visit ownPresent ds0;have ownRoute:=own_route g0 node route rooted phase visit ownPresent;obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp ds0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=route_suffix g0 _ _ _ visit hv0;have lengths:=suffix.length_le;rw [ownRoute] at lengths;simp only [List.length_cons] at lengths;omega}
 theorem child_blocks_disjoint (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (f0 s0:Fin (g0.node node).children.length) (different:f0 ≠ s0):List.Disjoint (walkGhost g0 (g0.childIndex node ((g0.node node).children.get f0)) (.inr ⟨node,f0⟩ ::route) (RootedPath.child node f0 route rooted)) (walkGhost g0 (g0.childIndex node ((g0.node node).children.get s0)) (.inr ⟨node,s0⟩ ::route) (RootedPath.child node s0 route rooted)):=by
   apply List.disjoint_left.mpr
   intro visit ha0 hbb0
@@ -285,7 +284,7 @@ theorem child_blocks_disjoint (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.
   have positions:f0=s0:=Fin.ext
     (congrArg (fun occurrence:g0.StoredOccurrence=> match occurrence with | .inl _=> 0 | .inr pair=> pair.2.val) heads)
   exact different positions
-theorem walk_nodup (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by compact_proof { classical{ have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have childrenNodup: (childrenGhost g0 node route rooted).Nodup:=by { apply List.nodup_flatten.mpr;constructor; · { intro block hb0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;exact child_blocks_disjoint g0 node route rooted f0 s0 (ne_of_lt before)}};have beginningNodup:=List.nodup_append'.mpr ⟨own_nodup g0 node route rooted false,childrenNodup,own_children_disjoint g0 node route rooted false⟩;have endsNodup: ((ownVisits g0 node route rooted true).reverse).Nodup:=List.nodup_reverse.mpr (own_nodup g0 node route rooted true);have disjoint:List.Disjoint (ownVisits g0 node route rooted false++childrenGhost g0 node route rooted) (ownVisits g0 node route rooted true).reverse:=by { apply List.disjoint_left.mpr;intro visit hp0 endPresent;have endOwn:=List.mem_reverse.mp endPresent;rcases List.mem_append.mp hp0 with own | descendant; · { have firstPhase:=own_phase g0 node route rooted false visit own;have secondPhase:=own_phase g0 node route rooted true visit endOwn;simp_all}; · { exact List.disjoint_left.mp (own_children_disjoint g0 node route rooted true) endOwn descendant}};have joined:=List.nodup_append'.mpr ⟨beginningNodup,endsNodup,disjoint⟩;rw [walkGhost.eq_def];exact joined}};intro node route rooted;exact claim node.val node rfl route rooted}}
+theorem walk_nodup (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by cp { classical{ have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have childrenNodup: (childrenGhost g0 node route rooted).Nodup:=by { apply List.nodup_flatten.mpr;constructor; · { intro block hb0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;exact child_blocks_disjoint g0 node route rooted f0 s0 (ne_of_lt before)}};have beginningNodup:=List.nodup_append'.mpr ⟨own_nodup g0 node route rooted false,childrenNodup,own_children_disjoint g0 node route rooted false⟩;have endsNodup: ((ownVisits g0 node route rooted true).reverse).Nodup:=List.nodup_reverse.mpr (own_nodup g0 node route rooted true);have disjoint:List.Disjoint (ownVisits g0 node route rooted false++childrenGhost g0 node route rooted) (ownVisits g0 node route rooted true).reverse:=by { apply List.disjoint_left.mpr;intro visit hp0 endPresent;have endOwn:=List.mem_reverse.mp endPresent;rcases List.mem_append.mp hp0 with own | descendant; · { have firstPhase:=own_phase g0 node route rooted false visit own;have secondPhase:=own_phase g0 node route rooted true visit endOwn;simp_all}; · { exact List.disjoint_left.mp (own_children_disjoint g0 node route rooted true) endOwn descendant}};have joined:=List.nodup_append'.mpr ⟨beginningNodup,endsNodup,disjoint⟩;rw [walkGhost.eq_def];exact joined}};intro node route rooted;exact claim node.val node rfl route rooted}}
 def rootGhost (g0:DAG n):List (GuardVisit g0):= (List.ofFn fun position:Fin g0.roots.length=> walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).flatten
 theorem root_nodup (g0:DAG n): (rootGhost g0).Nodup:=by { classical{ apply List.nodup_flatten.mpr;constructor; · { intro block hp0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hp0;subst block;exact walk_nodup g0 _ _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;apply List.disjoint_left.mpr;intro visit ha0 hbb0;have sa0:=route_suffix g0 _ _ _ visit ha0;have sb0:=route_suffix g0 _ _ _ visit hbb0;have routes:=equal_length_suffix sa0 sb0 rfl;have positions:f0=s0:=Sum.inl.inj (List.cons.inj routes).1;exact (ne_of_lt before) positions}}}
 theorem root_length_le (g0:DAG n) (fr0:g0.FormulaForest): (rootGhost g0).length≤ 2*g0.guardIncidences:=by
@@ -297,7 +296,7 @@ theorem root_length_le (g0:DAG n) (fr0:g0.FormulaForest): (rootGhost g0).length�
   exact bound.trans (visit_card_le g0 fr0)
 def event {g0:DAG n} (visit:GuardVisit g0):GuardEvent n:=if visit.phase then .leave ((g0.node visit.node).guardLabels.get visit.position) else .enter ((g0.node visit.node).guardLabels.get visit.position)
 theorem own_events (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (phase:Bool): (ownVisits g0 node route rooted phase).map event=if phase then (g0.node node).guardLabels.map GuardEvent.leave else (g0.node node).guardLabels.map GuardEvent.enter:=by { cases phase with | false=> { rw [ownVisits,List.map_ofFn];exact List.ofFn_getElem_eq_map _ GuardEvent.enter} | true=> { rw [ownVisits,List.map_ofFn];exact List.ofFn_getElem_eq_map _ GuardEvent.leave}}
-theorem walk_events (g0:DAG n) (guarded:g0.Guarded): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map event=walkEvents g0 node:=by compact_proof { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map event=walkEvents g0 node:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have ds0: (childrenGhost g0 node route rooted).map event= (List.ofFn fun position:Fin (g0.node node).children.length=> walkEvents g0 (g0.childIndex node ((g0.node node).children.get position))).flatten:=by { simp only [childrenGhost,List.map_flatten,List.map_ofFn];apply congrArg List.flatten;apply congrArg List.ofFn;funext position;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _};rw [walkGhost.eq_def];change ((ownVisits g0 node route rooted false++childrenGhost g0 node route rooted)++ (ownVisits g0 node route rooted true).reverse).map event=_;rw [List.map_append,List.map_append,List.map_reverse,own_events,own_events,ds0];rw [walkEvents.eq_def];have permitted:=guarded node;cases equation:g0.node node with | zero=> { simp [equation,Gate.guardLabels,Gate.children]} | input coordinate=> { simp [equation,Gate.guardLabels,Gate.children]} | disj children=> { simp [equation,Gate.guardLabels,Gate.children,List.flatMap];exact congrArg List.flatten (List.ofFn_getElem_eq_map children (fun child=> walkEvents g0 (g0.childIndex node child)))} | guard child labels=> { simp [equation,Gate.guardLabels,Gate.children,List.ofFn_succ,List.map_reverse]} | liveAnd left right=> { simp [equation,Gate.IsGuarded,Gate.isLiveAnd] at permitted}}};intro node route rooted;exact claim node.val node rfl route rooted}
+theorem walk_events (g0:DAG n) (guarded:g0.Guarded): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map event=walkEvents g0 node:=by cp { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map event=walkEvents g0 node:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have ds0: (childrenGhost g0 node route rooted).map event= (List.ofFn fun position:Fin (g0.node node).children.length=> walkEvents g0 (g0.childIndex node ((g0.node node).children.get position))).flatten:=by { simp only [childrenGhost,List.map_flatten,List.map_ofFn];apply congrArg List.flatten;apply congrArg List.ofFn;funext position;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _};rw [walkGhost.eq_def];change ((ownVisits g0 node route rooted false++childrenGhost g0 node route rooted)++ (ownVisits g0 node route rooted true).reverse).map event=_;rw [List.map_append,List.map_append,List.map_reverse,own_events,own_events,ds0];rw [walkEvents.eq_def];have permitted:=guarded node;cases equation:g0.node node with | zero=> { simp [equation,Gate.guardLabels,Gate.children]} | input coordinate=> { simp [equation,Gate.guardLabels,Gate.children]} | disj children=> { simp [equation,Gate.guardLabels,Gate.children,List.flatMap];exact congrArg List.flatten (List.ofFn_getElem_eq_map children (fun child=> walkEvents g0 (g0.childIndex node child)))} | guard child labels=> { simp [equation,Gate.guardLabels,Gate.children,List.ofFn_succ,List.map_reverse]} | liveAnd left right=> { simp [equation,Gate.IsGuarded,Gate.isLiveAnd] at permitted}}};intro node route rooted;exact claim node.val node rfl route rooted}
 theorem root_events (g0:DAG n) (guarded:g0.Guarded): (rootGhost g0).map event=rootEvents g0:=by { simp only [rootGhost,List.map_flatten,List.map_ofFn,Function.comp_apply,rootEvents];have mapped: (List.ofFn fun position:Fin g0.roots.length=> (walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).map event)=List.ofFn fun position:Fin g0.roots.length=> walkEvents g0 (g0.roots.get position):=by { apply congrArg List.ofFn;funext position;exact walk_events g0 guarded _ _ _};change (List.ofFn fun position:Fin g0.roots.length=> (walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).map event).flatten=g0.roots.flatMap (walkEvents g0);rw [mapped];exact congrArg List.flatten (List.ofFn_getElem_eq_map g0.roots (walkEvents g0))}
 theorem root_event_count_le (g0:DAG n) (fr0:g0.FormulaForest): (rootEvents g0).length≤ 2*g0.guardIncidences:=by
   have counts:=congrArg List.length (root_events g0 fr0.1)
@@ -308,12 +307,12 @@ end Cost.ForestGuardVisits ctx "Cost.ForestGuardAccumulator" namespace Cost.Fore
 open Decoder Cost.ForestGuardSchedule
 variable {n:ℕ}
 theorem stored_occurrence_card (g0:DAG n):Nat.card g0.StoredOccurrence=g0.roots.length+g0.childIncidences:=by { simp only [DAG.StoredOccurrence,DAG.ParentOccurrence,Nat.card_sum,Nat.card_sigma,Nat.card_fin,Nat.card_eq_fintype_card];simp [DAG.childIncidences,List.sum_ofFn]}
-theorem rooted_route_eq_of_incoming (g0:DAG n) (fr0:g0.FormulaForest) (firstNode secondNode:Fin g0.nodeCount) (firstRoute secondRoute:List g0.StoredOccurrence) (firstPath:Cost.ForestOccurrences.RootedPath g0 firstNode firstRoute) (secondPath:Cost.ForestOccurrences.RootedPath g0 secondNode secondRoute) (incoming:firstRoute.head? =secondRoute.head?):firstRoute=secondRoute:=by compact_proof { cases firstPath with | root fp0=> { cases secondPath with | root sp0=> { simp only [List.head?_cons,Option.some.injEq,Sum.inl.injEq] at incoming;cases incoming;rfl} | child parent position ar0 path=> { simp only [List.head?_cons,Option.some.injEq] at incoming;cases incoming}} | child pa0 fp0 firstAncestor firstAncestorPath=> { cases secondPath with | root sp0=> { simp only [List.head?_cons,Option.some.injEq] at incoming;cases incoming} | child pb0 sp0 secondAncestor secondAncestorPath=> { have positions: (⟨pa0,fp0⟩ :g0.ParentOccurrence)= ⟨pb0,sp0⟩ :=by { exact Sum.inr.inj (Option.some.inj incoming)};have parents:pa0=pb0:=congrArg Sigma.fst positions;subst pb0;have childPositions:fp0=sp0:=Fin.ext (congrArg (fun position:g0.ParentOccurrence=> position.2.val) positions);subst sp0;have ancestors:=Cost.ForestOccurrences.RootedPath.unique_internal g0 fr0 pa0 firstAncestor secondAncestor (Cost.ForestOccurrences.parent_internal g0 pa0 fp0) firstAncestorPath secondAncestorPath;rw [ancestors]}}}
+theorem rooted_route_eq_of_incoming (g0:DAG n) (fr0:g0.FormulaForest) (firstNode secondNode:Fin g0.nodeCount) (firstRoute secondRoute:List g0.StoredOccurrence) (firstPath:Cost.ForestOccurrences.RootedPath g0 firstNode firstRoute) (secondPath:Cost.ForestOccurrences.RootedPath g0 secondNode secondRoute) (incoming:firstRoute.head? =secondRoute.head?):firstRoute=secondRoute:=by cp { cases firstPath with | root fp0=> { cases secondPath with | root sp0=> { simp only [List.head?_cons,Option.some.injEq,Sum.inl.injEq] at incoming;cases incoming;rfl} | child parent position ar0 path=> { simp only [List.head?_cons,Option.some.injEq] at incoming;cases incoming}} | child pa0 fp0 firstAncestor firstAncestorPath=> { cases secondPath with | root sp0=> { simp only [List.head?_cons,Option.some.injEq] at incoming;cases incoming} | child pb0 sp0 secondAncestor secondAncestorPath=> { have positions: (⟨pa0,fp0⟩ :g0.ParentOccurrence)= ⟨pb0,sp0⟩ :=by { exact Sum.inr.inj (Option.some.inj incoming)};have parents:pa0=pb0:=congrArg Sigma.fst positions;subst pb0;have childPositions:fp0=sp0:=Fin.ext (congrArg (fun position:g0.ParentOccurrence=> position.2.val) positions);subst sp0;have ancestors:=Cost.ForestOccurrences.RootedPath.unique_internal g0 fr0 pa0 firstAncestor secondAncestor (Cost.ForestOccurrences.parent_internal g0 pa0 fp0) firstAncestorPath secondAncestorPath;rw [ancestors]}}}
 structure NodeVisit (g0:DAG n) where
   (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:Cost.ForestOccurrences.RootedPath g0 node route)
 def NodeVisit.incoming {g0:DAG n} (visit:NodeVisit g0):g0.StoredOccurrence:=visit.route.head visit.rooted.nonempty
 theorem incoming_refers (g0:DAG n) (visit:NodeVisit g0):g0.refers visit.incoming=visit.node:=by { cases visit with | mk node route rooted=> { cases rooted <;> rfl}}
-theorem incoming_injective (g0:DAG n) (fr0:g0.FormulaForest):Function.Injective (NodeVisit.incoming (g0:=g0)):=by compact_proof {
+theorem incoming_injective (g0:DAG n) (fr0:g0.FormulaForest):Function.Injective (NodeVisit.incoming (g0:=g0)):=by cp {
   intro f0 s0 he0
   have nodes:f0.node=s0.node:=by
     rw [← incoming_refers g0 f0, ← incoming_refers g0 s0]
@@ -343,7 +342,7 @@ def walkGhost (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence
         (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).flatten
 termination_by node.val
 decreasing_by all_goals exact g0.childIndex_lt _ _
-theorem route_suffix (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:NodeVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by compact_proof { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:NodeVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted visit hp0;rw [walkGhost.eq_def] at hp0;rcases List.mem_cons.mp hp0 with he0 | descendant; · { subst visit;exact List.suffix_refl route}; · { obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp descendant;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _ visit hv0;exact (List.suffix_cons _ route).trans suffix}}};intro node route rooted visit hp0;exact claim node.val node rfl route rooted visit hp0}
+theorem route_suffix (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:NodeVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by cp { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route) (visit:NodeVisit g0),visit ∈ walkGhost g0 node route rooted→ route <:+visit.route:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted visit hp0;rw [walkGhost.eq_def] at hp0;rcases List.mem_cons.mp hp0 with he0 | descendant; · { subst visit;exact List.suffix_refl route}; · { obtain ⟨block,hb0,hv0⟩ :=List.mem_flatten.mp descendant;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _ visit hv0;exact (List.suffix_cons _ route).trans suffix}}};intro node route rooted visit hp0;exact claim node.val node rfl route rooted visit hp0}
 private theorem equal_length_suffix {f0 s0 whole:List α} (sa0:f0 <:+whole) (sb0:s0 <:+whole) (lengths:f0.length=s0.length):f0=s0:= (List.suffix_of_suffix_length_le sa0 sb0 lengths.le).eq_of_length lengths
 def childrenGhost (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route):List (NodeVisit g0):= (List.ofFn fun position:Fin (g0.node node).children.length=> walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).flatten
 theorem own_not_mem_children (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route): (⟨node,route,rooted⟩ :NodeVisit g0) ∉ childrenGhost g0 node route rooted:=by { intro hp0;obtain ⟨block,hb0,ownPresent⟩ :=List.mem_flatten.mp hp0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;have suffix:=route_suffix g0 _ _ _ _ ownPresent;have lengths:=suffix.length_le;simp only [List.length_cons] at lengths;omega}
@@ -357,7 +356,7 @@ theorem child_blocks_disjoint (g0:DAG n) (node:Fin g0.nodeCount) (route:List g0.
   have positions:f0=s0:=Fin.ext
     (congrArg (fun occurrence:g0.StoredOccurrence=> match occurrence with | .inl _=> 0 | .inr pair=> pair.2.val) heads)
   exact different positions
-theorem walk_nodup (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by compact_proof { classical{ have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have childrenNodup: (childrenGhost g0 node route rooted).Nodup:=by { apply List.nodup_flatten.mpr;constructor; · { intro block hb0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;exact child_blocks_disjoint g0 node route rooted f0 s0 (ne_of_lt before)}};rw [walkGhost.eq_def];exact List.nodup_cons.mpr ⟨own_not_mem_children g0 node route rooted,childrenNodup⟩ }};intro node route rooted;exact claim node.val node rfl route rooted}}
+theorem walk_nodup (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by cp { classical{ have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).Nodup:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;have childrenNodup: (childrenGhost g0 node route rooted).Nodup:=by { apply List.nodup_flatten.mpr;constructor; · { intro block hb0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hb0;subst block;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;exact child_blocks_disjoint g0 node route rooted f0 s0 (ne_of_lt before)}};rw [walkGhost.eq_def];exact List.nodup_cons.mpr ⟨own_not_mem_children g0 node route rooted,childrenNodup⟩ }};intro node route rooted;exact claim node.val node rfl route rooted}}
 def rootGhost (g0:DAG n):List (NodeVisit g0):= (List.ofFn fun position:Fin g0.roots.length=> walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).flatten
 theorem root_nodup (g0:DAG n): (rootGhost g0).Nodup:=by { classical{ apply List.nodup_flatten.mpr;constructor; · { intro block hp0;obtain ⟨position,he0⟩ :=List.mem_ofFn.mp hp0;subst block;exact walk_nodup g0 _ _ _}; · { apply List.pairwise_ofFn.mpr;intro f0 s0 before;apply List.disjoint_left.mpr;intro visit ha0 hbb0;have sa0:=route_suffix g0 _ _ _ visit ha0;have sb0:=route_suffix g0 _ _ _ visit hbb0;have routes:=equal_length_suffix sa0 sb0 rfl;have positions:f0=s0:=Sum.inl.inj (List.cons.inj routes).1;exact (ne_of_lt before) positions}}}
 theorem root_length_le (g0:DAG n) (fr0:g0.FormulaForest): (rootGhost g0).length≤ g0.roots.length+g0.childIncidences:=by
@@ -371,7 +370,7 @@ def walkNodes (g0:DAG n) (node:Fin g0.nodeCount):List (Fin g0.nodeCount):=
   node:: (g0.node node).children.flatMap (fun child=> walkNodes g0 (g0.childIndex node child))
 termination_by node.val
 decreasing_by all_goals exact g0.childIndex_lt _ _
-theorem walk_nodes (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map NodeVisit.node=walkNodes g0 node:=by compact_proof { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map NodeVisit.node=walkNodes g0 node:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;rw [walkGhost.eq_def,walkNodes.eq_def,List.map_cons,List.map_flatten,List.map_ofFn];apply congrArg (List.cons node);have mapped: (List.ofFn fun position:Fin (g0.node node).children.length=> (walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).map NodeVisit.node)=List.ofFn fun position:Fin (g0.node node).children.length=> walkNodes g0 (g0.childIndex node ((g0.node node).children.get position)):=by { apply congrArg List.ofFn;funext position;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _};change (List.ofFn fun position:Fin (g0.node node).children.length=> (walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).map NodeVisit.node).flatten=_;rw [mapped];exact congrArg List.flatten (List.ofFn_getElem_eq_map (g0.node node).children (fun child=> walkNodes g0 (g0.childIndex node child)))}};intro node route rooted;exact claim node.val node rfl route rooted}
+theorem walk_nodes (g0:DAG n): ∀ (node:Fin g0.nodeCount) (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map NodeVisit.node=walkNodes g0 node:=by cp { have claim: ∀ rank:ℕ, ∀ (node:Fin g0.nodeCount),node.val=rank→ ∀ (route:List g0.StoredOccurrence) (rooted:RootedPath g0 node route), (walkGhost g0 node route rooted).map NodeVisit.node=walkNodes g0 node:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro node value route rooted;rw [walkGhost.eq_def,walkNodes.eq_def,List.map_cons,List.map_flatten,List.map_ofFn];apply congrArg (List.cons node);have mapped: (List.ofFn fun position:Fin (g0.node node).children.length=> (walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).map NodeVisit.node)=List.ofFn fun position:Fin (g0.node node).children.length=> walkNodes g0 (g0.childIndex node ((g0.node node).children.get position)):=by { apply congrArg List.ofFn;funext position;exact ih ((g0.node node).children.get position).val (by { have earlier:=g0.childIndex_lt node ((g0.node node).children.get position);omega}) _ rfl _ _};change (List.ofFn fun position:Fin (g0.node node).children.length=> (walkGhost g0 (g0.childIndex node ((g0.node node).children.get position)) (.inr ⟨node,position⟩ ::route) (RootedPath.child node position route rooted)).map NodeVisit.node).flatten=_;rw [mapped];exact congrArg List.flatten (List.ofFn_getElem_eq_map (g0.node node).children (fun child=> walkNodes g0 (g0.childIndex node child)))}};intro node route rooted;exact claim node.val node rfl route rooted}
 def rootNodes (g0:DAG n):List (Fin g0.nodeCount):=g0.roots.flatMap (walkNodes g0)
 theorem root_nodes (g0:DAG n): (rootGhost g0).map NodeVisit.node=rootNodes g0:=by { simp only [rootGhost,rootNodes,List.map_flatten,List.map_ofFn];have mapped: (List.ofFn fun position:Fin g0.roots.length=> (walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).map NodeVisit.node)=List.ofFn fun position:Fin g0.roots.length=> walkNodes g0 (g0.roots.get position):=by { apply congrArg List.ofFn;funext position;exact walk_nodes g0 _ _ _};change (List.ofFn fun position:Fin g0.roots.length=> (walkGhost g0 (g0.roots.get position) [.inl position] (RootedPath.root position)).map NodeVisit.node).flatten=_;rw [mapped];exact congrArg List.flatten (List.ofFn_getElem_eq_map g0.roots (walkNodes g0))}
 theorem root_node_count_le (g0:DAG n) (fr0:g0.FormulaForest): (rootNodes g0).length≤ g0.roots.length+g0.childIncidences:=by
@@ -430,12 +429,12 @@ structure Valid (state:Builder):Prop where
   (count:state.entries.length=state.count) (current:state.current≤ state.count) (parents: ∀ parent ∈ state.parents,parent≤ state.count) (entries: ∀ entry ∈ state.entries,0 < entry.identifier∧ entry.parent < entry.identifier∧ entry.identifier≤ state.count) (leaves: ∀ leaf ∈ state.leaves,leaf.pointer≤ state.count)
 theorem initial_valid:Valid initial:=by { refine ⟨rfl,by { simp [initial]}, ?_, ?_, ?_⟩ <;> simp [initial]}
 theorem beginRoot_valid (state:Builder) (valid:Valid state):Valid (beginRoot state):=by { exact ⟨valid.count,Nat.zero_le _,by { simp [beginRoot]},valid.entries,valid.leaves⟩ }
-theorem step_valid (root:ℕ) (state:Builder) (valid:Valid state) (operation:CursorOp n):Valid (step root state operation):=by compact_proof { cases operation with | down owner position child=> { refine ⟨by { simpa [step] using congrArg Nat.succ valid.count},by { simp [step]}, ?_, ?_, ?_⟩; · { intro parent hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst parent;exact Nat.le_trans valid.current (Nat.le_succ _)}; · { exact Nat.le_trans (valid.parents parent earlier) (Nat.le_succ _)}}; · { intro entry hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst entry;exact ⟨by { simp},by { simpa using Nat.lt_succ_of_le valid.current},by { simp [step]}⟩ }; · { obtain ⟨positive,parentEarlier,bounded⟩ :=valid.entries entry earlier;exact ⟨positive,parentEarlier,Nat.le_trans bounded (Nat.le_succ _)⟩ }}; · { intro leaf hp0;exact Nat.le_trans (valid.leaves leaf hp0) (Nat.le_succ _)}} | up=> { refine ⟨valid.count, ?_, ?_,valid.entries,valid.leaves⟩; · { cases he0:state.parents with | nil=> { simp [step,he0]} | cons parent rest=> { simpa [step,he0] using valid.parents parent (by { rw [he0];exact List.mem_cons_self})}}; · { intro parent hp0;exact valid.parents parent (List.mem_of_mem_tail hp0)}} | leaf owner route head=> { refine ⟨valid.count,valid.current,valid.parents,valid.entries, ?_⟩;intro leaf hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst leaf;exact valid.current}; · { exact valid.leaves leaf earlier}} | node owner=> { exact valid} | enter owner position channel=> { exact valid} | leave owner position channel=> { exact valid}}
+theorem step_valid (root:ℕ) (state:Builder) (valid:Valid state) (operation:CursorOp n):Valid (step root state operation):=by cp { cases operation with | down owner position child=> { refine ⟨by { simpa [step] using congrArg Nat.succ valid.count},by { simp [step]}, ?_, ?_, ?_⟩; · { intro parent hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst parent;exact Nat.le_trans valid.current (Nat.le_succ _)}; · { exact Nat.le_trans (valid.parents parent earlier) (Nat.le_succ _)}}; · { intro entry hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst entry;exact ⟨by { simp},by { simpa using Nat.lt_succ_of_le valid.current},by { simp [step]}⟩ }; · { obtain ⟨positive,parentEarlier,bounded⟩ :=valid.entries entry earlier;exact ⟨positive,parentEarlier,Nat.le_trans bounded (Nat.le_succ _)⟩ }}; · { intro leaf hp0;exact Nat.le_trans (valid.leaves leaf hp0) (Nat.le_succ _)}} | up=> { refine ⟨valid.count, ?_, ?_,valid.entries,valid.leaves⟩; · { cases he0:state.parents with | nil=> { simp [step,he0]} | cons parent rest=> { simpa [step,he0] using valid.parents parent (by { rw [he0];exact List.mem_cons_self})}}; · { intro parent hp0;exact valid.parents parent (List.mem_of_mem_tail hp0)}} | leaf owner route head=> { refine ⟨valid.count,valid.current,valid.parents,valid.entries, ?_⟩;intro leaf hp0;rcases List.mem_cons.mp hp0 with he0 | earlier; · { subst leaf;exact valid.current}; · { exact valid.leaves leaf earlier}} | node owner=> { exact valid} | enter owner position channel=> { exact valid} | leave owner position channel=> { exact valid}}
 theorem scan_valid (root:ℕ) (state:Builder) (valid:Valid state) (operations:List (CursorOp n)):Valid (scan root state operations):=by { induction operations generalizing state with | nil=> { exact valid} | cons operation rest ih=> { exact ih _ (step_valid root state valid operation)}}
-def extendRoute (route : ℕ → LeafRoute) (identifier parent position : ℕ) : ℕ → LeafRoute :=
-  fun pointer => if pointer = identifier then position :: route parent else route pointer
-def routeStep (state : Builder) (route : ℕ → LeafRoute) (operation : CursorOp n) : ℕ → LeafRoute :=
-  match operation with | .down _ position _ => extendRoute route (state.count + 1) state.current position | _ => route
+def extendRoute (route:ℕ→ LeafRoute) (identifier parent position:ℕ):ℕ→ LeafRoute:=
+  fun pointer=> if pointer=identifier then position::route parent else route pointer
+def routeStep (state:Builder) (route:ℕ→ LeafRoute) (operation:CursorOp n):ℕ→ LeafRoute:=
+  match operation with | .down _ position _=> extendRoute route (state.count+1) state.current position | _=> route
 def isDown:CursorOp n→ ℕ | .down _ _ _=> 1 | _=> 0
 def allocations (operations:List (CursorOp n)):ℕ:= (operations.map isDown).sum
 theorem step_count (root:ℕ) (state:Builder) (operation:CursorOp n): (step root state operation).count=state.count+isDown operation:=by { cases operation <;> simp [step,isDown]}
@@ -521,96 +520,96 @@ def operationBudget (g0:DAG n) (node:Fin g0.nodeCount):ℕ:=
   | .guard child labels=> 3+2*labels.length+operationBudget g0 (g0.childIndex node child)
 termination_by node.val
 decreasing_by all_goals exact g0.childIndex_lt _ _
-theorem cursor_length (g0 : DAG n) (node : Fin g0.nodeCount) (route : LeafRoute) :
-    (cursorOps g0 node route).length = operationBudget g0 node := by compact_proof {
-  have claim : ∀ rank : ℕ, ∀ current : Fin g0.nodeCount, current.val = rank →
-      ∀ route, (cursorOps g0 current route).length = operationBudget g0 current := by
+theorem cursor_length (g0:DAG n) (node:Fin g0.nodeCount) (route:LeafRoute):
+    (cursorOps g0 node route).length=operationBudget g0 node:=by cp {
+  have claim: ∀ rank:ℕ, ∀ current:Fin g0.nodeCount,current.val=rank→
+      ∀ route, (cursorOps g0 current route).length=operationBudget g0 current:=by
     intro rank
     induction rank using Nat.strong_induction_on with
-    | h rank ih =>
+    | h rank ih=>
       intro current he0 route
-      rw [cursorOps, operationBudget]
-      cases equation : g0.node current with
-      | zero => simp
-      | input head => simp
-      | liveAnd left right => simp
-      | guard child labels =>
-          have below := ih (g0.childIndex current child).val
-            (by have earlier := g0.childIndex_lt current child; source_aux_index 2; omega)
-            (g0.childIndex current child) rfl (0 :: route)
-          simp only [List.length_cons, List.length_append, List.length_map, List.length_reverse,
-            List.length_finRange, List.length_nil, below]
+      rw [cursorOps,operationBudget]
+      cases equation:g0.node current with
+      | zero=> simp
+      | input head=> simp
+      | liveAnd left right=> simp
+      | guard child labels=>
+          have below:=ih (g0.childIndex current child).val
+            (by have earlier:=g0.childIndex_lt current child;aux 2;omega)
+            (g0.childIndex current child) rfl (0::route)
+          simp only [List.length_cons,List.length_append,List.length_map,List.length_reverse,
+            List.length_finRange,List.length_nil,below]
           omega
-      | disj refs =>
-          have counts : ((List.finRange refs.length).map fun position =>
-              2 + (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val :: route)).length) =
-              refs.map (fun child => 2 + operationBudget g0 (g0.childIndex current child)) := by
+      | disj refs=>
+          have counts: ((List.finRange refs.length).map fun position=>
+              2+ (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val::route)).length)=
+              refs.map (fun child=> 2+operationBudget g0 (g0.childIndex current child)):=by
             calc
-              _ = (List.finRange refs.length).map (fun position =>
-                  2 + operationBudget g0 (g0.childIndex current (refs.get position))) := by
+              _= (List.finRange refs.length).map (fun position=>
+                  2+operationBudget g0 (g0.childIndex current (refs.get position))):=by
                 apply List.map_congr_left
                 intro position hp0
                 rw [ih (g0.childIndex current (refs.get position)).val
-                  (by have earlier := g0.childIndex_lt current (refs.get position); omega)
+                  (by have earlier:=g0.childIndex_lt current (refs.get position);omega)
                   (g0.childIndex current (refs.get position)) rfl]
-              _ = _ := by
-                simpa only [List.map_map, Function.comp_def] using
-                  congrArg (List.map (fun child => 2 + operationBudget g0 (g0.childIndex current child)))
+              _=_:=by
+                simpa only [List.map_map,Function.comp_def] using
+                  congrArg (List.map (fun child=> 2+operationBudget g0 (g0.childIndex current child)))
                     (List.map_get_finRange refs)
-          simp only [List.length_cons, List.length_flatMap, List.length_append,
-            List.length_singleton, List.length_nil, Nat.zero_add]
-          have same : ((List.finRange refs.length).map fun position =>
-              (1 + (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val :: route)).length) + 1) =
-              (List.finRange refs.length).map (fun position =>
-                2 + (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val :: route)).length) := by
+          simp only [List.length_cons,List.length_flatMap,List.length_append,
+            List.length_singleton,List.length_nil,Nat.zero_add]
+          have same: ((List.finRange refs.length).map fun position=>
+              (1+ (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val::route)).length)+1)=
+              (List.finRange refs.length).map (fun position=>
+                2+ (cursorOps g0 (g0.childIndex current (refs.get position)) (position.val::route)).length):=by
             apply List.map_congr_left
             intro position hp0
             omega
           simp only [Nat.add_assoc] at same ⊢
-          rw [same, counts]
+          rw [same,counts]
           omega
   exact claim node.val node rfl route
 }
 private theorem map_sum_bound (items:List α) (f0 s0:α→ ℕ) (bound: ∀ item ∈ items,f0 item≤ s0 item): (items.map f0).sum≤ (items.map s0).sum:=by { induction items with | nil=> { simp} | cons item rest ih=> { have head:=bound item List.mem_cons_self;have tail:=ih (fun current hp0=> bound current (List.mem_cons_of_mem item hp0));simp only [List.map_cons,List.sum_cons];omega}}
 private theorem sum_budget (items:List α) (nodes guards:α→ ℕ): (items.map fun item=> 4*nodes item+guards item).sum=4* (items.map nodes).sum+ (items.map guards).sum:=by { induction items with | nil=> { simp} | cons item rest ih=> { simp only [List.map_cons,List.sum_cons,ih];omega}}
-theorem operationBudget_bound (g0 : DAG n) (node : Fin g0.nodeCount) :
-    operationBudget g0 node + 2 ≤
-      4 * (ForestNodeVisits.walkNodes g0 node).length + (walkEvents g0 node).length := by compact_proof {
-  have claim : ∀ rank : ℕ, ∀ current : Fin g0.nodeCount, current.val = rank →
-      operationBudget g0 current + 2 ≤
-        4 * (ForestNodeVisits.walkNodes g0 current).length + (walkEvents g0 current).length := by
+theorem operationBudget_bound (g0:DAG n) (node:Fin g0.nodeCount):
+    operationBudget g0 node+2≤
+      4* (ForestNodeVisits.walkNodes g0 node).length+ (walkEvents g0 node).length:=by cp {
+  have claim: ∀ rank:ℕ, ∀ current:Fin g0.nodeCount,current.val=rank→
+      operationBudget g0 current+2≤
+        4* (ForestNodeVisits.walkNodes g0 current).length+ (walkEvents g0 current).length:=by
     intro rank
     induction rank using Nat.strong_induction_on with
-    | h rank ih =>
+    | h rank ih=>
       intro current he0
-      have below : ∀ child : Fin current.val,
-          operationBudget g0 (g0.childIndex current child) + 2 ≤
-            4 * (ForestNodeVisits.walkNodes g0 (g0.childIndex current child)).length +
-              (walkEvents g0 (g0.childIndex current child)).length := by
+      have below: ∀ child:Fin current.val,
+          operationBudget g0 (g0.childIndex current child)+2≤
+            4* (ForestNodeVisits.walkNodes g0 (g0.childIndex current child)).length+
+              (walkEvents g0 (g0.childIndex current child)).length:=by
         intro child
-        exact ih child.val (by have earlier := g0.childIndex_lt current child; omega)
+        exact ih child.val (by have earlier:=g0.childIndex_lt current child;omega)
           (g0.childIndex current child) rfl
-      rw [operationBudget, ForestNodeVisits.walkNodes, walkEvents]
-      cases equation : g0.node current with
-      | zero => simp [Gate.children]
-      | input head => simp [Gate.children]
-      | liveAnd left right =>
-          simp only [Gate.children, List.length_cons]
-          source_aux_index 4
+      rw [operationBudget,ForestNodeVisits.walkNodes,walkEvents]
+      cases equation:g0.node current with
+      | zero=> simp [Gate.children]
+      | input head=> simp [Gate.children]
+      | liveAnd left right=>
+          simp only [Gate.children,List.length_cons]
+          aux 4
           omega
-      | guard child labels =>
-          have bounded := below child
-          simp only [Gate.children, List.flatMap_cons, List.flatMap_nil, List.append_nil,
-            List.length_cons, List.length_append, List.length_map, List.length_reverse]
+      | guard child labels=>
+          have bounded:=below child
+          simp only [Gate.children,List.flatMap_cons,List.flatMap_nil,List.append_nil,
+            List.length_cons,List.length_append,List.length_map,List.length_reverse]
           omega
-      | disj refs =>
-          have bounded := map_sum_bound refs
-            (fun child => 2 + operationBudget g0 (g0.childIndex current child))
-            (fun child => 4 * (ForestNodeVisits.walkNodes g0 (g0.childIndex current child)).length +
+      | disj refs=>
+          have bounded:=map_sum_bound refs
+            (fun child=> 2+operationBudget g0 (g0.childIndex current child))
+            (fun child=> 4* (ForestNodeVisits.walkNodes g0 (g0.childIndex current child)).length+
               (walkEvents g0 (g0.childIndex current child)).length)
-            (fun child hp0 => by have currentBound := below child; omega)
+            (fun child hp0=> by have currentBound:=below child;omega)
           rw [sum_budget] at bounded
-          simp only [Gate.children, List.length_cons, List.length_flatMap]
+          simp only [Gate.children,List.length_cons,List.length_flatMap]
           omega
   exact claim node.val node rfl
 }
@@ -855,7 +854,7 @@ def rootFamilyUse (g0:DAG n) (positions:List (Fin g0.roots.length)) (owner:Fin g
   | inr child=>
     refine ⟨.inr child,rootFamily_cones_subset g0 positions retained, ?_⟩
     exact same
-theorem rootFamilyUse_injective (g0:DAG n) (positions:List (Fin g0.roots.length)) (unique:positions.Nodup) (owner:Fin g0.nodeCount):Function.Injective (rootFamilyUse g0 positions owner):=by compact_proof { intro f0 s0 same;apply Subtype.ext;have actual:=congrArg Subtype.val same;cases f0 with | mk f0 validFirst=> { cases s0 with | mk s0 validSecond=> { rcases validFirst with ⟨retainedFirst,refersFirst⟩;rcases validSecond with ⟨retainedSecond,refersSecond⟩;cases f0 <;> cases s0 <;> simp only [rootFamilyUse] at actual; · { apply congrArg Sum.inl;apply Fin.ext;have equality:=Sum.inl.inj actual;have positionsEqual:=unique.get_inj_iff.mp equality;exact congrArg (fun index:Fin positions.length=> index.val) positionsEqual}; · { cases actual}; · { cases actual}; · { exact congrArg Sum.inr (Sum.inr.inj actual)}}}}
+theorem rootFamilyUse_injective (g0:DAG n) (positions:List (Fin g0.roots.length)) (unique:positions.Nodup) (owner:Fin g0.nodeCount):Function.Injective (rootFamilyUse g0 positions owner):=by cp { intro f0 s0 same;apply Subtype.ext;have actual:=congrArg Subtype.val same;cases f0 with | mk f0 validFirst=> { cases s0 with | mk s0 validSecond=> { rcases validFirst with ⟨retainedFirst,refersFirst⟩;rcases validSecond with ⟨retainedSecond,refersSecond⟩;cases f0 <;> cases s0 <;> simp only [rootFamilyUse] at actual; · { apply congrArg Sum.inl;apply Fin.ext;have equality:=Sum.inl.inj actual;have positionsEqual:=unique.get_inj_iff.mp equality;exact congrArg (fun index:Fin positions.length=> index.val) positionsEqual}; · { cases actual}; · { cases actual}; · { exact congrArg Sum.inr (Sum.inr.inj actual)}}}}
 theorem rootFamily_forest (g0:DAG n) (fr0:g0.FormulaForest) (positions:List (Fin g0.roots.length)) (unique:positions.Nodup): (rootFamily g0 positions).FormulaForest:=by { refine ⟨rootFamily_guarded g0 fr0.1 positions, ?_⟩;intro owner internal;exact (Nat.card_le_card_of_injective _ (rootFamilyUse_injective g0 positions unique owner)).trans (fr0.2 owner internal)}
 end Cost.Forest
 namespace Cost.Forest
@@ -903,9 +902,9 @@ open Cost.ForestCursorTraversal Cost.ForestCursorDescriptors
 variable {n:Nat}
 def DownBound (limit:Nat):CursorOp n→ Prop | .down _ position _=> position < limit | _=> True
 theorem node_children_le_incidence (g0:DAG n) (node:Fin g0.nodeCount): (g0.node node).children.length≤ g0.childIncidences:=by { rw [DAG.childIncidences,List.sum_ofFn];exact Finset.single_le_sum (f:=fun index:Fin g0.nodeCount=> (g0.node index).children.length) (fun index _=> Nat.zero_le _) (Finset.mem_univ node)}
-theorem cursor_down_bound (g0:DAG n) (node:Fin g0.nodeCount) (route:LeafRoute): ∀ operation ∈ cursorOps g0 node route,DownBound g0.childIncidences operation:=by compact_proof { have claim: ∀ rank:Nat, ∀ owner:Fin g0.nodeCount,owner.val=rank→ ∀ route:LeafRoute, ∀ operation ∈ cursorOps g0 owner route,DownBound g0.childIncidences operation:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro owner rankEq route;rw [cursorOps];intro operation member;rcases List.mem_cons.mp member with rfl | member; · { trivial};cases nodeEq:g0.node owner with | zero=> { simp only [nodeEq,List.not_mem_nil] at member} | input head=> { simp only [nodeEq,List.mem_singleton] at member;subst operation;trivial} | liveAnd f0 s0=> { simp only [nodeEq,List.not_mem_nil] at member} | disj refs=> { simp only [nodeEq] at member;obtain ⟨position,_,occurrence⟩ :=List.mem_flatMap.mp member;simp only [List.singleton_append,List.mem_cons,List.mem_append,List.mem_singleton,List.not_mem_nil,or_false,or_assoc] at occurrence;rcases occurrence with rfl | childMember | rfl; · { have lengthBound:=node_children_le_incidence g0 owner;simp only [nodeEq,Gate.children] at lengthBound;exact position.isLt.trans_le lengthBound}; · { exact ih (g0.childIndex owner (refs.get position)).val (by { have earlier:=g0.childIndex_lt owner (refs.get position);omega}) (g0.childIndex owner (refs.get position)) rfl _ operation childMember}; · { trivial}} | guard child labels=> { simp only [nodeEq,List.mem_append,List.mem_cons,List.mem_singleton,List.not_mem_nil,or_false,or_assoc] at member;rcases member with entered | rfl | childMember | rfl | exited; · { obtain ⟨position,_,same⟩ :=List.mem_map.mp entered;subst operation;trivial}; · { have lengthBound:=node_children_le_incidence g0 owner;simp only [nodeEq,Gate.children,List.length_cons,List.length_nil] at lengthBound;change 0 < g0.childIncidences;omega}; · { exact ih (g0.childIndex owner child).val (by { have earlier:=g0.childIndex_lt owner child;omega}) (g0.childIndex owner child) rfl _ operation childMember}; · { trivial}; · { obtain ⟨position,_,same⟩ :=List.mem_map.mp exited;subst operation;trivial}}}};exact claim node.val node rfl route}
+theorem cursor_down_bound (g0:DAG n) (node:Fin g0.nodeCount) (route:LeafRoute): ∀ operation ∈ cursorOps g0 node route,DownBound g0.childIncidences operation:=by cp { have claim: ∀ rank:Nat, ∀ owner:Fin g0.nodeCount,owner.val=rank→ ∀ route:LeafRoute, ∀ operation ∈ cursorOps g0 owner route,DownBound g0.childIncidences operation:=by { intro rank;induction rank using Nat.strong_induction_on with | h rank ih=> { intro owner rankEq route;rw [cursorOps];intro operation member;rcases List.mem_cons.mp member with rfl | member; · { trivial};cases nodeEq:g0.node owner with | zero=> { simp only [nodeEq,List.not_mem_nil] at member} | input head=> { simp only [nodeEq,List.mem_singleton] at member;subst operation;trivial} | liveAnd f0 s0=> { simp only [nodeEq,List.not_mem_nil] at member} | disj refs=> { simp only [nodeEq] at member;obtain ⟨position,_,occurrence⟩ :=List.mem_flatMap.mp member;simp only [List.singleton_append,List.mem_cons,List.mem_append,List.mem_singleton,List.not_mem_nil,or_false,or_assoc] at occurrence;rcases occurrence with rfl | childMember | rfl; · { have lengthBound:=node_children_le_incidence g0 owner;simp only [nodeEq,Gate.children] at lengthBound;exact position.isLt.trans_le lengthBound}; · { exact ih (g0.childIndex owner (refs.get position)).val (by { have earlier:=g0.childIndex_lt owner (refs.get position);omega}) (g0.childIndex owner (refs.get position)) rfl _ operation childMember}; · { trivial}} | guard child labels=> { simp only [nodeEq,List.mem_append,List.mem_cons,List.mem_singleton,List.not_mem_nil,or_false,or_assoc] at member;rcases member with entered | rfl | childMember | rfl | exited; · { obtain ⟨position,_,same⟩ :=List.mem_map.mp entered;subst operation;trivial}; · { have lengthBound:=node_children_le_incidence g0 owner;simp only [nodeEq,Gate.children,List.length_cons,List.length_nil] at lengthBound;change 0 < g0.childIncidences;omega}; · { exact ih (g0.childIndex owner child).val (by { have earlier:=g0.childIndex_lt owner child;omega}) (g0.childIndex owner child) rfl _ operation childMember}; · { trivial}; · { obtain ⟨position,_,same⟩ :=List.mem_map.mp exited;subst operation;trivial}}}};exact claim node.val node rfl route}
 def PositionsBound (limit:Nat) (builder:Builder):Prop:= ∀ entry ∈ builder.entries,entry.position < limit
-theorem descriptor_step_positions (limit root:Nat) (builder:Builder) (bounded:PositionsBound limit builder) (operation:CursorOp n) (source:DownBound limit operation):PositionsBound limit (ForestCursorDescriptors.step root builder operation):=by compact_proof { cases operation with | down owner position child=> { intro entry member;rcases List.mem_cons.mp member with rfl | old; · { exact source}; · { exact bounded entry old}} | node owner=> { exact bounded} | up=> { exact bounded} | enter owner position channel=> { exact bounded} | leave owner position channel=> { exact bounded} | leaf owner route head=> { exact bounded}}
+theorem descriptor_step_positions (limit root:Nat) (builder:Builder) (bounded:PositionsBound limit builder) (operation:CursorOp n) (source:DownBound limit operation):PositionsBound limit (ForestCursorDescriptors.step root builder operation):=by cp { cases operation with | down owner position child=> { intro entry member;rcases List.mem_cons.mp member with rfl | old; · { exact source}; · { exact bounded entry old}} | node owner=> { exact bounded} | up=> { exact bounded} | enter owner position channel=> { exact bounded} | leave owner position channel=> { exact bounded} | leaf owner route head=> { exact bounded}}
 theorem descriptor_scan_positions (limit root:Nat) (builder:Builder) (bounded:PositionsBound limit builder) (operations:List (CursorOp n)) (source: ∀ operation ∈ operations,DownBound limit operation):PositionsBound limit (scan root builder operations):=by { induction operations generalizing builder with | nil=> { exact bounded} | cons operation rest ih=> { exact ih (ForestCursorDescriptors.step root builder operation) (descriptor_step_positions limit root builder bounded operation (source operation List.mem_cons_self)) (fun later member=> source later (List.mem_cons_of_mem operation member))}}
 theorem descriptor_roots_positions (g0:DAG n) (builder:Builder) (bounded:PositionsBound g0.childIncidences builder) (positions:List (Fin g0.roots.length)):PositionsBound g0.childIncidences (scanRoots g0 builder positions):=by { induction positions generalizing builder with | nil=> { exact bounded} | cons position rest ih=> { apply ih;exact descriptor_scan_positions g0.childIncidences position.val (beginRoot builder) bounded (cursorOps g0 (g0.roots.get position) []) (cursor_down_bound g0 _ [])}}
 theorem buildRoots_position_bound (g0:DAG n): ∀ entry ∈ (buildRoots g0).entries,entry.position < g0.childIncidences:=by { exact descriptor_roots_positions g0 initial (by { intro entry member;cases member}) _}
@@ -933,7 +932,7 @@ variable {n:Nat} {W:Type} [AddCommGroup W] [LinearOrder W] [IsOrderedAddMonoid W
 def forestSize (g0:DAG n):Nat:=n+g0.nodeCount+g0.roots.length+g0.childIncidences+g0.guardIncidences
 def chosenMixedWidth (g0:DAG n):Nat:=Nat.log 2 (10000* (forestSize g0+1))+1
 theorem chosenMixedCapacity (g0:DAG n):10000* (forestSize g0+1) < 2 ^ chosenMixedWidth g0:=Nat.lt_pow_succ_log_self (by { decide}:1 < 2) _
-theorem original_descriptor_capacity (g0:DAG n) (fr0:g0.FormulaForest) (target:Channel n): (buildRoots (healthyGraph g0 target false)).count < 2 ^ chosenMixedWidth g0∧ ∀ entry ∈ (buildRoots (healthyGraph g0 target false)).entries,entry.position < 2 ^ chosenMixedWidth g0:=by compact_proof { have cap:=chosenMixedCapacity g0;have geometry:=healthy_geometry g0 target false;have positiveForest:=Forest.rootFamily_forest g0 fr0 (Forest.healthyPositions g0 target false) (Forest.healthyPositions_nodup g0 target false);have count:=actual_descriptor_count_bound (healthyGraph g0 target false) positiveForest;have rootCount:=Forest.healthyPositions_length_le g0 target false;simp only [geometry.2.1,geometry.2.2.1,geometry.2.2.2.1] at count;unfold forestSize at cap;constructor; · { omega}; · { intro entry member;have bound:=buildRoots_position_bound (healthyGraph g0 target false) entry member;rw [geometry.2.1] at bound;omega}}
+theorem original_descriptor_capacity (g0:DAG n) (fr0:g0.FormulaForest) (target:Channel n): (buildRoots (healthyGraph g0 target false)).count < 2 ^ chosenMixedWidth g0∧ ∀ entry ∈ (buildRoots (healthyGraph g0 target false)).entries,entry.position < 2 ^ chosenMixedWidth g0:=by cp { have cap:=chosenMixedCapacity g0;have geometry:=healthy_geometry g0 target false;have positiveForest:=Forest.rootFamily_forest g0 fr0 (Forest.healthyPositions g0 target false) (Forest.healthyPositions_nodup g0 target false);have count:=actual_descriptor_count_bound (healthyGraph g0 target false) positiveForest;have rootCount:=Forest.healthyPositions_length_le g0 target false;simp only [geometry.2.1,geometry.2.2.1,geometry.2.2.2.1] at count;unfold forestSize at cap;constructor; · { omega}; · { intro entry member;have bound:=buildRoots_position_bound (healthyGraph g0 target false) entry member;rw [geometry.2.1] at bound;omega}}
 end Cost.ForestRootProjection ctx "Cost.ForestOriginalSemantics" namespace Cost.ForestOriginalSemantics
 open Controller Decoder Decoder.DAG Cost
 open Cost.ForestRootProjection Cost.ForestIndexedOperands
@@ -947,6 +946,27 @@ variable {n:ℕ} {W:Type} [AddCommGroup W] [LinearOrder W] [IsOrderedAddMonoid W
 open Cost Cost.ForestIndexedOperands
 /-- forest maximum weight: Formula-forest execution and maximum weight. -/
 theorem forest_maximum_weight (g0:DAG n) (guarded:g0.Guarded) (fr0:g0.FormulaForest) (rows:List Row) (roots:List Nat) (matched:RowsMatch g0 rows) (rootsMatch:RootsMatch g0 roots) (ws0:Channel n→ W) (nonnegative: ∀ channel,0≤ ws0 channel) (b:ℕ) (target:Channel n) (candidate:ForestWeightedTagged.Candidate W) (selected: (ForestWeightedIndexed.view (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows) ws0 b target roots).2).data.selected=some candidate): (∀ (position:Fin g0.roots.length) (K:Finset (Channel n)),Admissible b target K→ g0.eval (assignmentOfSet K) (g0.roots.get position)=true→ GenericWeight.total ws0 K≤ candidate.score)∧ (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows) ws0 b target roots).2.operations≤ 4* (g0.roots.length+g0.childIncidences)+2*g0.guardIncidences∧ (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows) ws0 b target roots).2.arithmetic≤ n+8* (g0.roots.length+g0.childIncidences)+4*g0.guardIncidences:=by { sorry}
+/-- For healthy-zero forest outputs and nonnegative weights, return an attained maximum detecting set and its physical realization. -/
+theorem forest_physical_maximum (g:DAG n) (fr:g.FormulaForest)
+    (rs:List Row) (rt:List Nat) (mt:RowsMatch g rs)
+    (rm:RootsMatch g rt) (ws:Channel n→ W)
+    (nn: ∀ c,0≤ ws c) (b:Nat) (br:Physical.Bridge n)
+    (hb:0 < b)
+    (hz: ∀ i:Fin g.roots.length,
+      g.eval (assignmentOfSet {br.target}) (g.roots.get i)=false)
+    (ex:Physical.BridgeDetectable (b:=b) br true g.observations):
+    ∃ a K,
+      (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rs)
+        ws b br.target rt).2.selected=some a∧
+      Admissible b br.target K∧
+      Physical.BridgeInputDetects br true g.observations
+        (Physical.realizeBridge br hb K) true∧
+      a.score=GenericWeight.total ws K∧
+      ∀ L,Admissible b br.target L→
+        Physical.BridgeInputDetects br true g.observations
+          (Physical.realizeBridge br hb L) true→
+        GenericWeight.total ws L≤ GenericWeight.total ws K:=by
+  sorry
 end Optimization.Weights
 end Controller
 

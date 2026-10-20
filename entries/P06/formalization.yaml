@@ -1,9 +1,9 @@
 version: v0.4
 project:
-  name: Critical sets, query bounds and width obstructions
-  description: Critical detecting-set counts, physical test-list and query lower bounds, specification-clause
-    primal and incidence treewidth obstructions, and the stated native or specification backdoor
-    bounds.
+  name: Critical recovery, query lower bounds and binary-native width
+  description: Critical-set and cycle recovery through a fixed source-reading program, black-box
+    query obstructions, and primal/incidence width lower bounds for both specification and complete
+    binary-expanded native CNF graphs.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -11,7 +11,7 @@ project:
   - Idris Ali Shaik
 classification:
   arxiv:
-  - cs.CC
+  - 'cs.CC'
   msc2020:
   - '68Q25'
   - '68Q60'
@@ -23,26 +23,19 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Example 6.1 (cycle decoder), Proposition 6.2 (critical sets), Corollary 6.3
-    (adaptive queries), Proposition 6.10 (treewidth), the structural component of Proposition
-    6.11 (linear width obstruction), and Proposition 6.12 (syntactic backdoors). Native recovery
-    executions and their exact resource counts are mechanized refinements; expansion and degree
-    assumptions remain supplied.
+  note: Version 1.0; critical families, query obstructions, backdoors and Proposition 6.10. The
+    additional width graphs use the complete binary-expanded native CNF.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
 status:
-  scope: Critical detecting-set systems, physical test-list and query lower bounds, primal and
-    incidence treewidth obstructions, and native or specification backdoor lower bounds. Query
-    bounds use the displayed deterministic and randomized query models. Width and backdoor theorems
-    concern the specified native or specification encodings. The supplied expansion and degree
-    hypotheses remain assumptions of the structural circuit component; no infinite expander construction
-    or DNNF lower bound is included. The cycle and critical recovery executions use a Solution-supplied
-    instance-dependent forest program. Its reference factory inherits the P04 preprocessing gap;
-    the fetched tick bounds do not charge that computation. The selected primal and incidence
-    treewidth graphs are built from the n-ary specification clauses. Transfer to the bounded-gate
-    native CNF of Proposition 6.10 remains unproved here. The selected counts, query bounds and
-    separately identified backdoor results retain their own statements.
+  scope: The selected surface preserves the existing counts, query bounds, backdoors and specification-graph
+    width results. It adds physical critical/cycle recovery through one fixed 57-instruction program
+    at each word width, including source loading, canonical indicator output, halt and displayed
+    time/live/resident bounds. It also adds the complete binary-expanded native CNF primal and
+    incidence treewidth lower bounds. Recovery retains the stated source-row and root promises;
+    it does not recognize arbitrary malformed inputs. The separately supplied source-construction
+    companions discharge the general forest construction obligation.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -62,18 +55,19 @@ automation:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Prove critical-set counts and query obstructions, distinguishing specification
-      graphs from bounded native encodings.
+    prompting_notes: Preserve the exact selected hypotheses; verify P04/P06/P07 source-construction
+      companions and the affected statement, metadata, comparison, kernel and rendering surfaces.
   spend_usd: not tracked
   notes: The author directed the formalization. AI agents assisted with proof construction and
     packaging.
 fidelity:
-  divergences: The cycle and critical recovery executions use a Solution-supplied instance-dependent
-    forest program. Its reference factory inherits the P04 preprocessing gap; the fetched tick
-    bounds do not charge that computation. The selected primal and incidence treewidth graphs
-    are built from the n-ary specification clauses. Transfer to the bounded-gate native CNF of
-    Proposition 6.10 remains unproved here. The selected counts, query bounds and separately identified
-    backdoor results retain their own statements.
+  divergences: The selected surface preserves the existing counts, query bounds, backdoors and
+    specification-graph width results. It adds physical critical/cycle recovery through one fixed
+    57-instruction program at each word width, including source loading, canonical indicator output,
+    halt and displayed time/live/resident bounds. It also adds the complete binary-expanded native
+    CNF primal and incidence treewidth lower bounds. Recovery retains the stated source-row and
+    root promises; it does not recognize arbitrary malformed inputs. The separately supplied source-construction
+    companions discharge the general forest construction obligation.
 review:
   status: self-assessed
   reviewers: []
@@ -176,4 +170,28 @@ alignment:
       satisfies the stated linear size-versus-treewidth, net-cutwidth and K-input block-width
       inequalities, with C=12000*c*(D+1). Expansion and bounded degree remain premises; no infinite
       expander construction or DNNF/OBDD lower bound is selected.
+  - source: Example 5.2 and critical-family recovery
+    lean: Controller.Cost.CriticalSourceScan.critical_physical_recovery
+    module: Controller.Cost.CriticalSourceRecovery
+    status: proved
+    note: One source-reading program recovers the canonical indicator and a physical detecting
+      realization under the critical-family promise, with complete cold-run bounds.
+  - source: Proposition 5.3 (cycle recovery)
+    lean: Controller.Cost.CriticalSourceScan.cycle_physical_recovery
+    module: Controller.Cost.CriticalSourceRecovery
+    status: proved
+    note: The same fixed program recovers and realizes the full simultaneous detecting set for
+      the modulo-cycle source.
+  - source: Proposition 6.10 (binary-expanded native primal graph)
+    lean: Controller.Graph.BoundedNativeWidth.primal_treewidth_lower
+    module: Controller.Graph.NativeMinor
+    status: proved
+    note: The primal graph is built from the complete binary-expanded native CNF; its treewidth
+      is at least min(channels,buses).
+  - source: Proposition 6.10 (binary-expanded native incidence graph)
+    lean: Controller.Graph.BoundedNativeWidth.incidence_treewidth_lower
+    module: Controller.Graph.NativeMinor
+    status: proved
+    note: The incidence graph is built from the same complete native clause list; its treewidth
+      is at least min(channels,buses).
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.

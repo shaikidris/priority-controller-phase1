@@ -17,10 +17,12 @@ version 1.0, [DOI 10.5281/zenodo.23400057](https://zenodo.org/records/23400057).
 Per-entry metadata distinguishes manuscript statements from implementation
 refinements and other differences in the formalization.
 
-The [algorithm and encoding contracts](SEMANTIC_SCOPE.md) identify the remaining
-uniform code-construction, bounded-encoding width and typed-family acceptance
-bridges. The selected component theorems retain their literal scope; the full
-paper algorithm target remains open at those bridges.
+The [algorithm and encoding contracts](SEMANTIC_SCOPE.md) state the exact
+entry interfaces. [Concrete construction contracts](CONSTRUCTION_CONTRACTS.md)
+cover forest, bounded-live-AND and proper-basis source constructors, including
+execution and temporary word storage. P06 includes complete binary-native width
+proofs. P02/P03 source construction, P08 typed-family acceptance and conventional
+encoded-language classification have their separate interfaces.
 
 ## P01: exact physical images
 
@@ -88,21 +90,20 @@ The explicit program and numerical constants are implementation refinements;
 the entry does not enumerate all primary assignments or all native-CNF models.
 [Metadata and exact alignment](entries/P03/formalization.yaml).
 
-## P04: formula forests and weighted candidate bounds
+## P04: forest detection and attained maximum weight
 
-[P04](Phase1/P04/Challenge.lean) gives physical detection execution for a
-supplied formula forest with matching rows, heads and roots, under its displayed
-native layout and initial-state assumptions. It bounds ticks, live words and
-other declared operation/storage measures and emits a detecting eligible-set
-descriptor on acceptance. Its reference code factory precomputes a selected result;
-the fetched tick bound does not charge that computation or establish the full
-uniform algorithm of Theorem 5.6. Its separate weighted theorem assumes a
-returned traversal candidate and nonnegative weights, and bounds every
-admissible true-set weight by that candidate's score with linear operation
-counts. This is the upper-bound component of Corollary 6.7; it does not establish
-candidate existence, attainment or maximum-weight optimality of the emitted
-physical test. Encoded-weight bit costs are separate.
-[Metadata and exact alignment](entries/P04/formalization.yaml).
+[P04](Phase1/P04/Challenge.lean) proves physical detection execution for supplied
+formula forests, the weighted score bound, and an attained maximum-weight
+physical detecting set for healthy-zero observations. The optimum theorem
+retains nonnegative weights, a positive bus count and detectability. Its output
+is an eligible-set indicator defining a canonical physical realization.
+
+The [complete forest constructor](Controller/Cost/ForestSourceCompiler.lean)
+reads original rows, roots and weights, constructs the same checked resident,
+and has linear construction work and temporary word storage. The
+[cold weighted execution](Controller/Cost/ForestWeightedCold.lean) emits the
+attained optimum. Generic weight arithmetic and encoded bit costs have separate
+contracts. [Metadata and exact alignment](entries/P04/formalization.yaml).
 
 ## P05: dual-Horn and graph-cover representations
 
@@ -117,33 +118,41 @@ P-completeness or counting-hardness theorem.
 [Entry account](entries/P05/README.md) and
 [metadata](entries/P05/formalization.yaml).
 
-## P06: critical sets, query bounds and structural obstructions
+## P06: source recovery, query obstructions and native width
 
-[P06](Phase1/P06/Challenge.lean) formalizes the cycle/critical-set constructions
-of Example 6.1 and Proposition 6.2, universal physical-test-list lower bounds,
-and deterministic and finite randomized query bounds from Corollary 6.3.
-The costed recovery runs refine the constructive arguments with explicit native
-representation and execution premises. The structural theorems cover the
-specified primal/incidence encodings of Proposition 6.10, the conditional
-graph-width component of Proposition 6.11 and the syntactic backdoors of
-Proposition 6.12.
-Expansion and degree bounds are supplied assumptions. The query bounds restrict
-oracle access; they are not sequential-time lower bounds for an algorithm that
-reads decoder syntax. No infinite expander construction or DNNF lower bound is
-selected. [Metadata and exact alignment](entries/P06/formalization.yaml).
+[P06](Phase1/P06/Challenge.lean) combines critical-set and cycle recovery,
+black-box query lower bounds, backdoors, and primal/incidence width results.
+The source recovery statements use one fixed 57-instruction program at each
+word width. They include original source loading, canonical indicator emission,
+halt and the displayed fetched, live-word and resident-word bounds, under the
+stated critical-family or cycle source promises.
+
+The binary-native width statements use the complete binary-expanded native CNF,
+with its auxiliary wires and clauses. Both its primal and incidence treewidths
+are at least the minimum of the channel and bus counts. Specification-graph
+width statements retain their own graphs. These structured-family results do
+not recognize arbitrary CNF or supply an infinite expander construction.
+[Metadata and exact alignment](entries/P06/formalization.yaml).
 
 ## P07: bounded live conjunction and proper bases
 
-[P07](Phase1/P07/Challenge.lean) proves small-support and consistent selector
-expansion laws from Lemmas 7.2 and 7.3, then gives actual native detection and
-checked emitted witnesses for a supplied live-AND bound. Its numerical XP,
-one-live-AND and healthy-one estimates refine Theorem 7.4; the displayed general
-XP and healthy-one inequalities are weaker than the manuscript's sharper
-expressions. The proper-basis program formalizes the algorithmic component of
-Theorem 7.5 under supplied basis and representation evidence. It does not prove
-the full-basis hardness classification or independently supply an encoded
-language's missing construction bridge.
-[Metadata and exact alignment](entries/P07/formalization.yaml).
+[P07](Phase1/P07/Challenge.lean) selects the bounded-support and consistent
+selector-expansion laws, complete bounded native execution and emitted-witness
+checking, its displayed XP/special-case inequalities, and proper-basis execution.
+Raw-layout, live-AND, basis `Uses`, proper-basis and representation premises are
+explicit. The displayed general XP and healthy-one inequalities retain their
+stated bounds rather than asserting the manuscript's sharper expressions.
+
+The [construction companions](Controller/Cost/ExtensionAlgorithmsComplete.lean)
+prove concrete source-only constructors, exact code images, total construction
+plus execution time, and temporary construction storage. The constructed
+proper-basis implementation uses bounded `k=0` in the guarded case and source
+table constructors in the monotone/literal cases. The registry's selected
+proper-basis theorem retains its own implementation. These larger construction
+certificates are included in the proof library and the independent audit target
+list; they are not additional Comparator-selected statements in P07.
+[Construction contracts](CONSTRUCTION_CONTRACTS.md) and
+[metadata](entries/P07/formalization.yaml).
 
 ## P08: observation projection and typed certificates
 

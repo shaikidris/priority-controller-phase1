@@ -1,0 +1,173 @@
+{
+  "status": "TEN_PUBLIC_BROWSER_AND_INTAKE_IMPLEMENTATION_CHECKS_PASS",
+  "source_kind": "local uncommitted tree",
+  "request_syntax_fixture_commit": "55f045bf374185eeda9795c3978b78804a70dcea",
+  "immutable_Git_replay": false,
+  "server_revision": "019205bf1f96531df08da742d80e4218373f7dd8",
+  "deployed_server_revision_independently_confirmed": false,
+  "preflight_source_sha256": "dd51bef4979e5453d01f155ed084c61c21cef606e3e9ba13bc5943a566fd4bed",
+  "intake_source_sha256": "83c34d1a2b7c1ccd53da70336ca1b8689f09b668ddbd2073141572b8fdfa1da6",
+  "entries": [
+    {
+      "entry": "P01",
+      "status": "pass",
+      "metadata": "formalization.yaml",
+      "sha256": "de7e033c2aab9437f9533e1ec65da9b4b61d2f7daf84a22e9b7cc9b1f42d6fc1",
+      "preview": {
+        "text": "Exact reachable qualifier-set images for a finite priority controller with independent enable and request inputs and a specified first-stage bridge interface. The formal statements characterize detection through arbitrary Boolean qualifier observations, show that nonemptiness cannot be expressed by valid proper-coordinate relations, and classify a specified qualifier-only stuck-at fault. The selector and fault equations are explicit.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P01/comparator.json",
+        "formalization_metadata_path": "formalization.yaml"
+      }
+    },
+    {
+      "entry": "P02",
+      "status": "pass",
+      "metadata": "entries/P02/formalization.yaml",
+      "sha256": "fb77cfb8a151d4d2f9117e2559a70efd1340dcd03369f3f6dc76708e1c347118",
+      "preview": {
+        "text": "Correctness and completeness of fault detection and extension over a supplied guarded decoder DAG, together with an executed native cold-detector bound.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P02/comparator.json",
+        "formalization_metadata_path": "entries/P02/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P03",
+      "status": "pass",
+      "metadata": "entries/P03/formalization.yaml",
+      "sha256": "b5e43be65d624af77d02ab9b4d7a218ab1e9050d336bd366616bb8b5cc3a8320",
+      "preview": {
+        "text": "Canonical eligible-set enumeration with actual prefix traversal, exact returned sets, detecting emitted witnesses, iterator delay and native program resource bounds.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P03/comparator.json",
+        "formalization_metadata_path": "entries/P03/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P04",
+      "status": "pass",
+      "metadata": "entries/P04/formalization.yaml",
+      "sha256": "5dbdb1a317da63fd07fb6d018397b088eb056226f3ae19a7512ec8c86c4e892e",
+      "preview": {
+        "text": "Formula-forest detection execution and nonnegative-weight optimal detecting sets for healthy-zero observations. Complete source construction and word-storage proofs are supplied as checked companion modules.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P04/comparator.json",
+        "formalization_metadata_path": "entries/P04/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P05",
+      "status": "pass",
+      "metadata": "entries/P05/formalization.yaml",
+      "sha256": "492dc82d22617b6850663cfb8865bb93bc30a3a8cd61a5f371f92033006ab886",
+      "preview": {
+        "text": "Dual-Horn satisfiability and finite graph vertex covers are represented by physical bridge detection in finite priority controllers. The constructions preserve the declared variable or vertex universe, have linear counted decoder size, and count eligible detecting qualifier sets rather than primary-input assignments.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P05/comparator.json",
+        "formalization_metadata_path": "entries/P05/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P06",
+      "status": "pass",
+      "metadata": "entries/P06/formalization.yaml",
+      "sha256": "ae7c0885bf340cbc16c065b12ce07f8ac25cf37c7a0eca74cb0879839c0b512e",
+      "preview": {
+        "text": "Critical-set and cycle recovery through a fixed source-reading program, black-box query obstructions, and primal/incidence width lower bounds for both specification and complete binary-expanded native CNF graphs.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P06/comparator.json",
+        "formalization_metadata_path": "entries/P06/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P07",
+      "status": "pass",
+      "metadata": "entries/P07/formalization.yaml",
+      "sha256": "c893a8393706161be3174d67c7deb41a86bd136ea26b92f7e39ed10d1bf2bd86",
+      "preview": {
+        "text": "Bounded-support and selector-expansion laws with complete native executions for bounded live conjunctions and proper bases. Concrete source construction, total time and temporary word-storage proofs accompany the selected registry statements.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P07/comparator.json",
+        "formalization_metadata_path": "entries/P07/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P08",
+      "status": "pass",
+      "metadata": "entries/P08/formalization.yaml",
+      "sha256": "d084170f86388d136851a9645b9419eed6a3c1c9bd4ee49211612f3ec16797f5",
+      "preview": {
+        "text": "Observation-wrapper projection, recovery for the intended producer family, checked structured-family decoding, and typed satisfiability or certified-unsatisfiability pipeline laws.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P08/comparator.json",
+        "formalization_metadata_path": "entries/P08/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P09",
+      "status": "pass",
+      "metadata": "entries/P09/formalization.yaml",
+      "sha256": "75fd33db349c814dc3a1ac17b402ef386989b5b94d4cbce94c4089056a49eadf",
+      "preview": {
+        "text": "Checked ordinary-resolution construction for the native controller encoding and supported observation wrappers, with cubic inference bounds and the displayed derived-literal storage bound.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P09/comparator.json",
+        "formalization_metadata_path": "entries/P09/formalization.yaml"
+      }
+    },
+    {
+      "entry": "P10",
+      "status": "pass",
+      "metadata": "entries/P10/formalization.yaml",
+      "sha256": "943a12afaa9605f3d9201421161e96fba7b794c71a6dea6ad13bf5f4f7ad8751",
+      "preview": {
+        "text": "Concrete binary encodings, cold native interpretation, executed image construction, finite TM2 realization, logarithmic visited-work-cell bounds and parameterized reduction composition. One fixed program or machine serves all stated inputs; construction cost and intermediate output length are included in the relevant time bounds.",
+        "origin": "project.description",
+        "dedicated": true
+      },
+      "requested_paths": {
+        "project_path": null,
+        "comparator_config_path": "entries/P10/comparator.json",
+        "formalization_metadata_path": "entries/P10/formalization.yaml"
+      }
+    }
+  ],
+  "live_Palomar_state_changed": false
+}

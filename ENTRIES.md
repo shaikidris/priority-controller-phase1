@@ -1,6 +1,6 @@
 # Selected formalization entries
 
-The ten entries select 80 theorem statements from the Paper A proof library and
+The ten entries select 85 theorem statements from the Paper A proof library and
 its encoded-machine bridge. The selection retains the complete K00 bridge,
 including all 39 K00 obligations. Each entry has its own transparent Challenge,
 Solution imports, comparison configuration and source metadata.
@@ -10,9 +10,9 @@ Solution imports, comparison configuration and source metadata.
 | [P01](Phase1/P01/Challenge.lean) | Exact physical image and observation criterion | 6 + 0 | `entries/P01/comparator.json` | `formalization.yaml` |
 | [P02](Phase1/P02/Challenge.lean) | Guarded decision and constrained extension | 6 + 1 | `entries/P02/comparator.json` | `entries/P02/formalization.yaml` |
 | [P03](Phase1/P03/Challenge.lean) | Canonical enumeration and streaming delay | 8 + 2 | `entries/P03/comparator.json` | `entries/P03/formalization.yaml` |
-| [P04](Phase1/P04/Challenge.lean) | Formula-forest execution and candidate score bounds | 2 + 3 | `entries/P04/comparator.json` | `entries/P04/formalization.yaml` |
+| [P04](Phase1/P04/Challenge.lean) | Forest execution and attained healthy-zero physical maximum | 3 + 3 | `entries/P04/comparator.json` | `entries/P04/formalization.yaml` |
 | [P05](Phase1/P05/Challenge.lean) | Dual-Horn and graph-cover representations | 7 + 0 | `entries/P05/comparator.json` | `entries/P05/formalization.yaml` |
-| [P06](Phase1/P06/Challenge.lean) | Critical sets, queries, width and backdoors | 14 + 1 | `entries/P06/comparator.json` | `entries/P06/formalization.yaml` |
+| [P06](Phase1/P06/Challenge.lean) | Fixed source recovery, queries, native width and backdoors | 18 + 1 | `entries/P06/comparator.json` | `entries/P06/formalization.yaml` |
 | [P07](Phase1/P07/Challenge.lean) | Bounded conjunction and proper bases | 11 + 4 | `entries/P07/comparator.json` | `entries/P07/formalization.yaml` |
 | [P08](Phase1/P08/Challenge.lean) | Observation projection and typed certificates | 11 + 0 | `entries/P08/comparator.json` | `entries/P08/formalization.yaml` |
 | [P09](Phase1/P09/Challenge.lean) | Ordinary resolution and wrappers | 9 + 4 | `entries/P09/comparator.json` | `entries/P09/formalization.yaml` |
@@ -41,8 +41,10 @@ premises remain part of every corresponding theorem. The width obstruction
 uses the displayed graph expansion and degree assumptions. Proper-basis
 execution does not assert the full-basis hardness classification. Certificate
 recovery uses typed payloads and the displayed explicit grammar and checkers.
-The selected forest weight theorem bounds feasible true-set weights by a returned
-candidate score; it does not certify a maximum-weight physical test.
+The forest selection includes an attained maximum-weight physical test for
+healthy-zero observations, with nonnegative weights and detectability. The
+complete forest and extension source constructors are separately audited
+companions; see [construction contracts](CONSTRUCTION_CONTRACTS.md).
 Resolution claims concern ordinary resolution and the stated inference or
 literal-storage measures.
 

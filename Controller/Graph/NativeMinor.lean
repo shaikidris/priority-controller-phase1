@@ -5,6 +5,7 @@ module
 public import Controller.Graph.Minor
 public import Controller.Graph.NetWidth
 public import Controller.Native.Encode
+public import Controller.Native.BoundedEncode
 
 @[expose] public section
 
@@ -566,3 +567,497 @@ theorem incidence_treewidth_lower (w : ℕ) (bound : TreewidthLE (incidence p) w
 
 end NativeWidth
 end Controller.Graph
+
+set_option maxHeartbeats 4000000
+set_option maxRecDepth 8000
+
+namespace Controller.Graph.BoundedNativeWidth
+
+open Controller Controller.Native Controller.Native.Parameters Controller.Native.Bounded
+
+variable (p : Parameters)
+
+/-- The graph is taken from the complete binary-expanded native formula. -/
+def clauses : List (CNF.Clause (GlobalVariable p)) := (globalFormula p).clauses.toList
+
+def primal : SimpleGraph (GlobalVariable p) := clausePrimal (clauses p)
+
+def inputs (i : Fin p.channels) : List (CNF.Literal (Variable p)) :=
+  enable p i :: (List.finRange p.buses).map (fun j => internal p (.qualifierGuard .faulty j i))
+
+@[simp] theorem inputs_length (i : Fin p.channels) : (inputs p i).length = p.buses + 1 := by
+  simp [inputs]
+
+def prefixWire (i : Fin p.channels) (j : Fin p.buses) : GlobalVariable p :=
+  localSlots p (.qualifier .faulty i) (by
+    change LocalVariable (Variable p) ((inputs p i).length - 2)
+    exact (foldOutput (inputs p i) (internal p (.qualifier .faulty i))
+      ⟨j.val, by simp only [inputs_length, Nat.add_sub_cancel]; exact j.isLt⟩).1)
+
+def factor (i : Fin p.channels) (j : Fin p.buses) : GlobalVariable p :=
+  .original (.internal (.qualifierGuard .faulty j i))
+
+def flag (j : Fin p.buses) : GlobalVariable p := .original (.internal (.flag .faulty j))
+
+def previous (i : Fin p.channels) (j : Fin p.buses) : GlobalVariable p :=
+  if first : j.val = 0 then .original (.primary (.enable i))
+  else prefixWire p i ⟨j.val - 1, by omega⟩
+
+theorem mapped_foldInputs (i : Fin p.channels) (j : Fin p.buses) :
+    (foldInputs (inputs p i) (by simp; have := p.positiveBuses; omega)
+      ⟨j.val, by simp only [inputs_length, Nat.add_sub_cancel]; exact j.isLt⟩).map
+        (fun literal => (localSlots p (.qualifier .faulty i) literal.1, literal.2)) =
+      [(previous p i j, true), (factor p i j, true)] := by
+  simp only [foldInputs, inputs, List.length_cons,
+    List.map_cons, List.map_nil, originalLiteral, List.get_eq_getElem,
+    List.getElem_cons_succ, List.getElem_map, List.getElem_finRange]
+  by_cases first : j.val = 0
+  · simp [first, previous, localSlots, enable, internal, positive, factor, Fin.ext_iff]
+  · have earlier : j.val - 1 < p.buses - 1 := by omega
+    simp [first, previous, prefixWire, foldOutput, inputs, localSlots, internal, positive, factor, earlier]
+    rfl
+
+theorem local_row_mem (owner : Internal p)
+    (row : CNF.Clause (LocalVariable (Variable p) (auxiliaryCount (p.gate owner))))
+    (member : row ∈ rows (internal p owner) (p.gate owner)) :
+    row.map (fun literal => (localSlots p owner literal.1, literal.2)) ∈ clauses p := by
+  have localMember : row.map (fun literal => (localSlots p owner literal.1, literal.2)) ∈
+      (producerFormula p owner).clauses.toList := by
+    change _ ∈ ((rows (internal p owner) (p.gate owner)).toArray.map
+      (Controller.CNF.OrderedFormula.Clause.relabel (localSlots p owner))).toList
+    simp only [Array.toList_map]
+    exact List.mem_map.mpr ⟨row, member, rfl⟩
+  have inEquations : ∀ owners : List (Internal p), owner ∈ owners →
+      row.map (fun literal => (localSlots p owner literal.1, literal.2)) ∈
+        (owners.foldr (fun role suffix => producerFormula p role ++ suffix)
+          Controller.CNF.OrderedFormula.empty).clauses.toList := by
+    intro owners
+    induction owners with
+    | nil => simp
+    | cons head tail ih =>
+      intro occurs
+      change _ ∈ ((producerFormula p head).clauses ++ _).toList
+      rw [Array.toList_append]
+      rcases List.mem_cons.mp occurs with same | later
+      · subst head; exact List.mem_append_left _ localMember
+      · exact List.mem_append_right _ (ih later)
+  change _ ∈ ((globalEquationFormula p).clauses ++ _).toList
+  rw [Array.toList_append]
+  exact List.mem_append_left _ (inEquations p.roles (p.mem_roles owner))
+
+/-- Each binary qualifier producer joins its output to either of its inputs. -/
+theorem qualifier_link_row (i : Fin p.channels) (j : Fin p.buses)
+    (input : GlobalVariable p) (member : input = previous p i j ∨ input = factor p i j) :
+    [(prefixWire p i j, false), (input, true)] ∈ clauses p := by
+  let output := foldOutput (inputs p i) (internal p (.qualifier .faulty i))
+    ⟨j.val, by simp only [inputs_length, Nat.add_sub_cancel]; exact j.isLt⟩
+  let arguments := foldInputs (inputs p i) (by simp; have := p.positiveBuses; omega)
+    ⟨j.val, by simp only [inputs_length, Nat.add_sub_cancel]; exact j.isLt⟩
+  have argumentsMap := mapped_foldInputs p i j
+  have inputMember : (input, true) ∈ arguments.map
+      (fun literal => (localSlots p (.qualifier .faulty i) literal.1, literal.2)) := by
+    rw [argumentsMap]
+    rcases member with rfl | rfl <;> simp
+  obtain ⟨literal, literalMember, same⟩ := List.mem_map.mp inputMember
+  have producerMember : (⟨output, .and arguments⟩ : Producer _) ∈
+      expand (internal p (.qualifier .faulty i)) (p.gate (.qualifier .faulty i)) := by
+    change _ ∈ foldProducers .conjunction (inputs p i) (internal p (.qualifier .faulty i))
+    rw [foldProducers]
+    simp only [inputs_length]
+    have positive := p.positiveBuses
+    simp only [show p.buses + 1 ≠ 0 by omega, show p.buses + 1 ≠ 1 by omega,
+      dite_false]
+    exact List.mem_map.mpr ⟨⟨j.val, by simp only [inputs_length, Nat.add_sub_cancel]; exact j.isLt⟩, by simp, rfl⟩
+  have rowMember : [CNF.negate output, literal] ∈
+      (⟨output, .and arguments⟩ : Producer _).rows := by
+    change _ ∈ (CNF.Gate.and arguments).clauses output
+    exact List.mem_append_left _ (List.mem_map.mpr ⟨literal, literalMember, rfl⟩)
+  have allRows := local_row_mem p (.qualifier .faulty i) _
+    (List.mem_flatMap.mpr ⟨_, producerMember, rowMember⟩)
+  have outputPhase : output.2 = true := by
+    dsimp [output, foldOutput]
+    split <;> rfl
+  have mappedNegative : (localSlots p (.qualifier .faulty i) (CNF.negate output).1,
+      (CNF.negate output).2) = (prefixWire p i j, false) := by
+    change (localSlots p (.qualifier .faulty i) output.1, !output.2) = _
+    rw [outputPhase]
+    rfl
+  change [(localSlots p (.qualifier .faulty i) (CNF.negate output).1, (CNF.negate output).2),
+    (localSlots p (.qualifier .faulty i) literal.1, literal.2)] ∈ clauses p at allRows
+  rw [mappedNegative, same] at allRows
+  exact allRows
+
+def channelBranch (i : Fin p.channels) : Finset (GlobalVariable p) :=
+  insert (.original (.primary (.enable i)))
+    ((Finset.univ.image (prefixWire p i)) ∪ Finset.univ.image (factor p i))
+
+theorem prefix_mem (i : Fin p.channels) (j : Fin p.buses) :
+    prefixWire p i j ∈ channelBranch p i := by simp [channelBranch]
+
+theorem factor_mem (i : Fin p.channels) (j : Fin p.buses) :
+    factor p i j ∈ channelBranch p i := by simp [channelBranch]
+
+theorem previous_mem (i : Fin p.channels) (j : Fin p.buses) :
+    previous p i j ∈ channelBranch p i := by
+  unfold previous
+  split
+  · exact Finset.mem_insert_self _ _
+  · exact prefix_mem p i _
+
+def owner : GlobalVariable p → Option (Fin p.channels)
+  | .original (.primary (.enable i)) => some i
+  | .original (.internal (.qualifier _ i)) => some i
+  | .original (.internal (.qualifierGuard _ _ i)) => some i
+  | .auxiliary (.qualifier _ i) _ => some i
+  | _ => none
+
+theorem prefix_owner (i : Fin p.channels) (j : Fin p.buses) :
+    owner p (prefixWire p i j) = some i := by
+  unfold prefixWire foldOutput
+  split <;> rfl
+
+theorem channel_owner (i : Fin p.channels) (x : GlobalVariable p)
+    (member : x ∈ channelBranch p i) : owner p x = some i := by
+  rcases Finset.mem_insert.mp member with rfl | member
+  · rfl
+  rcases Finset.mem_union.mp member with member | member
+  · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp member
+    exact prefix_owner p i j
+  · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp member
+    rfl
+
+theorem row_path (S : Finset (GlobalVariable p)) (x y : GlobalVariable p)
+    (hx : x ∈ S) (hy : y ∈ S) (row : CNF.Clause (GlobalVariable p))
+    (member : row ∈ clauses p) (inX : x ∈ row.map Prod.fst) (inY : y ∈ row.map Prod.fst) :
+    Relation.ReflTransGen (fun a b => a ∈ S ∧ b ∈ S ∧ (primal p).Adj a b) x y := by
+  by_cases equal : x = y
+  · subst y; exact .refl
+  · exact .single ⟨hx, hy, equal, row, member, inX, inY⟩
+
+theorem channel_connected (i : Fin p.channels) : ConnectedWithin (primal p) (channelBranch p i) := by
+  let S := channelBranch p i
+  let hub : GlobalVariable p := .original (.primary (.enable i))
+  let R := fun a b => a ∈ S ∧ b ∈ S ∧ (primal p).Adj a b
+  let : Std.Symm R := ⟨fun _ _ edge => ⟨edge.2.1, edge.1, edge.2.2.symm⟩⟩
+  have hubMem : hub ∈ S := Finset.mem_insert_self _ _
+  have prefixPath : ∀ k (below : k < p.buses),
+      Relation.ReflTransGen R hub (prefixWire p i ⟨k, below⟩) := by
+    intro k
+    induction k with
+    | zero =>
+      intro below
+      have row := qualifier_link_row p i ⟨0, below⟩ hub (Or.inl (by simp [hub, previous]))
+      exact row_path p S hub _ hubMem (prefix_mem p i _) _ row (by simp) (by simp)
+    | succ k ih =>
+      intro below
+      have previousEq : previous p i ⟨k + 1, below⟩ = prefixWire p i ⟨k, by omega⟩ := by
+        simp [previous]
+      have row := qualifier_link_row p i ⟨k + 1, below⟩ _ (Or.inl previousEq.symm)
+      exact (ih (by omega)).trans
+        (row_path p S _ _ (prefix_mem p i _) (prefix_mem p i _) _ row (by simp) (by simp))
+  have factorPath (j : Fin p.buses) : Relation.ReflTransGen R hub (factor p i j) := by
+    have row := qualifier_link_row p i j _ (Or.inr rfl)
+    exact (prefixPath j.val j.isLt).trans
+      (row_path p S _ _ (prefix_mem p i _) (factor_mem p i j) _ row (by simp) (by simp))
+  have fromHub (x : GlobalVariable p) (member : x ∈ S) : Relation.ReflTransGen R hub x := by
+    rcases Finset.mem_insert.mp member with rfl | member
+    · exact .refl
+    rcases Finset.mem_union.mp member with member | member
+    · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp member
+      exact prefixPath j.val j.isLt
+    · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp member
+      exact factorPath j
+  refine ⟨⟨hub, hubMem⟩, ?_⟩
+  intro x hx y hy
+  exact (symm (fromHub x hx)).trans (fromHub y hy)
+
+theorem factor_flag_row (i : Fin p.channels) (j : Fin p.buses) :
+    [(factor p i j, true), (flag p j, true)] ∈ clauses p := by
+  let role : Internal p := .qualifierGuard .faulty j i
+  let localRow : CNF.Clause (LocalVariable (Variable p) (auxiliaryCount (p.gate role))) :=
+    [(.original (.internal role), true), (.original (.internal (.flag .faulty j)), true)]
+  have localMember : localRow ∈ rows (internal p role) (p.gate role) := by
+    change localRow ∈ localRow :: _
+    exact List.mem_cons_self
+  simpa [localRow, localSlots, factor, flag, role] using local_row_mem p role localRow localMember
+
+theorem factor_flag_adj (i : Fin p.channels) (j : Fin p.buses) :
+    (primal p).Adj (factor p i j) (flag p j) := by
+  exact ⟨by simp [factor, flag], _, factor_flag_row p i j, by simp, by simp⟩
+
+/-- The actual binary prefix wires give the required channel branches. -/
+def primalMinor : MinorModel (completeBipartiteGraph (Fin p.channels) (Fin p.buses))
+    (primal p) where
+  branch vertex := match vertex with
+    | .inl i => channelBranch p i
+    | .inr j => {flag p j}
+  connected vertex := by
+    cases vertex with
+    | inl i => exact channel_connected p i
+    | inr j =>
+      refine ⟨Finset.singleton_nonempty _, ?_⟩
+      intro x hx y hy
+      have same : x = y := (Finset.mem_singleton.mp hx).trans (Finset.mem_singleton.mp hy).symm
+      subst y
+      exact .refl
+  disjoint := by
+    intro x y different
+    apply Finset.disjoint_left.mpr
+    intro v hx hy
+    cases x with
+    | inl i =>
+      cases y with
+      | inl k =>
+        have equal := (channel_owner p i v hx).symm.trans (channel_owner p k v hy)
+        exact different (congrArg Sum.inl (Option.some.inj equal))
+      | inr j =>
+        have same := Finset.mem_singleton.mp hy
+        have contradiction := channel_owner p i v hx
+        rw [same] at contradiction
+        cases contradiction
+    | inr j =>
+      cases y with
+      | inl i =>
+        have same := Finset.mem_singleton.mp hx
+        have contradiction := channel_owner p i v hy
+        rw [same] at contradiction
+        cases contradiction
+      | inr k =>
+        have same := (Finset.mem_singleton.mp hx).symm.trans (Finset.mem_singleton.mp hy)
+        have equal : j = k := by simpa [flag] using same
+        exact different (congrArg Sum.inr equal)
+  edge := by
+    intro x y adjacent
+    cases x with
+    | inl i =>
+      cases y with
+      | inl k => simp [completeBipartiteGraph] at adjacent
+      | inr j => exact ⟨factor p i j, factor_mem p i j,
+          flag p j, Finset.mem_singleton_self _, factor_flag_adj p i j⟩
+    | inr j =>
+      cases y with
+      | inr k => simp [completeBipartiteGraph] at adjacent
+      | inl i => exact ⟨flag p j, Finset.mem_singleton_self _,
+          factor p i j, factor_mem p i j, (factor_flag_adj p i j).symm⟩
+
+/-- The complete bounded-gate native CNF has treewidth at least min(n,b). -/
+theorem primal_treewidth_lower (w : Nat) (bound : TreewidthLE (primal p) w) :
+    min p.channels p.buses ≤ w :=
+  completeBipartite_treewidth_lower _ _ _ ((primalMinor p).treewidth_mono bound)
+
+abbrev RowAddress := Fin (clauses p).length
+abbrev IncidenceVertex := GlobalVariable p ⊕ RowAddress p
+
+def rowClause (address : RowAddress p) : CNF.Clause (GlobalVariable p) := (clauses p)[address.val]
+
+def incidenceAdj : IncidenceVertex p → IncidenceVertex p → Prop
+  | .inl x, .inr address => x ∈ (rowClause p address).map Prod.fst
+  | .inr address, .inl x => x ∈ (rowClause p address).map Prod.fst
+  | _, _ => False
+
+def incidence : SimpleGraph (IncidenceVertex p) where
+  Adj := incidenceAdj p
+  symm := ⟨by intro x y edge; cases x <;> cases y <;> exact edge⟩
+  loopless := ⟨by intro x edge; cases x <;> exact edge⟩
+
+def rowVertex (row : CNF.Clause (GlobalVariable p)) (member : row ∈ clauses p) : IncidenceVertex p :=
+  .inr ⟨(clauses p).idxOf row, List.idxOf_lt_length_of_mem member⟩
+
+@[simp] theorem rowVertex_clause (row : CNF.Clause (GlobalVariable p)) (member : row ∈ clauses p) :
+    rowClause p ⟨(clauses p).idxOf row, List.idxOf_lt_length_of_mem member⟩ = row :=
+  List.getElem_idxOf _
+
+@[simp] theorem rowVertex_adj_left (row : CNF.Clause (GlobalVariable p))
+    (member : row ∈ clauses p) (x : GlobalVariable p) :
+    (incidence p).Adj (.inl x) (rowVertex p row member) ↔ x ∈ row.map Prod.fst := by
+  change x ∈ (rowClause p _).map Prod.fst ↔ _
+  rw [rowVertex_clause p row member]
+
+@[simp] theorem rowVertex_adj_right (row : CNF.Clause (GlobalVariable p))
+    (member : row ∈ clauses p) (x : GlobalVariable p) :
+    (incidence p).Adj (rowVertex p row member) (.inl x) ↔ x ∈ row.map Prod.fst := by
+  change x ∈ (rowClause p _).map Prod.fst ↔ _
+  rw [rowVertex_clause p row member]
+
+def previousRow (i : Fin p.channels) (j : Fin p.buses) : IncidenceVertex p :=
+  rowVertex p [(prefixWire p i j, false), (previous p i j, true)]
+    (qualifier_link_row p i j _ (Or.inl rfl))
+
+def factorRow (i : Fin p.channels) (j : Fin p.buses) : IncidenceVertex p :=
+  rowVertex p [(prefixWire p i j, false), (factor p i j, true)]
+    (qualifier_link_row p i j _ (Or.inr rfl))
+
+def flagRow (i : Fin p.channels) (j : Fin p.buses) : IncidenceVertex p :=
+  rowVertex p [(factor p i j, true), (flag p j, true)] (factor_flag_row p i j)
+
+def incidenceChannelBranch (i : Fin p.channels) : Finset (IncidenceVertex p) :=
+  (channelBranch p i).image Sum.inl ∪
+    Finset.univ.biUnion (fun j => {previousRow p i j, factorRow p i j, flagRow p i j})
+
+def incidenceOwner : IncidenceVertex p → Option (Fin p.channels)
+  | .inl x => owner p x
+  | .inr address => (rowClause p address).head?.bind (fun literal => owner p literal.1)
+
+@[simp] theorem incidenceOwner_rowVertex (row : CNF.Clause (GlobalVariable p))
+    (member : row ∈ clauses p) : incidenceOwner p (rowVertex p row member) =
+      row.head?.bind (fun literal => owner p literal.1) := by
+  change (rowClause p _).head?.bind _ = _
+  rw [rowVertex_clause p row member]
+
+theorem incidence_variable_mem (i : Fin p.channels) (x : GlobalVariable p)
+    (member : x ∈ channelBranch p i) : (.inl x : IncidenceVertex p) ∈ incidenceChannelBranch p i :=
+  Finset.mem_union_left _ (Finset.mem_image.mpr ⟨x, member, rfl⟩)
+
+theorem incidence_rows_mem (i : Fin p.channels) (j : Fin p.buses) :
+    previousRow p i j ∈ incidenceChannelBranch p i ∧
+    factorRow p i j ∈ incidenceChannelBranch p i ∧
+    flagRow p i j ∈ incidenceChannelBranch p i := by
+  have contains (x : IncidenceVertex p) (member : x ∈ {previousRow p i j, factorRow p i j, flagRow p i j}) :
+      x ∈ incidenceChannelBranch p i :=
+    Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨j, Finset.mem_univ _, member⟩)
+  exact ⟨contains _ (by simp), contains _ (by simp), contains _ (by simp)⟩
+
+theorem incidence_channel_owner (i : Fin p.channels) (x : IncidenceVertex p)
+    (member : x ∈ incidenceChannelBranch p i) : incidenceOwner p x = some i := by
+  rcases Finset.mem_union.mp member with storedVariable | row
+  · obtain ⟨v, sourceMember, same⟩ := Finset.mem_image.mp storedVariable
+    subst x
+    exact channel_owner p i v sourceMember
+  · obtain ⟨j, _, member⟩ := Finset.mem_biUnion.mp row
+    simp only [Finset.mem_insert, Finset.mem_singleton] at member
+    rcases member with rfl | rfl | rfl
+    · simp [previousRow, prefix_owner]
+    · simp [factorRow, prefix_owner]
+    · simp [flagRow, factor, owner]
+
+theorem incidence_channel_connected (i : Fin p.channels) :
+    ConnectedWithin (incidence p) (incidenceChannelBranch p i) := by
+  let S := incidenceChannelBranch p i
+  let hub : IncidenceVertex p := .inl (.original (.primary (.enable i)))
+  let R := fun x y => x ∈ S ∧ y ∈ S ∧ (incidence p).Adj x y
+  let : Std.Symm R := ⟨fun _ _ edge => ⟨edge.2.1, edge.1, edge.2.2.symm⟩⟩
+  have hubMem : hub ∈ S := incidence_variable_mem p i _ (Finset.mem_insert_self _ _)
+  have previousEdges (j : Fin p.buses) :
+      (incidence p).Adj (.inl (previous p i j)) (previousRow p i j) ∧
+      (incidence p).Adj (previousRow p i j) (.inl (prefixWire p i j)) := by
+    simp [previousRow]
+  have factorEdges (j : Fin p.buses) :
+      (incidence p).Adj (.inl (prefixWire p i j)) (factorRow p i j) ∧
+      (incidence p).Adj (factorRow p i j) (.inl (factor p i j)) := by
+    simp [factorRow]
+  have flagEdges (j : Fin p.buses) :
+      (incidence p).Adj (.inl (factor p i j)) (flagRow p i j) := by
+    simp [flagRow]
+  have prefixPath : ∀ k (below : k < p.buses),
+      Relation.ReflTransGen R hub (.inl (prefixWire p i ⟨k, below⟩)) := by
+    intro k
+    induction k with
+    | zero =>
+      intro below
+      have edge := previousEdges ⟨0, below⟩
+      have first : previous p i ⟨0, below⟩ = .original (.primary (.enable i)) := by simp [previous]
+      rw [first] at edge
+      exact (Relation.ReflTransGen.single
+        (r := R) ⟨hubMem, (incidence_rows_mem p i _).1, edge.1⟩).tail
+        ⟨(incidence_rows_mem p i _).1, incidence_variable_mem p i _ (prefix_mem p i _), edge.2⟩
+    | succ k ih =>
+      intro below
+      have edge := previousEdges ⟨k + 1, below⟩
+      have previousEq : previous p i ⟨k + 1, below⟩ = prefixWire p i ⟨k, by omega⟩ := by simp [previous]
+      rw [previousEq] at edge
+      exact ((ih (by omega)).tail
+        ⟨incidence_variable_mem p i _ (prefix_mem p i _), (incidence_rows_mem p i _).1, edge.1⟩).tail
+        ⟨(incidence_rows_mem p i _).1, incidence_variable_mem p i _ (prefix_mem p i _), edge.2⟩
+  have factorPath (j : Fin p.buses) : Relation.ReflTransGen R hub (.inl (factor p i j)) :=
+    ((prefixPath j.val j.isLt).tail
+      ⟨incidence_variable_mem p i _ (prefix_mem p i j), (incidence_rows_mem p i j).2.1,
+        (factorEdges j).1⟩).tail
+      ⟨(incidence_rows_mem p i j).2.1, incidence_variable_mem p i _ (factor_mem p i j), (factorEdges j).2⟩
+  have fromHub (x : IncidenceVertex p) (member : x ∈ S) : Relation.ReflTransGen R hub x := by
+    rcases Finset.mem_union.mp member with storedVariable | row
+    · obtain ⟨v, sourceMember, same⟩ := Finset.mem_image.mp storedVariable
+      subst x
+      rcases Finset.mem_insert.mp sourceMember with rfl | sourceMember
+      · exact .refl
+      rcases Finset.mem_union.mp sourceMember with prefixMember | factorMember
+      · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp prefixMember
+        exact prefixPath j.val j.isLt
+      · obtain ⟨j, _, rfl⟩ := Finset.mem_image.mp factorMember
+        exact factorPath j
+    · obtain ⟨j, _, member⟩ := Finset.mem_biUnion.mp row
+      simp only [Finset.mem_insert, Finset.mem_singleton] at member
+      rcases member with rfl | rfl | rfl
+      · exact (prefixPath j.val j.isLt).tail
+          ⟨incidence_variable_mem p i _ (prefix_mem p i j), (incidence_rows_mem p i j).1,
+            (previousEdges j).2.symm⟩
+      · exact (prefixPath j.val j.isLt).tail
+          ⟨incidence_variable_mem p i _ (prefix_mem p i j), (incidence_rows_mem p i j).2.1,
+            (factorEdges j).1⟩
+      · exact (factorPath j).tail
+          ⟨incidence_variable_mem p i _ (factor_mem p i j), (incidence_rows_mem p i j).2.2, flagEdges j⟩
+  refine ⟨⟨hub, hubMem⟩, ?_⟩
+  intro x hx y hy
+  exact (symm (fromHub x hx)).trans (fromHub y hy)
+
+def incidenceMinor : MinorModel (completeBipartiteGraph (Fin p.channels) (Fin p.buses))
+    (incidence p) where
+  branch vertex := match vertex with
+    | .inl i => incidenceChannelBranch p i
+    | .inr j => {.inl (flag p j)}
+  connected vertex := by
+    cases vertex with
+    | inl i => exact incidence_channel_connected p i
+    | inr j =>
+      refine ⟨Finset.singleton_nonempty _, ?_⟩
+      intro x hx y hy
+      have same := (Finset.mem_singleton.mp hx).trans (Finset.mem_singleton.mp hy).symm
+      subst y
+      exact .refl
+  disjoint := by
+    intro x y different
+    apply Finset.disjoint_left.mpr
+    intro v hx hy
+    cases x with
+    | inl i =>
+      cases y with
+      | inl k =>
+        have equal := (incidence_channel_owner p i v hx).symm.trans (incidence_channel_owner p k v hy)
+        exact different (congrArg Sum.inl (Option.some.inj equal))
+      | inr j =>
+        have contradiction := incidence_channel_owner p i v hx
+        rw [Finset.mem_singleton.mp hy] at contradiction
+        cases contradiction
+    | inr j =>
+      cases y with
+      | inl i =>
+        have contradiction := incidence_channel_owner p i v hy
+        rw [Finset.mem_singleton.mp hx] at contradiction
+        cases contradiction
+      | inr k =>
+        have same := (Finset.mem_singleton.mp hx).symm.trans (Finset.mem_singleton.mp hy)
+        have equal : j = k := by simpa [flag] using same
+        exact different (congrArg Sum.inr equal)
+  edge := by
+    have edge (i : Fin p.channels) (j : Fin p.buses) :
+        (incidence p).Adj (flagRow p i j) (.inl (flag p j)) := by
+      simp [flagRow]
+    intro x y adjacent
+    cases x with
+    | inl i =>
+      cases y with
+      | inl k => simp [completeBipartiteGraph] at adjacent
+      | inr j => exact ⟨flagRow p i j, (incidence_rows_mem p i j).2.2,
+          .inl (flag p j), Finset.mem_singleton_self _, edge i j⟩
+    | inr j =>
+      cases y with
+      | inr k => simp [completeBipartiteGraph] at adjacent
+      | inl i => exact ⟨.inl (flag p j), Finset.mem_singleton_self _,
+          flagRow p i j, (incidence_rows_mem p i j).2.2, (edge i j).symm⟩
+
+/-- Row occurrences, including repeated clauses, are vertices of this graph. -/
+theorem incidence_treewidth_lower (w : Nat) (bound : TreewidthLE (incidence p) w) :
+    min p.channels p.buses ≤ w :=
+  completeBipartite_treewidth_lower _ _ _ ((incidenceMinor p).treewidth_mono bound)
+
+
+end Controller.Graph.BoundedNativeWidth
