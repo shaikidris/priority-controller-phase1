@@ -7,20 +7,18 @@ paper algorithms.
 
 ## Program families and code construction
 
-P02, P03, P04, P06 and P07 select instance-dependent program definitions supplied
-by the Solution. Comparator checks the types and permitted axioms of definition
-holes; it does not require their bodies to equal a predetermined implementation.
-The supplied source bodies therefore require separate inspection. The ordinary
-machine transition and resource definitions are explicit in each Challenge.
+The ten Comparator files identify the registry-selected statements and any
+implementation definition holes. Definition-hole comparison checks the type
+and permitted axioms; it does not fix a predetermined implementation body.
+The concrete supplied implementations therefore have separate image and
+construction contracts in the proof library.
 
-A bound on fetched execution starts with an instruction array already available.
-It does not charge the computation used to generate that array. P04's
-`ForestRootProjection.mixedSelectorCode` evaluates `ForestWeightedIndexed.runAll`
-to form an instruction constant; `mixedPositiveProgram` also computes the
-selected candidate when constructing its suffix. P06's `CriticalSets.forestProgram`
-uses this assembly. Their fetched tick bounds do not establish the paper's
-uniform linear-time algorithm. A charged constructor or a fixed program reading
-the instance remains necessary for that conclusion.
+P04's `ForestSourceCompiler` constructs the complete cold resident from original
+source rows, roots and weights, with linear construction work and temporary
+word storage. It takes no selected set or precomputed healthy family as input.
+The weighted cold execution emits an attained physical optimum under the
+healthy-zero and nonnegative-weight premises. P06's critical/cycle recovery
+instead uses a fixed 57-instruction source reader at each word width.
 
 P02's execution theorem decides whether a constrained detecting set exists and
 checks its emitted native model. Its postcondition does not identify that model's
@@ -35,30 +33,37 @@ and emitter remain definition holes; the selected interface does not charge
 construction of that instance-dependent code. Working words exclude the retained
 external output stream, and code words have a separate bound.
 
-P07's execution statements retain the raw-layout and representation hypotheses.
-Its XP and special-case inequalities bound the explicit time function. They are
-supporting estimates for the execution statements.
+P07's selected execution statements retain raw-layout and representation
+hypotheses. The XP and special-case inequalities support those executions.
+Its concrete construction companions prove source-only bounded and proper-basis
+constructors, complete code images, construction plus execution time and
+temporary word storage. The constructed proper-basis guarded branch uses the
+bounded `k=0` implementation. The original registry-selected proper-basis
+execution keeps its own implementation. The construction certificates are
+listed in the companion audit manifest rather than added as P07 Comparator
+targets.
 
-P10 supplies fixed-machine simulation and composition results under their stated
-constructor and resource premises. Applying those results to a program family
-requires proofs of those premises, including charged image construction. The
-general K00 bridge alone does not discharge them for P02–P07.
+P10 provides the complete K00 encoded-machine simulation and composition bridge
+under its stated constructor and resource premises. The word-model construction
+proofs do not by themselves prove K01 or classify the complete encoded detector
+language. P02/P03 construction and P08 accepted-family claims have their
+separate interfaces and are not implicit consequences of these companions.
 
 ## Forest outputs and weights
 
-P04's accepted output contains an indicator of an admissible detecting set K.
-That descriptor defines a canonical physical input; it is not a serialization
-of every primary-input coordinate. The selected weighted theorem bounds the
-weight of each admissible true set by a returned candidate's score. It assumes
-that candidate is returned and proves neither candidate existence nor score
-attainment. Weight arithmetic is counted separately from encoded bit costs.
+P04 emits an indicator of an admissible detecting eligible set. That set
+defines a canonical physical input; it is not a serialization of every primary
+input coordinate. Its selected weighted statements include score domination
+and an attained physical maximum under healthy-zero observations, nonnegative
+weights, positive bus count and detectability. Generic arithmetic-operation
+counts and encoded-weight bit costs are separate.
 
 ## Width and recognition
 
-P06's selected primal and incidence graphs use the n-ary specification clause
-list. A minor/width transfer to the bounded-gate native encoding in Proposition
-6.10 remains required. The critical-set counts, query bounds and separately
-identified native or specification backdoor theorems keep their literal scope.
+P06 includes both specification-clause graphs and the complete binary-expanded
+native CNF graphs. The added native primal/incidence lower bounds use their
+literal complete native clause list. Critical-set counts, query bounds and
+native/specification backdoor theorems retain their own hypotheses.
 
 P08's typed pipeline is sound after successful acceptance of a structured
 payload. `decodeChecked_requires_extra_coordinates` proves that, with at least
@@ -83,7 +88,8 @@ alone is not an encoded counting-hardness theorem. Arithmetic estimates and size
 lemmas elsewhere in the selection support the principal results; their proof
 length does not change their mathematical scope.
 
-The full target of the paper algorithms is retained. Uniform charged program
-construction, the bounded-encoding width transfer and a nontrivial accepted
-typed-family construction remain open obligations of that target. Passing
-mechanical checks of the selected components does not close those obligations.
+The full paper target also includes the separate P02/P03 uniform source
+construction interfaces, a nontrivial accepted P08 typed family, and conventional
+encoded-language classification. The forest and extension construction
+companions and the P06 binary-native width theorems establish their displayed
+contracts; they do not imply those separate claims.

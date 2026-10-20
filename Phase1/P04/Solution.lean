@@ -1,4 +1,3 @@
-module
-
-public import Controller.Cost.ForestOriginalSemantics
-public import Controller.Optimization.Weights
+import Controller.Cost.ForestOriginalSemantics
+import Controller.Optimization.Weights
+import Controller.Cost.ForestCompilerComplete

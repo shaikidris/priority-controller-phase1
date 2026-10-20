@@ -15,7 +15,11 @@
     "Controller.Graph.NativeWidth.incidence_treewidth_lower",
     "Controller.Boundaries.Backdoors.native_backdoor_lower_bound",
     "Controller.Boundaries.Backdoors.specification_backdoor_lower_bound",
-    "Controller.Graph.CoverCircuit.linear_width_obstruction"
+    "Controller.Graph.CoverCircuit.linear_width_obstruction",
+    "Controller.Cost.CriticalSourceScan.critical_physical_recovery",
+    "Controller.Cost.CriticalSourceScan.cycle_physical_recovery",
+    "Controller.Graph.BoundedNativeWidth.primal_treewidth_lower",
+    "Controller.Graph.BoundedNativeWidth.incidence_treewidth_lower"
   ],
   "permitted_axioms": [
     "propext",

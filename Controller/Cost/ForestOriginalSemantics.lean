@@ -165,3 +165,98 @@ theorem original_physical_execution (graph : DAG n) (forest : graph.FormulaFores
     simpa only [List.ofFn_eq_map, boolWord, ForestZeroChannelEmit.bitWord] using emitted
 
 end Controller.Cost.ForestOriginalSemantics
+
+namespace Controller.Cost.ForestOriginalSemantics
+
+open Controller Controller.Decoder Controller.Decoder.DAG Controller.Cost
+open Controller.Cost.ForestRootProjection Controller.Cost.ForestIndexedOperands
+open Controller.Cost.ForestWeightedIndexed Controller.Cost.ForestCursorAllRoots
+open Controller.Cost.ForestCursorDescriptors
+
+variable {n width : Nat} {W : Type} [AddCommGroup W] [LinearOrder W] [IsOrderedAddMonoid W]
+
+set_option autoImplicit false in
+/-- The fetched positive branch emits the indicator of an attained maximum
+detecting set and halts. Detectability supplies the selected candidate; it is
+not an additional hypothesis. Construction of the resident is charged separately. -/
+theorem original_weighted_physical_execution (prior : Program width 8)
+    (graph negativeGraph : DAG n) (forest : graph.FormulaForest)
+    (rows : List Row) (roots negativeRoots : List Nat)
+    (matched : RowsMatch graph rows) (rootsMatch : RootsMatch graph roots)
+    (negativeMatched : RowsMatch negativeGraph rows)
+    (weights : Channel n → W) (nonnegative : ∀ channel, 0 ≤ weights channel)
+    (b : Nat) (bridge : Physical.Bridge n) (positive : 0 < b)
+    (healthy : ∀ position : Fin graph.roots.length,
+      graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get position) = false)
+    (detectable : Physical.BridgeDetectable (b := b) bridge true graph.observations)
+    (countFits : (buildRoots graph).count < 2 ^ width)
+    (positionFits : ∀ entry ∈ (buildRoots graph).entries, entry.position < 2 ^ width)
+    (state : Controller.Cost.State width 8) (rest : List (Word width))
+    (position : state.pc = word width prior.size) (running : state.halted = false)
+    (heap : state.heap = cacheHeap width (UniformDAGRun.packetHeaderHeap width n rows roots) rows roots)
+    (stack : state.stack = word width negativeRoots.length ::
+      ((inputPacket n 0 rows negativeRoots).map (word width) ++ (word width bridge.target.val :: rest)))
+    (sourceRoom : sourceAllocatedCells graph rows roots < 2 ^ width)
+    (packetRoom : sourcePrefixCells rows + negativeRoots.length < 2 ^ width)
+    (programRoom : (mixedResident prior graph negativeGraph rows roots negativeRoots
+      negativeMatched weights b bridge.target countFits positionFits).size < 2 ^ width) :
+    ∃ K final ticks peak,
+      Execution (mixedResident prior graph negativeGraph rows roots negativeRoots
+        negativeMatched weights b bridge.target countFits positionFits) state final ticks peak ∧
+      final.halted = true ∧ final.reg 4 = word width 1 ∧
+      Admissible b bridge.target K ∧
+      Physical.BridgeInputDetects bridge true graph.observations
+        (Physical.realizeBridge bridge positive K) true ∧
+      final.heap = #[] ∧ final.stack = rest ∧
+      final.output = List.ofFn (fun channel : Channel n => boolWord width (decide (channel ∈ K))) ++ state.output ∧
+      (∀ L, Admissible b bridge.target L →
+        Physical.BridgeInputDetects bridge true graph.observations
+          (Physical.realizeBridge bridge positive L) true →
+        GenericWeight.total weights L ≤ GenericWeight.total weights K) ∧
+      ticks ≤ 18 * (buildRoots graph).count +
+        ForestWitnessAccept.sourceBudget graph graph.nodeCount + 12 * n +
+        4 * sourceAllocatedCells graph rows roots + 4 * (sourcePrefixCells rows + negativeRoots.length) + 37 ∧
+      peak ≤ state.liveWords + 3 * (buildRoots graph).count + 2 * n + 6 := by
+  obtain ⟨_, root, member, initialK, legal, different⟩ :=
+    (Physical.bridge_detectable_iff_root bridge positive true graph).mp detectable
+  obtain ⟨rootPosition, rootEq⟩ := List.mem_iff_get.mp member
+  rw [← rootEq, healthy rootPosition] at different
+  have initialTrue : graph.eval (assignmentOfSet initialK) (graph.roots.get rootPosition) = true := by
+    cases value : graph.eval (assignmentOfSet initialK) (graph.roots.get rootPosition) with
+    | false => exact False.elim (different value)
+    | true => rfl
+  obtain ⟨candidate, chosen⟩ : ∃ candidate,
+      (ForestWeightedIndexed.runAll (source n rows) weights b bridge.target roots).2.selected = some candidate := by
+    cases selected : (ForestWeightedIndexed.runAll (source n rows) weights b bridge.target roots).2.selected with
+    | none =>
+      exact False.elim
+        ((indexed_none_iff graph forest.1 rows roots matched rootsMatch weights nonnegative b bridge.target).mp
+          selected ⟨rootPosition, initialK, legal, initialTrue⟩)
+    | some candidate => exact ⟨candidate, rfl⟩
+  obtain ⟨selectedRoot, _, blocked, final, ticks, peak, admissible, value, _, best,
+      trace, time, space, finalHeap, finalStack, output, halted, tag⟩ :=
+    mixed_selected_execution prior graph negativeGraph forest forest.1 rows roots negativeRoots
+      matched rootsMatch negativeMatched weights nonnegative b bridge.target countFits positionFits
+      candidate chosen state rest position running heap stack sourceRoom packetRoom programRoom
+  refine ⟨fullUnblocked blocked, final, ticks, peak, trace, halted, tag, admissible,
+    ?_, finalHeap, finalStack, output, ?_, time, space⟩
+  · apply (Physical.realizeBridge_detects_iff bridge positive _ admissible graph.observations).mpr
+    refine ⟨selectedRoot, ?_⟩
+    change graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get selectedRoot) ≠
+      graph.eval (assignmentOfSet (fullUnblocked blocked)) (graph.roots.get selectedRoot)
+    rw [healthy selectedRoot, value]
+    decide
+  · intro L legalL detects
+    obtain ⟨other, discrepancy⟩ :=
+      (Physical.realizeBridge_detects_iff bridge positive L legalL graph.observations).mp detects
+    change graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get other) ≠
+      graph.eval (assignmentOfSet L) (graph.roots.get other) at discrepancy
+    rw [healthy other] at discrepancy
+    have trueAt : graph.eval (assignmentOfSet L) (graph.roots.get other) = true := by
+      cases equation : graph.eval (assignmentOfSet L) (graph.roots.get other) with
+      | false => exact False.elim (discrepancy equation.symm)
+      | true => rfl
+    exact best other L legalL trueAt
+
+
+end Controller.Cost.ForestOriginalSemantics

@@ -1,8 +1,9 @@
 version: v0.4
 project:
-  name: Formula-forest execution and weighted candidate bounds
-  description: Formula-forest physical-detection correctness, fetched execution bounds after instance-dependent
-    code construction, and conditional weighted candidate score bounds.
+  name: Forest detection and attained healthy-zero maximum weight
+  description: Formula-forest detection execution and nonnegative-weight optimal detecting sets
+    for healthy-zero observations. Complete source construction and word-storage proofs are supplied
+    as checked companion modules.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -10,7 +11,7 @@ project:
   - Idris Ali Shaik
 classification:
   arxiv:
-  - cs.DM
+  - 'cs.DM'
   msc2020:
   - '68Q25'
   - '68Q60'
@@ -22,24 +23,20 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Theorem 5.6 (formula forests) and the score-domination component of Corollary
-    6.7 (maximum weight for formula forests). The literal native execution and numerical resource
-    bounds refine the manuscript algorithm. The selected weighted statement establishes a conditional
-    upper bound, not attainment or full maximum-weight optimality.
+  note: Version 1.0; Theorem 5.6 and healthy-zero Corollary 6.7. The source word/list constructor
+    and weighted physical optimum are included in the proof package; only the listed declarations
+    are registry-selected.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
 status:
-  scope: Physical detection execution for supplied formula forests and bounds of admissible true-set
-    weights by a returned candidate score, with linear operation counts. The selected score theorem
-    is an upper-bound component of Corollary 6.7; attainment, candidate existence and maximum-weight
-    optimality of the emitted physical test are not conclusions of the selected surface. The fetched-execution
-    bound starts after instance-dependent code construction. The reference factory evaluates runAll
-    and embeds the selected result while constructing the code; that computation is not charged
-    by the fetched tick bound. This does not establish the paper's uniform linear-time algorithm.
-    Acceptance emits an eligible-set indicator defining a canonical physical input, rather than
-    all primary-input coordinates. The weighted result is a conditional score upper bound, without
-    candidate existence or attainment.
+  scope: The selected surface preserves the original physical execution and conditional score
+    bound and adds candidate existence, attainment and optimality of a physically detecting eligible
+    set under healthy-zero observations, nonnegative weights, positive bus count and detectability.
+    The complete source-driven forest constructor has separately checked linear construction work
+    and temporary word-storage bounds in the companion proof package. Construction is measured
+    in source word/list operations; generic weight arithmetic, bit encoding and full primary-input
+    serialization retain separate contracts.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -59,18 +56,19 @@ automation:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Prove formula-forest detection and weighted candidate bounds while separating
-      code construction from fetched execution.
+    prompting_notes: Preserve the exact selected hypotheses; verify P04/P06/P07 source-construction
+      companions and the affected statement, metadata, comparison, kernel and rendering surfaces.
   spend_usd: not tracked
   notes: The author directed the formalization. AI agents assisted with proof construction and
     packaging.
 fidelity:
-  divergences: The fetched-execution bound starts after instance-dependent code construction.
-    The reference factory evaluates runAll and embeds the selected result while constructing the
-    code; that computation is not charged by the fetched tick bound. This does not establish the
-    paper's uniform linear-time algorithm. Acceptance emits an eligible-set indicator defining
-    a canonical physical input, rather than all primary-input coordinates. The weighted result
-    is a conditional score upper bound, without candidate existence or attainment.
+  divergences: The selected surface preserves the original physical execution and conditional
+    score bound and adds candidate existence, attainment and optimality of a physically detecting
+    eligible set under healthy-zero observations, nonnegative weights, positive bus count and
+    detectability. The complete source-driven forest constructor has separately checked linear
+    construction work and temporary word-storage bounds in the companion proof package. Construction
+    is measured in source word/list operations; generic weight arithmetic, bit encoding and full
+    primary-input serialization retain separate contracts.
 review:
   status: self-assessed
   reviewers: []
@@ -92,9 +90,13 @@ alignment:
     lean: Controller.Optimization.Weights.forest_maximum_weight
     module: Controller.Optimization.Weights
     status: proved
-    note: Conditional on the indexed weighted traversal returning a candidate, its score bounds
-      the weight of every admissible set making any supplied root true. The theorem also proves
-      linear indexed and arithmetic operation bounds. It supplies the upper-bound component of
-      6.7; it does not assert that the candidate score is attained, that a candidate exists whenever
-      detection is possible, or that the physical output test has maximum weight.
+    note: The original conditional upper-bound component is preserved. The separately selected
+      physical-maximum theorem supplies candidate existence, attainment and physical optimality
+      under healthy-zero observations.
+  - source: Corollary 6.7 (healthy-zero maximum weight)
+    lean: Controller.Optimization.Weights.forest_physical_maximum
+    module: Controller.Optimization.Weights
+    status: proved
+    note: Detectability supplies an attained maximum among admissible detecting sets; nonnegative
+      weights and healthy-zero observations are explicit.
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.

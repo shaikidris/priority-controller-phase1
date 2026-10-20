@@ -2,6 +2,7 @@ module
 
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
 
+public import Controller.Physical.DetectCorrect
 public import Controller.Decoder.ZeroSystem
 public import Controller.Decoder.ForestGeneric
 public import Controller.Cost.ForestWeightedIndexed
@@ -144,5 +145,115 @@ theorem forest_maximum_weight (graph : DAG n) (guarded : graph.Guarded)
         selected position K eligible trueAt,
     ForestWeightedIndexed.runAll_operations_bound graph forest rows roots matched rootsMatch weights b target,
     ForestWeightedIndexed.runAll_arithmetic_bound graph rows roots matched rootsMatch forest weights b target⟩
+
+end Controller.Optimization.Weights
+
+
+
+namespace Controller.Optimization.Weights
+
+open Controller Controller.Decoder Controller.Decoder.DAG Controller.Cost
+open Controller.Cost.ForestIndexedOperands Controller.Cost.ForestWeightedTagged
+
+variable {n : Nat} {W : Type} [AddCommGroup W] [LinearOrder W] [IsOrderedAddMonoid W]
+
+/-- The source-indexed algorithm either certifies absence of admissible true
+sets or returns an attained maximum, with linear indexed and arithmetic counts.
+There is no hypothesis that the algorithm has already returned a candidate. -/
+theorem forest_attained_maximum (graph : DAG n) (forest : graph.FormulaForest)
+    (rows : List Row) (roots : List Nat) (matched : RowsMatch graph rows)
+    (rootsMatch : RootsMatch graph roots) (weights : Channel n → W)
+    (nonnegative : ∀ channel, 0 ≤ weights channel) (b : Nat) (target : Channel n) :
+    let result := (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows)
+      weights b target roots).2
+    (result.selected = none ↔ ¬ ∃ position : Fin graph.roots.length, ∃ K : Finset (Channel n),
+      Admissible b target K ∧ graph.eval (assignmentOfSet K) (graph.roots.get position) = true) ∧
+    (∀ candidate, result.selected = some candidate →
+      ∃ position : Fin graph.roots.length, candidate.root = position.val ∧
+        ∃ K : Finset (Channel n), Admissible b target K ∧
+          graph.eval (assignmentOfSet K) (graph.roots.get position) = true ∧
+          candidate.score = GenericWeight.total weights K ∧
+          ∀ other L, Admissible b target L →
+            graph.eval (assignmentOfSet L) (graph.roots.get other) = true →
+            GenericWeight.total weights L ≤ GenericWeight.total weights K) ∧
+    result.operations ≤ 4 * (graph.roots.length + graph.childIncidences) + 2 * graph.guardIncidences ∧
+    result.arithmetic ≤ n + 8 * (graph.roots.length + graph.childIncidences) + 4 * graph.guardIncidences := by
+  intro result
+  have indexed := congrArg (fun state : ForestWeightedDirect.State n W => state.data.selected)
+    (ForestWeightedIndexed.runAll_projection graph rows roots matched rootsMatch weights b target).2
+  have direct := congrArg TaggedState.selected
+    (ForestWeightedDirect.runAll_projection graph weights b target).1
+  have projected : result.selected = (ForestWeightedTagged.runGlobal graph weights b target).2.1.selected :=
+    indexed.trans direct
+  refine ⟨ForestWeightedIndexed.indexed_none_iff graph forest.1 rows roots matched rootsMatch
+    weights nonnegative b target, ?_,
+    ForestWeightedIndexed.runAll_operations_bound graph forest rows roots matched rootsMatch weights b target,
+    ForestWeightedIndexed.runAll_arithmetic_bound graph rows roots matched rootsMatch forest weights b target⟩
+  intro candidate selected
+  have globalSelected := projected.symm.trans selected
+  obtain ⟨position, rootEq, K, eligible, trueAt, score⟩ :=
+    ForestWeightedOptimal.global_sound graph weights b target candidate globalSelected
+  refine ⟨position, rootEq, K, eligible, trueAt, score, ?_⟩
+  intro other L legal value
+  rw [← score]
+  exact ForestWeightedOptimal.global_optimal_bound graph forest.1 weights nonnegative b target
+    candidate globalSelected other L legal value
+
+/-- On healthy-zero forest observations, detectability forces the indexed
+algorithm to return a candidate whose attained weight is a maximum among all
+admissible detecting eligible sets. The set realizes a physical detecting test. -/
+theorem forest_physical_maximum (graph : DAG n) (forest : graph.FormulaForest)
+    (rows : List Row) (roots : List Nat) (matched : RowsMatch graph rows)
+    (rootsMatch : RootsMatch graph roots) (weights : Channel n → W)
+    (nonnegative : ∀ channel, 0 ≤ weights channel) (b : Nat) (bridge : Physical.Bridge n)
+    (positive : 0 < b)
+    (healthy : ∀ position : Fin graph.roots.length,
+      graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get position) = false)
+    (detectable : Physical.BridgeDetectable (b := b) bridge true graph.observations) :
+    ∃ candidate K,
+      (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows)
+        weights b bridge.target roots).2.selected = some candidate ∧
+      Admissible b bridge.target K ∧
+      Physical.BridgeInputDetects bridge true graph.observations
+        (Physical.realizeBridge bridge positive K) true ∧
+      candidate.score = GenericWeight.total weights K ∧
+      ∀ L, Admissible b bridge.target L →
+        Physical.BridgeInputDetects bridge true graph.observations
+          (Physical.realizeBridge bridge positive L) true →
+        GenericWeight.total weights L ≤ GenericWeight.total weights K := by
+  have closure := forest_attained_maximum graph forest rows roots matched rootsMatch
+    weights nonnegative b bridge.target
+  obtain ⟨_, root, member, initialK, initialLegal, different⟩ :=
+    (Physical.bridge_detectable_iff_root bridge positive true graph).mp detectable
+  obtain ⟨position, rootEq⟩ := List.mem_iff_get.mp member
+  rw [← rootEq, healthy position] at different
+  have initialTrue : graph.eval (assignmentOfSet initialK) (graph.roots.get position) = true := by
+    cases value : graph.eval (assignmentOfSet initialK) (graph.roots.get position) with
+    | false => exact False.elim (different value)
+    | true => rfl
+  cases selected : (ForestWeightedIndexed.runAll (ForestWeightedIndexed.source n rows)
+      weights b bridge.target roots).2.selected with
+  | none => exact False.elim (closure.1.mp selected ⟨position, initialK, initialLegal, initialTrue⟩)
+  | some candidate =>
+    obtain ⟨returned, _, K, legal, value, score, best⟩ := closure.2.1 candidate selected
+    refine ⟨candidate, K, rfl, legal, ?_, score, ?_⟩
+    · apply (Physical.realizeBridge_detects_iff bridge positive K legal graph.observations).mpr
+      refine ⟨returned, ?_⟩
+      change graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get returned) ≠
+        graph.eval (assignmentOfSet K) (graph.roots.get returned)
+      rw [healthy returned, value]
+      decide
+    · intro L legalL detects
+      obtain ⟨other, discrepancy⟩ :=
+        (Physical.realizeBridge_detects_iff bridge positive L legalL graph.observations).mp detects
+      change graph.eval (assignmentOfSet {bridge.target}) (graph.roots.get other) ≠
+        graph.eval (assignmentOfSet L) (graph.roots.get other) at discrepancy
+      rw [healthy other] at discrepancy
+      have trueAt : graph.eval (assignmentOfSet L) (graph.roots.get other) = true := by
+        cases equation : graph.eval (assignmentOfSet L) (graph.roots.get other) with
+        | false => exact False.elim (discrepancy equation.symm)
+        | true => rfl
+      exact best other L legalL trueAt
+
 
 end Controller.Optimization.Weights

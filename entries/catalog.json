@@ -41,12 +41,13 @@
     ]
   },
   "P04": {
-    "purpose": "Formula-forest execution and weighted candidate bounds",
+    "purpose": "Forest detection and attained healthy-zero maximum weight",
     "comparator_config_path": "entries/P04/comparator.json",
     "formalization_metadata_path": "entries/P04/formalization.yaml",
     "theorem_names": [
       "Controller.Cost.ForestOriginalSemantics.original_physical_execution",
-      "Controller.Optimization.Weights.forest_maximum_weight"
+      "Controller.Optimization.Weights.forest_maximum_weight",
+      "Controller.Optimization.Weights.forest_physical_maximum"
     ]
   },
   "P05": {
@@ -64,7 +65,7 @@
     ]
   },
   "P06": {
-    "purpose": "Critical sets, query, width and backdoor obstructions",
+    "purpose": "Critical recovery, query lower bounds and binary-native width",
     "comparator_config_path": "entries/P06/comparator.json",
     "formalization_metadata_path": "entries/P06/formalization.yaml",
     "theorem_names": [
@@ -81,11 +82,15 @@
       "Controller.Graph.NativeWidth.incidence_treewidth_lower",
       "Controller.Boundaries.Backdoors.native_backdoor_lower_bound",
       "Controller.Boundaries.Backdoors.specification_backdoor_lower_bound",
-      "Controller.Graph.CoverCircuit.linear_width_obstruction"
+      "Controller.Graph.CoverCircuit.linear_width_obstruction",
+      "Controller.Cost.CriticalSourceScan.critical_physical_recovery",
+      "Controller.Cost.CriticalSourceScan.cycle_physical_recovery",
+      "Controller.Graph.BoundedNativeWidth.primal_treewidth_lower",
+      "Controller.Graph.BoundedNativeWidth.incidence_treewidth_lower"
     ]
   },
   "P07": {
-    "purpose": "Bounded live conjunction and proper-basis algorithms",
+    "purpose": "Bounded conjunction and proper-basis algorithms",
     "comparator_config_path": "entries/P07/comparator.json",
     "formalization_metadata_path": "entries/P07/formalization.yaml",
     "theorem_names": [

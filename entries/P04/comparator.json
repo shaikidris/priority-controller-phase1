@@ -3,7 +3,8 @@
   "solution_module": "Phase1.P04.Solution",
   "theorem_names": [
     "Controller.Cost.ForestOriginalSemantics.original_physical_execution",
-    "Controller.Optimization.Weights.forest_maximum_weight"
+    "Controller.Optimization.Weights.forest_maximum_weight",
+    "Controller.Optimization.Weights.forest_physical_maximum"
   ],
   "permitted_axioms": [
     "propext",

@@ -1,0 +1,187 @@
+{
+  "status": "VISIBLE_HTML_DECLARATION_TEXT_AND_AUDIT_TYPES_CHECKED",
+  "method": "HTML text extraction and selected declaration/type inspection; no browser screenshot",
+  "entries": [
+    {
+      "entry": "P04",
+      "html_sha256": "4a09fd804ef00e3bd6e392d30ad4b55d720beed324e41af5b27d5dd94000566f",
+      "selected_visible": 6,
+      "excerpts": [
+        {
+          "name": "Controller.Cost.ForestOriginalSemantics.original_physical_execution",
+          "visible_excerpt": "ecution and maximum weight. theorem declaration uses `sorry`original_physical_execution (g0:DAG n) (fr0:g0.FormulaForest) (b:Nat) (bridge:Physical.Bridge n) (hb:0 < b) (rows:List Row) (originalRoots:List Nat) (originalMatched:RowsMatch g0 rows) (heads:UniformDAGSource.HeadsMatch g0 rows originalMatched) (originalRootsMatch:RootsMatch g0 originalRoots) (ws0:Channel n\u2192 W) (nonnegative: \u2200 channel,0\u2264 ws0 channe"
+        },
+        {
+          "name": "Controller.Optimization.Weights.forest_maximum_weight",
+          "visible_excerpt": "ecution and maximum weight. theorem declaration uses `sorry`forest_maximum_weight (g0:DAG n) (guarded:g0.Guarded) (fr0:g0.FormulaForest) (rows:List Row) (roots:List Nat) (matched:RowsMatch g0 rows) (rootsMatch:RootsMatch g0 roots) (ws0:Channel n\u2192 W) (nonnegative: \u2200 channel,0\u2264 ws0 channel) (b:\u2115) (target:Channel n) (candidate:ForestWeightedTagged.Candidate W) (selected: (ForestWeightedIndexed.view (ForestWeig"
+        },
+        {
+          "name": "Controller.Optimization.Weights.forest_physical_maximum",
+          "visible_excerpt": "d its physical realization. theorem declaration uses `sorry`forest_physical_maximum (g:DAG n) (fr:g.FormulaForest) (rs:List Row) (rt:List Nat) (mt:RowsMatch g rs) (rm:RootsMatch g rt) (ws:Channel n\u2192 W) (nn: \u2200 c,0\u2264 ws c) (b:Nat) (br:Physical.Bridge n) (hb:0 < b) (hz: \u2200 i:Fin g.roots.length, g.eval (assignmentOfSet {br.target}) (g.roots.get i)=false) (ex:Physical.BridgeDetectable (b:=b) br true g.observations"
+        },
+        {
+          "name": "Controller.Cost.ForestRootProjection.mixedResident",
+          "visible_excerpt": "rderedAddMonoid W]noncomputable def declaration uses `sorry`mixedResident: {width n:\u2115}\u2192 {W:Type}\u2192 [AddCommGroup.{0} W]\u2192 [LinearOrder.{0} W]\u2192 Cost.Program width 8\u2192 (positiveGraph negativeGraph:Decoder.DAG n)\u2192 (rows:List.{0} Cost.ForestIndexedOperands.Row)\u2192 List.{0} \u2115\u2192 List.{0} \u2115\u2192 Cost.ForestIndexedOperands.RowsMatch negativeGraph rows\u2192 (Channel n\u2192 W)\u2192 \u2115\u2192 Channel n\u2192 LT.lt.{0} (Cost.ForestCursorDescriptors.bui"
+        },
+        {
+          "name": "Controller.Cost.ForestRootProjection.packetPrelude",
+          "visible_excerpt": "riable {width:Nat}noncomputable def declaration uses `sorry`packetPrelude: {width:\u2115}\u2192 Cost.Program width 8\u2192 Cost.Program width 8:=bywidth:\u2115\u22a2 {width : \u2115} \u2192 Program width 8 \u2192 Program width 8 {width:\u2115\u22a2 {width : \u2115} \u2192 Program width 8 \u2192 Program width 8 sorryAll goals completed! \ud83d\udc19}end Cost.ForestRootProjectionnamespace Cost.ForestRootProjectionopen Controller Cost Decoder Decoder.DAGopen Cost.ForestIndexedOperands"
+        },
+        {
+          "name": "Controller.Cost.ForestRootProjection.classificationPrior",
+          "visible_excerpt": "able {width n:Nat}noncomputable def declaration uses `sorry`classificationPrior: {n:\u2115}\u2192 (width:\u2115)\u2192 Decoder.DAG n\u2192 List.{0} Cost.ForestIndexedOperands.Row\u2192 List.{0} \u2115\u2192 (Channel n\u2192 Bool)\u2192 Cost.Program width 8:=bywidth:\u2115n:\u2115\u22a2 {n : \u2115} \u2192 (width : \u2115) \u2192 DAG n \u2192 List Row \u2192 List \u2115 \u2192 (Channel n \u2192 Bool) \u2192 Program width 8 {width:\u2115n:\u2115\u22a2 {n : \u2115} \u2192 (width : \u2115) \u2192 DAG n \u2192 List Row \u2192 List \u2115 \u2192 (Channel n \u2192 Bool) \u2192 Program width"
+        }
+      ]
+    },
+    {
+      "entry": "P06",
+      "html_sha256": "53772b2e02257b2d2c5042f2ad9181e896bd1cfb0c74d47126262ddbe53087cf",
+      "selected_visible": 19,
+      "excerpts": [
+        {
+          "name": "Controller.Cost.CriticalSets.cycle_complete",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`cycle_complete (b:Nat) (bridge:Physical.Bridge n) (positive:0 < b) (rows:List Row) (roots:List Nat) (matched:RowsMatch (cycleDAG n) rows) (heads:UniformDAGSource.HeadsMatch (cycleDAG n) rows matched) (rootMatches:RootsMatch (cycleDAG n) roots) (address loaded temporary:Word (chosenMixedWidth (cycleDAG n))) (saved:Fin 8\u2192 Word (chosenMixedWidth (cycl"
+        },
+        {
+          "name": "Controller.Cost.CriticalSets.cycle_unique",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`cycle_unique {b:Nat} (bridge:Physical.Bridge n) (positive:0 < b) (L:Finset (Channel n)) (admissible:Admissible b bridge.target L) (detects:Physical.BridgeInputDetects bridge true (cycleDAG n).observations (Physical.realizeBridge bridge positive L) true):L=Finset.univ :=byn:\u2115b:\u2115bridge:Physical.Bridge npositive:0 < bL:Finset (Channel n)admissible:Adm"
+        },
+        {
+          "name": "Controller.Boundaries.physical_test_list_lower_bound",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`physical_test_list_lower_bound {b:\u2115} (bridge:Physical.Bridge n) (tests:List (Physical.PrimaryInput n b)) (covers: \u2200 K \u2208 criticalSets b bridge.target, \u2203 input \u2208 tests,Physical.BridgeInputDetects bridge true (criticalObservation K) input true): (criticalSets b bridge.target).card\u2264 tests.length :=byn:\u2115b:\u2115bridge:Physical.Bridge ntests:List (Physical.Pr"
+        },
+        {
+          "name": "Controller.Boundaries.criticalSets_card_one",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`criticalSets_card_one (t:Channel n): (criticalSets 1 t).card=2 ^ (n - 1) - 1 :=byn:\u2115t:Channel n\u22a2 (criticalSets 1 t).card = 2 ^ (n - 1) - 1 sorryAll goals completed! \ud83d\udc19 criticalSets card many: Critical sets, query, width and backdoor obstructions. theorem declaration uses `sorry`criticalSets_card_many (b:\u2115) (hb:2\u2264 b) (t:Channel n): (criticalSets b t)"
+        },
+        {
+          "name": "Controller.Boundaries.criticalSets_card_many",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`criticalSets_card_many (b:\u2115) (hb:2\u2264 b) (t:Channel n): (criticalSets b t).card=2 ^ n - 2 :=byn:\u2115b:\u2115hb:2 \u2264 bt:Channel n\u22a2 (criticalSets b t).card = 2 ^ n - 2 {n:\u2115b:\u2115hb:2 \u2264 bt:Channel n\u22a2 (criticalSets b t).card = 2 ^ n - 2 sorryAll goals completed! \ud83d\udc19}end Boundarieselaboration function for `commandSource_context_` has not been implementedsource_context "
+        },
+        {
+          "name": "Controller.Cost.CriticalSets.critical_complete",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`critical_complete (b:Nat) (bridge:Physical.Bridge n) (positive:0 < b) (K:Finset (Channel n)) (legal:K \u2208 criticalSets b bridge.target) (rows:List Row) (roots:List Nat) (matched:RowsMatch (criticalDAG K) rows) (heads:UniformDAGSource.HeadsMatch (criticalDAG K) rows matched) (rootMatches:RootsMatch (criticalDAG K) roots) (address loaded temporary:Word"
+        },
+        {
+          "name": "Controller.Boundaries.deterministic_one_bus",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`deterministic_one_bus (tree:QueryTree (Finset (Channel n))) (t:Channel n) (correct:CorrectOnCriticalFamily tree 1 t):2 ^ (n - 1) - 1\u2264 tree.budget :=byn:\u2115tree:QueryTree (Finset (Channel n))t:Channel ncorrect:CorrectOnCriticalFamily tree 1 t\u22a2 2 ^ (n - 1) - 1 \u2264 tree.budget sorryAll goals completed! \ud83d\udc19 deterministic many buses: Critical sets, query, wid"
+        },
+        {
+          "name": "Controller.Boundaries.deterministic_many_buses",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`deterministic_many_buses (tree:QueryTree (Finset (Channel n))) (b:\u2115) (hb:2\u2264 b) (t:Channel n) (correct:CorrectOnCriticalFamily tree b t):2 ^ n - 2\u2264 tree.budget :=byn:\u2115tree:QueryTree (Finset (Channel n))b:\u2115hb:2 \u2264 bt:Channel ncorrect:CorrectOnCriticalFamily tree b t\u22a2 2 ^ n - 2 \u2264 tree.budget sorryAll goals completed! \ud83d\udc19 randomized mixture lower bound: C"
+        },
+        {
+          "name": "Controller.Boundaries.randomized_mixture_lower_bound",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`randomized_mixture_lower_bound {Coins:Type*} [Fintype Coins] (trees:Coins\u2192 QueryTree (Finset (Channel n))) (weight:Coins\u2192 \u211d) (nonnegative: \u2200 coin,0\u2264 weight coin) (normalized: \u2211 coin,weight coin=1) (b:\u2115) (t:Channel n) (r:\u2115) (budget: \u2200 coin, (trees coin).budget\u2264 r) (bottomCorrect: (2 / 3:\u211d)\u2264 \u2211 coin,weight coin* (if (trees coin).run bottomValue=false "
+        },
+        {
+          "name": "Controller.Graph.NativeWidth.primal_treewidth_lower",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`primal_treewidth_lower (w:\u2115) (bound:TreewidthLE (primal p) w):min p.channels p.buses\u2264 w :=byp:Parametersw:\u2115bound:TreewidthLE (primal p) w\u22a2 min p.channels p.buses \u2264 w {p:Parametersw:\u2115bound:TreewidthLE (primal p) w\u22a2 min p.channels p.buses \u2264 w sorryAll goals completed! \ud83d\udc19}abbrev EquationAddress := (role:Internal p) \u00d7 Fin ((p.gate role).clauses (interna"
+        },
+        {
+          "name": "Controller.Graph.NativeWidth.incidence_treewidth_lower",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`incidence_treewidth_lower (w:\u2115) (bound:TreewidthLE (incidence p) w):min p.channels p.buses\u2264 w :=byp:Parametersw:\u2115bound:TreewidthLE (incidence p) w\u22a2 min p.channels p.buses \u2264 w {p:Parametersw:\u2115bound:TreewidthLE (incidence p) w\u22a2 min p.channels p.buses \u2264 w sorryAll goals completed! \ud83d\udc19}end NativeWidthend Graphelaboration function for `commandSource_conte"
+        },
+        {
+          "name": "Controller.Boundaries.Backdoors.native_backdoor_lower_bound",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`native_backdoor_lower_bound (parameters:Parameters) (target:BaseClass) (backdoor:Finset (GlobalVariable parameters)) (valid:DeletionBackdoor target (globalFormula parameters).clauses.toList backdoor\u2228 StrongBackdoor target (globalFormula parameters).clauses.toList backdoor):parameters.buses\u2264 backdoor.card :=byparameters:Parameterstarget:BaseClassbac"
+        },
+        {
+          "name": "Controller.Boundaries.Backdoors.specification_backdoor_lower_bound",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`specification_backdoor_lower_bound (parameters:Parameters) (target:BaseClass) (backdoor:Finset (Variable parameters)) (valid:DeletionBackdoor target parameters.specificationFormula.clauses.toList backdoor\u2228 StrongBackdoor target parameters.specificationFormula.clauses.toList backdoor):parameters.buses\u2264 backdoor.card :=byparameters:Parameterstarget:B"
+        },
+        {
+          "name": "Controller.Graph.CoverCircuit.linear_width_obstruction",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`linear_width_obstruction (c D:\u2115) (expansion:VertexExpansion J.graph c) (degree: \u2200 v, (BoundedCover.neighbors J v).card\u2264 D): let N:=BoundedCover.variableLiteralSize J driver layout let C:=12000*c*(D+1) (\u2200 w,TreewidthLE (portGraph J driver layout) w\u2192 N\u2264 C*(w+1))\u2227 (\u2200 w,TreewidthLE (BoundedCover.primal J driver layout) w\u2192 N\u2264 C*(w+1))\u2227 (\u2200 w,TreewidthLE "
+        },
+        {
+          "name": "Controller.Cost.CriticalSourceScan.critical_physical_recovery",
+          "visible_excerpt": "a physical detecting input. theorem declaration uses `sorry`critical_physical_recovery (b:Nat) (bridge:Physical.Bridge n) (positive:0 < b) (K:Finset (Channel n)) (legal:K \u2208 criticalSets b bridge.target) (rows:List Row) (roots:List Nat) (matched:RowsMatch (criticalDAG K) rows) (rootMatch:RootsMatch (criticalDAG K) roots) (rest output:List (Word (chosenMixedWidth (criticalDAG K)))) (address loaded temporary:W"
+        },
+        {
+          "name": "Controller.Cost.CriticalSourceScan.cycle_physical_recovery",
+          "visible_excerpt": "lization for cycle sources. theorem declaration uses `sorry`cycle_physical_recovery (b:Nat) (bridge:Physical.Bridge n) (positive:0 < b) (rows:List Row) (roots:List Nat) (matched:RowsMatch (CriticalSets.cycleDAG n) rows) (rootMatch:RootsMatch (CriticalSets.cycleDAG n) roots) (rest output:List (Word (chosenMixedWidth (CriticalSets.cycleDAG n)))) (address loaded temporary:Word (chosenMixedWidth (CriticalSets.c"
+        },
+        {
+          "name": "Controller.Graph.BoundedNativeWidth.primal_treewidth_lower",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`primal_treewidth_lower (w:\u2115) (bound:TreewidthLE (primal p) w):min p.channels p.buses\u2264 w :=byp:Parametersw:\u2115bound:TreewidthLE (primal p) w\u22a2 min p.channels p.buses \u2264 w {p:Parametersw:\u2115bound:TreewidthLE (primal p) w\u22a2 min p.channels p.buses \u2264 w sorryAll goals completed! \ud83d\udc19}abbrev EquationAddress := (role:Internal p) \u00d7 Fin ((p.gate role).clauses (interna"
+        },
+        {
+          "name": "Controller.Graph.BoundedNativeWidth.incidence_treewidth_lower",
+          "visible_excerpt": " and backdoor obstructions. theorem declaration uses `sorry`incidence_treewidth_lower (w:\u2115) (bound:TreewidthLE (incidence p) w):min p.channels p.buses\u2264 w :=byp:Parametersw:\u2115bound:TreewidthLE (incidence p) w\u22a2 min p.channels p.buses \u2264 w {p:Parametersw:\u2115bound:TreewidthLE (incidence p) w\u22a2 min p.channels p.buses \u2264 w sorryAll goals completed! \ud83d\udc19}end NativeWidthend Graphelaboration function for `commandSource_conte"
+        },
+        {
+          "name": "Controller.Cost.CriticalSets.forestProgram",
+          "visible_excerpt": ".decode payload n)noncomputable def declaration uses `sorry`forestProgram: {n:\u2115}\u2192 (graph:Decoder.DAG n)\u2192 graph.FormulaForest\u2192 \u2115\u2192 Channel n\u2192 (rows:List.{0} Cost.ForestIndexedOperands.Row)\u2192 List.{0} \u2115\u2192 Cost.ForestIndexedOperands.RowsMatch graph rows\u2192 Cost.Program (Cost.ForestRootProjection.chosenMixedWidth graph) 8 :=byn:\u2115\u22a2 {n : \u2115} \u2192 (graph : DAG n) \u2192 graph.FormulaForest \u2192 \u2115 \u2192 Channel n \u2192 (rows : List Row) \u2192 "
+        }
+      ]
+    },
+    {
+      "entry": "P07",
+      "html_sha256": "11ad113d2120840251976b2fd58b3690553fe9634a2938810fbb02c186535a75",
+      "selected_visible": 15,
+      "excerpts": [
+        {
+          "name": "Controller.Decoder.DAG.exists_small_true_support",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`exists_small_true_support (graph : DAG n) (K : Finset (Channel n)) (root : Fin graph.nodeCount) (active : graph.eval (assignmentOfSet K) root = true) (k : \u2115) (bound : graph.liveAndCount \u2264 k) : \u2203 support : Finset (Channel n), support \u2286 K \u2227 support.Nonempty \u2227 support.card \u2264 k + 1 \u2227 graph.eval (assignmentOfSet support) root = true := byn:\u2115graph:DAG nK"
+        },
+        {
+          "name": "Controller.Decoder.DAG.exists_small_target_support",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`exists_small_target_support (graph : DAG n) (K : Finset (Channel n)) (root : Fin graph.nodeCount) (active : graph.eval (assignmentOfSet K) root = true) (target : Channel n) (targetIn : target \u2208 K) (k : \u2115) (bound : graph.liveAndCount \u2264 k) (busCount : \u2115) : \u2203 support : Finset (Channel n), support \u2286 K \u2227 target \u2208 support \u2227 support.card \u2264 k + 2 \u2227 Admissi"
+        },
+        {
+          "name": "Controller.Decoder.DAG.expansion_identity",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`expansion_identity (graph : DAG n) (nodes : Finset (Fin graph.nodeCount)) (closed : graph.ChildClosed nodes) (a : Assignment n) (index : Fin graph.nodeCount) (member : index \u2208 nodes) : graph.eval a index = true \u2194 \u2200 selector : graph.Selector nodes, (graph.expansion nodes selector).eval a index = true := byn:\u2115graph:DAG nnodes:Finset (Fin graph.nodeCo"
+        },
+        {
+          "name": "Controller.Decoder.DAG.global_selector_count",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`global_selector_count (graph : DAG n) : Fintype.card (graph.Selector Finset.univ) = 2 ^ graph.liveAndCount := byn:\u2115graph:DAG n\u22a2 Fintype.card (graph.Selector Finset.univ) = 2 ^ graph.liveAndCount sorryAll goals completed! \ud83d\udc19end DAGend Controller.Decoderelaboration function for `commandSource_context_` has not been implementedsource_context \"Controlle"
+        },
+        {
+          "name": "Controller.Decoder.DAG.cone_expansion_identity",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`cone_expansion_identity (graph : DAG n) (a : Assignment n) (root : Fin graph.nodeCount) : graph.eval a root = true \u2194 \u2200 selector : graph.Selector (graph.cone root), (graph.expansion (graph.cone root) selector).eval a root = true := byn:\u2115graph:DAG na:Assignment nroot:Fin graph.nodeCount\u22a2 graph.eval a root = true \u2194 \u2200 (selector : graph.Selector (graph."
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeComplete.execution",
+          "visible_excerpt": "parameters.bridge.target}) root sorryAll goals completed! \ud83d\udc19 execution: Bounded live conjunction and proper-basis algorithms. theorem declaration uses `sorry`execution (parameters : Parameters) (raw : parameters.layout = .raw) (k : Nat) (andBound : parameters.decoder.liveAndCount \u2264 k) : \u2203 final ticks peak, Execution (BoundedNativeDetector.program parameters (BoundedNativeDetector.width parameters) k) (initia"
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeComplete.emitted_witness",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`emitted_witness (parameters : Parameters) (raw : parameters.layout = .raw) (drive : parameters.drive = true) (final : State wordWidth 8) (checked : Certificate.ModelCheck.check (formula parameters) (NativeRealizedChecked.decodeOutput final.output (compile parameters).toState.count) = true) : Admissible parameters.buses parameters.bridge.target (emi"
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeComplete.xp_time",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`xp_time (parameters : Parameters) (k : Nat) : BoundedNativeCold.timeBound parameters k \u2264 15000*((k+2)*(parameters.decoder.countedSize+1)^(k+1)+ (parameters.decoder.countedSize+1)*2^k)*(parameters.decoder.countedSize+1)+100*(selectedSize parameters).total := byparameters:Parametersk:\u2115\u22a2 BoundedNativeCold.timeBound parameters k \u2264 15000 * ((k + 2) * (p"
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeComplete.one_and_time",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`one_and_time (parameters : Parameters) : BoundedNativeCold.timeBound parameters 1 \u2264 360000*(parameters.channels^2+parameters.decoder.roots.length)*parameters.decoder.countedSize+ 100*(selectedSize parameters).total := byparameters:Parameters\u22a2 BoundedNativeCold.timeBound parameters 1 \u2264 360000 * (parameters.channels ^ 2 + parameters.decoder.roots.len"
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeComplete.healthy_one_time",
+          "visible_excerpt": "nd proper-basis algorithms. theorem declaration uses `sorry`healthy_one_time (parameters : Parameters) (k : Nat) (healthy : parameters.decoder.roots.all (parameters.decoder.evalTable (assignmentOfSet {parameters.bridge.target})) = true) : BoundedNativeCold.timeBound parameters k \u2264 15000*(2^k+1)*(parameters.decoder.countedSize+1)^2+100*(selectedSize parameters).total := byparameters:Parametersk:\u2115healthy:para"
+        },
+        {
+          "name": "Controller.Extensions.ProperBasisComplete.execution",
+          "visible_excerpt": "parameters.bridge.target}) root sorryAll goals completed! \ud83d\udc19 execution: Bounded live conjunction and proper-basis algorithms. theorem declaration uses `sorry`execution (parameters : Parameters) (raw : parameters.layout = .raw) (k : Nat) (andBound : parameters.decoder.liveAndCount \u2264 k) : \u2203 final ticks peak, Execution (BoundedNativeDetector.program parameters (BoundedNativeDetector.width parameters) k) (initia"
+        },
+        {
+          "name": "Controller.Cost.SharedDetectorCold.program",
+          "visible_excerpt": " registers : Nat) := Array (Instruction width registers)def programWords (p : Program width registers) : Nat := 4 * p.sizedef programStep (p : Program width registers) (s : State width registers) : Option (State width registers) := do let instruction \u2190 p[s.pc.val]? step instruction sinductive Execution (p : Program width registers) : State width registers \u2192 State width registers \u2192 Nat \u2192 Nat \u2192 Prop where | r"
+        },
+        {
+          "name": "Controller.Extensions.BoundedNativeDetector.program",
+          "visible_excerpt": " registers : Nat) := Array (Instruction width registers)def programWords (p : Program width registers) : Nat := 4 * p.sizedef programStep (p : Program width registers) (s : State width registers) : Option (State width registers) := do let instruction \u2190 p[s.pc.val]? step instruction sinductive Execution (p : Program width registers) : State width registers \u2192 State width registers \u2192 Nat \u2192 Nat \u2192 Prop where | r"
+        },
+        {
+          "name": "Controller.Extensions.MonotoneNativeDetector.program",
+          "visible_excerpt": " registers : Nat) := Array (Instruction width registers)def programWords (p : Program width registers) : Nat := 4 * p.sizedef programStep (p : Program width registers) (s : State width registers) : Option (State width registers) := do let instruction \u2190 p[s.pc.val]? step instruction sinductive Execution (p : Program width registers) : State width registers \u2192 State width registers \u2192 Nat \u2192 Nat \u2192 Prop where | r"
+        },
+        {
+          "name": "Controller.Extensions.LiteralNativeDetector.program",
+          "visible_excerpt": " registers : Nat) := Array (Instruction width registers)def programWords (p : Program width registers) : Nat := 4 * p.sizedef programStep (p : Program width registers) (s : State width registers) : Option (State width registers) := do let instruction \u2190 p[s.pc.val]? step instruction sinductive Execution (p : Program width registers) : State width registers \u2192 State width registers \u2192 Nat \u2192 Nat \u2192 Prop where | r"
+        }
+      ]
+    }
+  ]
+}

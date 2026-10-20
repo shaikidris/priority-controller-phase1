@@ -1,4 +1,3 @@
-module
 
 import Phase1.P01.Solution
 import Phase1.P02.Solution

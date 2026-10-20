@@ -10,17 +10,26 @@ The K00 encoded-machine bridge supplies additional resource-respecting
 infrastructure; it does not by itself establish membership of a concrete
 encoded detector language in a conventional complexity class.
 
-The source manifest records the 921 extracted research modules, their
-original SHA-256 digests, and the ported proof-library digests. Research commit
+The source manifest records the 921 base research modules, their original
+SHA-256 digests, and the ported proof-library digests. Its construction extension
+records 133 additional modules and excerpts added to three existing owners,
+including physical attainment, source recovery, native width, and complete
+construction, execution, and temporary storage contracts. Each extension input
+and ported owner has a separate SHA-256 digest. Research commit
 `4fa94a30c6fb3de154f65ba29a70fdb0e6e95172` identifies the repository base.
 The audited local source snapshot also contains work outside that commit, so
 that commit alone does not reproduce this extraction. The per-file manifest
 identifies the actual source input.
 
+The construction extension records research base
+`6c300f9c66bfe03db18bf966b16b5a37195a7f3e`; its per-file hashes identify
+the complete local source inputs.
+
 The original proof development used Lean 4.33.0. This package uses Lean
 4.35.0-rc3 and the complete canonical Mathlib dependency graph recorded in
 `lake-manifest.json`. The compatibility port introduces Lean module visibility,
-updates proof APIs, and partitions the original large `RawTypedCopy` owner
+uses supported legacy source modules for the construction extension, updates
+proof APIs, and partitions the original large `RawTypedCopy` owner
 among its existing module and two imported parts.
 
 Clauses retain the original ordered lists of variable/polarity pairs. Formula

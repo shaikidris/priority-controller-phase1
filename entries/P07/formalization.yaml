@@ -1,8 +1,9 @@
 version: v0.4
 project:
-  name: Bounded live conjunction and proper-basis detection
-  description: Support and expansion identities for bounded live conjunction, native bounded-conjunction
-    detection with explicit XP and special-case time bounds, and proper-basis execution.
+  name: Bounded conjunction and proper-basis algorithms
+  description: Bounded-support and selector-expansion laws with complete native executions for
+    bounded live conjunctions and proper bases. Concrete source construction, total time and temporary
+    word-storage proofs accompany the selected registry statements.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -10,7 +11,7 @@ project:
   - Idris Ali Shaik
 classification:
   arxiv:
-  - cs.CC
+  - 'cs.CC'
   msc2020:
   - '68Q25'
   - '68Q60'
@@ -22,25 +23,22 @@ sources:
   type: preprint
   location: https://zenodo.org/records/23400057
   relationship: formalizes
-  note: Version 1.0; Lemma 7.2 (bounded positive support), Lemma 7.3 (guarded expansion), Theorem
-    7.4 (bounded live conjunction), and the proper-basis algorithmic component of Theorem 7.5.
-    The native programs and numerical bounds are mechanized refinements. The general XP and healthy-one
-    bounds are the weaker displayed formal bounds, not the sharper manuscript expressions; full-basis
-    hardness is outside this selection.
+  note: Version 1.0; Lemmas 7.2–7.3 and the algorithmic directions of Theorems 7.4–7.5. Exact
+    source construction and storage proofs are provided as companion modules.
   license: unknown
   author_endorsement: participated
 related_formalizations: []
 status:
-  scope: Support and expansion identities for bounded live conjunction, native bounded-conjunction
-    detection with explicit XP and special-case time bounds, and proper-basis execution. The decoder
-    and its live-conjunction or proper-basis evidence are supplied. Runtime is measured in the
-    explicit native execution model. The proper-basis algorithms do not establish the full-basis
-    hardness classification or conventional encoded-language membership without the required construction
-    bridge. The execution bounds concern Solution-supplied instance-dependent programs under the
-    displayed raw-layout and representation premises. Comparator does not pin their bodies; no
-    uniform charged image constructor for these program families is selected. The XP and special-case
-    inequalities are supporting bounds on the explicit time function, rather than independent
-    algorithm implementations.
+  scope: The selected registry statements retain their exact raw-layout, live-AND, basis Uses,
+    proper-basis and representation hypotheses. They include support/expansion laws, complete
+    bounded native execution and proper-basis execution, with the displayed XP and special-case
+    inequalities. The companion source package separately proves concrete source-only constructors,
+    exact instruction images, construction plus execution time, temporary construction storage
+    and native model checking. Its proper-basis implementation reuses the constructed bounded
+    k=0 detector for the guarded branch and constructs the monotone/literal table branches; the
+    original selected proper-basis theorem and implementation are retained. The full construction
+    certificates are companion declarations, not additional Comparator-selected targets in this
+    entry. K01 and encoded-language classification are deferred.
   sorry_count: 0
   sorry_in_definitions: 0
   axioms:
@@ -60,17 +58,22 @@ automation:
       wall_time: not tracked
       spend_usd: not tracked
       hardware: Local Apple Silicon computer
-    prompting_notes: Prove support and expansion laws and audit the bounded-conjunction and proper-basis
-      execution premises and time functions.
+    prompting_notes: Preserve the exact selected hypotheses; verify P04/P06/P07 source-construction
+      companions and the affected statement, metadata, comparison, kernel and rendering surfaces.
   spend_usd: not tracked
   notes: The author directed the formalization. AI agents assisted with proof construction and
     packaging.
 fidelity:
-  divergences: The execution bounds concern Solution-supplied instance-dependent programs under
-    the displayed raw-layout and representation premises. Comparator does not pin their bodies;
-    no uniform charged image constructor for these program families is selected. The XP and special-case
-    inequalities are supporting bounds on the explicit time function, rather than independent
-    algorithm implementations.
+  divergences: The selected registry statements retain their exact raw-layout, live-AND, basis
+    Uses, proper-basis and representation hypotheses. They include support/expansion laws, complete
+    bounded native execution and proper-basis execution, with the displayed XP and special-case
+    inequalities. The companion source package separately proves concrete source-only constructors,
+    exact instruction images, construction plus execution time, temporary construction storage
+    and native model checking. Its proper-basis implementation reuses the constructed bounded
+    k=0 detector for the guarded branch and constructs the monotone/literal table branches; the
+    original selected proper-basis theorem and implementation are retained. The full construction
+    certificates are companion declarations, not additional Comparator-selected targets in this
+    entry. K01 and encoded-language classification are deferred.
 review:
   status: self-assessed
   reviewers: []
