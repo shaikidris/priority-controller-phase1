@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerQueries
+public import Controller.Cost.ForestCompilerQueries
+
+@[expose] public section
+
 
 /-! Count-only compiler metadata. Native instruction generation needs the
 number of distinct coordinates and channel coverage, not a second copy of

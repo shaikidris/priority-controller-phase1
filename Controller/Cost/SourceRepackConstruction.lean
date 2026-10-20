@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.StackPacketConstruction
+public import Controller.Cost.StackPacketConstruction
+
+@[expose] public section
+
 
 /-! Charged instruction construction for exchanging the retained source heap. -/
 namespace Controller.Cost.SourceRepackConstruction

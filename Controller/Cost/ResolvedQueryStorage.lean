@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedFrontStorage
-import Controller.Cost.ResolvedCallbackConstruction
-import Controller.Cost.ResolvedNativeQueryConstruction
+public import Controller.Cost.ResolvedFrontStorage
+public import Controller.Cost.ResolvedCallbackConstruction
+public import Controller.Cost.ResolvedNativeQueryConstruction
+
+@[expose] public section
+
 
 /-! Returning and native selector queries retain the source metadata, emitted
 front, query image and return image. Every scalar placement is supported by the

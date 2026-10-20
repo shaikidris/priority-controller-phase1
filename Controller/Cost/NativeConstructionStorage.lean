@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeContinuationConstruction
-import Controller.Cost.TemplateStreamConstruction
+public import Controller.Cost.NativeContinuationConstruction
+public import Controller.Cost.TemplateStreamConstruction
+
+@[expose] public section
+
 
 /-! Temporary native-constructor storage. Fixed read/store recipes, occurrence
 streams, gate blocks, reverse block directories and final materialization are

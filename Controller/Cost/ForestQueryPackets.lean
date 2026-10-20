@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestReferenceConstruction
+public import Controller.Cost.ForestReferenceConstruction
+
+@[expose] public section
+
 
 /-! Source-driven construction of all negative query packets. This producer
 runs the charged cone builder, appends the root/target units and advances the

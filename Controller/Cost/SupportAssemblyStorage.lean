@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.AssemblyStorage
-import Controller.Cost.SupportColdConstruction
-import Controller.Cost.SupportNativeConstruction
+public import Controller.Cost.AssemblyStorage
+public import Controller.Cost.SupportColdConstruction
+public import Controller.Cost.SupportNativeConstruction
+
+@[expose] public section
+
 
 /-! Actual assembly traces for source-count streams, support callbacks and
 cold source exchange. No source evaluation is performed to form an instruction. -/

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ExtensionNativeRecipes
+public import Controller.Cost.ExtensionNativeRecipes
+
+@[expose] public section
+
 
 /-! A native success continuation is formed from fixed control templates and
 the charged selected-circuit constructor. It emits the runtime assignment;

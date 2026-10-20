@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestRootClassification
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ForestRootClassification
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Construction storage of the counts-only source interpreter. No hypothetical
 source/evaluation heap is materialized to obtain layout operands. -/

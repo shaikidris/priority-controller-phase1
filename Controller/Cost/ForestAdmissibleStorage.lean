@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestAdmissibleConstruction
-import Controller.Cost.ForestClauseStorage
+public import Controller.Cost.ForestAdmissibleConstruction
+public import Controller.Cost.ForestClauseStorage
+
+@[expose] public section
+
 
 /-! Complete reserved-row caller construction storage. The source image and
 fixed admissibility continuation have traced operand evaluation; buffers cover

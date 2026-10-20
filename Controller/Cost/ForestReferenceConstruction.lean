@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestReferenceWork
+public import Controller.Cost.ForestReferenceWork
+
+@[expose] public section
+
 
 /-! Charged source-clause construction. The recursive result carries the
 actual emitted rows and its construction clock; it does not first allocate a

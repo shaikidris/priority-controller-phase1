@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestClauseProgramConstruction
-import Controller.Cost.ForestDirectoryStorage
-import Controller.Cost.ForestLiteralStorage
+public import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.ForestDirectoryStorage
+public import Controller.Cost.ForestLiteralStorage
+
+@[expose] public section
+
 
 /-! Storage certificate for complete variable source-clause image generation.
 Every profile, directory, literal and fixed-operand pass has an actual trace.

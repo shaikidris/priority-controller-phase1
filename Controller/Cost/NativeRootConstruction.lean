@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeCircuitConstruction
-import Controller.Cost.NativeRetainedExecution
+public import Controller.Cost.NativeCircuitConstruction
+public import Controller.Cost.NativeRetainedExecution
+
+@[expose] public section
+
 
 /-! Physical native roots are formed once, in source-interface order. The
 constructor caches each block length, so subsequent addresses do not require

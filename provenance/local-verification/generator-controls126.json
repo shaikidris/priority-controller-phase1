@@ -1,0 +1,47 @@
+{
+  "status": "SEVEN_MODERN_MODULE_GENERATOR_CONTROLS_PASS",
+  "checks": [
+    {
+      "control": "division",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "2b70899c7e7f4234a1520aad91d20fe4a1c4ef71119e025916931c6644219aaf"
+    },
+    {
+      "control": "dynamic-register",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "b2c489eed49d0572755255353f2f22de2c913ca47b49f2e4004139c8616683b7"
+    },
+    {
+      "control": "dynamic-opcode",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "93e2b58426468020bf1d8f0e7d8d5dc5e4f85a3fe9b7104ab94787ee01b64bb7"
+    },
+    {
+      "control": "unsafe-template",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "3d38d2df29ac8b53c579e73d82b375e8966413d2c952c6a1cd7b59c2caa84157"
+    },
+    {
+      "control": "non-natural",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "44f8bfe7845cb8b28cf09aeff0aafb5b689d982ec136684e255079c3d9e67d92"
+    },
+    {
+      "control": "finite-register",
+      "exit_code": 1,
+      "status": "pass",
+      "log_sha256": "af3b669f44800091baf3a5fd4cacaea7f173b484663d08b35a62d86a2751b988"
+    },
+    {
+      "control": "finite-index-positive",
+      "exit_code": 0,
+      "status": "pass",
+      "log_sha256": "a435f11f08a26dfe63cf4663e679ead71fdb18816d35cd516c1ed8b6a6b44129"
+    }
+  ]
+}

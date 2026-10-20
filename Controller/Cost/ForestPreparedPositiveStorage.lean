@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestPreparedPositive
-import Controller.Cost.ForestClauseProgramConstruction
-import Controller.Cost.ForestPositiveStorage
+public import Controller.Cost.ForestPreparedPositive
+public import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.ForestPositiveStorage
+
+@[expose] public section
+
 
 /-! Storage of the actual selected positive-branch assembler. Prefix operands,
 descriptors, witness code and cleanup have traced formation; widening and final

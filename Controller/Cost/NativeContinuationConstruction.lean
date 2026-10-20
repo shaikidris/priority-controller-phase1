@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeRootConstruction
-import Controller.Extensions.BasisNativeFinish
+public import Controller.Cost.NativeRootConstruction
+public import Controller.Extensions.BasisNativeFinish
+
+@[expose] public section
+
 
 /-! Native continuation construction from the selected source circuit and its
 physical interface. Root blocks and circuit blocks are built once. The selected

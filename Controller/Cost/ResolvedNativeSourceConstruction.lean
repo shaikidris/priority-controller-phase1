@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNativeQueryConstruction
-import Controller.Cost.ResolvedFrontConstruction
+public import Controller.Cost.ResolvedNativeQueryConstruction
+public import Controller.Cost.ResolvedFrontConstruction
+
+@[expose] public section
+
 
 /-! The successful selector continuation is assembled from a charged source
 front and the complete native query constructor. -/

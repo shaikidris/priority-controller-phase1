@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeGateExecution
-import Controller.Cost.ForestClauseProgramConstruction
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.NativeGateExecution
+public import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Native instruction formation from source literal coordinates. Environments
 contain scalar source fields; arithmetic recipes form addresses and branch

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.PlanConstructionStorage
-import Controller.Cost.PacketTransferStorage
+public import Controller.Cost.PlanConstructionStorage
+public import Controller.Cost.PacketTransferStorage
+
+@[expose] public section
+
 
 /-! Source-front buffers account for the cached source plan, operand emitter,
 packet handoff, fixed copy/header recipes and all intermediate list images. -/

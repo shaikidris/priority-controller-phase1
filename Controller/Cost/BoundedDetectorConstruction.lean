@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedSearchConstruction
-import Controller.Cost.SupportNativeConstruction
-import Controller.Cost.SupportColdConstruction
+public import Controller.Cost.ResolvedSearchConstruction
+public import Controller.Cost.SupportNativeConstruction
+public import Controller.Cost.SupportColdConstruction
+
+@[expose] public section
+
 
 /-! Complete bounded-live-AND detector instruction construction. Both search
 phases, cold input preparation and relocation belong to this constructor. -/

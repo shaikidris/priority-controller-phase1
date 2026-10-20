@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCachedReferences
-import Controller.Cost.ForestZeroSourcePlan
+public import Controller.Cost.ForestCachedReferences
+public import Controller.Cost.ForestZeroSourcePlan
+
+@[expose] public section
+
 
 /-! Root queries formed in source order from cached offsets. Positional roots
 are traversed once, preserving duplicate declared observations. -/

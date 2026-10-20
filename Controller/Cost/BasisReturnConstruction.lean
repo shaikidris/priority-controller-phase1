@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisRootConstruction
+public import Controller.Cost.BasisRootConstruction
+
+@[expose] public section
+
 
 /-! A proper-basis root verdict is followed by one explicit channel-word
 emitter. Cached emission lengths determine the two success continuations. -/

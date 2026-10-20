@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeGateConstruction
-import Controller.Cost.NativeCircuitSize
+public import Controller.Cost.NativeGateConstruction
+public import Controller.Cost.NativeCircuitSize
+
+@[expose] public section
+
 
 /-! One traversal builds native gate blocks and caches their lengths. Instruction
 blocks are collected in reverse order and materialized once; no recursive

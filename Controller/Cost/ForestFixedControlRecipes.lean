@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestConstructionRecipes
+public import Controller.Cost.ForestConstructionRecipes
+
+@[expose] public section
+
 
 /-! Fixed scalar templates for the forest loader, selector flag and final halt. -/
 namespace Controller.Cost.ForestFixedControlRecipes

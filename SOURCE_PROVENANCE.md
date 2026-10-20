@@ -28,8 +28,8 @@ the complete local source inputs.
 The original proof development used Lean 4.33.0. This package uses Lean
 4.35.0-rc3 and the complete canonical Mathlib dependency graph recorded in
 `lake-manifest.json`. The compatibility port introduces Lean module visibility,
-uses supported legacy source modules for the construction extension, updates
-proof APIs, and partitions the original large `RawTypedCopy` owner
+exports public construction interfaces and checked generated recipe bodies,
+updates proof APIs, and partitions the original large `RawTypedCopy` owner
 among its existing module and two imported parts.
 
 Clauses retain the original ordered lists of variable/polarity pairs. Formula

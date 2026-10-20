@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestPreparedNegative
-import Controller.Cost.ForestStreamingStorage
+public import Controller.Cost.ForestPreparedNegative
+public import Controller.Cost.ForestStreamingStorage
+
+@[expose] public section
+
 
 /-! Original-forest storage bound for the complete negative image constructor.
 The certified loop includes metadata and provisional/relocated scratch; final

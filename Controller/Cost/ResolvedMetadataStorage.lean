@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedNativeLayoutConstruction
-import Controller.Cost.ClauseProfileStorage
-import Controller.Cost.ForestDirectoryStorage
+public import Controller.Cost.ResolvedNativeLayoutConstruction
+public import Controller.Cost.ClauseProfileStorage
+public import Controller.Cost.ForestDirectoryStorage
+
+@[expose] public section
+
 
 /-! Storage for source-row and scalar layout preparation. Source-node
 constructors expose the six syntax cases; reference records and profiles have

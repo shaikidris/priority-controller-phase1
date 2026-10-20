@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceOptimal
+public import Controller.Cost.ForestSourceOptimal
+
+@[expose] public section
+
 
 /-! Construction-operation accounting for the complete source-only forest
 image. Weight arithmetic and its encoded storage are separate. The stage

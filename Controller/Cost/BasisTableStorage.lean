@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.SupportAssemblyStorage
-import Controller.Cost.BasisTableConstruction
+public import Controller.Cost.SupportAssemblyStorage
+public import Controller.Cost.BasisTableConstruction
+
+@[expose] public section
+
 
 /-! Proper-basis table construction storage. Singleton interpreters are fixed
 images; columns, sign-pair jobs and matrix parking form source-count streams. -/

@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ExtensionConstructionRecipes
-import Controller.Cost.ForestClauseProgramConstruction
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ExtensionConstructionRecipes
+public import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Relocation reads already formed instruction fields, adds the segment offset
 to branch targets and repacks that word. Other fields are copied. The input

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestConstructionRecipes
-import Controller.Cost.CompilerAppendTrace
+public import Controller.Cost.ForestConstructionRecipes
+public import Controller.Cost.CompilerAppendTrace
+
+@[expose] public section
+
 
 /-! Charged formation of variable source-literal streams. Fixed templates
 use checked first-order recipes; the stream writer forms each block once,

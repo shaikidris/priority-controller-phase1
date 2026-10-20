@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestIndexedOperands
-import Controller.Cost.CompilerAppendTrace
+public import Controller.Cost.ForestIndexedOperands
+public import Controller.Cost.CompilerAppendTrace
+
+@[expose] public section
+
 
 /-! One source pass caches row records and child/guard stream offsets. Later
 reference formation uses indexed reads of these arrays; prefix sums occur

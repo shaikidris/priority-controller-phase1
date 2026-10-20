@@ -1,8 +1,13 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.UniformSourceConstruction
-import Controller.Cost.BoundedRun
-import Controller.Cost.UniformDAGRuntimeOutputs
-import Controller.Cost.ForestRootProjection
+public import Controller.Cost.UniformSourceConstruction
+public import Controller.Cost.BoundedRun
+public import Controller.Cost.UniformDAGRuntimeOutputs
+public import Controller.Cost.ForestRootProjection
+
+@[expose] public section
+
 
 /-! Source-driven healthy-root classification before image construction.
 A counts-only resident evaluates the original packet and emits its root flags;

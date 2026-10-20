@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisTableStorage
-import Controller.Cost.BasisOutputStorage
-import Controller.Cost.ProperNativeConstruction
+public import Controller.Cost.BasisTableStorage
+public import Controller.Cost.BasisOutputStorage
+public import Controller.Cost.ProperNativeConstruction
+
+@[expose] public section
+
 
 /-! Proper-basis native assembly retains the source table image, redirected
 root/witness schedule and the selected native continuation at the same time. -/

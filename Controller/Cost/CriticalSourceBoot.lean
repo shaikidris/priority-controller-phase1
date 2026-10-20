@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.CriticalSourceScan
-import Controller.Cost.EnumerationSteps
+public import Controller.Cost.CriticalSourceScan
+public import Controller.Cost.EnumerationSteps
+
+@[expose] public section
+
 
 /-! Cold execution of the fixed critical-source scanner. -/
 namespace Controller.Cost.CriticalSourceScan

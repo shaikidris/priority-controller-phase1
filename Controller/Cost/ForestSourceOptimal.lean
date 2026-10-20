@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceImage
-import Controller.Cost.ForestWeightedCold
+public import Controller.Cost.ForestSourceImage
+public import Controller.Cost.ForestWeightedCold
+
+@[expose] public section
+
 
 /-! Physical optimum emission by the source-only instruction constructor.
 Generic weight operations and encoded input/output sizes keep their separate

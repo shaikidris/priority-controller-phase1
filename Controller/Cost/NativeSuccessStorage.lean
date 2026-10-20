@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeFinishStorage
-import Controller.Cost.NativeSuccessConstruction
+public import Controller.Cost.NativeFinishStorage
+public import Controller.Cost.NativeSuccessConstruction
+
+@[expose] public section
+
 
 /-! Native success storage retains the fixed save/restore frames and both
 native code materializations alongside the checked source-circuit constructor. -/

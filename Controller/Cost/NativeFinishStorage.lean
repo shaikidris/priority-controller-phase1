@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeConstructionStorage
+public import Controller.Cost.NativeConstructionStorage
+
+@[expose] public section
+
 
 /-! Native output emission storage includes its address stream, mapped block
 directory, flattened code and widening buffers in addition to the retained

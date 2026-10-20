@@ -76,6 +76,25 @@ def main():
         assert fingerprint(source) == inputs, 'source changed during replay'
         print('PASS', name, flush=True)
 
+    # leanexport may ignore unknown requested names. Reject a stale manifest
+    # before exporting, and check the permitted axioms for every exact root.
+    root_check = output / 'AuditRoots.lean'
+    quoted = ', '.join('`' + name for name in names)
+    root_check.write_text(
+        'module\nimport ' + targets['module'] + '\n'
+        'import Lean.Elab.Command\nimport Lean.Util.CollectAxioms\n'
+        'open Lean Elab Command in\nrun_cmd do\n'
+        '  let names : List Name := [' + quoted + ']\n'
+        '  for name in names do\n'
+        '    let _ ← getConstInfo name\n'
+        '    let axioms ← Lean.collectAxioms name\n'
+        '    for axiomName in axioms do\n'
+        '      unless [``propext, ``Classical.choice, ``Quot.sound].contains axiomName do\n'
+        '        throwError "unapproved axiom {axiomName} in {name}"\n'
+        '  logInfo m!"AUDIT_ROOTS_PASS: {names.length}"\n')
+    run('root-existence-and-axioms', ['lake', 'env', str(binary / 'lean'),
+        '--root=' + str(output), str(root_check)])
+
     exported = output / 'construction.export'
     run('export', ['lake', 'env', str(binary / 'leanexport'), targets['module'], '--',
                    *names, *primitive_names], stdout=exported)

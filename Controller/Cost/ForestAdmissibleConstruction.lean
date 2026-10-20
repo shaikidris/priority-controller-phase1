@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestClauseProgramConstruction
+public import Controller.Cost.ForestClauseProgramConstruction
+
+@[expose] public section
+
 
 /-! Charged image construction for the complete reserved-row query caller.
 The constructor includes the variable source clause program and the fixed

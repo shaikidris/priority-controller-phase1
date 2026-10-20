@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.AndRankConstruction
-import Controller.Cost.SourceOperandConstruction
+public import Controller.Cost.AndRankConstruction
+public import Controller.Cost.SourceOperandConstruction
+
+@[expose] public section
+
 
 /-! The selector-query operand plan reads cached child offsets and dense AND
 ranks. Original incidence positions and duplicate occurrences are preserved. -/

@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResolvedQueryStorage
+public import Controller.Cost.ResolvedQueryStorage
+
+@[expose] public section
+
 
 /-! Compositional instruction-list storage in the source word model. Append
 copies its left spine and shares its right input. Widening, redirection and

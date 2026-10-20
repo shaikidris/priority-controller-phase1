@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.Model
+public import Controller.Cost.Model
+
+@[expose] public section
+
 
 /-! A fuel-bounded interpreter for the concrete fetched machine. A proved
 halting execution identifies its actual returned state at every sufficient

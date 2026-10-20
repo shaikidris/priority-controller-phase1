@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerMarks
-import Controller.Cost.ForestScalarNegativeConstruction
-import Controller.Cost.ForestFixedControlRecipes
+public import Controller.Cost.ForestCompilerMarks
+public import Controller.Cost.ForestScalarNegativeConstruction
+public import Controller.Cost.ForestFixedControlRecipes
+
+@[expose] public section
+
 
 /-! Tail-recursive negative-resident assembly. The runtime state carries one
 mark table, scalar placement operands and completed output blocks. Local

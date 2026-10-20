@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Extensions.ResolvedSourcePlan
-import Controller.Cost.ForestCompilerOffsets
+public import Controller.Extensions.ResolvedSourcePlan
+public import Controller.Cost.ForestCompilerOffsets
+
+@[expose] public section
+
 
 /-! Dense selector ranks are assigned once in occurrence order. The resulting
 word vector supports constant-time rank reads during query construction. -/

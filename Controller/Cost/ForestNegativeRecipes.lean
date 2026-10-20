@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestConstructionRecipes
-import Controller.Cost.ForestCachedNegativeProgram
+public import Controller.Cost.ForestConstructionRecipes
+public import Controller.Cost.ForestCachedNegativeProgram
+
+@[expose] public section
+
 
 /-! Fixed negative-query kernels with explicit scalar operands. The variable
 clause constructor is assembled separately between these two fixed streams. -/

@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ResidentSolverConstruction
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ResidentSolverConstruction
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Storage for the fixed normalizer/FIFO resident solver templates. All four
 formed blocks and their joins are retained by this conservative envelope. -/

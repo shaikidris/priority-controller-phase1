@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestPositiveConstruction
-import Controller.Cost.ForestDescriptorStorage
-import Controller.Cost.WordConstructionStorage
+public import Controller.Cost.ForestPositiveConstruction
+public import Controller.Cost.ForestDescriptorStorage
+public import Controller.Cost.WordConstructionStorage
+
+@[expose] public section
+
 
 /-! Construction storage of the positive descriptor/witness image. Descriptor
 control and witness arithmetic have explicit traces. The front-list and final

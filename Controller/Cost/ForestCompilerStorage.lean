@@ -1,10 +1,15 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestSourceStorage
-import Controller.Cost.ForestSourcePreparationStorage
-import Controller.Cost.UniformSourceStorage
-import Controller.Cost.ForestPreparedPositiveStorage
-import Controller.Cost.ForestNegativeStorage
-import Controller.Cost.ForestQueryPacketStorage
+public import Controller.Cost.ForestSourceStorage
+public import Controller.Cost.ForestSourcePreparationStorage
+public import Controller.Cost.UniformSourceStorage
+public import Controller.Cost.ForestPreparedPositiveStorage
+public import Controller.Cost.ForestNegativeStorage
+public import Controller.Cost.ForestQueryPacketStorage
+
+@[expose] public section
+
 
 /-! Storage composition for the source-only forest compiler in the source/list
 and first-order word-construction models. Original source and scalar inputs

@@ -1,94 +1,96 @@
 {
-  "status": "TEN_LOCAL_PINNED_METADATA_SELECTION_WORKFLOW_MANIFEST_CHECKS_PASS",
-  "source_kind": "local uncommitted tree",
-  "immutable_Git_replay": false,
-  "protected_Linux_replay": false,
+  "current_repair_receipt": "module-compatibility126.json",
   "entries": [
     {
+      "comparator_sha256": "9352c9575f32dd7ea9a2784d64cc2043ee636837d969d676488cffd1c2299dbd",
       "entry": "P01",
       "metadata_sha256": "de7e033c2aab9437f9533e1ec65da9b4b61d2f7daf84a22e9b7cc9b1f42d6fc1",
-      "comparator_sha256": "9352c9575f32dd7ea9a2784d64cc2043ee636837d969d676488cffd1c2299dbd",
       "msc_scalars": 2,
       "selected_theorems": 6,
       "status": "pass"
     },
     {
+      "comparator_sha256": "07c0880aec3896f8c7468eb8eeb494fe543aa4b89db9008c54cac31dc3670f0e",
       "entry": "P02",
       "metadata_sha256": "fb77cfb8a151d4d2f9117e2559a70efd1340dcd03369f3f6dc76708e1c347118",
-      "comparator_sha256": "07c0880aec3896f8c7468eb8eeb494fe543aa4b89db9008c54cac31dc3670f0e",
       "msc_scalars": 2,
       "selected_theorems": 6,
       "status": "pass"
     },
     {
+      "comparator_sha256": "a0cb82e2ab6d595d0d8da957cfaaaae6edf88a492c8ae718dbe384eb9ef5ef5a",
       "entry": "P03",
       "metadata_sha256": "b5e43be65d624af77d02ab9b4d7a218ab1e9050d336bd366616bb8b5cc3a8320",
-      "comparator_sha256": "a0cb82e2ab6d595d0d8da957cfaaaae6edf88a492c8ae718dbe384eb9ef5ef5a",
       "msc_scalars": 2,
       "selected_theorems": 8,
       "status": "pass"
     },
     {
+      "comparator_sha256": "f9b29cc7ff9677b042201cff1f71fd6ac5a590192ad594ebb8091f76dd39ea62",
       "entry": "P04",
       "metadata_sha256": "5dbdb1a317da63fd07fb6d018397b088eb056226f3ae19a7512ec8c86c4e892e",
-      "comparator_sha256": "f9b29cc7ff9677b042201cff1f71fd6ac5a590192ad594ebb8091f76dd39ea62",
       "msc_scalars": 2,
       "selected_theorems": 3,
       "status": "pass"
     },
     {
+      "comparator_sha256": "7725f5c06fcd0b90d27d59089795fadbacc50459c9d6463b205dad0d6004969e",
       "entry": "P05",
       "metadata_sha256": "492dc82d22617b6850663cfb8865bb93bc30a3a8cd61a5f371f92033006ab886",
-      "comparator_sha256": "7725f5c06fcd0b90d27d59089795fadbacc50459c9d6463b205dad0d6004969e",
       "msc_scalars": 2,
       "selected_theorems": 7,
       "status": "pass"
     },
     {
+      "comparator_sha256": "5386d27d98384ea65b065bddad77069a335eef7d1d866e33c1a7299c83f94b50",
       "entry": "P06",
       "metadata_sha256": "ae7c0885bf340cbc16c065b12ce07f8ac25cf37c7a0eca74cb0879839c0b512e",
-      "comparator_sha256": "5386d27d98384ea65b065bddad77069a335eef7d1d866e33c1a7299c83f94b50",
       "msc_scalars": 2,
       "selected_theorems": 18,
       "status": "pass"
     },
     {
+      "comparator_sha256": "7e196960f20b861f8c707f733a62523b1fc4ba9cc0bd840f7fa322dc3f5b0392",
       "entry": "P07",
       "metadata_sha256": "c893a8393706161be3174d67c7deb41a86bd136ea26b92f7e39ed10d1bf2bd86",
-      "comparator_sha256": "7e196960f20b861f8c707f733a62523b1fc4ba9cc0bd840f7fa322dc3f5b0392",
       "msc_scalars": 2,
       "selected_theorems": 11,
       "status": "pass"
     },
     {
+      "comparator_sha256": "af660b2283976b49a76491152848b5d29e4053c6f46cc6c7350732cf893418ed",
       "entry": "P08",
       "metadata_sha256": "d084170f86388d136851a9645b9419eed6a3c1c9bd4ee49211612f3ec16797f5",
-      "comparator_sha256": "af660b2283976b49a76491152848b5d29e4053c6f46cc6c7350732cf893418ed",
       "msc_scalars": 2,
       "selected_theorems": 11,
       "status": "pass"
     },
     {
+      "comparator_sha256": "2ee4561103760da5f5bdbea285dc7d8d0e5a9224e10c37052e3a9a2de9b1133f",
       "entry": "P09",
       "metadata_sha256": "75fd33db349c814dc3a1ac17b402ef386989b5b94d4cbce94c4089056a49eadf",
-      "comparator_sha256": "2ee4561103760da5f5bdbea285dc7d8d0e5a9224e10c37052e3a9a2de9b1133f",
       "msc_scalars": 2,
       "selected_theorems": 9,
       "status": "pass"
     },
     {
+      "comparator_sha256": "d35fab85d9e7f9f4135c160b884e5929f6faf23dda26b915e1d8829d935c7fac",
       "entry": "P10",
       "metadata_sha256": "943a12afaa9605f3d9201421161e96fba7b794c71a6dea6ad13bf5f4f7ad8751",
-      "comparator_sha256": "d35fab85d9e7f9f4135c160b884e5929f6faf23dda26b915e1d8829d935c7fac",
       "msc_scalars": 2,
       "selected_theorems": 6,
       "status": "pass"
     }
   ],
+  "immutable_Git_replay": false,
   "manifest": {
-    "verso_commit": "8fc7a297f14d5adc1a551b5b4ecf283c08bd691f",
     "cached_verso_manifest_sha256": "94dc7ca786cc5b60c3620b5a9b073326c6735c846be2b33ab58be0ad7d4696d6",
     "merged_packages": 13,
-    "source_manifest_sha256": "d75105ad02aee3355357e8fb32011b273450141ae3f0cd7dce3d750a3be266b0"
-  }
+    "source_manifest_sha256": "d75105ad02aee3355357e8fb32011b273450141ae3f0cd7dce3d750a3be266b0",
+    "verso_commit": "8fc7a297f14d5adc1a551b5b4ecf283c08bd691f"
+  },
+  "protected_Linux_replay": false,
+  "record_role": "Historical source-bound evidence for public parent ed774233fc9c15d5bac1a87e79ac2826ff75a34c",
+  "source_kind": "local uncommitted tree",
+  "status": "TEN_LOCAL_PINNED_METADATA_SELECTION_WORKFLOW_MANIFEST_CHECKS_PASS"
 }

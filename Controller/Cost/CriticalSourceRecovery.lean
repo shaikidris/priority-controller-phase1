@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.CriticalSourceBoot
+public import Controller.Cost.CriticalSourceBoot
+
+@[expose] public section
+
 
 /-! Uniform source-to-output recovery for the critical-set source layouts. -/
 namespace Controller.Cost.CriticalSourceScan

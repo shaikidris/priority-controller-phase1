@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.WordConstructionRecipe
-import Lean.Elab.Command
-import Lean.Util.Sorry
+public import Controller.Cost.WordConstructionRecipe
+public meta import Lean.Elab.Command
+public meta import Lean.Util.Sorry
+
+public meta section
+
 
 /-! Checked derivation of recipes for fixed numeric instruction templates.
 The generator rejects instance-dependent plain instructions and unsupported
@@ -138,7 +143,7 @@ elab "derive_extension_recipe " source:ident : command => do
       let recipeName := name.str "constructionRecipe"
       let definitionType ← mkForallFVars #[width] (← inferType recipe)
       let definitionValue ← mkLambdaFVars #[width] recipe
-      addAndCompile (.defnDecl {
+      withExporting <| addAndCompile (.defnDecl {
         name := recipeName
         levelParams := []
         type := definitionType

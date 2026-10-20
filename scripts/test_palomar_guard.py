@@ -19,6 +19,7 @@ args = parser.parse_args()
 sys.path.insert(0, str(args.pipeline.resolve()))
 from scripts import submission_contract as contract
 from scripts import render_challenge as renderer
+from scripts import source_requirements as requirements
 SOURCE = Path(__file__).resolve().parents[1]
 
 class GuardRegression(unittest.TestCase):
@@ -105,6 +106,29 @@ class GuardRegression(unittest.TestCase):
             bad=copy.deepcopy(data);bad['alignment']['statements'].pop()
             with self.assertRaisesRegex(ValueError,'selections differ'):
                 guard.validate_selection(SOURCE,bad,comparator)
+
+    def test_legacy_unselected_owner_rejected(self):
+        # A valid selected surface must not hide an incompatible companion.
+        with tempfile.TemporaryDirectory(dir=args.scratch_root) as tmp:
+            root = Path(tmp)
+            (root/'Challenge.lean').write_text('module\npublic def answer := 1\n')
+            (root/'Companion.lean').write_text('def unselected := 1\n')
+            with self.assertRaisesRegex(ValueError, 'Companion.lean.*module header'):
+                guard.validate_source_requirements(root, requirements)
+
+    def test_module_comment_and_line_contract(self):
+        with tempfile.TemporaryDirectory(dir=args.scratch_root) as tmp:
+            root = Path(tmp); path = root/'Owner.lean'
+            path.write_text('/- header -/\nmodule\npublic def answer := 1\n')
+            self.assertEqual(guard.validate_source_requirements(root, requirements)['files_checked'], 1)
+            path.write_text('module\n' + '\n'*requirements.MAX_LEAN_SOURCE_LINES)
+            with self.assertRaisesRegex(ValueError, 'at most 10,000 lines'):
+                guard.validate_source_requirements(root, requirements)
+
+    def test_all_delivered_sources_modern(self):
+        evidence = guard.validate_source_requirements(SOURCE, requirements)
+        self.assertTrue(evidence['module_required'])
+        self.assertGreater(evidence['files_checked'], 1000)
 
     def test_manifest_conflict(self):
         base=json.loads((SOURCE/'lake-manifest.json').read_text())

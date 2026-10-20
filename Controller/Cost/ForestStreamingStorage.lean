@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestStreamingConstruction
-import Controller.Cost.ForestMarkStorage
-import Controller.Cost.ForestScalarStorage
+public import Controller.Cost.ForestStreamingConstruction
+public import Controller.Cost.ForestMarkStorage
+public import Controller.Cost.ForestScalarStorage
+
+@[expose] public section
+
 
 /-! Construction storage of the complete tail packet loop. Metadata and both
 placement images have traced scratch storage. Maxima compose those stages

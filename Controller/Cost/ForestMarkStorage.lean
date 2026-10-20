@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestCompilerMarks
+public import Controller.Cost.ForestCompilerMarks
+
+@[expose] public section
+
 
 /-! Transient storage of the count-only metadata pass. Coverage recursion
 shares a read-only mark table; a continuation stores scalar words rather than

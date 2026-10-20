@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestReferenceConstruction
+public import Controller.Cost.ForestReferenceConstruction
+
+@[expose] public section
+
 
 /-! Cumulative new-record storage of the cached source-clause producer.
 Original source arrays and input tails are read-only and shared. The profile

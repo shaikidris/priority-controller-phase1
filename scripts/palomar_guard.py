@@ -82,6 +82,14 @@ def validate_selection(source, metadata, comparator):
             raise ValueError("Selected source module is missing: " + config[field])
 
 
+def validate_source_requirements(source, requirements):
+    """Use the pinned verifier's complete tree check, including unselected owners."""
+    evidence, issues = requirements.inspect_lean_sources(source)
+    if issues:
+        raise ValueError("Palomar source requirements: " + str(issues[0]))
+    return evidence
+
+
 def manifest_guard(source, renderer):
     import urllib.request
     toolchain = (source / "lean-toolchain").read_text().strip()
@@ -118,6 +126,8 @@ def main():
     require_snapshot(pipeline, PIPELINE)
     sys.path.insert(0, str(pipeline))
     contract = importlib.import_module("scripts.submission_contract")
+    requirements = importlib.import_module("scripts.source_requirements")
+    source_requirements = validate_source_requirements(source, requirements)
     catalog = json.loads((source / "entries/catalog.json").read_text())
     entry = catalog[args.entry]
     comparator = entry["comparator_config_path"]
@@ -144,6 +154,7 @@ def main():
         "metadata_portability": {"ambiguous_plain_msc_scalars": 0,
                                  "msc_scalars_checked": portable_codes,
                                  "scope": "Known YAML scalar ambiguity lint; not full browser intake validation"},
+        "source_requirements": source_requirements,
         "manifest_guard": manifest,
         "metadata_sha256": hashlib.sha256((source / metadata_path).read_bytes()).hexdigest(),
         "workflow_sha256": hashlib.sha256((source / WORKFLOW).read_bytes()).hexdigest(),

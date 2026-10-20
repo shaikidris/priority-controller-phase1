@@ -1,6 +1,11 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ForestDescriptorConstruction
-import Controller.Cost.ForestConstructionRecipes
+public import Controller.Cost.ForestDescriptorConstruction
+public import Controller.Cost.ForestConstructionRecipes
+
+@[expose] public section
+
 
 /-! The positive witness image is formed from the selector's computed records.
 The descriptor writer is executed with its proved fuel bound; the witness

@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.BasisTableConstruction
-import Controller.Cost.BasisOutputConstruction
-import Controller.Cost.NativeContinuationConstruction
+public import Controller.Cost.BasisTableConstruction
+public import Controller.Cost.BasisOutputConstruction
+public import Controller.Cost.NativeContinuationConstruction
+
+@[expose] public section
+
 
 /-! Proper-basis native detector image assembly. Matrix sizes are arithmetic
 source dimensions, and the source native circuit is compiled only once. -/

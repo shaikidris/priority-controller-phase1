@@ -1,16 +1,21 @@
+module
 
-import Phase1.P01.Solution
-import Phase1.P02.Solution
-import Phase1.P03.Solution
-import Phase1.P04.Solution
-import Phase1.P05.Solution
-import Phase1.P06.Solution
-import Phase1.P07.Solution
-import Phase1.P08.Solution
-import Phase1.P09.Solution
-import Phase1.P10.Solution
-import Lean.Util.CollectAxioms
-import Lean.Meta.PPGoal
+
+public import Phase1.P01.Solution
+public import Phase1.P02.Solution
+public import Phase1.P03.Solution
+public import Phase1.P04.Solution
+public import Phase1.P05.Solution
+public import Phase1.P06.Solution
+public import Phase1.P07.Solution
+public import Phase1.P08.Solution
+public import Phase1.P09.Solution
+public import Phase1.P10.Solution
+public import Lean.Util.CollectAxioms
+public meta import Lean.Meta.PPGoal
+
+@[expose] public section
+
 
 set_option pp.fullNames true
 set_option pp.universes true

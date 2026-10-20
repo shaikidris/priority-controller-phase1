@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ClauseProfileCounts
-import Controller.Extensions.ResolvedNativeProfile
-import Mathlib.Tactic.Linarith
+public import Controller.Cost.ClauseProfileCounts
+public import Controller.Extensions.ResolvedNativeProfile
+public import Mathlib.Tactic.Linarith
+
+@[expose] public section
+
 
 /-! Normalized row sizes from original source fields. A guard counts distinct
 channel labels by finite membership scans; its negative child cannot coincide

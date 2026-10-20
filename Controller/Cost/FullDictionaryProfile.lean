@@ -1,5 +1,10 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.ClauseProfileCounts
+public import Controller.Cost.ClauseProfileCounts
+
+@[expose] public section
+
 
 /-! Full coordinate dictionaries cover every channel. Their emitted positive
 row has one distinct local ID per channel, independently of clause multiplicity. -/

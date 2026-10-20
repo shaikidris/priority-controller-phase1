@@ -1,7 +1,12 @@
+module
+
 /- Copyright (c) 2026 Idris Ali Shaik. SPDX-License-Identifier: Apache-2.0 -/
-import Controller.Cost.NativeContinuationConstruction
-import Controller.Cost.SupportTraversalConstruction
-import Controller.Cost.StackPacketConstruction
+public import Controller.Cost.NativeContinuationConstruction
+public import Controller.Cost.SupportTraversalConstruction
+public import Controller.Cost.StackPacketConstruction
+
+@[expose] public section
+
 
 /-! The healthy-zero support phase shares one native continuation, formed
 from explicit source counts and the selected native source circuit. -/
