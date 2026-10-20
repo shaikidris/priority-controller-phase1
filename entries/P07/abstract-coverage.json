@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P07/formalization.yaml",
+  "comparator_path": "entries/P07/comparator.json",
+  "input_sha256": {
+    "metadata": "7b2e90327bbfae1e0592a8d764c338473209f8e238d2a5e7ea8562bf886e1166",
+    "comparator": "7e196960f20b861f8c707f733a62523b1fc4ba9cc0bd840f7fa322dc3f5b0392",
+    "challenge": "2d83f3436469070084dad2d09dcff10aa750ecb4572af7bde2acea1cf7dbba07"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "support",
+      "theorems": [
+        "Controller.Decoder.DAG.exists_small_true_support",
+        "Controller.Decoder.DAG.exists_small_target_support"
+      ],
+      "abstract_quotes": [
+        "Bounded-support"
+      ],
+      "account": "True and target-forced supports have the stated live-AND cardinality bounds."
+    },
+    {
+      "id": "selectors",
+      "theorems": [
+        "Controller.Decoder.DAG.expansion_identity",
+        "Controller.Decoder.DAG.global_selector_count",
+        "Controller.Decoder.DAG.cone_expansion_identity"
+      ],
+      "abstract_quotes": [
+        "consistent selector-expansion laws"
+      ],
+      "account": "Global and cone expansions share consistent selector choices; the selector count is exactly exponential in live ANDs."
+    },
+    {
+      "id": "bounded-execution",
+      "theorems": [
+        "Controller.Extensions.BoundedNativeComplete.execution",
+        "Controller.Extensions.BoundedNativeComplete.emitted_witness"
+      ],
+      "abstract_quotes": [
+        "complete native detection executions and checked emitted witnesses",
+        "bounded live conjunctions"
+      ],
+      "account": "The bounded detector halts and emits checked physical witnesses under its raw-layout and live-AND promises."
+    },
+    {
+      "id": "time",
+      "theorems": [
+        "Controller.Extensions.BoundedNativeComplete.xp_time",
+        "Controller.Extensions.BoundedNativeComplete.one_and_time",
+        "Controller.Extensions.BoundedNativeComplete.healthy_one_time"
+      ],
+      "abstract_quotes": [
+        "general XP bound",
+        "polynomial bound for one live conjunction",
+        "FPT bound for healthy-one roots"
+      ],
+      "account": "The three selected time inequalities use their formal size parameters, without the sharper manuscript bounds."
+    },
+    {
+      "id": "proper-basis",
+      "theorems": [
+        "Controller.Extensions.ProperBasisComplete.execution"
+      ],
+      "abstract_quotes": [
+        "complete native detection executions",
+        "proper bases"
+      ],
+      "account": "The proper-basis detector halts with exact feasibility, polynomial native bounds and a checked accepting model."
+    }
+  ]
+}

@@ -35,6 +35,8 @@ external output stream, and code words have a separate bound.
 
 P07's selected execution statements retain raw-layout and representation
 hypotheses. The XP and special-case inequalities support those executions.
+Their program definitions are instance-dependent implementation holes supplied
+by Solution; these selected resource bounds exclude construction of that code.
 Its concrete construction companions prove source-only bounded and proper-basis
 constructors, complete code images, construction plus execution time and
 temporary word storage. The constructed proper-basis guarded branch uses the

@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P05/formalization.yaml",
+  "comparator_path": "entries/P05/comparator.json",
+  "input_sha256": {
+    "metadata": "492dc82d22617b6850663cfb8865bb93bc30a3a8cd61a5f371f92033006ab886",
+    "comparator": "7725f5c06fcd0b90d27d59089795fadbacc50459c9d6463b205dad0d6004969e",
+    "challenge": "12842c4c0c059407639925acfeae4a3309e3974115bd66abf82893f8da87de7b"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "dual-horn",
+      "theorems": [
+        "Controller.Reductions.DualHorn.model_bridge_detectable_iff",
+        "Controller.Reductions.DualHorn.decoder_formulaForest"
+      ],
+      "abstract_quotes": [
+        "Dual-Horn satisfiability",
+        "represented by physical bridge detection"
+      ],
+      "account": "The guarded formula-forest construction represents dual-Horn models by physical detectability."
+    },
+    {
+      "id": "decoder-size",
+      "theorems": [
+        "Controller.Reductions.DualHorn.decoder_size_linear",
+        "Controller.Reductions.coverDAG_size_linear"
+      ],
+      "abstract_quotes": [
+        "linear counted decoder size"
+      ],
+      "account": "Dual-Horn and graph-cover decoders satisfy their explicit counted-size inequalities."
+    },
+    {
+      "id": "graph-cover",
+      "theorems": [
+        "Controller.Reductions.cover_physical_detects_only_covers",
+        "Controller.Reductions.cover_realizer_detects_iff"
+      ],
+      "abstract_quotes": [
+        "finite graph vertex covers",
+        "represented by physical bridge detection"
+      ],
+      "account": "Physical detection yields a cover, and canonical eligible realizations detect exactly the cover sets."
+    },
+    {
+      "id": "counting",
+      "theorems": [
+        "Controller.Reductions.cover_detection_count"
+      ],
+      "abstract_quotes": [
+        "count eligible detecting qualifier sets rather than primary-input assignments"
+      ],
+      "account": "The finite eligible-detection count equals the vertex-cover count, retaining isolated vertices."
+    }
+  ]
+}

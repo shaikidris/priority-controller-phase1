@@ -1,9 +1,11 @@
 version: v0.4
 project:
   name: Bounded conjunction and proper-basis algorithms
-  description: Bounded-support and selector-expansion laws with complete native executions for
-    bounded live conjunctions and proper bases. Concrete source construction, total time and temporary
-    word-storage proofs accompany the selected registry statements.
+  description: Bounded-support and consistent selector-expansion laws for decoder DAGs, with
+    complete native detection executions and checked emitted witnesses for bounded live conjunctions
+    and proper bases. Selected time inequalities give a general XP bound, a polynomial bound
+    for one live conjunction, and an FPT bound for healthy-one roots. Concrete source construction,
+    total time and temporary word-storage proofs are supplied as companion declarations.
   authors:
   - Idris Ali Shaik
   license: Apache-2.0
@@ -30,7 +32,9 @@ sources:
 related_formalizations: []
 status:
   scope: The selected registry statements retain their exact raw-layout, live-AND, basis Uses,
-    proper-basis and representation hypotheses. They include support/expansion laws, complete
+    proper-basis and representation hypotheses. The selected program definitions are instance-dependent
+    implementation holes supplied by Solution. Their resource bounds charge fetched execution,
+    not construction of that code. They include support/expansion laws, complete
     bounded native execution and proper-basis execution, with the displayed XP and special-case
     inequalities. The companion source package separately proves concrete source-only constructors,
     exact instruction images, construction plus execution time, temporary construction storage
@@ -65,7 +69,9 @@ automation:
     packaging.
 fidelity:
   divergences: The selected registry statements retain their exact raw-layout, live-AND, basis
-    Uses, proper-basis and representation hypotheses. They include support/expansion laws, complete
+    Uses, proper-basis and representation hypotheses. The selected program definitions are instance-dependent
+    implementation holes supplied by Solution. Their resource bounds charge fetched execution,
+    not construction of that code. They include support/expansion laws, complete
     bounded native execution and proper-basis execution, with the displayed XP and special-case
     inequalities. The companion source package separately proves concrete source-only constructors,
     exact instruction images, construction plus execution time, temporary construction storage
@@ -117,10 +123,12 @@ alignment:
     lean: Controller.Extensions.BoundedNativeComplete.execution
     module: Controller.Extensions.BoundedNativeComplete
     status: proved
-    note: For raw native layout and a supplied bound k on liveAndCount, the actual detector halts
+    note: For raw native layout and a supplied bound k on liveAndCount, the Solution-supplied
+      instance-dependent program halts
       with the exact displayed detection answer, native timeBound, working/code bounds and a checked
       native model plus eligible witness on acceptance. The native execution model and representation
-      are explicit.
+      are explicit. These selected bounds exclude code construction; the source-construction
+      certificates are separate companion declarations.
   - source: Theorem 7.4 (native implementation; displayed formal bounds)
     lean: Controller.Extensions.BoundedNativeComplete.emitted_witness
     module: Controller.Extensions.BoundedNativeComplete
@@ -153,8 +161,10 @@ alignment:
     module: Controller.Extensions.ProperBasisComplete
     status: proved
     note: For a supplied proper gate basis and matching rows/heads/roots in raw layout, the selected
-      native detector halts, decides drive-one feasibility, has the displayed polynomial tick/code/working
+      Solution-supplied instance-dependent native program halts, decides drive-one feasibility,
+      has the displayed polynomial tick/code/working
       bounds and emits a checked model on acceptance. This is the proper-basis algorithmic component
       of 7.5; the full-basis hardness half and conventional encoded-language membership are outside
-      this selection.
+      this selection. These selected bounds exclude code construction; the proper-basis
+      source-construction certificates are separate companion declarations.
 acknowledgements: Lean 4, Mathlib, OpenAI Codex and Claude Code.

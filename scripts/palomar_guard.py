@@ -14,6 +14,7 @@ import subprocess
 import sys
 
 from palomar_metadata_portability import validate_metadata_portability
+from check_palomar_abstract_coverage import validate_abstract_coverage
 
 
 PIPELINE = "d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44"
@@ -142,6 +143,9 @@ def main():
     portable_codes = validate_metadata_portability((source / metadata_path).read_text())
     metadata = contract.load_formalization_metadata(source / metadata_path)
     validate_selection(source, metadata, comparator)
+    abstract_coverage = validate_abstract_coverage(
+        source, metadata, metadata_path, comparator,
+        str(Path(comparator).with_name("abstract-coverage.json")))
     import yaml
     validate_workflow(yaml.safe_load((source / WORKFLOW).read_text()))
     renderer = importlib.import_module("scripts.render_challenge")
@@ -155,6 +159,7 @@ def main():
                                  "msc_scalars_checked": portable_codes,
                                  "scope": "Known YAML scalar ambiguity lint; not full browser intake validation"},
         "source_requirements": source_requirements,
+        "abstract_coverage": abstract_coverage,
         "manifest_guard": manifest,
         "metadata_sha256": hashlib.sha256((source / metadata_path).read_bytes()).hexdigest(),
         "workflow_sha256": hashlib.sha256((source / WORKFLOW).read_bytes()).hexdigest(),

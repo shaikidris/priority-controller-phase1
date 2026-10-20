@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P10/formalization.yaml",
+  "comparator_path": "entries/P10/comparator.json",
+  "input_sha256": {
+    "metadata": "943a12afaa9605f3d9201421161e96fba7b794c71a6dea6ad13bf5f4f7ad8751",
+    "comparator": "d35fab85d9e7f9f4135c160b884e5929f6faf23dda26b915e1d8829d935c7fac",
+    "challenge": "75a874b83f93320d4012ce004b928f43c303748e7d48c99f18da801311a27fec"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "image-simulation",
+      "theorems": [
+        "Controller.Complexity.ImageCanonical.decoded_execution"
+      ],
+      "abstract_quotes": [
+        "Concrete binary encodings, cold native interpretation"
+      ],
+      "account": "Accepted binary images simulate halted native execution with the displayed cold interpreter time and space bounds."
+    },
+    {
+      "id": "compilation",
+      "theorems": [
+        "Controller.Complexity.NativeCompilation.tm_polytime"
+      ],
+      "abstract_quotes": [
+        "executed image construction",
+        "finite TM2 realization",
+        "construction cost and intermediate output length are included"
+      ],
+      "account": "An executed polynomial image constructor and native time bound yield polynomial finite TM2 computation."
+    },
+    {
+      "id": "space-composition",
+      "theorems": [
+        "Controller.Complexity.SpaceTapeBridge.composed",
+        "Controller.Complexity.SpaceTapeErasure.logspace"
+      ],
+      "abstract_quotes": [
+        "logarithmic visited-work-cell bounds"
+      ],
+      "account": "Virtual-input composition and allocation-erased tape execution preserve output and bound visited work cells under the given program contracts."
+    },
+    {
+      "id": "parameterized-composition",
+      "theorems": [
+        "Controller.Complexity.ParameterReduction.compose"
+      ],
+      "abstract_quotes": [
+        "parameterized reduction composition"
+      ],
+      "account": "Executed parameterized reductions compose with language correctness and computable parameter growth bounds."
+    },
+    {
+      "id": "parameterized-realization",
+      "theorems": [
+        "Controller.Complexity.ParameterTM.realization"
+      ],
+      "abstract_quotes": [
+        "finite TM2 realization",
+        "One fixed program or machine serves all stated inputs"
+      ],
+      "account": "A supplied parameterized execution witness yields an input-independent finite machine with the displayed parameterized time bound."
+    }
+  ]
+}

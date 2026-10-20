@@ -1,0 +1,147 @@
+{
+  "status": "locally-verified",
+  "scope": "Reviewed abstract coverage, metadata and CI guard changes only; no new proof replay or Palomar state change",
+  "proof_input_parent_commit": "4defc1bfee6f82a50c5d48e6ad4fe6e01df73cc0",
+  "unchanged_lean_files": 1081,
+  "unchanged_comparators": 10,
+  "entry_reports": {
+    "P01": {
+      "status": "pass",
+      "families_checked": 4,
+      "theorems_checked": 6,
+      "coverage_sha256": "2b9923c2869b444d4adcfb5a0f71e22969414ffaa09566922755c04b3763c22f",
+      "input_sha256": {
+        "metadata": "de7e033c2aab9437f9533e1ec65da9b4b61d2f7daf84a22e9b7cc9b1f42d6fc1",
+        "comparator": "9352c9575f32dd7ea9a2784d64cc2043ee636837d969d676488cffd1c2299dbd",
+        "challenge": "67d347e0592af5fe0d12671d76b9b33ee8cdbd09351fa7afdb22f9cf93fc5e6f"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P02": {
+      "status": "pass",
+      "families_checked": 3,
+      "theorems_checked": 6,
+      "coverage_sha256": "0fb315e1385d4125f305dae8a1077835da3f3de35e917b1fa3b6f374322f9951",
+      "input_sha256": {
+        "metadata": "fb77cfb8a151d4d2f9117e2559a70efd1340dcd03369f3f6dc76708e1c347118",
+        "comparator": "07c0880aec3896f8c7468eb8eeb494fe543aa4b89db9008c54cac31dc3670f0e",
+        "challenge": "a82f579ad630e08e8ba17bdda1c742bc64cb552ba7a007ceedf0009eee360242"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P03": {
+      "status": "pass",
+      "families_checked": 5,
+      "theorems_checked": 8,
+      "coverage_sha256": "08351ea0579d525d1311e0eff845ca37e05b2a38e7516f32b170b44a6244b249",
+      "input_sha256": {
+        "metadata": "b5e43be65d624af77d02ab9b4d7a218ab1e9050d336bd366616bb8b5cc3a8320",
+        "comparator": "a0cb82e2ab6d595d0d8da957cfaaaae6edf88a492c8ae718dbe384eb9ef5ef5a",
+        "challenge": "eb03be581a8ef3e56429f496be0c1956ac4e75e59d2a155f8a268b9c3833d317"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P04": {
+      "status": "pass",
+      "families_checked": 2,
+      "theorems_checked": 3,
+      "coverage_sha256": "1aace526a33994cb90745e9c7fb868be474738f1f3f1019cfa7a63bbfbed6f70",
+      "input_sha256": {
+        "metadata": "5dbdb1a317da63fd07fb6d018397b088eb056226f3ae19a7512ec8c86c4e892e",
+        "comparator": "f9b29cc7ff9677b042201cff1f71fd6ac5a590192ad594ebb8091f76dd39ea62",
+        "challenge": "ecc76322f5b42136c3b5e501acfe2fcf3a0348116a20579a2aabdc4d2af67d5d"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P05": {
+      "status": "pass",
+      "families_checked": 4,
+      "theorems_checked": 7,
+      "coverage_sha256": "04775b0bcf699e3af5700c0d821dcb6d878967b9360dcca495ab4fc761c6aaae",
+      "input_sha256": {
+        "metadata": "492dc82d22617b6850663cfb8865bb93bc30a3a8cd61a5f371f92033006ab886",
+        "comparator": "7725f5c06fcd0b90d27d59089795fadbacc50459c9d6463b205dad0d6004969e",
+        "challenge": "12842c4c0c059407639925acfeae4a3309e3974115bd66abf82893f8da87de7b"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P06": {
+      "status": "pass",
+      "families_checked": 7,
+      "theorems_checked": 18,
+      "coverage_sha256": "5e6d7560f89f5b6cf736e778ba5e72292b9b9ee137e4bf82447a74dad7dfbce3",
+      "input_sha256": {
+        "metadata": "c9ed3f6556831980fc208b789e10f41475ae793c1331207741ad254bda2a7f5d",
+        "comparator": "5386d27d98384ea65b065bddad77069a335eef7d1d866e33c1a7299c83f94b50",
+        "challenge": "c004aca2f294292355ff5300260c04dfebe73dd0f0aa494c07fdd63b09fb816a"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P07": {
+      "status": "pass",
+      "families_checked": 5,
+      "theorems_checked": 11,
+      "coverage_sha256": "261362fee0125bcf0e63c233d5c07d6466cb752b8d2fc787a4fe3be8a5258adf",
+      "input_sha256": {
+        "metadata": "7b2e90327bbfae1e0592a8d764c338473209f8e238d2a5e7ea8562bf886e1166",
+        "comparator": "7e196960f20b861f8c707f733a62523b1fc4ba9cc0bd840f7fa322dc3f5b0392",
+        "challenge": "2d83f3436469070084dad2d09dcff10aa750ecb4572af7bde2acea1cf7dbba07"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P08": {
+      "status": "pass",
+      "families_checked": 5,
+      "theorems_checked": 11,
+      "coverage_sha256": "74257f5c250b0691315f3953ec0b4a5b6ec730b1273e3ebbdabf5b68cf49a589",
+      "input_sha256": {
+        "metadata": "e8bbf2f7d16b9083a91b4704dc7738071688b5cfb0bf7486219e0ae8509ba3bd",
+        "comparator": "af660b2283976b49a76491152848b5d29e4053c6f46cc6c7350732cf893418ed",
+        "challenge": "18733804d68e73393b3709b74743834d75d5727cb0d1bca487d01bf3963285ef"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P09": {
+      "status": "pass",
+      "families_checked": 3,
+      "theorems_checked": 9,
+      "coverage_sha256": "0bf55f55e86e0f362bc797d29dc173329ebca2c816d09d039baa36e766eff04a",
+      "input_sha256": {
+        "metadata": "75fd33db349c814dc3a1ac17b402ef386989b5b94d4cbce94c4089056a49eadf",
+        "comparator": "2ee4561103760da5f5bdbea285dc7d8d0e5a9224e10c37052e3a9a2de9b1133f",
+        "challenge": "9d3f19b8235525fb6b5554ed5945a2b66c359e915b41ace43145901dd8413bb4"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    },
+    "P10": {
+      "status": "pass",
+      "families_checked": 5,
+      "theorems_checked": 6,
+      "coverage_sha256": "a81abccd79e4953ea6073588c4a0092e59c4a7cd3c3f0ff960208aa6bd0ddddc",
+      "input_sha256": {
+        "metadata": "943a12afaa9605f3d9201421161e96fba7b794c71a6dea6ad13bf5f4f7ad8751",
+        "comparator": "d35fab85d9e7f9f4135c160b884e5929f6faf23dda26b915e1d8829d935c7fac",
+        "challenge": "75a874b83f93320d4012ce004b928f43c303748e7d48c99f18da801311a27fec"
+      },
+      "scope": "Reviewed family coverage and input freshness; not automatic semantic certification"
+    }
+  },
+  "families_checked": 43,
+  "theorems_checked": 85,
+  "actual_p06_omission_control": {
+    "status": "expected-rejection",
+    "diagnostic": "Abstract omits reviewed phrase for family backdoors: Strong and deletion backdoors into Horn, renamable-Horn and two-CNF"
+  },
+  "regression_tests": {
+    "abstract_coverage": 11,
+    "project_guard": 20,
+    "harness_validation": "passed"
+  },
+  "publication": "local candidate; immutable commit identifies publication state",
+  "metadata_role_review": {
+    "P06": "Recovery source labels agree with Proposition 6.2 and Example 6.1.",
+    "P07": "Selected Solution-supplied program holes and excluded construction cost are explicit; companion constructors remain separate.",
+    "P08": "decodeChecked checks the supplied decoder, rather than discovering it."
+  },
+  "metadata_revision_parent_commit": "9df72ff8f5e9f9b224680d4bcf151bc7d2491da9"
+}

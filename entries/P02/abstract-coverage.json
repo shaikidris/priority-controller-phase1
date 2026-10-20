@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "metadata_path": "entries/P02/formalization.yaml",
+  "comparator_path": "entries/P02/comparator.json",
+  "input_sha256": {
+    "metadata": "fb77cfb8a151d4d2f9117e2559a70efd1340dcd03369f3f6dc76708e1c347118",
+    "comparator": "07c0880aec3896f8c7468eb8eeb494fe543aa4b89db9008c54cac31dc3670f0e",
+    "challenge": "a82f579ad630e08e8ba17bdda1c742bc64cb552ba7a007ceedf0009eee360242"
+  },
+  "review": {
+    "method": "manual-semantic-review",
+    "reviewer": "Codex",
+    "rationale": "Reviewed selected Challenge statements, alignment accounts and decoded project.description. Supporting lemmas are grouped with their mathematical result; separate result families and selected boundary results have explicit abstract phrases. This is an agent review, not independent human or Palomar editorial clearance."
+  },
+  "families": [
+    {
+      "id": "detection",
+      "theorems": [
+        "Controller.Public.guarded_bridge_detector_correct",
+        "Controller.Public.guarded_bridge_detector_complete"
+      ],
+      "abstract_quotes": [
+        "Correctness and completeness of fault detection"
+      ],
+      "account": "Guarded DAG detection returns sound witnesses and is complete under the stated representation premises."
+    },
+    {
+      "id": "extension",
+      "theorems": [
+        "Controller.Decoder.DAG.extendSet_some",
+        "Controller.Decoder.DAG.extendSet_none_iff",
+        "Controller.Decoder.DAG.extendSet_exists_iff"
+      ],
+      "abstract_quotes": [
+        "extension over a supplied guarded decoder DAG"
+      ],
+      "account": "Returned extensions are valid and failure is equivalent to nonexistence of an admissible constrained witness."
+    },
+    {
+      "id": "native-execution",
+      "theorems": [
+        "Controller.Cost.SharedDetectorCold.execution"
+      ],
+      "abstract_quotes": [
+        "executed native cold-detector bound"
+      ],
+      "account": "The supplied source representation executes with the selected native resource bounds."
+    }
+  ]
+}
