@@ -1,6 +1,6 @@
 # Selected formalization entries
 
-The ten entries select 85 theorem statements from the Paper A proof library and
+The ten entries select 88 theorem statements from the Paper A proof library and
 its encoded-machine bridge. The selection retains the complete K00 bridge,
 including all 39 K00 obligations. Each entry has its own transparent Challenge,
 Solution imports, comparison configuration and source metadata.
@@ -14,7 +14,7 @@ Solution imports, comparison configuration and source metadata.
 | [P05](Phase1/P05/Challenge.lean) | Dual-Horn and graph-cover representations | 7 + 0 | `entries/P05/comparator.json` | `entries/P05/formalization.yaml` |
 | [P06](Phase1/P06/Challenge.lean) | Fixed source recovery, queries, native width and backdoors | 18 + 1 | `entries/P06/comparator.json` | `entries/P06/formalization.yaml` |
 | [P07](Phase1/P07/Challenge.lean) | Bounded conjunction and proper bases | 11 + 4 | `entries/P07/comparator.json` | `entries/P07/formalization.yaml` |
-| [P08](Phase1/P08/Challenge.lean) | Observation projection and typed certificates | 11 + 0 | `entries/P08/comparator.json` | `entries/P08/formalization.yaml` |
+| [P08](Phase1/P08/Challenge.lean) | Observation projection and typed certificates | 14 + 0 | `entries/P08/comparator.json` | `entries/P08/formalization.yaml` |
 | [P09](Phase1/P09/Challenge.lean) | Ordinary resolution and wrappers | 9 + 4 | `entries/P09/comparator.json` | `entries/P09/formalization.yaml` |
 | [P10](Phase1/P10/Challenge.lean) | Encoded simulation and reduction composition | 6 + 4 | `entries/P10/comparator.json` | `entries/P10/formalization.yaml` |
 

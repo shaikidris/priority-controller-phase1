@@ -12,7 +12,10 @@
     "Controller.Certificate.Pipeline.runFamily_certified_unsat",
     "Controller.Certificate.Pipeline.runFamily_sat_sound",
     "Controller.Certificate.Pipeline.runFamily_unsat_sound",
-    "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates"
+    "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates",
+    "Controller.Recognition.ObservationDetection.optional_native_decision",
+    "Controller.Recognition.RecoveryDriver.recover_exact",
+    "Controller.Recognition.exists_accepted_positive_output"
   ],
   "permitted_axioms": [
     "propext",

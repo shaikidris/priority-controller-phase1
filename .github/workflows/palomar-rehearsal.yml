@@ -41,7 +41,7 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           repository: PalomarRegistry/PalomarSubmission
-          ref: d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44
+          ref: ad5db9e7ff8b17523d73aeb244aaeabcde810c64
           path: pipeline
           persist-credentials: false
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
@@ -76,7 +76,7 @@ jobs:
           if-no-files-found: error
   verify:
     needs: guard
-    uses: PalomarRegistry/PalomarSubmission/.github/workflows/submission.yml@d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44
+    uses: PalomarRegistry/PalomarSubmission/.github/workflows/submission.yml@ad5db9e7ff8b17523d73aeb244aaeabcde810c64
     with:
       repository: ${{ needs.guard.outputs.repository }}
       commit: ${{ needs.guard.outputs.commit }}

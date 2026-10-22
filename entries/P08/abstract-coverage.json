@@ -3,9 +3,9 @@
   "metadata_path": "entries/P08/formalization.yaml",
   "comparator_path": "entries/P08/comparator.json",
   "input_sha256": {
-    "metadata": "e8bbf2f7d16b9083a91b4704dc7738071688b5cfb0bf7486219e0ae8509ba3bd",
-    "comparator": "af660b2283976b49a76491152848b5d29e4053c6f46cc6c7350732cf893418ed",
-    "challenge": "18733804d68e73393b3709b74743834d75d5727cb0d1bca487d01bf3963285ef"
+    "metadata": "8cbfd9344182973088d8210e5eaa50f9f31b2794cab9a891e4675f4b9f0fca67",
+    "comparator": "7470cd3e405b3266e2a4c36a4cd339caec7409d6e5bb7ea0d06efdbdd0d01af6",
+    "challenge": "73ec4a810a9ca46a8a5ad2860dee0cedfbacdf82bfdae92c6a020f39043409fc"
   },
   "review": {
     "method": "manual-semantic-review",
@@ -28,12 +28,13 @@
     {
       "id": "producer-recovery",
       "theorems": [
-        "Controller.Recognition.IntendedDAG.recovery_exact"
+        "Controller.Recognition.IntendedDAG.recovery_exact",
+        "Controller.Recognition.RecoveryDriver.recover_exact"
       ],
       "abstract_quotes": [
-        "intended-producer recovery"
+        "finite intended-producer recovery from a promised candidate list"
       ],
-      "account": "A maximal run under the candidate promise recovers exactly the intended nonroots without duplicate identifiers."
+      "account": "The supplied-run exact-recovery theorem is accompanied by a finite driver proving its own run and saturation under the same candidate promise, with exact nonroot trace length."
     },
     {
       "id": "typed-decoding",
@@ -56,7 +57,7 @@
       ],
       "abstract_quotes": [
         "sound SAT/UNSAT verdicts",
-        "Exact SAT and certified-UNSAT completeness claims assume successful family acceptance",
+        "Exact SAT and certified-UNSAT completeness assume successful family acceptance",
         "accepted refutation certificate for the latter"
       ],
       "account": "Verdict soundness is unconditional on arbitrary SubmittedInput; exact behavior and certificate completeness retain acceptance premises."
@@ -64,12 +65,24 @@
     {
       "id": "coordinate-boundary",
       "theorems": [
-        "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates"
+        "Controller.Recognition.GuardedFamily.decodeChecked_requires_extra_coordinates",
+        "Controller.Recognition.exists_accepted_positive_output"
       ],
       "abstract_quotes": [
-        "Acceptance with an observed root requires more source coordinates than native variables"
+        "Positive-output acceptance requires extra source coordinates",
+        "a fully accepted satisfiable two-channel, one-bus packet with one observed output"
       ],
-      "account": "Successful positive-output typed acceptance requires strictly more original coordinates than native variables; no accepted witness is constructed."
+      "account": "The cardinality boundary is accompanied by a complete serialized accepted example with a physical detecting input, source model and SAT verdict; no general family constructor is claimed."
+    },
+    {
+      "id": "physical-detector-consequence",
+      "theorems": [
+        "Controller.Recognition.ObservationDetection.optional_native_decision"
+      ],
+      "abstract_quotes": [
+        "a physical detector consequence for guarded optional wrappers"
+      ],
+      "account": "The guarded detector returns an input exactly when the represented optional-wrapper formula is satisfiable, under declared support, observed-pair matching and root coverage. Successful recognition and construction-time bounds are not assumed or concluded."
     }
   ]
 }

@@ -71,10 +71,15 @@ P08's typed pipeline is sound after successful acceptance of a structured
 payload. `decodeChecked_requires_extra_coordinates` proves that, with at least
 one observed root, the source coordinate count must exceed the native variable
 count. Private activities require those additional coordinates. The plain native
-coordinate count therefore cannot be accepted in that case. A nontrivial
-positive-output acceptance construction is not supplied. Projection equivalences
-preserve the declared activity and polarity grammar; recognizer completeness and
-raw-file parsing are separate claims.
+coordinate count therefore cannot be accepted in that case. A complete serialized packet with two channels, one bus, one observed output,
+36 coordinates and 91 source rows passes the full decoder, has a physical
+detecting input and a satisfying source assignment, and receives a SAT verdict.
+The optional-wrapper detector corollary retains guardedness, declared support,
+observed-pair matching and root coverage. The finite scanning driver retains
+CandidatePromise and proves its own execution and saturation, with one trace
+entry per nonroot. Projection equivalences preserve the declared activity and
+polarity grammar; candidate discovery, a general accepted-family constructor,
+raw-file parsing and machine-level construction costs are separate claims.
 
 ## Resolution and supporting statements
 
@@ -91,7 +96,7 @@ lemmas elsewhere in the selection support the principal results; their proof
 length does not change their mathematical scope.
 
 The full paper target also includes the separate P02/P03 uniform source
-construction interfaces, a nontrivial accepted P08 typed family, and conventional
+construction interfaces, a general accepted P08 typed-family constructor, and conventional
 encoded-language classification. The forest and extension construction
 companions and the P06 binary-native width theorems establish their displayed
 contracts; they do not imply those separate claims.

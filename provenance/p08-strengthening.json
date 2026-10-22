@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "entry": "P08",
+  "origin": "Author-owned proof and certificate-data modules; Apache-2.0",
+  "selected_additions": [
+    "Controller.Recognition.ObservationDetection.optional_native_decision",
+    "Controller.Recognition.RecoveryDriver.recover_exact",
+    "Controller.Recognition.exists_accepted_positive_output"
+  ],
+  "modules": {
+    "Controller/Recognition/AcceptanceCertificates.lean": "8cd16163719b53b0bf075d30879a39795429e05727c78fc372d9387f74f49746",
+    "Controller/Recognition/AcceptanceCoordinates.lean": "8e372fb2b23034c5e09868ab7f2ee24323caeadfc2aecd9973361422c033bfec",
+    "Controller/Recognition/AcceptanceCutCheck.lean": "6f111214c65853c51956467fe515eb69d2d8e6b6b6838a3a6611a158286888ae",
+    "Controller/Recognition/AcceptanceInhabited.lean": "87619f55053f8a4c422eef6110ec82c2ed85a5168a58174fd0d6bbbcc5fbfbb7",
+    "Controller/Recognition/AcceptanceMetadataCheck.lean": "2ee9c5eaab1f35464bca30e41def0e78dae6bab08c819edd65fadd3f5e9e6c57",
+    "Controller/Recognition/AcceptanceMetadataData.lean": "2f6b40b591e6917710d8ced185108c4cfa7aec0bdb1d5c8c88f573ff9d3e7198",
+    "Controller/Recognition/AcceptanceReplay.lean": "cb28ab085160f464de3cb97d6a558b2f4f92c4fb0801d23a425826164da84f6c",
+    "Controller/Recognition/AliasIdentity.lean": "0eb4dc6ea7f24bfa95721600a2430723f33d4c20e24db1f54b3e8bf9d3cf29d3",
+    "Controller/Recognition/ObservationDetection.lean": "08d5a4f6ab7f76f48bc7ba09cf5321fa60437ca4dde87ddb2ba6ac9c728a2336",
+    "Controller/Recognition/P08Generic.lean": "a55c443c79734c154c2966d18f0a63b8dee9364b75ca2d00ffc0d387cf100d45",
+    "Controller/Recognition/P08Strengthening.lean": "63e815fa89953129e312585739cad7ed282613dc6a88cb3b584975f37ab87561",
+    "Controller/Recognition/RecoveryDriver.lean": "1349d5673e0fb106f9d8dfd5c6723dff872e66186c15cac345b3d414787337a2",
+    "Controller/Recognition/SerializationRoundtrip.lean": "41137c45de35f468743eee8c3ce004fc32ec8a3e9d84d414cebd6c3a93183a23"
+  },
+  "scope": "Finite recovery under CandidatePromise; physical detector consequence for declared guarded optional wrappers; a complete accepted satisfiable positive-output packet. No general accepted-family constructor or machine construction-cost theorem."
+}

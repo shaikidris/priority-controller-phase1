@@ -3,7 +3,6 @@ public meta import Lean.Elab.Command
 public meta import Lean.Meta.Match.Match
 meta import all Lean.Meta.Match.Match
 public meta import Lean.Meta.Tactic.AuxLemma
-
 public import Mathlib.Data.Finset.Basic
 public import Mathlib.Data.Finset.BooleanAlgebra
 public import Mathlib.Data.Finset.Card
@@ -27,8 +26,6 @@ public import Mathlib.Tactic.Ring
 public import Mathlib.Tactic.Tauto
 public import Std.Sat.CNF
 public import Std.Tactic.BVDecide.LRAT.Checker
-/- Preserve source-module names and module-local elaboration caches when
-   flattening definitions. Every declaration is still checked by Lean. -/
 open Lean Elab Command in
 elab "source_context " source:str : command => do
   let root := (← getOptions).get `sourceContextRoot ""
@@ -44,20 +41,13 @@ elab "end_source_context" : command => do
   let root := (← getOptions).get `sourceContextRoot ""
   if root.isEmpty then throwError "missing original Challenge module"
   modifyEnv (·.setMainModule root.toName)
-
 @[expose] public section
 /-!
 # Observation projection, producer recovery and typed certificates
 The grammar, state transitions, resource measures and mathematical predicates
-are explicit. Definition holes identify only implementation witnesses; the
-selected universal theorems constrain their executions or returned results.
-The selected statements retain the exact assumptions of the proof library.
+are explicit. The statements retain their explicit grammar, candidate and acceptance premises.
 -/
-open Lean Elab Command in
-run_cmd do
-  let e0 : Lean.Expr := .const (`Nat) ([]); let e1 : Lean.Expr := .const (`Eq) ([Lean.Level.succ (Lean.Level.zero)]); let e2 : Lean.Expr := .sort (Lean.Level.zero); let e3 : Lean.Expr := .app e1 e2; let e4 : Lean.Expr := .const (`LT.lt) ([Lean.Level.zero]); let e5 : Lean.Expr := .app e4 e0; let e6 : Lean.Expr := .const (`instLTNat) ([]); let e7 : Lean.Expr := .app e5 e6; let e8 : Lean.Expr := .bvar 0; let e9 : Lean.Expr := .app e7 e8; let e10 : Lean.Expr := .const (`HAdd.hAdd) ([Lean.Level.zero, Lean.Level.zero, Lean.Level.zero]); let e11 : Lean.Expr := .app e10 e0; let e12 : Lean.Expr := .app e11 e0; let e13 : Lean.Expr := .app e12 e0; let e14 : Lean.Expr := .const (`instHAdd) ([Lean.Level.zero]); let e15 : Lean.Expr := .app e14 e0; let e16 : Lean.Expr := .const (`instAddNat) ([]); let e17 : Lean.Expr := .app e15 e16; let e18 : Lean.Expr := .app e13 e17; let e19 : Lean.Expr := .app e18 e8; let e20 : Lean.Expr := .const (`OfNat.ofNat) ([Lean.Level.zero]); let e21 : Lean.Expr := .app e20 e0; let e22 : Lean.Expr := .lit (Lean.Literal.natVal 1); let e23 : Lean.Expr := .app e21 e22; let e24 : Lean.Expr := .const (`instOfNatNat) ([]); let e25 : Lean.Expr := .app e24 e22; let e26 : Lean.Expr := .app e23 e25; let e27 : Lean.Expr := .app e19 e26; let e28 : Lean.Expr := .app e9 e27; let e29 : Lean.Expr := .app e3 e28; let e30 : Lean.Expr := .const (`True) ([]); let e31 : Lean.Expr := .app e29 e30; let e32 : Lean.Expr := .forallE .anonymous e0 e31 (Lean.BinderInfo.default); let e33 : Lean.Expr := .const (`eq_true) ([]); let e34 : Lean.Expr := .app e33 e28; let e35 : Lean.Expr := .const (`Nat.lt_add_one) ([]); let e36 : Lean.Expr := .app e35 e8; let e37 : Lean.Expr := .app e34 e36; let e38 : Lean.Expr := .lam .anonymous e0 e37 (Lean.BinderInfo.default); let fact : Lean.TheoremVal := { name := `Nat.lt_add_one._simp_1, levelParams := [], type := e32, value := e38 }; if let some old := (← getEnv).toKernelEnv.find? fact.name then unless old == .thmInfo fact do throwError "conflicting Source auxiliary fact" else liftCoreM <| addDecl (.thmDecl fact)
-source_context "Controller.CNF.Basic"
-namespace Controller.CNF
+source_context "Controller.CNF.Basic" namespace Controller.CNF
 abbrev Literal (α : Type*) := Std.Sat.Literal α
 abbrev OrderedFormula.Clause (α : Type u) : Type u := List (Literal α)
 structure OrderedFormula (α : Type u) where
@@ -110,8 +100,7 @@ def Discrepant (signals : σ → Bool) (pair : Literal σ × Literal σ) : Prop 
 inductive UnitDerived (formula : Formula α) : Clause α → Prop where
   | source (clause : Clause α) (membership : clause ∈ formula.clauses) : UnitDerived formula clause | reorder {left right : Clause α} (proof : UnitDerived formula left) (permutation : left.Perm right) : UnitDerived formula right | propagate (literal : Literal α) (tail : Clause α) (clause : UnitDerived formula (literal :: tail)) (unit : UnitDerived formula [negate literal]) : UnitDerived formula tail
 def inactiveFormula (pure : Formula α) (activities : ρ → Literal α) (accepted : List ρ) : Formula α := pure ++ ofClauses (accepted.map fun i => [negate (activities i)])
-/-- Typed projection and certificate law. -/
-theorem observation_projection_of_unit_conflict (definitions : Formula σ) (wrapper : Formula (Sum σ α)) (pure : Formula α) (pairs : ρ → Literal σ × Literal σ) (activities : ρ → Literal α) (accepted : List ρ) (pureCovered : ∀ signals values, Satisfies (joint signals values) wrapper → Satisfies values pure) (guards : ∀ signals values, Satisfies (joint signals values) wrapper → ∀ i, LiteralHolds values (activities i) → Discrepant signals (pairs i)) (conflict : UnitDerived (inactiveFormula pure activities accepted) []) (uniform : ∀ i ∈ accepted, ∀ left right : Bool, left ≠ right → (¬∃ signals, Satisfies signals definitions ∧ literalValue signals (pairs i).1 = left ∧ literalValue signals (pairs i).2 = right) ∨ ∃ values, ∀ signals, Satisfies signals definitions → literalValue signals (pairs i).1 = left → literalValue signals (pairs i).2 = right → Satisfies (joint signals values) wrapper) (signals : σ → Bool) (model : Satisfies signals definitions) : (∃ values, Satisfies (joint signals values) wrapper) ↔ ∃ i ∈ accepted, Discrepant signals (pairs i) := by sorry
+/-- Typed projection and certificate law. -/ theorem observation_projection_of_unit_conflict (definitions : Formula σ) (wrapper : Formula (Sum σ α)) (pure : Formula α) (pairs : ρ → Literal σ × Literal σ) (activities : ρ → Literal α) (accepted : List ρ) (pureCovered : ∀ signals values, Satisfies (joint signals values) wrapper → Satisfies values pure) (guards : ∀ signals values, Satisfies (joint signals values) wrapper → ∀ i, LiteralHolds values (activities i) → Discrepant signals (pairs i)) (conflict : UnitDerived (inactiveFormula pure activities accepted) []) (uniform : ∀ i ∈ accepted, ∀ left right : Bool, left ≠ right → (¬∃ signals, Satisfies signals definitions ∧ literalValue signals (pairs i).1 = left ∧ literalValue signals (pairs i).2 = right) ∨ ∃ values, ∀ signals, Satisfies signals definitions → literalValue signals (pairs i).1 = left → literalValue signals (pairs i).2 = right → Satisfies (joint signals values) wrapper) (signals : σ → Bool) (model : Satisfies signals definitions) : (∃ values, Satisfies (joint signals values) wrapper) ↔ ∃ i ∈ accepted, Discrepant signals (pairs i) := by sorry
 inductive RequirementTree (ρ : Type*) where
   | leaf (observation : ρ) | branch (left right : RequirementTree ρ)
 def RequirementTree.leaves : RequirementTree ρ → List ρ | .leaf i => [i] | .branch left right => left.leaves ++ right.leaves
@@ -149,10 +138,8 @@ def OptionalWrapper.DeclaredPrivate [Fintype ι] (wrapper : OptionalWrapper σ �
 noncomputable def extendDeclaredAuxiliaries (support : Finset α) (values : {a // a ∈ support} → Bool) : α → Bool := by
   classical
   exact fun a => if membership : a ∈ support then values ⟨a, membership⟩ else false
-/-- Typed projection and certificate law. -/
-theorem optional_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) wrapper.formula) ↔ ∃ i ∈ wrapper.tree.leaves, Discrepant signals (wrapper.observedPairs i) := by sorry
-/-- Typed projection and certificate law. -/
-theorem selected_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (selected : List ρ) (allLeaves : ∀ i ∈ selected, i ∈ wrapper.tree.leaves) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) (selectedFormula wrapper selected)) ↔ ∃ i ∈ selected, Discrepant signals (wrapper.observedPairs i) := by sorry
+/-- Typed projection and certificate law. -/ theorem optional_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) wrapper.formula) ↔ ∃ i ∈ wrapper.tree.leaves, Discrepant signals (wrapper.observedPairs i) := by sorry
+/-- Typed projection and certificate law. -/ theorem selected_declared_cnf_projection [Fintype ι] (wrapper : OptionalWrapper σ ι ρ) (valid : wrapper.DeclaredPrivate) (selected : List ρ) (allLeaves : ∀ i ∈ selected, i ∈ wrapper.tree.leaves) (signals : σ → Bool) : (∃ values : {a // a ∈ wrapper.declaredAuxiliaries} → Bool, Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries values)) (selectedFormula wrapper selected)) ↔ ∃ i ∈ selected, Discrepant signals (wrapper.observedPairs i) := by sorry
 end Controller.Native.ObservationProjection source_context "Controller.Recognition.Producers"
 section
 attribute [local instance 2000] List.decidableBAll
@@ -191,20 +178,16 @@ instance [DecidableEq α] [Fintype α] (roots : Finset α) (rank : α → Nat) (
 attribute [instance 1000] Nat.decLt
 end Controller.Recognition end source_context "Controller.Recognition.ProducerCompletion" namespace Controller.Recognition.IntendedDAG
 variable [DecidableEq α]
-/-- Typed projection and certificate law. -/
-theorem recovery_exact (dag : IntendedDAG α) (promise : dag.CandidatePromise) {known trace} (run : dag.Run promise known trace) (saturated : ∀ p ∈ promise.candidates, ¬p.Ready known) : (∀ p ∈ trace, p = dag.producer p.output.1 ∧ p.output.1 ∉ dag.roots) ∧ (∀ v, v ∉ dag.roots → dag.producer v ∈ trace) ∧ (trace.map (fun p => p.output.1)).Nodup := by sorry
-end Controller.Recognition.IntendedDAG source_context "Controller.Recognition.Coverage" namespace Controller.Recognition.Coverage
-open Controller.CNF
+/-- Typed projection and certificate law. -/ theorem recovery_exact (dag : IntendedDAG α) (promise : dag.CandidatePromise) {known trace} (run : dag.Run promise known trace) (saturated : ∀ p ∈ promise.candidates, ¬p.Ready known) : (∀ p ∈ trace, p = dag.producer p.output.1 ∧ p.output.1 ∉ dag.roots) ∧ (∀ v, v ∉ dag.roots → dag.producer v ∈ trace) ∧ (trace.map (fun p => p.output.1)).Nodup := by sorry
+end Controller.Recognition.IntendedDAG source_context "Controller.Recognition.Coverage" namespace Controller.Recognition.Coverage open Controller.CNF
 abbrev Origins (source : Formula α) := List (Fin source.clauses.size)
 def block (source : Formula α) (origins : Origins source) : Formula α := ofClauses (origins.map fun i => source.clauses[i])
-end Controller.Recognition.Coverage source_context "Controller.Recognition.Normalization" namespace Controller.Recognition
-open Controller.CNF
+end Controller.Recognition.Coverage source_context "Controller.Recognition.Normalization" namespace Controller.Recognition open Controller.CNF
 structure AliasEdge (α : Type*) where
   (left : α) (right : α) (phase : Bool)
 inductive AliasPath (edges : List (AliasEdge α)) : α → α → Bool → Prop where
   | refl (i) : AliasPath edges i i true | edge (e) (member : e ∈ edges) : AliasPath edges e.left e.right e.phase | symm {i j phase} : AliasPath edges i j phase → AliasPath edges j i phase | trans {i j k first second} : AliasPath edges i j first → AliasPath edges j k second → AliasPath edges i k (second == first)
-end Controller.Recognition source_context "Controller.Recognition.Record" namespace Controller.Recognition
-open Controller.CNF
+end Controller.Recognition source_context "Controller.Recognition.Record" namespace Controller.Recognition open Controller.CNF
 structure Record (source : Formula (Fin original)) (recovered : Nat) where
   (expected : Formula (Fin recovered)) (coordinate : Fin original → Fin recovered) (phase : Fin original → Bool) (anchor : Fin recovered → Fin original) (aliases : Fin original → Coverage.Origins source) (sourceRows : Fin source.clauses.size → Option (Fin expected.clauses.size)) (expectedRows : Fin expected.clauses.size → Fin source.clauses.size)
 namespace Record variable {original recovered : Nat} {source : Formula (Fin original)}
@@ -375,87 +358,87 @@ inductive Role (layout : PrefixLayout) (n b m q : ℕ) where
   deriving DecidableEq, Repr
 structure Parameters where
   (channels : ℕ) (buses : ℕ) (positiveBuses : 0 < buses) (bridge : Physical.Bridge channels) (decoder : Decoder.DAG channels) (layout : PrefixLayout) (drive : Bool)
-abbrev Internal (parameters : Parameters) := Role parameters.layout parameters.channels parameters.buses parameters.decoder.nodeCount parameters.decoder.roots.length
-inductive Variable (parameters : Parameters) where
-  | primary (role : PrimaryRole parameters.channels parameters.buses) | internal (role : Internal parameters)
+abbrev Internal (params : Parameters) := Role params.layout params.channels params.buses params.decoder.nodeCount params.decoder.roots.length
+inductive Variable (params : Parameters) where
+  | primary (role : PrimaryRole params.channels params.buses) | internal (role : Internal params)
   deriving DecidableEq, Repr
-abbrev Lit (parameters : Parameters) := CNF.Literal (Variable parameters)
+abbrev Lit (params : Parameters) := CNF.Literal (Variable params)
 namespace Parameters
-def positive (slot : Variable parameters) : Lit parameters := (slot, true)
-def negative (slot : Variable parameters) : Lit parameters := (slot, false)
-def enable (parameters : Parameters) (channel : Fin parameters.channels) : Lit parameters := positive (.primary (.enable channel))
-def request (parameters : Parameters) (bus : Fin parameters.buses) (channel : Fin parameters.channels) : Lit parameters := positive (.primary (.request bus channel))
-def internal (parameters : Parameters) (role : Internal parameters) : Lit parameters := positive (.internal role)
-def firstBus (parameters : Parameters) : Fin parameters.buses := ⟨0, parameters.positiveBuses⟩
-def targetAbsent (parameters : Parameters) : Lit parameters := internal parameters (.absent .healthy parameters.firstBus parameters.bridge.target)
-def primaryRoles (parameters : Parameters) : List (PrimaryRole parameters.channels parameters.buses) := (List.finRange parameters.channels).map .enable ++ (List.finRange parameters.buses).flatMap (fun bus => (List.finRange parameters.channels).map (.request bus)) ++ [.wire]
-def roles (parameters : Parameters) : List (Internal parameters) := [.driver, .remaining] ++ Side.all.map .firstProduct ++ Side.all.flatMap (fun side => (List.finRange parameters.buses).flatMap fun bus => (List.finRange parameters.channels).map (.term side bus)) ++ Side.all.flatMap (fun side => (List.finRange parameters.buses).flatMap fun bus => (List.finRange parameters.channels).map (.absent side bus)) ++ Side.all.flatMap (fun side => (List.finRange parameters.buses).map (.flag side)) ++ Side.all.flatMap (fun side => (List.finRange parameters.buses).flatMap fun bus => (List.finRange parameters.channels).map (.mask side bus)) ++ Side.all.flatMap (fun side => (List.finRange (parameters.layout.activeCount parameters.buses)).flatMap fun bus => (List.finRange parameters.channels).map (.active side bus)) ++ Side.all.flatMap (fun side => (List.finRange parameters.buses).flatMap fun bus => (List.finRange parameters.channels).map (.qualifierGuard side bus)) ++ Side.all.flatMap (fun side => (List.finRange parameters.channels).map (.qualifier side)) ++ Side.all.flatMap (fun side => (List.finRange parameters.decoder.nodeCount).map (.decoder side)) ++ (List.finRange parameters.decoder.roots.length).map .difference ++ [.detected]
-@[simp] theorem mem_primaryRoles (parameters : Parameters) (role) :
-    role ∈ parameters.primaryRoles := by
+def positive (slot : Variable params) : Lit params := (slot, true)
+def negative (slot : Variable params) : Lit params := (slot, false)
+def enable (params : Parameters) (channel : Fin params.channels) : Lit params := positive (.primary (.enable channel))
+def request (params : Parameters) (bus : Fin params.buses) (channel : Fin params.channels) : Lit params := positive (.primary (.request bus channel))
+def internal (params : Parameters) (role : Internal params) : Lit params := positive (.internal role)
+def firstBus (params : Parameters) : Fin params.buses := ⟨0, params.positiveBuses⟩
+def targetAbsent (params : Parameters) : Lit params := internal params (.absent .healthy params.firstBus params.bridge.target)
+def primaryRoles (params : Parameters) : List (PrimaryRole params.channels params.buses) := (List.finRange params.channels).map .enable ++ (List.finRange params.buses).flatMap (fun bus => (List.finRange params.channels).map (.request bus)) ++ [.wire]
+def roles (params : Parameters) : List (Internal params) := [.driver, .remaining] ++ Side.all.map .firstProduct ++ Side.all.flatMap (fun side => (List.finRange params.buses).flatMap fun bus => (List.finRange params.channels).map (.term side bus)) ++ Side.all.flatMap (fun side => (List.finRange params.buses).flatMap fun bus => (List.finRange params.channels).map (.absent side bus)) ++ Side.all.flatMap (fun side => (List.finRange params.buses).map (.flag side)) ++ Side.all.flatMap (fun side => (List.finRange params.buses).flatMap fun bus => (List.finRange params.channels).map (.mask side bus)) ++ Side.all.flatMap (fun side => (List.finRange (params.layout.activeCount params.buses)).flatMap fun bus => (List.finRange params.channels).map (.active side bus)) ++ Side.all.flatMap (fun side => (List.finRange params.buses).flatMap fun bus => (List.finRange params.channels).map (.qualifierGuard side bus)) ++ Side.all.flatMap (fun side => (List.finRange params.channels).map (.qualifier side)) ++ Side.all.flatMap (fun side => (List.finRange params.decoder.nodeCount).map (.decoder side)) ++ (List.finRange params.decoder.roots.length).map .difference ++ [.detected]
+@[simp] theorem mem_primaryRoles (params : Parameters) (role) :
+    role ∈ params.primaryRoles := by
   cases role <;> simp [primaryRoles]
-@[simp] theorem mem_roles (parameters : Parameters) (role) : role ∈ parameters.roles := by cases role <;> simp [roles]
-def variableRoles (parameters : Parameters) : List (Variable parameters) := parameters.primaryRoles.map .primary ++ parameters.roles.map .internal
-@[simp] theorem mem_variableRoles (parameters : Parameters) (slot : Variable parameters) :
-    slot ∈ parameters.variableRoles := by
+@[simp] theorem mem_roles (params : Parameters) (role) : role ∈ params.roles := by cases role <;> simp [roles]
+def variableRoles (params : Parameters) : List (Variable params) := params.primaryRoles.map .primary ++ params.roles.map .internal
+@[simp] theorem mem_variableRoles (params : Parameters) (slot : Variable params) :
+    slot ∈ params.variableRoles := by
   cases slot <;> simp [variableRoles]
-instance (parameters : Parameters) : Fintype (Variable parameters) := Fintype.ofList parameters.variableRoles (mem_variableRoles parameters)
-def decoderGate (parameters : Parameters) (side : Side) (index : Fin parameters.decoder.nodeCount) : CNF.Gate (Variable parameters) := match parameters.decoder.node index with | .zero => .or [] | .input channel => .alias (internal parameters (.qualifier side channel)) | .disj children => .or (children.map fun child => internal parameters (.decoder side (parameters.decoder.childIndex index child))) | .guard child labels => .and (internal parameters (.decoder side (parameters.decoder.childIndex index child)) :: labels.map fun channel => negative (.internal (.qualifier side channel))) | .liveAnd left right => .and [internal parameters (.decoder side (parameters.decoder.childIndex index left)), internal parameters (.decoder side (parameters.decoder.childIndex index right))]
-def rawTermInputs (parameters : Parameters) (side : Side) (bus : Fin parameters.buses) (channel : Fin parameters.channels) : List (Lit parameters) := [enable parameters channel, request parameters bus channel] ++ ((List.finRange parameters.buses).filter (fun earlier => earlier < bus)).map (fun earlier => internal parameters (.mask side earlier channel))
-def termGate (parameters : Parameters) (side : Side) (bus : Fin parameters.buses) (channel : Fin parameters.channels) : CNF.Gate (Variable parameters) :=
-  match layoutEquation : parameters.layout with
-  | .raw => .and (rawTermInputs parameters side bus channel)
+instance (params : Parameters) : Fintype (Variable params) := Fintype.ofList params.variableRoles (mem_variableRoles params)
+def decoderGate (params : Parameters) (side : Side) (index : Fin params.decoder.nodeCount) : CNF.Gate (Variable params) := match params.decoder.node index with | .zero => .or [] | .input channel => .alias (internal params (.qualifier side channel)) | .disj children => .or (children.map fun child => internal params (.decoder side (params.decoder.childIndex index child))) | .guard child labels => .and (internal params (.decoder side (params.decoder.childIndex index child)) :: labels.map fun channel => negative (.internal (.qualifier side channel))) | .liveAnd left right => .and [internal params (.decoder side (params.decoder.childIndex index left)), internal params (.decoder side (params.decoder.childIndex index right))]
+def rawTermInputs (params : Parameters) (side : Side) (bus : Fin params.buses) (channel : Fin params.channels) : List (Lit params) := [enable params channel, request params bus channel] ++ ((List.finRange params.buses).filter (fun earlier => earlier < bus)).map (fun earlier => internal params (.mask side earlier channel))
+def termGate (params : Parameters) (side : Side) (bus : Fin params.buses) (channel : Fin params.channels) : CNF.Gate (Variable params) :=
+  match layoutEquation : params.layout with
+  | .raw => .and (rawTermInputs params side bus channel)
   | .shared => .and
-      [internal parameters (.active side ⟨bus.val, by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt⟩ channel), request parameters bus channel]
-def activeGate (parameters : Parameters) (side : Side) (bus : Fin (parameters.layout.activeCount parameters.buses)) (channel : Fin parameters.channels) : CNF.Gate (Variable parameters) :=
-  match layoutEquation : parameters.layout with
+      [internal params (.active side ⟨bus.val, by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt⟩ channel), request params bus channel]
+def activeGate (params : Parameters) (side : Side) (bus : Fin (params.layout.activeCount params.buses)) (channel : Fin params.channels) : CNF.Gate (Variable params) :=
+  match layoutEquation : params.layout with
   | .raw => False.elim (Nat.not_lt_zero bus.val (by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt))
   | .shared =>
-      if first : bus.val = 0 then .alias (enable parameters channel)
+      if first : bus.val = 0 then .alias (enable params channel)
       else .and
-        [internal parameters (.active side ⟨bus.val - 1, by omega⟩ channel),
-          internal parameters (.mask side ⟨bus.val - 1, by
-            have bound : bus.val < parameters.buses := by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt
+        [internal params (.active side ⟨bus.val - 1, by omega⟩ channel),
+          internal params (.mask side ⟨bus.val - 1, by
+            have bound : bus.val < params.buses := by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt
             omega⟩ channel)]
-def gate (parameters : Parameters) : Internal parameters → CNF.Gate (Variable parameters) | .driver => .and (parameters.bridge.drivers.sort.map fun channel => internal parameters (.absent .healthy parameters.firstBus channel)) | .remaining => .and (parameters.bridge.remaining.sort.map fun channel => internal parameters (.absent .healthy parameters.firstBus channel)) | .firstProduct side => .and [match side with | .healthy => targetAbsent parameters | .faulty => positive (.primary .wire), internal parameters .driver, internal parameters .remaining] | .term side bus channel => termGate parameters side bus channel | .absent side bus channel => .not (internal parameters (.term side bus channel)) | .flag side bus => if bus.val = 0 then .not (internal parameters (.firstProduct side)) else .or ((List.finRange parameters.channels).map fun channel => internal parameters (.term side bus channel)) | .mask side bus channel => .xor (internal parameters (.flag side bus)) (internal parameters (.absent side bus channel)) | .active side bus channel => activeGate parameters side bus channel | .qualifierGuard side bus channel => .or [negative (.internal (.flag side bus)), request parameters bus channel] | .qualifier side channel => .and (enable parameters channel :: (List.finRange parameters.buses).map fun bus => internal parameters (.qualifierGuard side bus channel)) | .decoder side index => decoderGate parameters side index | .difference output => .xor (internal parameters (.decoder .healthy (parameters.decoder.roots.get output))) (internal parameters (.decoder .faulty (parameters.decoder.roots.get output))) | .detected => .or ((List.finRange parameters.decoder.roots.length).map fun output => internal parameters (.difference output))
-def assertions (parameters : Parameters) : List (Lit parameters) := [(parameters.targetAbsent.1, !parameters.drive), (.internal .driver, parameters.drive), (.primary .wire, parameters.drive), internal parameters .detected]
-def equationClauses (parameters : Parameters) : List (CNF.Clause (Variable parameters)) := parameters.roles.flatMap fun role => (parameters.gate role).clauses (internal parameters role)
-def equationFormula (parameters : Parameters) : CNF.Formula (Variable parameters) := CNF.ofClauses parameters.equationClauses
-def assertionFormula (parameters : Parameters) : CNF.Formula (Variable parameters) := CNF.ofClauses (parameters.assertions.map fun literal => [literal])
-def specificationFormula (parameters : Parameters) : CNF.Formula (Variable parameters) := parameters.equationFormula ++ parameters.assertionFormula
+def gate (params : Parameters) : Internal params → CNF.Gate (Variable params) | .driver => .and (params.bridge.drivers.sort.map fun channel => internal params (.absent .healthy params.firstBus channel)) | .remaining => .and (params.bridge.remaining.sort.map fun channel => internal params (.absent .healthy params.firstBus channel)) | .firstProduct side => .and [match side with | .healthy => targetAbsent params | .faulty => positive (.primary .wire), internal params .driver, internal params .remaining] | .term side bus channel => termGate params side bus channel | .absent side bus channel => .not (internal params (.term side bus channel)) | .flag side bus => if bus.val = 0 then .not (internal params (.firstProduct side)) else .or ((List.finRange params.channels).map fun channel => internal params (.term side bus channel)) | .mask side bus channel => .xor (internal params (.flag side bus)) (internal params (.absent side bus channel)) | .active side bus channel => activeGate params side bus channel | .qualifierGuard side bus channel => .or [negative (.internal (.flag side bus)), request params bus channel] | .qualifier side channel => .and (enable params channel :: (List.finRange params.buses).map fun bus => internal params (.qualifierGuard side bus channel)) | .decoder side index => decoderGate params side index | .difference output => .xor (internal params (.decoder .healthy (params.decoder.roots.get output))) (internal params (.decoder .faulty (params.decoder.roots.get output))) | .detected => .or ((List.finRange params.decoder.roots.length).map fun output => internal params (.difference output))
+def assertions (params : Parameters) : List (Lit params) := [(params.targetAbsent.1, !params.drive), (.internal .driver, params.drive), (.primary .wire, params.drive), internal params .detected]
+def equationClauses (params : Parameters) : List (CNF.Clause (Variable params)) := params.roles.flatMap fun role => (params.gate role).clauses (internal params role)
+def equationFormula (params : Parameters) : CNF.Formula (Variable params) := CNF.ofClauses params.equationClauses
+def assertionFormula (params : Parameters) : CNF.Formula (Variable params) := CNF.ofClauses (params.assertions.map fun literal => [literal])
+def specificationFormula (params : Parameters) : CNF.Formula (Variable params) := params.equationFormula ++ params.assertionFormula
 def primaryAssignment {n b : ℕ} (input : Physical.PrimaryInput n b) (wire : Bool) :
     PrimaryRole n b → Bool
   | .enable channel => input.enable channel
   | .request bus channel => input.request bus channel
   | .wire => wire
-def selectorRun (parameters : Parameters) (input : Physical.PrimaryInput parameters.channels parameters.buses) (wire : Bool) : Side → Physical.SelectorRun parameters.channels parameters.buses | .healthy => Physical.healthyRun input | .faulty => Physical.runFromFirst input (Physical.bridgeFirstFlag parameters.bridge input wire)
-def qualifiers (parameters : Parameters) (input : Physical.PrimaryInput parameters.channels parameters.buses) (wire : Bool) (side : Side) : Assignment parameters.channels := Physical.qualifiers input.enable input.request (parameters.selectorRun input wire side).flags
-def roleValue (parameters : Parameters) (input : Physical.PrimaryInput parameters.channels parameters.buses)
-    (wire : Bool) : Internal parameters → Bool
-  | .driver => Physical.bridgeD parameters.bridge input
-  | .remaining => Physical.bridgeR parameters.bridge input
+def selectorRun (params : Parameters) (input : Physical.PrimaryInput params.channels params.buses) (wire : Bool) : Side → Physical.SelectorRun params.channels params.buses | .healthy => Physical.healthyRun input | .faulty => Physical.runFromFirst input (Physical.bridgeFirstFlag params.bridge input wire)
+def qualifiers (params : Parameters) (input : Physical.PrimaryInput params.channels params.buses) (wire : Bool) (side : Side) : Assignment params.channels := Physical.qualifiers input.enable input.request (params.selectorRun input wire side).flags
+def roleValue (params : Parameters) (input : Physical.PrimaryInput params.channels params.buses)
+    (wire : Bool) : Internal params → Bool
+  | .driver => Physical.bridgeD params.bridge input
+  | .remaining => Physical.bridgeR params.bridge input
   | .firstProduct side =>
-      (match side with | .healthy => Physical.bridgeU parameters.bridge input | .faulty => wire) &&
-        Physical.bridgeD parameters.bridge input && Physical.bridgeR parameters.bridge input
-  | .term side bus channel => (parameters.selectorRun input wire side).terms bus channel
-  | .absent side bus channel => !(parameters.selectorRun input wire side).terms bus channel
-  | .flag side bus => (parameters.selectorRun input wire side).flags bus
-  | .mask side bus channel => (parameters.selectorRun input wire side).masks bus channel
+      (match side with | .healthy => Physical.bridgeU params.bridge input | .faulty => wire) &&
+        Physical.bridgeD params.bridge input && Physical.bridgeR params.bridge input
+  | .term side bus channel => (params.selectorRun input wire side).terms bus channel
+  | .absent side bus channel => !(params.selectorRun input wire side).terms bus channel
+  | .flag side bus => (params.selectorRun input wire side).flags bus
+  | .mask side bus channel => (params.selectorRun input wire side).masks bus channel
   | .active side bus channel =>
-      match layoutEquation : parameters.layout with
+      match layoutEquation : params.layout with
       | .raw => False.elim (Nat.not_lt_zero bus.val (by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt))
-      | .shared => (parameters.selectorRun input wire side).activeBefore
+      | .shared => (params.selectorRun input wire side).activeBefore
           ⟨bus.val, by simpa [layoutEquation, PrefixLayout.activeCount] using bus.isLt⟩ channel
-  | .qualifierGuard side bus channel => !(parameters.selectorRun input wire side).flags bus || input.request bus channel
-  | .qualifier side channel => parameters.qualifiers input wire side channel
-  | .decoder side index => parameters.decoder.eval (parameters.qualifiers input wire side) index
+  | .qualifierGuard side bus channel => !(params.selectorRun input wire side).flags bus || input.request bus channel
+  | .qualifier side channel => params.qualifiers input wire side channel
+  | .decoder side index => params.decoder.eval (params.qualifiers input wire side) index
   | .difference output =>
-      parameters.decoder.eval (parameters.qualifiers input wire .healthy) (parameters.decoder.roots.get output) ^^
-        parameters.decoder.eval (parameters.qualifiers input wire .faulty) (parameters.decoder.roots.get output)
-  | .detected => parameters.decoder.roots.any fun root =>
-      parameters.decoder.eval (parameters.qualifiers input wire .healthy) root ^^
-        parameters.decoder.eval (parameters.qualifiers input wire .faulty) root
-def physicalAssignment (parameters : Parameters) (input : Physical.PrimaryInput parameters.channels parameters.buses) (wire : Bool) : Variable parameters → Bool | .primary role => primaryAssignment input wire role | .internal role => parameters.roleValue input wire role
-def observations (parameters : Parameters) : Fin parameters.decoder.roots.length → Assignment parameters.channels → Bool := fun output assignment => parameters.decoder.eval assignment (parameters.decoder.roots.get output)
+      params.decoder.eval (params.qualifiers input wire .healthy) (params.decoder.roots.get output) ^^
+        params.decoder.eval (params.qualifiers input wire .faulty) (params.decoder.roots.get output)
+  | .detected => params.decoder.roots.any fun root =>
+      params.decoder.eval (params.qualifiers input wire .healthy) root ^^
+        params.decoder.eval (params.qualifiers input wire .faulty) root
+def physicalAssignment (params : Parameters) (input : Physical.PrimaryInput params.channels params.buses) (wire : Bool) : Variable params → Bool | .primary role => primaryAssignment input wire role | .internal role => params.roleValue input wire role
+def observations (params : Parameters) : Fin params.decoder.roots.length → Assignment params.channels → Bool := fun output assignment => params.decoder.eval assignment (params.decoder.roots.get output)
 end Parameters end Controller.Native source_context "Controller.Resolution.Trace"
 attribute [-instance] instIsPartialOrder_mathlib
 namespace Controller.Resolution open CNF
@@ -480,8 +463,7 @@ def runSteps : State v → List (Step v) → Option (State v) | state, [] => som
 def check (f : FiniteFormula v) (trace : Trace v) : Bool := if trace.originalClauseCount = f.clauses.size then match runSteps (initialState f) trace.steps with | none => false | some state => match state.rows trace.finalClauseId with | none => false | some c => c.isEmpty else false
 end Controller.Resolution
 attribute [instance 1000] instIsPartialOrder_mathlib
-source_context "Controller.Certificate.LRATAdapter"
-namespace Controller.Certificate open Controller.CNF
+source_context "Controller.Certificate.LRATAdapter" namespace Controller.Certificate open Controller.CNF
 structure FiniteIdentifiers (varCount : ℕ) where
   (identify : Fin varCount → ℕ) (injective : Function.Injective identify)
 namespace FiniteIdentifiers
@@ -494,8 +476,7 @@ end LRATAdapter
 inductive Certificate (varCount : ℕ) where
   | resolution (trace : Controller.Resolution.Trace varCount) | lrat (actions : LRATAdapter.Actions)
 def checkTyped (source : FiniteFormula varCount) : Certificate varCount → Bool | .resolution trace => Controller.Resolution.check source trace | .lrat actions => LRATAdapter.check (FiniteIdentifiers.canonical varCount) source actions
-end Controller.Certificate source_context "Controller.Recognition.BridgeProjection" namespace Controller.Recognition.Attachment
-open Controller.CNF
+end Controller.Certificate source_context "Controller.Recognition.BridgeProjection" namespace Controller.Recognition.Attachment open Controller.CNF
 open Controller.Certificate
 def negativeUnits (clause : Clause (Fin count)) : Formula (Fin count) := ofClauses (clause.map fun literal => [negate literal])
 def entailCheck (premise : Formula (Fin count)) (conclusion : Clause (Fin count)) (certificate : Certificate count) : Bool := checkTyped (premise ++ negativeUnits conclusion) certificate
@@ -582,8 +563,7 @@ instance (signals : Fin boundary → Bool) (pair : Literal (Fin boundary) × Lit
   unfold Native.ObservationProjection.Discrepant
   infer_instance
 def extension (record : WrapperRecord boundary auxCount observations) (signals : Fin boundary → Bool) : Fin auxCount → Bool := match record.selected.find? (fun i => decide (Native.ObservationProjection.Discrepant signals (record.pairs i))) with | none => fun _ => false | some i => match record.orientations i (literalValue signals (record.pairs i).1) (literalValue signals (record.pairs i).2) with | .impossible _ => fun _ => false | .extension values _ => values
-end WrapperRecord end Controller.Recognition.Attachment source_context "Controller.Recognition.Check" namespace Controller.Recognition
-open Controller.CNF
+end WrapperRecord end Controller.Recognition.Attachment source_context "Controller.Recognition.Check" namespace Controller.Recognition open Controller.CNF
 structure SerializedRecord where
   (sourceClauses : List (List (Nat × Bool))) (expectedClauses : List (List (Nat × Bool))) (coordinates : List Nat) (phases : List Bool) (anchors : List Nat) (aliasOrigins : List (List Nat)) (sourceRows : List (Option Nat)) (expectedRows : List Nat)
   deriving DecidableEq
@@ -618,14 +598,14 @@ def decodeRaw {original : Nat} (source : Formula (Fin original)) (recovered : Na
   let expectedRows ← decodeVector expected.clauses.size rowOrigins
   pure { expected, coordinate, phase, anchor, aliases, sourceRows, expectedRows }
 end SerializedRecord namespace FamilyRecord
-structure Roles (parameters : Native.Parameters) (recovered : Nat) where
-  (identify : Native.Variable parameters → Fin recovered) (name : Fin recovered → Native.Variable parameters) (phase : Native.Variable parameters → Bool)
-namespace Roles variable {parameters : Native.Parameters} {recovered : Nat}
-def Valid (roles : Roles parameters recovered) : Prop := (∀ named, roles.name (roles.identify named) = named) ∧ (∀ index, roles.identify (roles.name index) = index)
-instance (roles : Roles parameters recovered) : Decidable roles.Valid := by
+structure Roles (params : Native.Parameters) (recovered : Nat) where
+  (identify : Native.Variable params → Fin recovered) (name : Fin recovered → Native.Variable params) (phase : Native.Variable params → Bool)
+namespace Roles variable {params : Native.Parameters} {recovered : Nat}
+def Valid (roles : Roles params recovered) : Prop := (∀ named, roles.name (roles.identify named) = named) ∧ (∀ index, roles.identify (roles.name index) = index)
+instance (roles : Roles params recovered) : Decidable roles.Valid := by
   unfold Valid
   infer_instance
-def check (roles : Roles parameters recovered) : Bool := decide roles.Valid
+def check (roles : Roles params recovered) : Bool := decide roles.Valid
 end Roles end FamilyRecord
 structure SerializedChainedRecord where
   (base : SerializedRecord) (edges : List ((Nat × Nat) × Bool)) (origins : List (List Nat)) (paths : List (List (Nat × Bool)))
@@ -655,24 +635,24 @@ end SerializedChainedRecord
 structure SerializedRoles where
   (coordinates : List Nat) (names : List Nat) (phases : List Bool)
   deriving DecidableEq
-namespace FamilyRecord.Roles variable {parameters : Native.Parameters} {recovered : Nat}
-def serialize (roles : FamilyRecord.Roles parameters recovered) : SerializedRoles where
-  coordinates := parameters.variableRoles.map fun role => (roles.identify role).val; names := (List.finRange recovered).map fun i => parameters.variableRoles.idxOf (roles.name i); phases := parameters.variableRoles.map roles.phase
-def serializedCheck (roles : FamilyRecord.Roles parameters recovered) (payload : SerializedRoles) : Bool := decide (payload = roles.serialize) && roles.check
+namespace FamilyRecord.Roles variable {params : Native.Parameters} {recovered : Nat}
+def serialize (roles : FamilyRecord.Roles params recovered) : SerializedRoles where
+  coordinates := params.variableRoles.map fun role => (roles.identify role).val; names := (List.finRange recovered).map fun i => params.variableRoles.idxOf (roles.name i); phases := params.variableRoles.map roles.phase
+def serializedCheck (roles : FamilyRecord.Roles params recovered) (payload : SerializedRoles) : Bool := decide (payload = roles.serialize) && roles.check
 end FamilyRecord.Roles namespace SerializedRoles
-def roleIndex (parameters : Native.Parameters) (role : Native.Variable parameters) : Fin parameters.variableRoles.length := ⟨parameters.variableRoles.idxOf role, List.idxOf_lt_length_of_mem (parameters.mem_variableRoles role)⟩
-def decodeRaw (parameters : Native.Parameters) (recovered : Nat) (payload : SerializedRoles) : Option (FamilyRecord.Roles parameters recovered) := do
+def roleIndex (params : Native.Parameters) (role : Native.Variable params) : Fin params.variableRoles.length := ⟨params.variableRoles.idxOf role, List.idxOf_lt_length_of_mem (params.mem_variableRoles role)⟩
+def decodeRaw (params : Native.Parameters) (recovered : Nat) (payload : SerializedRoles) : Option (FamilyRecord.Roles params recovered) := do
   let decodedIDs ← payload.coordinates.mapM (SerializedRecord.decodeID recovered)
-  let coordinates ← SerializedRecord.decodeVector parameters.variableRoles.length decodedIDs
+  let coordinates ← SerializedRecord.decodeVector params.variableRoles.length decodedIDs
   let decodedNames ← payload.names.mapM
-    (SerializedRecord.decodeID parameters.variableRoles.length)
+    (SerializedRecord.decodeID params.variableRoles.length)
   let names ← SerializedRecord.decodeVector recovered decodedNames
-  let phases ← SerializedRecord.decodeVector parameters.variableRoles.length payload.phases
+  let phases ← SerializedRecord.decodeVector params.variableRoles.length payload.phases
   pure {
-    identify := fun role => coordinates (roleIndex parameters role)
-    name := fun index => parameters.variableRoles.get (names index)
-    phase := fun role => phases (roleIndex parameters role) }
-def decodeChecked (parameters : Native.Parameters) (recovered : Nat) (payload : SerializedRoles) : Option (FamilyRecord.Roles parameters recovered) := match decodeRaw parameters recovered payload with | none => none | some roles => if roles.serializedCheck payload then some roles else none
+    identify := fun role => coordinates (roleIndex params role)
+    name := fun index => params.variableRoles.get (names index)
+    phase := fun role => phases (roleIndex params role) }
+def decodeChecked (params : Native.Parameters) (recovered : Nat) (payload : SerializedRoles) : Option (FamilyRecord.Roles params recovered) := match decodeRaw params recovered payload with | none => none | some roles => if roles.serializedCheck payload then some roles else none
 end SerializedRoles namespace PrivateFamily
 open Controller.Certificate
 structure Cuts (left right : Formula (Fin count)) where
@@ -689,22 +669,22 @@ instance (partition : Partition boundary auxCount recovered) : Decidable partiti
   infer_instance
 def check (partition : Partition boundary auxCount recovered) : Bool := decide partition.Valid
 end Partition
-def driveFormula (parameters : Native.Parameters) : Formula (Native.Variable parameters) := parameters.equationFormula ++ ofClauses ((parameters.assertions.take 3).map fun literal => [literal])
+def driveFormula (params : Native.Parameters) : Formula (Native.Variable params) := params.equationFormula ++ ofClauses ((params.assertions.take 3).map fun literal => [literal])
 structure Record (source : Formula (Fin original)) (recovered : Nat)
-  (parameters : Native.Parameters) (boundary auxCount : Nat) where
-  (aliases : AliasTrace.Record source recovered) (roles : FamilyRecord.Roles parameters boundary) (partition : Partition boundary auxCount recovered) (wrapper : Attachment.WrapperRecord boundary auxCount parameters.decoder.roots.length) (targetLink : Attachment.TargetLink.Record boundary parameters.decoder.roots.length) (metadata : ProducerMetadata.Record wrapper.definitions) (namedDrive : Formula (Fin boundary)) (bundle : Formula (Fin recovered))
+  (params : Native.Parameters) (boundary auxCount : Nat) where
+  (aliases : AliasTrace.Record source recovered) (roles : FamilyRecord.Roles params boundary) (partition : Partition boundary auxCount recovered) (wrapper : Attachment.WrapperRecord boundary auxCount params.decoder.roots.length) (targetLink : Attachment.TargetLink.Record boundary params.decoder.roots.length) (metadata : ProducerMetadata.Record wrapper.definitions) (namedDrive : Formula (Fin boundary)) (bundle : Formula (Fin recovered))
   (coreCuts : Cuts wrapper.definitions namedDrive) (sourceCuts : Cuts aliases.base.expected bundle)
-namespace Record variable {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {parameters : Native.Parameters}
-def signalBundle (record : Record source recovered parameters boundary auxCount) : Formula (Fin boundary ⊕ Fin auxCount) := relabel Sum.inl record.wrapper.definitions ++ record.wrapper.wrapper
-def physicalPairs (record : Record source recovered parameters boundary auxCount) (i : Fin parameters.decoder.roots.length) : Literal (Fin boundary) × Literal (Fin boundary) := (signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal parameters (.decoder .healthy (parameters.decoder.roots.get i))), signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal parameters (.decoder .faulty (parameters.decoder.roots.get i))))
-def physicalRoots (record : Record source recovered parameters boundary auxCount) : Finset (Fin boundary) := (parameters.primaryRoles.map fun role => record.roles.identify (.primary role)).toFinset
-def Checks (record : Record source recovered parameters boundary auxCount) : Prop := record.aliases.check = true ∧ record.roles.check = true ∧ record.partition.check = true ∧ record.coreCuts.check = true ∧ record.sourceCuts.check = true ∧ record.wrapper.check = true ∧ record.targetLink.check = true ∧ record.metadata.check = true ∧ record.namedDrive.clauses = (signedRelabel record.roles.identify record.roles.phase (driveFormula parameters)).clauses ∧ record.bundle.clauses = (signedRelabel record.partition.identify record.partition.phase record.signalBundle).clauses ∧ record.targetLink.definitions.clauses = record.wrapper.definitions.clauses ∧ record.targetLink.pairs = record.wrapper.pairs ∧ record.targetLink.selected = record.wrapper.selected ∧ record.targetLink.target = signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal parameters .detected) ∧ record.wrapper.pairs = record.physicalPairs ∧ record.wrapper.selected = List.finRange parameters.decoder.roots.length ∧ record.metadata.roots = record.physicalRoots
-instance (record : Record source recovered parameters boundary auxCount) : Decidable record.Checks := by
+namespace Record variable {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {params : Native.Parameters}
+def signalBundle (record : Record source recovered params boundary auxCount) : Formula (Fin boundary ⊕ Fin auxCount) := relabel Sum.inl record.wrapper.definitions ++ record.wrapper.wrapper
+def physicalPairs (record : Record source recovered params boundary auxCount) (i : Fin params.decoder.roots.length) : Literal (Fin boundary) × Literal (Fin boundary) := (signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal params (.decoder .healthy (params.decoder.roots.get i))), signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal params (.decoder .faulty (params.decoder.roots.get i))))
+def physicalRoots (record : Record source recovered params boundary auxCount) : Finset (Fin boundary) := (params.primaryRoles.map fun role => record.roles.identify (.primary role)).toFinset
+def Checks (record : Record source recovered params boundary auxCount) : Prop := record.aliases.check = true ∧ record.roles.check = true ∧ record.partition.check = true ∧ record.coreCuts.check = true ∧ record.sourceCuts.check = true ∧ record.wrapper.check = true ∧ record.targetLink.check = true ∧ record.metadata.check = true ∧ record.namedDrive.clauses = (signedRelabel record.roles.identify record.roles.phase (driveFormula params)).clauses ∧ record.bundle.clauses = (signedRelabel record.partition.identify record.partition.phase record.signalBundle).clauses ∧ record.targetLink.definitions.clauses = record.wrapper.definitions.clauses ∧ record.targetLink.pairs = record.wrapper.pairs ∧ record.targetLink.selected = record.wrapper.selected ∧ record.targetLink.target = signedLiteral record.roles.identify record.roles.phase (Native.Parameters.internal params .detected) ∧ record.wrapper.pairs = record.physicalPairs ∧ record.wrapper.selected = List.finRange params.decoder.roots.length ∧ record.metadata.roots = record.physicalRoots
+instance (record : Record source recovered params boundary auxCount) : Decidable record.Checks := by
   unfold Checks
   infer_instance
-def check (record : Record source recovered parameters boundary auxCount) : Bool := decide record.Checks
-def signalsOfNative (record : Record source recovered parameters boundary auxCount) (assignment : Native.Variable parameters → Bool) : Fin boundary → Bool := fun index => assignment (record.roles.name index) == record.roles.phase (record.roles.name index)
-def liftNative (record : Record source recovered parameters boundary auxCount) (assignment : Native.Variable parameters → Bool) : Fin original → Bool :=
+def check (record : Record source recovered params boundary auxCount) : Bool := decide record.Checks
+def signalsOfNative (record : Record source recovered params boundary auxCount) (assignment : Native.Variable params → Bool) : Fin boundary → Bool := fun index => assignment (record.roles.name index) == record.roles.phase (record.roles.name index)
+def liftNative (record : Record source recovered params boundary auxCount) (assignment : Native.Variable params → Bool) : Fin original → Bool :=
   let signals := record.signalsOfNative assignment
   let joined := Native.ObservationProjection.joint signals (record.wrapper.extension signals)
   record.aliases.base.lift (fun index => joined (record.partition.name index) ==
@@ -731,14 +711,14 @@ def decodeRaw (boundary auxCount recovered : Nat) (payload : SerializedPartition
 def decodeChecked (boundary auxCount recovered : Nat) (payload : SerializedPartition) : Option (Partition boundary auxCount recovered) := match decodeRaw boundary auxCount recovered payload with | none => none | some partition => if partition.serializedCheck payload then some partition else none
 end SerializedPartition
 structure CompletePayload (source : Formula (Fin original)) (recovered : Nat)
-  (parameters : Native.Parameters) (boundary auxCount : Nat) where
-  (aliases : SerializedChainedRecord) (roles : SerializedRoles) (partition : SerializedPartition) (expected : Formula (Fin recovered)) (wrapper : Attachment.WrapperRecord boundary auxCount parameters.decoder.roots.length) (targetLink : Attachment.TargetLink.Record boundary parameters.decoder.roots.length) (metadata : ProducerMetadata.Record wrapper.definitions) (namedDrive : Formula (Fin boundary)) (bundle : Formula (Fin recovered))
+  (params : Native.Parameters) (boundary auxCount : Nat) where
+  (aliases : SerializedChainedRecord) (roles : SerializedRoles) (partition : SerializedPartition) (expected : Formula (Fin recovered)) (wrapper : Attachment.WrapperRecord boundary auxCount params.decoder.roots.length) (targetLink : Attachment.TargetLink.Record boundary params.decoder.roots.length) (metadata : ProducerMetadata.Record wrapper.definitions) (namedDrive : Formula (Fin boundary)) (bundle : Formula (Fin recovered))
   (coreCuts : Cuts wrapper.definitions namedDrive) (sourceCuts : Cuts expected bundle)
-namespace CompletePayload variable {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {parameters : Native.Parameters}
+namespace CompletePayload variable {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {params : Native.Parameters}
 theorem formula_of_rows {left right : Formula α} (same : left.clauses = right.clauses) : left = right := by cases left; cases right; exact congrArg Controller.CNF.OrderedFormula.mk same
-def decodeRaw (payload : CompletePayload source recovered parameters boundary auxCount) : Option (Record source recovered parameters boundary auxCount) := do
+def decodeRaw (payload : CompletePayload source recovered params boundary auxCount) : Option (Record source recovered params boundary auxCount) := do
   let aliases ← SerializedChainedRecord.decodeChecked source recovered payload.aliases
-  let roles ← SerializedRoles.decodeChecked parameters boundary payload.roles
+  let roles ← SerializedRoles.decodeChecked params boundary payload.roles
   let partition ← SerializedPartition.decodeChecked boundary auxCount recovered payload.partition
   if rows : aliases.base.expected.clauses = payload.expected.clauses then
     let same := formula_of_rows rows
@@ -754,17 +734,13 @@ def decodeRaw (payload : CompletePayload source recovered parameters boundary au
       coreCuts := payload.coreCuts
       sourceCuts := same.symm ▸ payload.sourceCuts }
   else none
-def decodeChecked (payload : CompletePayload source recovered parameters boundary auxCount) : Option (Record source recovered parameters boundary auxCount) := match payload.decodeRaw with | none => none | some record => if record.check then some record else none
-end CompletePayload end PrivateFamily end Controller.Recognition source_context "Controller.Recognition.FamilyRecord" namespace Controller.Recognition.GuardedFamily
-open Controller.Decoder Controller.CNF
+def decodeChecked (payload : CompletePayload source recovered params boundary auxCount) : Option (Record source recovered params boundary auxCount) := match payload.decodeRaw with | none => none | some record => if record.check then some record else none
+end CompletePayload end PrivateFamily end Controller.Recognition source_context "Controller.Recognition.FamilyRecord" namespace Controller.Recognition.GuardedFamily open Controller.Decoder Controller.CNF
 def guardedCheck (graph : DAG n) : Bool := (List.finRange graph.nodeCount).all fun i => !(graph.node i).isLiveAnd
-def decodeChecked (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) : Option (PrivateFamily.Record source recovered parameters boundary auxCount) := if guardedCheck parameters.decoder then payload.decodeChecked else none
-/-- Typed projection and certificate law. -/
-theorem decodeChecked_sound (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (accepted : decodeChecked payload = some record) : parameters.decoder.Guarded ∧ record.check = true ∧ (Satisfiable source ↔ Physical.BridgeDetectable (b := parameters.buses) parameters.bridge parameters.drive parameters.observations) := by sorry
-/-- Typed projection and certificate law. -/
-theorem decodeChecked_lifting (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (accepted : decodeChecked payload = some record) (assignment : Native.Variable parameters → Bool) (model : Satisfies assignment parameters.specificationFormula) : Satisfies (record.liftNative assignment) source := by sorry
-/-- An accepted positive-output wrapper needs more source coordinates than native variables. -/
-theorem decodeChecked_requires_extra_coordinates {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {parameters : Native.Parameters} (payload : PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : PrivateFamily.Record source recovered parameters boundary auxCount) (positive : 0 < parameters.decoder.roots.length) (accepted : decodeChecked payload = some record) : Fintype.card (Native.Variable parameters) < original := by sorry
+def decodeChecked (payload : PrivateFamily.CompletePayload source recovered params boundary auxCount) : Option (PrivateFamily.Record source recovered params boundary auxCount) := if guardedCheck params.decoder then payload.decodeChecked else none
+/-- Typed projection and certificate law. -/ theorem decodeChecked_sound (payload : PrivateFamily.CompletePayload source recovered params boundary auxCount) (record : PrivateFamily.Record source recovered params boundary auxCount) (accepted : decodeChecked payload = some record) : params.decoder.Guarded ∧ record.check = true ∧ (Satisfiable source ↔ Physical.BridgeDetectable (b := params.buses) params.bridge params.drive params.observations) := by sorry
+/-- Typed projection and certificate law. -/ theorem decodeChecked_lifting (payload : PrivateFamily.CompletePayload source recovered params boundary auxCount) (record : PrivateFamily.Record source recovered params boundary auxCount) (accepted : decodeChecked payload = some record) (assignment : Native.Variable params → Bool) (model : Satisfies assignment params.specificationFormula) : Satisfies (record.liftNative assignment) source := by sorry
+/-- An accepted positive-output wrapper needs more source coordinates than native variables. -/ theorem decodeChecked_requires_extra_coordinates {original recovered boundary auxCount : Nat} {source : Formula (Fin original)} {params : Native.Parameters} (payload : PrivateFamily.CompletePayload source recovered params boundary auxCount) (record : PrivateFamily.Record source recovered params boundary auxCount) (positive : 0 < params.decoder.roots.length) (accepted : decodeChecked payload = some record) : Fintype.card (Native.Variable params) < original := by sorry
 end Controller.Recognition.GuardedFamily source_context "Controller.Certificate.InputBinding" namespace Controller.Certificate
 open Controller.CNF
 structure InputPacket where
@@ -972,8 +948,8 @@ end Controller.Physical source_context "Controller.Physical.DetectCorrect" names
 def detectInput {n b : Nat} (bridge : Bridge n) (hb : 0 < b) (drive : Bool) (graph : Decoder.DAG n) : Option (PrimaryInput n b) := (graph.detectSet b bridge.target drive).map (realizeBridge bridge hb)
 end Controller.Physical source_context "Controller.Native.Lift" namespace Controller.Native.Lift
 open Controller
-def named (parameters : Parameters) (input : Physical.PrimaryInput parameters.channels parameters.buses) (wire : Bool) := parameters.physicalAssignment input wire
-def detectNamed (parameters : Parameters) := (Physical.detectInput parameters.bridge parameters.positiveBuses parameters.drive parameters.decoder).map (fun input => named parameters input true)
+def named (params : Parameters) (input : Physical.PrimaryInput params.channels params.buses) (wire : Bool) := params.physicalAssignment input wire
+def detectNamed (params : Parameters) := (Physical.detectInput params.bridge params.positiveBuses params.drive params.decoder).map (fun input => named params input true)
 end Controller.Native.Lift source_context "Controller.Certificate.Pipeline" namespace Controller.Certificate.Pipeline
 open Controller Controller.CNF
 inductive Candidate (varCount : Nat) where
@@ -983,16 +959,32 @@ inductive Verdict where
   deriving DecidableEq, Repr
 def checkModelInput (source : FiniteFormula varCount) (input : SubmittedInput) (assignment : Fin varCount → Bool) : Bool := match input with | .structured packet => if packet = InputPacket.serialize source then ModelCheck.check source assignment else false | .dimacsText _ | .jsonText _ => false
 def validate (source : FiniteFormula varCount) (input : SubmittedInput) : Candidate varCount → Verdict | .sat assignment => if checkModelInput source input assignment then .sat else .invalid | .unsat certificate => if checkSubmitted source input certificate then .unsat else .invalid | .outside => .outside | .invalid => .invalid | .timeout => .timeout
-def familyCandidate {source : FiniteFormula varCount} (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) : Candidate varCount := match Recognition.GuardedFamily.decodeChecked payload with | none => .outside | some record => match Native.Lift.detectNamed parameters with | some assignment => .sat (record.liftNative assignment) | none => match refutation with | some certificate => .unsat certificate | none => .timeout
-def runFamily (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) : Verdict := validate source input (familyCandidate payload refutation)
-/-- Typed projection and certificate law. -/
-theorem runFamily_sat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .sat) : Satisfiable source := by sorry
-/-- Typed projection and certificate law. -/
-theorem runFamily_unsat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .unsat) : Unsatisfiable source := by sorry
-/-- Typed projection and certificate law. -/
-theorem runFamily_sat_iff (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered parameters boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (refutation : Option (Certificate varCount)) : runFamily source (.structured (InputPacket.serialize source)) payload refutation = .sat ↔ Satisfiable source := by sorry
-/-- Typed projection and certificate law. -/
-theorem runFamily_certified_unsat (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered parameters boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered parameters boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (certificate : Certificate varCount) (checked : checkTyped source certificate = true) : runFamily source (.structured (InputPacket.serialize source)) payload (some certificate) = .unsat := by sorry
-end Controller.Certificate.Pipeline
-
-end_source_context
+def familyCandidate {source : FiniteFormula varCount} (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (refutation : Option (Certificate varCount)) : Candidate varCount := match Recognition.GuardedFamily.decodeChecked payload with | none => .outside | some record => match Native.Lift.detectNamed params with | some assignment => .sat (record.liftNative assignment) | none => match refutation with | some certificate => .unsat certificate | none => .timeout
+def runFamily (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (refutation : Option (Certificate varCount)) : Verdict := validate source input (familyCandidate payload refutation)
+/-- Typed projection and certificate law. -/ theorem runFamily_sat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .sat) : Satisfiable source := by sorry
+/-- Typed projection and certificate law. -/ theorem runFamily_unsat_sound (source : FiniteFormula varCount) (input : SubmittedInput) (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (refutation : Option (Certificate varCount)) (accepted : runFamily source input payload refutation = .unsat) : Unsatisfiable source := by sorry
+/-- Typed projection and certificate law. -/ theorem runFamily_sat_iff (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered params boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (refutation : Option (Certificate varCount)) : runFamily source (.structured (InputPacket.serialize source)) payload refutation = .sat ↔ Satisfiable source := by sorry
+/-- Typed projection and certificate law. -/ theorem runFamily_certified_unsat (source : FiniteFormula varCount) (payload : Recognition.PrivateFamily.CompletePayload source recovered params boundary auxCount) (record : Recognition.PrivateFamily.Record source recovered params boundary auxCount) (recognized : Recognition.GuardedFamily.decodeChecked payload = some record) (certificate : Certificate varCount) (checked : checkTyped source certificate = true) : runFamily source (.structured (InputPacket.serialize source)) payload (some certificate) = .unsat := by sorry
+end Controller.Certificate.Pipeline end_source_context source_context "Controller.Recognition.ObservationDetection" namespace Controller.Recognition.ObservationDetection open Controller.CNF Controller.Native.ObservationProjection
+def observedPair (params : Native.Parameters)
+    (i : Fin params.decoder.roots.length) :
+    Literal (Native.Variable params) × Literal (Native.Variable params) :=
+  (Native.Parameters.internal params (.decoder .healthy (params.decoder.roots.get i)),
+   Native.Parameters.internal params (.decoder .faulty (params.decoder.roots.get i)))
+/-- The guarded detector decides the represented optional-wrapper family. -/ theorem optional_native_decision [Fintype ι] (params : Native.Parameters) (guarded : params.decoder.Guarded) (wrapper : OptionalWrapper (Native.Variable params) ι (Fin params.decoder.roots.length)) (declared : wrapper.DeclaredPrivate) (pairs : wrapper.observedPairs = observedPair params) (allRoots : ∀ i, i ∈ wrapper.tree.leaves) : (∃ (signals : Native.Variable params → Bool) (privateValues : {a // a ∈ wrapper.declaredAuxiliaries} → Bool), Satisfies (joint signals (extendDeclaredAuxiliaries wrapper.declaredAuxiliaries privateValues)) (relabel Sum.inl (PrivateFamily.driveFormula params) ++ wrapper.formula)) ↔ (Physical.detectInput params.bridge params.positiveBuses params.drive params.decoder).isSome = true := by sorry
+end Controller.Recognition.ObservationDetection end_source_context source_context "Controller.Recognition.RecoveryDriver" namespace Controller.Recognition.RecoveryDriver
+variable [DecidableEq α]
+def scan (candidates : List (Producer α)) :
+    Nat → Finset α → List (Producer α) → Finset α × List (Producer α)
+  | 0, known, trace => (known, trace)
+  | fuel + 1, known, trace =>
+    match candidates.find? (fun p => decide (p.Ready known)) with
+    | none => (known, trace)
+    | some p => scan candidates fuel (insert p.output.1 known) (p :: trace)
+def recover [Fintype α] (roots : Finset α) (candidates : List (Producer α)) :
+    Finset α × List (Producer α) :=
+  scan candidates (Fintype.card α - roots.card) roots []
+/-- Finite scanning recovers the intended producers under CandidatePromise. -/ theorem recover_exact [Fintype α] (dag : IntendedDAG α) (promise : dag.CandidatePromise) : let result := recover dag.roots promise.candidates; result.1 = Finset.univ ∧ (∀ p ∈ result.2, p = dag.producer p.output.1 ∧ p.output.1 ∉ dag.roots) ∧ (∀ v, v ∉ dag.roots → dag.producer v ∈ result.2) ∧ (result.2.map (fun p => p.output.1)).Nodup ∧ result.2.length = Fintype.card α - dag.roots.card := by sorry
+end Controller.Recognition.RecoveryDriver end_source_context source_context "Controller.Recognition.AcceptanceInhabited" namespace Controller.Recognition open Controller.CNF Controller.Certificate
+/-- A full accepted positive-output packet has a physical detecting input and a source model. -/ theorem exists_accepted_positive_output : ∃ (params : Native.Parameters) (source : Formula (Fin 36)) (payload : PrivateFamily.CompletePayload source 36 params 35 1) (record : PrivateFamily.Record source 36 params 35 1), params.channels = 2 ∧ params.buses = 1 ∧ params.drive = true ∧ params.decoder.roots.length = 1 ∧ source.clauses.size = 91 ∧ GuardedFamily.decodeChecked payload = some record ∧ Physical.BridgeDetectable (b := params.buses) params.bridge params.drive params.observations ∧ Pipeline.runFamily source (.structured (InputPacket.serialize source)) payload none = .sat ∧ Satisfiable source := by sorry
+end Controller.Recognition end_source_context
