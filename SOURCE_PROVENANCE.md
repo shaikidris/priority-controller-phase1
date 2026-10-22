@@ -52,3 +52,19 @@ provenance account, not a complete usage log. The source manuscript supplied
 the mathematical model and proof arguments according to the research plan.
 The DOI edition appeared after the initial Lean proofs; its publication date
 is not evidence of public precedence over those proofs. Independent human review is not asserted by this source account.
+
+
+The P08 module manifest, [p08-strengthening.json](provenance/p08-strengthening.json),
+records the finite recovery driver, physical-detector consequence, serialization
+round trips and concrete accepted packet. These are author-owned refinements
+proved in this package. The packet's coordinate rows and resolution/LRAT traces
+are data validated by the existing checker implementations.
+
+The submitted repository and the immutable commit supplied to Palomar identify
+the authoritative proof snapshot. The historical research commits below identify
+source baselines; per-file manifests identify the extracted inputs.
+
+| Role | Repository/source | Commit | Meaning |
+| --- | --- | --- | --- |
+| Historical extraction base | Author's research development | `4fa94a30c6fb3de154f65ba29a70fdb0e6e95172` | Baseline for the original source manifest; not a complete reproduction of its local inputs |
+| Historical construction base | Author's research development | `6c300f9c66bfe03db18bf966b16b5a37195a7f3e` | Baseline for the construction extension; its per-file hashes identify the complete inputs |

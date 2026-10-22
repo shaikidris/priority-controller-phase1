@@ -17,7 +17,7 @@ from palomar_metadata_portability import validate_metadata_portability
 from check_palomar_abstract_coverage import validate_abstract_coverage
 
 
-PIPELINE = "d4e41c1d5b0d114c4859e6e5831dc6d3ad1d0d44"
+PIPELINE = "ad5db9e7ff8b17523d73aeb244aaeabcde810c64"
 WORKFLOW = ".github/workflows/palomar-rehearsal.yml"
 PROFILE = "palomar-standard-v1"
 

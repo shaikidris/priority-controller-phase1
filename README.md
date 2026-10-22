@@ -21,8 +21,9 @@ The [algorithm and encoding contracts](SEMANTIC_SCOPE.md) state the exact
 entry interfaces. [Concrete construction contracts](CONSTRUCTION_CONTRACTS.md)
 cover forest, bounded-live-AND and proper-basis source constructors, including
 execution and temporary word storage. P06 includes complete binary-native width
-proofs. P02/P03 source construction, P08 typed-family acceptance and conventional
-encoded-language classification have their separate interfaces.
+proofs. P08 supplies a complete accepted positive-output typed packet. P02/P03
+source construction and conventional encoded-language classification have
+their separate interfaces.
 
 ## P01: exact physical images
 
@@ -156,16 +157,23 @@ list; they are not additional Comparator-selected statements in P07.
 
 ## P08: observation projection and typed certificates
 
-[P08](Phase1/P08/Challenge.lean) proves conditional observation projection and
-optional/selected-wrapper equivalences from Theorems A.1 and A.2 and Corollary
-A.3, plus intended-producer recovery from Lemma A.4. Its selected-observation
-projection also handles the empty-list case. The Section 8 interface is refined
-by checked structured-family decoding, model lifting, exact SAT behavior after
-acceptance and sound SAT/UNSAT verdicts. Certified-UNSAT completeness assumes a
-supplied certificate accepted by the typed checker. The payload, intended DAG,
-promises and grammar premises remain explicit. This is not a raw DIMACS/JSON
-parser, unrestricted CNF discovery or a proof of every auxiliary construction
-time bound. [Metadata and exact alignment](entries/P08/formalization.yaml).
+[P08](Phase1/P08/Challenge.lean) proves the conditional observation projection
+and optional/selected-wrapper equivalences of Theorems A.1 and A.2 and Corollary
+A.3. For guarded native controllers, declared optional wrappers with matching
+observed pairs and full root coverage are satisfiable exactly when the physical
+detector returns a detecting input. A finite candidate-scanning driver proves
+exact intended-producer recovery under the candidate promise of Lemma A.4,
+without a supplied run or maximality witness.
+
+The typed Section 8 interface provides checked decoding, model lifting, exact
+SAT behavior after acceptance and sound SAT/UNSAT verdicts. Certified-UNSAT
+completeness requires an accepted refutation certificate. A fully accepted
+serialized packet with two channels, one bus, one observed output, 36 source
+coordinates and 91 rows has a physical detecting input, a source model and a
+SAT verdict. Candidate discovery, a general accepted-family constructor,
+raw-file parsing and machine-level auxiliary construction costs are separate
+claims. [Proof mechanisms](entries/P08/README.md) and
+[metadata and exact alignment](entries/P08/formalization.yaml).
 
 ## P09: checked ordinary resolution
 
